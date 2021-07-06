@@ -1,0 +1,2 @@
+# brugly
+This project consists of a mobile application and a control panel to be the link between patients / pharmacies and pharmaceutical companies / Cosmetic companies, to keep pharmacies up-to-date with the latest medicines that may be in short supply The mobile application will provide an online store for the regular user or patient to browse through the medicines/cosmetics, search for Nursing service, upload his prescription for consultations and submit their applications.
