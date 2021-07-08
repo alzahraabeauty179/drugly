@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\CategoryController;
+use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,16 +16,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+
+
+
+
+
+
+// define("PAGINATE_NUMBER", 6);
+// date_default_timezone_set('Africa/Cairo');
+
 
 Auth::routes();
 
+Route::group(['middleware' => ['guest']], function () {
+    
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+
+});
+
+
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    });
+        'prefix'     => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth'],
+    ],
+    function () {
+
+        Route::get('/dashboard/home','HomeController@index')->name('dashboard.home');
+       
+    }
+);
