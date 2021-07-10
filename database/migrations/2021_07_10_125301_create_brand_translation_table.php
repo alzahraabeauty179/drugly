@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOwnerTranslationsTable extends Migration
+class CreateBrandTranslationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateOwnerTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('owner_translations', function (Blueprint $table) {
+        Schema::create('brand_translation', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner_id')->unsigned();
+
+            $table->integer('brand_id')->unsigned();
             $table->string('locale')->index();
+            
             $table->string('name');
-            $table->text('address');
-            $table->text('title');
-        
-            $table->unique(['owner_id', 'locale']);
-            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->text('description')->nullable();
+
+            $table->unique(['brand_id', 'locale']);
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
         });
     }
 
@@ -33,6 +34,6 @@ class CreateOwnerTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('owner_translations');
+        Schema::dropIfExists('brand_translation');
     }
 }

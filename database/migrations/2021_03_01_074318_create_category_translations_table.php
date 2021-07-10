@@ -15,12 +15,15 @@ class CreateCategoryTranslationsTable extends Migration
     {
         Schema::create('category_translations', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('category_id')->unsigned();
             $table->string('locale')->index();
+
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->unique(['category_id', 'locale']);
+
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
