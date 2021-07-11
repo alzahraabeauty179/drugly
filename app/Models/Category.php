@@ -17,6 +17,6 @@ class Category extends Model implements TranslatableContract
     protected $append = ['image_path'];
 
     public function getImagePathAttribute(){
-        return $this->image != null ? asset('uploads/category_images/'.$this->image) :  asset('uploads/category_images/default.png') ;
+        return $this->image != null ? asset('uploads/categories_images/'.$this->image) :  asset('uploads/categories_images/default.png') ;
     }
 }
