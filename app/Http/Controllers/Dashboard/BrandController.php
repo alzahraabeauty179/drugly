@@ -26,6 +26,7 @@ class BrandController extends BackEndController
      */
     public function store(Request $request)
     {
+        // return $request;
         $rules = [
             'image' => 'required|image|max:2048',
         ];
@@ -39,14 +40,9 @@ class BrandController extends BackEndController
 
         $request_data = $request->except(['_token', 'image']);
         $request_data['owner_id'] = auth()->user()->id;
-
+        // return $request_data;
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        }
-
-        $request_data = $request->except(['image', '_token']);
-        if ($request->image) {
-            $request_data['image'] = $this->uploadImage($request->image, 'brands_images');
         }
 
         $this->model->create($request_data);

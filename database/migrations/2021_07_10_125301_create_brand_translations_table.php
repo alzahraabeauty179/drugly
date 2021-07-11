@@ -13,7 +13,7 @@ class CreateBrandTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brand_translation', function (Blueprint $table) {
+        Schema::create('brand_translations', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('brand_id')->unsigned();
