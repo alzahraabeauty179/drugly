@@ -2,7 +2,7 @@
     {{csrf_field()}}
     {{method_field('DELETE')}}
 
-    <button type="submit" rel="tooltip" title="" class="btn btn-danger" data-original-title="@lang('site.delete')">
-        <i class="fa fa-times fa-fw"> @lang('site.delete')</i>
+    <button type="submit" title="@lang('site.delete')" class="btn btn-danger" data-original-title="@lang('site.delete')">
+        <i class="fa fa-times"> @lang('site.delete')</i>
     </button> 
 </form>

@@ -7,14 +7,14 @@
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-1">
-                    <h3 class="content-header-title">Add Brand</h3>
+                    <h3 class="content-header-title">@lang('site.add') @lang('site.'.$module_name_singular)</h3>
                 </div>
                 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">Home</a>
-                            <li class="breadcrumb-item"><a href="{{route('dashboard.brands.index')}}">Brands</a></li>
-                            <li class="breadcrumb-item active">Add Brand</li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home', ) }}">@lang('site.home')</a>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard.brands.index')}}">@lang('site.'.$module_name_plural)</a></li>
+                            <li class="breadcrumb-item active">@lang('site.add') @lang('site.'.$module_name_singular)</li>
                         </ol>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title text-capitlaize" id="file-repeater"><i class="ft-plus"></i> Add Brand</h4>
+                                    <h4 class="card-title text-capitlaize" id="file-repeater"><i class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular)</h4>
                                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -38,19 +38,20 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                    <form action="{{ route('dashboard.' . $module_name_plural . '.store') }}" method="post"
-                                          enctype="multipart/form-data">
-                
-                                        {{ method_field('post') }}
-                
-                                        @include('dashboard.'.$module_name_plural.'.form')
-                
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>
-                                                @lang('site.add')</button>
-                                        </div>
-                
-                                    </form> {{-- end of form --}}
+                                        <form action="{{ route('dashboard.' . $module_name_plural . '.store') }}" method="post"
+                                            enctype="multipart/form-data">
+                    
+                                            {{ method_field('post') }}
+                    
+                                            @include('dashboard.'.$module_name_plural.'.form')
+                    
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>
+                                                    @lang('site.add')
+                                                </button>
+                                            </div>
+                    
+                                        </form> {{-- end of form --}}
                                     </div>
                                 </div>
                             </div>
