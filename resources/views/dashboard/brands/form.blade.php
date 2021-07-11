@@ -2,9 +2,9 @@
 @foreach (config('translatable.locales') as $index => $locale)
     <div class="row">
         <div class="form-group col-md-6 mb-2">
+            <label class="bmd-label-floating">@lang('site.' . $locale . '.name')</label>
             <input  type="text" class="form-control @error($locale . ' .name') is-invalid
                     @enderror " name=" {{ $locale }}[name] "
-                    placeholder="@lang('site.' . $locale . '.name')"
                     value="{{ isset($row) ? $row->translate($locale)->name : old($locale . '.name') }}">
 
             @error($locale . '.name')
@@ -15,10 +15,9 @@
         </div>
 
         <div class="form-group col-md-6 mb-2">
-            <input  type="text" class="form-control @error($locale . ' .description') is-invalid
-                    @enderror " name=" {{ $locale }}[description] "
-                    placeholder="@lang('site.' . $locale . '.description')"
-                    value="{{ isset($row) ? $row->translate($locale)->description : old($locale . '.description') }}">
+            <label class="bmd-label-floating">@lang('site.' . $locale . '.description')</label>
+            <textarea name=" {{ $locale }}[description]" id="" cols="30" rows="10" class="form-control @error($locale . ' .description') is-invalid
+                      @enderror">{{ isset($row) ? $row->translate($locale)->description : old($locale . '.description') }}</textarea>
 
             @error($locale . '.description')
                 <small class=" text text-danger" role="alert">

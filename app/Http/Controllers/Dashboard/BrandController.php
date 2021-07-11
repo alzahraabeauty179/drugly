@@ -26,21 +26,30 @@ class BrandController extends BackEndController
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'ar.name'          => 'required|min:5|unique:brand_translations,name',
-            'en.name'          => 'required|min:5|unique:brand_translations,name',
-            'ar.description'   => 'nullable|min:5|unique:brand_translations,description',
-            'en.description'   => 'nullable|min:5|unique:brand_translations,description',
-            'image'            => 'required|image',
-        ]);
-   
-        request()->request->add(['owner_id' => auth()->user()->id,]);
+        $rules = [
+            'image' => 'required|image|max:2048',
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.name'        => 'required|string|min:3|max:200',
+                $locale . '.description' => 'required|string|min:3|max:500',
+            ];
+        }
+        $request->validate($rules);
+
+        $request_data = $request->except(['_token', 'image']);
+        $request_data['owner_id'] = auth()->user()->id;
+
+        if ($request->image) {
+            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
+        }
+
         $request_data = $request->except(['image', '_token']);
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, 'brands_images');
         }
 
-        Brand::create($request_data);
+        $this->model->create($request_data);
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
     }

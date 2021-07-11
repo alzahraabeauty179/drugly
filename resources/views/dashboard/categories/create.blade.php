@@ -1,11 +1,5 @@
 @extends('dashboard.layouts.app')
 
-<<<<<<< HEAD
-{{-- @section('title', __('site.' . $module_name_plural . '.add')) --}}
-
-@section('content')
-
-=======
 @section('title', __('site.add') .' '. __('site.' . $module_name_singular) )
 
 @section('content')
@@ -73,5 +67,4 @@
         </div>
     </div>
 </div>
->>>>>>> 647ebd9dba771750f50220a6a85b17db44d61a15
 @endsection

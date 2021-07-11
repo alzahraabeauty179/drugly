@@ -19,7 +19,6 @@
             </li>{{-- Dashboard --}}
 
             <li class="navigation-header">
-<<<<<<< HEAD
                 @if( auth()->user()->hasRole('store') )
                     <span>Store Account</span>
                 @else
@@ -40,22 +39,6 @@
 
             <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Brands</span></a>
             </li>{{-- Brands --}}
-=======
-                <span>Pharmacy Account</span><i class="ft-minus" data-toggle="tooltip" data-placement="left"
-                    data-original-title="Pharmacy Account"></i>
-            </li>{{-- Pharmacy Account --}}
-
-            <li class="nav-item">
-                <a><i class="ft-package"></i><span class="menu-title" data-i18n="">Warehouses</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="warehouses.html">All Warehouse</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Medication Request</a></li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Warehouses --}}
->>>>>>> 647ebd9dba771750f50220a6a85b17db44d61a15
 
             <li class="nav-item">
                 <a><i class="ft-layers"></i><span class="menu-title" data-i18n="">Cosmetic Companies</span></a>

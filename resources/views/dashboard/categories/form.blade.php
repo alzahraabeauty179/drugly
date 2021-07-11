@@ -1,23 +1,4 @@
 {{ csrf_field() }}
-<<<<<<< HEAD
-@foreach (config('translatable.locales') as $index => $locale)
-    <div class="col-md-6">
-        <div class="form-group">
-            <label>@lang('site.' . $locale . '.name')</label>
-            <input type="text" class="form-control @error($locale . ' .name') is-invalid
-        @enderror " name=" {{ $locale }}[name]"
-                value="{{ isset($row) ? $row->translate($locale)->name : old($locale . '.name') }}">
-
-            @error($locale . '.name')
-                <small class=" text text-danger" role="alert">
-                    <strong>{{ $message }}</strong>
-                </small>
-            @enderror
-        </div>
-    </div>
-@endforeach
-<div class="clearfix"></div>
-=======
 
 
 @foreach (config('translatable.locales') as $index => $locale)
@@ -74,4 +55,3 @@
     <img src="{{ isset($row) ? $row->image_path : asset('uploads/'.$module_name_plural.'_images/default.png') }}" alt="" style="width: 115px;height: 80px; " class="img-thumbnail image-preview">
 </div>
 
->>>>>>> 647ebd9dba771750f50220a6a85b17db44d61a15

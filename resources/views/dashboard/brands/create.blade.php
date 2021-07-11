@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('site.' . $module_name_plural . '.add')) 
+@section('title', __('site.add') .' '. __('site.' . $module_name_singular) )
 
 @section('content')
     <div class="app-content content">
