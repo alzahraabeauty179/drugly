@@ -65,11 +65,13 @@
                     ><span class="selected-language"></span> EN</a
                 >
                 <div class="dropdown-menu" aria-labelledby="dropdown-flag">
-                    <a class="dropdown-item" href="#"
-                    ><i class="flag-icon flag-icon-gb"></i> English</a
-                    ><a class="dropdown-item" href="#"
-                    ><i class="flag-icon flag-icon-fr"></i> Arabic</a
-                    >
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        @if (App::getLocale() != $localeCode)
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        @endif
+                    @endforeach
                 </div>
                 </li>
                 <li class="dropdown dropdown-notification nav-item">
@@ -344,16 +346,20 @@
                     ><img
                         src="{{ asset('dashboard_files/app-assets/images/portrait/small/avatar-s-1.png') }}"
                         alt="avatar" /><i></i></span
-                    ><span class="user-name">Ahmed Nasser</span></a
+                    ><span class="user-name">{{auth()->user()->name}}</span></a
                 >
                 <div class="dropdown-menu dropdown-menu-left">
                     <a class="dropdown-item" href="user-profile.html"
                     ><i class="ft-user"></i> Edit Profile</a
                     >
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"
-                    ><i class="ft-power"></i> Logout</a
-                    >
+                    <a  class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                    ><i class="ft-power"></i> Logout </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
                 </li>
             </ul>

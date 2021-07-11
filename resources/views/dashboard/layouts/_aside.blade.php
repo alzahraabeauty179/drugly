@@ -34,28 +34,26 @@
             </li>{{-- Dashboard --}}
 
             <li class="navigation-header">
-                <span>Pharmacy Account</span
-                ><i
+                @if( auth()->user()->hasRole('store') )
+                    <span>Store Account</span>
+                @else
+                    <span>Pharmacy Account</span>
+                @endif
+                <i
                     class="ft-minus"
                     data-toggle="tooltip"
                     data-placement="left"
-                    data-original-title="Pharmacy Account"
+                    @if( auth()->user()->hasRole('store') )
+                        data-original-title="Store Account"
+                    @else
+                        data-original-title="Pharmacy Account"
+                    @endif
+                    
                 ></i>
-            </li>{{-- Pharmacy Account --}}
+            </li>{{-- Account Type --}}
 
-            <li class="nav-item">
-                <a
-                    ><i class="ft-package"></i
-                    ><span class="menu-title" data-i18n="">Warehouses</span></a
-                >
-                <ul class="menu-content">
-                    <li>
-                    <a class="menu-item" href="warehouses.html">All Warehouse</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Medication Request</a></li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Warehouses --}}
+            <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Brands</span></a>
+            </li>{{-- Brands --}}
 
             <li class="nav-item">
                 <a

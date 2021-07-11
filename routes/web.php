@@ -45,6 +45,13 @@ Route::group(
     function () {
 
         Route::get('/dashboard/home','HomeController@index')->name('dashboard.home');
+
+        Route::prefix('dashboard')->namespace('Dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
+
+            ######################### Brands #########################
+            Route::resource('brands', 'BrandController');
+
+        });
        
     }
 );

@@ -20,6 +20,8 @@ class CreateBrandsTable extends Migration
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('active')->default(0);
+            $table->string('image')->nullable();
+            
             $table->timestamps();
         });
     }

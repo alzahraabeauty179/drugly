@@ -18,10 +18,10 @@ class BackEndController extends Controller
     public function __construct(Model $model)
     {
         $this->model = $model;
-        $this->middleware(['permission:read-'   . $this->getClassNameFromModel()])->only('index');
-        $this->middleware(['permission:create-' . $this->getClassNameFromModel()])->only('create');
-        $this->middleware(['permission:update-' . $this->getClassNameFromModel()])->only('update');
-        $this->middleware(['permission:delete-' . $this->getClassNameFromModel()])->only('delete');
+        // $this->middleware(['permission:read-'   . $this->getClassNameFromModel()])->only('index');
+        // $this->middleware(['permission:create-' . $this->getClassNameFromModel()])->only('create');
+        // $this->middleware(['permission:update-' . $this->getClassNameFromModel()])->only('update');
+        // $this->middleware(['permission:delete-' . $this->getClassNameFromModel()])->only('delete');
     }
 
     public function index(Request $request)
