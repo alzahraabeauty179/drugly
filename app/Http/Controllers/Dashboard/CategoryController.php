@@ -75,7 +75,7 @@ class CategoryController extends BackEndController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'required|string|min:3|max:500',
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
         }
         $request->validate($rules);
@@ -92,7 +92,14 @@ class CategoryController extends BackEndController
         session()->flash('success', __('site.updated_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
-
+    
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id, Request $request)
     {
         $category = $this->model->findOrFail($id);

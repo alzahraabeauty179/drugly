@@ -68,8 +68,10 @@ class BackEndController extends Controller
 
     protected function filter($rows)
     {
-
-        return $rows;
+        if($this->getSingularModelName() == "category")
+            return $this->model->whereNull('parent_id');
+        else
+            return $rows;
     }
     public function getClassNameFromModel()
     {

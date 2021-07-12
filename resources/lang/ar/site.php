@@ -8,6 +8,10 @@ return [
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
 
+    // Brand
+    'brand'  => 'ماركة تجارية',
+    'brands' => 'مركات تجارية',
+    'update' => 'تحديث',
     //users
     'actions'=>'الأحداث',
     'add'=>'أضف',
@@ -144,6 +148,8 @@ return [
     //categories
     'categories'=>'الأقسام',
     'category'=>'قسم',
+    'subcategory'=>'قسم فرعي',
+    'subcategories'=>'الاقسام الفرعية',
 
     //skills
     'skills'=>'المهارات',

@@ -61,6 +61,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
+                                                        <th>@lang('site.category')</th>
                                                         <th>@lang('site.edit')</th>
                                                         <th>@lang('site.delete')</th>
                                                     </tr>
@@ -70,6 +71,7 @@
                                                     <tr>
                                                         <td> {{++$index}} </td>
                                                         <td> {{ $row->name }} </td>
+                                                        <td> {{  $row->parent->name }} </td>
                                                         <td> @include('dashboard.buttons.edit') </td>
                                                         <td> @include('dashboard.buttons.delete') </td>
                                                     </tr>
@@ -79,6 +81,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
+                                                        <th>@lang('site.category')</th>
                                                         <th>@lang('site.edit')</th>
                                                         <th>@lang('site.delete')</th>
                                                     </tr>

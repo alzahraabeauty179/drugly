@@ -7,6 +7,12 @@ return [
     'desc'=>'Here you can add- delete- update ',
     'description'=>'Description ',
     'language'=>'Language',
+
+    // Brand
+    'brand'  => 'Brand',
+    'brands' => 'Brands',
+    'update' => 'Update',
+
     'login'=>'Sign In',
     'register'=>'Sign Up',
     'logout'=>'Logout',
@@ -83,6 +89,8 @@ return [
     //categories
     'categories'=>'Categories',
     'category'=>'Category',
+    'subcategory'=>'Sub Category',
+    'subcategories'=>'Sub Categories',
     'meta_desc'=>'Meta Description',
     'meta_keywords'=>'Meta Keywords',
 

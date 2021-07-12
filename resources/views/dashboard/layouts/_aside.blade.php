@@ -37,35 +37,22 @@
                 ></i>
             </li>{{-- Account Type --}}
 
-            <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Brands</span></a>
+            <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">@lang('site.brands')</span></a>
             </li>{{-- Brands --}}
 
             <li class="nav-item">
-                <a><i class="ft-layers"></i><span class="menu-title" data-i18n="">Cosmetic Companies</span></a>
+                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.categories')</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="cosmetic-companies.html">All Companies</a>
+                        <a class="menu-item" href="{{route('dashboard.categories.index')}}">@lang('site.all') @lang('site.categories')</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="#">Request Product / Medical Supplies</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Cosmetic Companies --}}
-
-            <li class="nav-item">
-                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">Categories</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="categories.html">All Category</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="{{ route('dashboard.categories.create', ) }}">Add Category</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="add-sub-category.html">Add Sub Category</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
+                    {{-- <li>
+                        <a class="menu-item" href="{{ route('dashboard.categories.create') }}">@lang('site.add') @lang('site.category')</a>
+                    </li> --}}
+                    <li><a class="menu-item" href="{{ route('dashboard.subcategories.index') }}">@lang('site.all') @lang('site.subcategories')</a></li>
+                    {{-- <li>
+                        <a class="menu-item" href="{{ route('dashboard.subcategories.create') }}">@lang('site.add') @lang('site.subcategory')</a>
+                    </li> --}}
                 </ul>
             </li>{{-- Categories --}}
 

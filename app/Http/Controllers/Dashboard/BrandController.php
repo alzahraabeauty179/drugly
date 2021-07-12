@@ -66,7 +66,7 @@ class BrandController extends BackEndController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'required|string|min:3|max:500',
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
         }
         $request->validate($rules);
@@ -86,7 +86,8 @@ class BrandController extends BackEndController
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

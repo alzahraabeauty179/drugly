@@ -45,7 +45,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form row" enctype="multipart/form-data" method="POST" action="{{ route('dashboard.categories.store') }}">
+                                    <form class="form row" enctype="multipart/form-data" method="POST" action="{{ route('dashboard.subcategories.store') }}">
                                         @method('POST')
 
                                         @include('dashboard.'.$module_name_plural.'.form')
