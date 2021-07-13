@@ -12,6 +12,7 @@ return [
     'brand'  => 'Brand',
     'brands' => 'Brands',
     'update' => 'Update',
+    'repeated_data'=>'Repeated data, where is name exist before!',
 
     'login'=>'Sign In',
     'register'=>'Sign Up',
@@ -91,6 +92,9 @@ return [
     'category'=>'Category',
     'subcategory'=>'Sub Category',
     'subcategories'=>'Sub Categories',
+    'select' =>'Select',
+    'logo'=>'Logo',
+
     'meta_desc'=>'Meta Description',
     'meta_keywords'=>'Meta Keywords',
 

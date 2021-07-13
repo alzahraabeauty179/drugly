@@ -12,6 +12,8 @@ return [
     'brand'  => 'ماركة تجارية',
     'brands' => 'مركات تجارية',
     'update' => 'تحديث',
+    'repeated_data'=>'تكرار البيانات ، إذا كان اسم موجودًا من قبل!',
+
     //users
     'actions'=>'الأحداث',
     'add'=>'أضف',
@@ -150,6 +152,8 @@ return [
     'category'=>'قسم',
     'subcategory'=>'قسم فرعي',
     'subcategories'=>'الاقسام الفرعية',
+    'select' =>'أختر',
+    'logo'=>'الشعار',
 
     //skills
     'skills'=>'المهارات',

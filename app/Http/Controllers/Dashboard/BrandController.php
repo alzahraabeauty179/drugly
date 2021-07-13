@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\BrandTranslation;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,6 +19,21 @@ class BrandController extends BackEndController
         parent::__construct($model);
     }
 
+    public function isExists(Request $request, $id)
+    {
+        $ownerData = Brand::where('owner_id', auth()->user()->id)->pluck('id')->toArray();
+        $result = 0;
+
+        foreach (config('translatable.locales') as $locale)
+            if( is_null($id) )
+                $result += BrandTranslation::where('name', $request[$locale . '.name'])->whereIn('brand_id', $ownerData)->count();
+            else
+                $result += BrandTranslation::where('name', $request[$locale . '.name'])->whereIn('brand_id', $ownerData)
+                                           ->where('brand_id', '!=', $id)->count();
+
+        return $result;
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -26,28 +42,35 @@ class BrandController extends BackEndController
      */
     public function store(Request $request)
     {
-        // return $request;
-        $rules = [
-            'image' => 'required|image|max:2048',
-        ];
-        foreach (config('translatable.locales') as $locale) {
-            $rules += [
-                $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'required|string|min:3|max:500',
+        if( $this->isExists($request, null) != 0 )
+        {
+            session()->flash('error', __('site.repeated_data'));
+            return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.create');
+
+        }else{
+            // return $request;
+            $rules = [
+                'image' => 'required|image|max:2048',
             ];
-        }
-        $request->validate($rules);
+            foreach (config('translatable.locales') as $locale) {
+                $rules += [
+                    $locale . '.name' => ['required','string','min:3','max:200'],
+                    $locale . '.description' => 'nullable|string|min:3|max:500',
+                ];
+            }
+            $request->validate($rules);
 
-        $request_data = $request->except(['_token', 'image']);
-        $request_data['owner_id'] = auth()->user()->id;
-        // return $request_data;
-        if ($request->image) {
-            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        }
+            $request_data = $request->except(['_token', 'image']);
+            $request_data['owner_id'] = auth()->user()->id;
+            // return $request_data;
+            if ($request->image) {
+                $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
+            }
 
-        $this->model->create($request_data);
-        session()->flash('success', __('site.add_successfuly'));
-        return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
+            $this->model->create($request_data);
+            session()->flash('success', __('site.add_successfuly'));
+            return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
+        }
     }
 
     /**
@@ -59,29 +82,36 @@ class BrandController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        $brand = $this->model->findOrFail($id);
-        $rules = [
-            'image' => 'nullable|image|max:2000',
-        ];
-        foreach (config('translatable.locales') as $locale) {
-            $rules += [
-                $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'nullable|string|min:3|max:500',
+        if( $this->isExists($request, $id) != 0 )
+        {
+            session()->flash('error', __('site.repeated_data'));
+            return redirect()->back();
+
+        }else{
+            $brand = $this->model->findOrFail($id);
+            $rules = [
+                'image' => 'nullable|image|max:2000',
             ];
-        }
-        $request->validate($rules);
-
-        $request_data = $request->except(['_token', 'image']);
-        if ($request->image) {
-            if ($brand->image != null) {
-                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
+            foreach (config('translatable.locales') as $locale) {
+                $rules += [
+                    $locale . '.name'        => 'required|string|min:3|max:200',
+                    $locale . '.description' => 'nullable|string|min:3|max:500',
+                ];
             }
-            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        } //end of if
+            $request->validate($rules);
 
-        $brand->update($request_data);
-        session()->flash('success', __('site.updated_successfuly'));
-        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+            $request_data = $request->except(['_token', 'image']);
+            if ($request->image) {
+                if ($brand->image != null) {
+                    Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
+                }
+                $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
+            } //end of if
+
+            $brand->update($request_data);
+            session()->flash('success', __('site.updated_successfuly'));
+            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        }
     }
 
     /**

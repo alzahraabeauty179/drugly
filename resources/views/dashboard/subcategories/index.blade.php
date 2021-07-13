@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="app-content content">
-        <div class="container-fluid row d-flex justify-content-center ">
+        <div class="container-fluid row d-flex justify-content-center">
             @if(session('success'))
                 <div class="alert alert-success col-sm-6 text-center" role="alert">
                     {!! session('success') !!}
@@ -64,6 +64,7 @@
                                                         <th>@lang('site.category')</th>
                                                         <th>@lang('site.edit')</th>
                                                         <th>@lang('site.delete')</th>
+                                                        <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -74,6 +75,13 @@
                                                         <td> {{  $row->parent->name }} </td>
                                                         <td> @include('dashboard.buttons.edit') </td>
                                                         <td> @include('dashboard.buttons.delete') </td>
+                                                        <td>
+                                                            <figure class="col-md-3 col-sm-6 col-12" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                                <a href="{{ asset($row->image_path) }}" itemprop="contentUrl">
+                                                                    <img class="img-thumbnail img-fluid" src="{{ asset($row->image_path) }}" itemprop="thumbnail" alt="{{ $row->description }}" />
+                                                                </a>
+                                                            </figure>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -84,6 +92,7 @@
                                                         <th>@lang('site.category')</th>
                                                         <th>@lang('site.edit')</th>
                                                         <th>@lang('site.delete')</th>
+                                                        <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>

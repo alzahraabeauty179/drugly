@@ -5,7 +5,19 @@
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
+        <div class="container-fluid row d-flex justify-content-center">
+            @if(session('success'))
+                <div class="alert alert-success col-sm-6 text-center" role="alert">
+                    {!! session('success') !!}
+                </div>
+            @endif
 
+            @if(session('error'))
+                <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                    {!! session('error') !!}
+                </div>
+            @endif
+        </div>
 
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
