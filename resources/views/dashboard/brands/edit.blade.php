@@ -12,7 +12,7 @@
                 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home', ) }}">@lang('site.home')</a>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home')</a>
                             <li class="breadcrumb-item"><a href="{{route('dashboard.brands.index')}}">@lang('site.'.$module_name_plural)</a></li>
                             <li class="breadcrumb-item active">@lang('site.update') @lang('site.'.$module_name_singular)</li>
                         </ol>
@@ -38,18 +38,18 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form method="POST" enctype="multipart/form-data" 
+                                        <form method="POST" enctype="multipart/form-data"
                                             action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}">
                                             @method('PUT')
 
                                             @include('dashboard.'.$module_name_plural.'.form')
-                                            
+
                                             <div class="form-group">
                                                 <button data-repeater-create="" class="btn btn-primary">
                                                     <i class="ft-plus"></i> @lang('site.update')
                                                 </button>
                                             </div>
-                    
+
                                         </form> {{-- end of form --}}
                                     </div>
                                 </div>

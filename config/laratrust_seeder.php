@@ -5,6 +5,7 @@ return [
         'super' => [
             'users'      => 'c,r,u,d',
             'categories' => 'c,r,u,d',
+            'products' => 'c,r,u,d',
             'owners'     => 'c,r,u,d',
             'works'      => 'c,r,u,d',
         ],

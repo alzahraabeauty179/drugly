@@ -94,6 +94,10 @@ return [
     'meta_desc'=>'Meta Description',
     'meta_keywords'=>'Meta Keywords',
 
+    //products
+    'products'=>'Products',
+    'product'=>'Product',
+
     //skills
     'skills'=>'Skills',
     'skill'=>'Skill',

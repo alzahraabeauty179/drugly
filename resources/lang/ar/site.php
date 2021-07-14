@@ -151,6 +151,10 @@ return [
     'subcategory'=>'قسم فرعي',
     'subcategories'=>'الاقسام الفرعية',
 
+    //products
+    'products'=>'المنتجات',
+    'product'=>'منتج',
+
     //skills
     'skills'=>'المهارات',
     'skill'=>'مهارة',

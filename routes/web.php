@@ -56,7 +56,10 @@ Route::group(
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');
 
+            ######################### products #########################
+            Route::resource('products', 'ProductController');
+
         });
-       
+
     }
 );

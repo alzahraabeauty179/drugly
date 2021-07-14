@@ -33,7 +33,7 @@
                     @else
                         data-original-title="Pharmacy Account"
                     @endif
-                    
+
                 ></i>
             </li>{{-- Account Type --}}
 
@@ -55,6 +55,22 @@
                     </li> --}}
                 </ul>
             </li>{{-- Categories --}}
+
+            <li class="nav-item">
+                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('dashboard.products.index')}}">@lang('site.all') @lang('site.products')</a>
+                    </li>
+                    {{-- <li>
+                        <a class="menu-item" href="{{ route('dashboard.products.create') }}">@lang('site.add') @lang('site.category')</a>
+                    </li> --}}
+                    {{-- <li><a class="menu-item" href="{{ route('dashboard.productsdetails.index') }}">@lang('site.all') @lang('site.subproducts')</a></li> --}}
+                    {{-- <li>
+                        <a class="menu-item" href="{{ route('dashboard.subproducts.create') }}">@lang('site.add') @lang('site.subcategory')</a>
+                    </li> --}}
+                </ul>
+            </li>{{-- products --}}
 
             <li class="nav-item">
                 <a><i class="ft-tag"></i><span class="menu-title" data-i18n="">Trademarks</span></a>
