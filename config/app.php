@@ -179,6 +179,10 @@ return [
         // laratrust 
         Laratrust\LaratrustServiceProvider::class,
 
+        // Yajra DataTables
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\HtmlServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
 
     ],
 
@@ -234,6 +238,10 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         // laratrust
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+
+        // Yajra DataTables
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+
 
 
     ],

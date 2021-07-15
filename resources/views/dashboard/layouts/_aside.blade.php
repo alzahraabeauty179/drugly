@@ -57,10 +57,10 @@
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">Categories</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="categories.html">All Category</a>
+                        <a class="menu-item" href="{{ route('dashboard.category.datatable', ) }}">@lang('site.categories')</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="{{ route('dashboard.categories.create', ) }}">Add Category</a>
+                        <a class="menu-item" href="{{ route('dashboard.categories.create', ) }}">@lang('site.add') @lang('site.category')</a>
                     </li>
                     <li>
                         <a class="menu-item" href="add-sub-category.html">Add Sub Category</a>

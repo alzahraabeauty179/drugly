@@ -26,15 +26,11 @@ class BackEndController extends Controller
 
     public function index(Request $request)
     {
-        //get all data of Model
-        $rows = $this->model;
-        $rows = $this->filter($rows);
-        $rows = $rows->paginate(10);
 
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
         // return $module_name_plural;
-        return view('dashboard.' . $module_name_plural . '.index', compact('rows', 'module_name_singular', 'module_name_plural'));
+        return view('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
     } //end of index
 
 

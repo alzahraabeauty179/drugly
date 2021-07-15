@@ -53,6 +53,8 @@
         href="{{ asset('dashboard_files/app-assets/css-rtl/pages/users.min.css') }}" />
     <!-- END Page Level CSS-->
 
+
+
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/css/style-rtl.css') }}" />
     <!-- END Custom CSS-->
@@ -72,6 +74,7 @@
 
         @include('dashboard.layouts._footer')
     </div><!-- end of wrapper -->
+
 
     <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('dashboard_files/app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>

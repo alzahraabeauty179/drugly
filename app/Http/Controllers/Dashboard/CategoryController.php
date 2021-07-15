@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\BackEndController;
+use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
 use App\Models\Category;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\DataTables\UsersDataTable;
+use DataTables;
+
 
 class CategoryController extends BackEndController
 {
@@ -14,7 +18,6 @@ class CategoryController extends BackEndController
     {
         parent::__construct($model);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -26,7 +29,7 @@ class CategoryController extends BackEndController
     {
 
         $rules = [
-            'image' => 'required|image|max:2048',
+            'image' => 'nullable|image|max:2048',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
@@ -102,5 +105,63 @@ class CategoryController extends BackEndController
         $category->delete();
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+    }
+
+
+    public function datatableAjax(Request  $request)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+
+        // return $request
+        $model = Category::query();
+        // return $model;
+        return DataTables::eloquent($model)
+            ->addColumn('name', function (Category $n) {
+                return $n->translation->name;
+            })->addColumn('description', function (Category $d) {
+                return $d->translation->description;
+            })->editColumn('created_at', function (Category $d) {
+                return $d->created_at->diffForHumans();
+            })
+            // ->editColumn('updated_at', 'dashboard.buttons.edit')
+            ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-warning" }}')
+            ->filter(function ($query) use ($request) {
+                return $query
+                    ->whereTranslationLike('name', "%" . $request->search['value'] . "%")
+                    ->orwhereTranslationLike('description', "%" . $request->search['value'] . "%")
+                    ->orwhere('id', 'like', "%" . $request->search['value'] . "%")
+                    ->orwhere('created_at', 'like', "%" . $request->search['value'] . "%")
+                    ->orwhere('updated_at', 'like', "%" . $request->search['value'] . "%");
+            })
+
+            // ->orderColumn('name', function ($query, $order = 'DESC') {
+            //      $query->join('category_translations', function($join){
+            //          return $join->on('categories.id', '=', 'category_translations.category_id')->select('category_translations.id AS ali', 'category_translations.name AS name', 'category_translations.description AS description'); //->orderBy('category_translations.name', 'DESC');
+            //      });
+            //     //  $query->join('category_translations', 'categories.id', '=', 'category_translations.category_id')->orderBy('category_translations.name', 'DESC');
+            //     // ->orderBy('status', $order);
+            // })
+
+            // ->orderColumns(['id', 'created_at'], '-:column $1')
+
+            // ->orderColumn('name', function ($query, Category $n) {
+            //     return $query->orderBy($n->translation->name, 'DESC');
+            // }) 
+
+            // ->orderColumn('name', 'category_translations.name')
+
+            // ->order(function ($query) {
+            //     if (request()->has('name')) {
+            //         return $query->orderBy('category_translations.name', 'asc');
+            //     };
+            //     if (request()->has('description')) {
+            //         return $query->orderBy('description', 'desc');
+            //     } 
+            //      if (request()->has('id')) {
+            //         return $query->orderBy('id', 'DESC');
+            //     }
+            // })
+            ->toJson();
     }
 }
