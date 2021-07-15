@@ -25,6 +25,11 @@ return [
     'admin'=>'مسئول',
     'user'=>'مستخدم',
     'logout'=>'تسجيل خروج',
+    'edit_profile'=>'تعديل الملف الشخصي',
+    'super_admin'=>'مدير التطبيق',
+    'medical_store'=>'مخزن الادوية',
+    'beauty_company'=>'شركة تجميل',
+    'pharmacy'=>'الصيدلية',
 
     'all'=>'الكل',
 

@@ -11,8 +11,6 @@ use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Passport\HasApiTokens;
 
-
-
 class User extends Authenticatable
 {
     use Notifiable, LaratrustUserTrait, HasApiTokens;
@@ -22,10 +20,13 @@ class User extends Authenticatable
      *
      * @var array
      */
-    // protected $fillable = [
-    //     'name', 'email', 'password',
-    // ];
     protected $guarded = [];
+
+    protected $append = ['image_path'];
+
+    public function getImagePathAttribute(){
+        return $this->image != null ? asset('uploads/users_images/'.$this->image) :  asset('dashboard_files/app-assets/images/portrait/small/avatar-s-1.png') ;
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -45,30 +46,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function work()
-    {
-        return $this->hasMany(Work::class);
-    }
-
-    public function latestWork()
-    {
-        return $this->hasOne(Work::class)->latest();
-    }
-    public function allSum($col)
-    {
-        return $this->work->sum($col);
-    }
-
-    public function scopeActive($query)
-    {
-
-        if (auth()->user()->type == 1 && auth()->user()->id == 1) {
-            $query->where('id', '>=', 1);
-        } else if (auth()->user()->type == 1) {
-            $query->where('id', '>', 1);
-        } else {
-            $query->where('id', auth()->user()->id);
-        }
-    }
 }

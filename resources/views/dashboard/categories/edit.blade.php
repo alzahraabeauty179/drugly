@@ -58,7 +58,10 @@
                             <div class="card-content collapse show">
                                 <div class="card-body">
                                     <form class="form row" method="POST" enctype="multipart/form-data" 
-                                        action="{{ route('dashboard.categories.update', ['category' => $row->id]) }}">
+                                    @if( auth()->user()->isAbleTo('edit_category') )
+                                        action="{{ route('dashboard.categories.update', ['category' => $row->id]) }}"
+                                    @endif
+                                    >
                                         @method('PUT')
 
                                         @include('dashboard.'.$module_name_plural.'.form')
@@ -66,7 +69,7 @@
 
                                         <div class="form-group col-md-6">
                                             <button data-repeater-create="" class="btn btn-primary">
-                                                <i class="ft-plus"></i> @lang('site.update')
+                                                <i class="fa fa-cog"></i> @lang('site.update')
                                             </button>
                                         </div>
 

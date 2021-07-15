@@ -53,14 +53,17 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form method="POST" enctype="multipart/form-data" 
-                                            action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}">
+                                        @if( auth()->user()->isAbleTo('edit_brand') )
+                                            action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}"
+                                        @endif
+                                        >
                                             @method('PUT')
 
                                             @include('dashboard.'.$module_name_plural.'.form')
                                             
                                             <div class="form-group">
                                                 <button data-repeater-create="" class="btn btn-primary">
-                                                    <i class="ft-plus"></i> @lang('site.update')
+                                                    <i class="fa fa-cog"></i> @lang('site.update')
                                                 </button>
                                             </div>
                     

@@ -58,7 +58,11 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form row" enctype="multipart/form-data" method="POST" action="{{ route('dashboard.subcategories.store') }}">
+                                    <form class="form row" enctype="multipart/form-data" method="POST" 
+                                    @if( auth()->user()->isAbleTo('create_category') )
+                                        action="{{ route('dashboard.subcategories.store') }}"
+                                    @endif
+                                    >
                                         @method('POST')
 
                                         @include('dashboard.'.$module_name_plural.'.form')

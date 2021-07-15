@@ -24,6 +24,9 @@ class RolesTableSeeder extends Seeder
             'description'    => 'Can do specific tasks like create categories, brand, products and receiving pharmacies orders.'
         ]);
 
+        $store->attachPermissions(['show_brands','create_brand','edit_brand','delete_brand',
+                                   'show_categories','create_category','edit_category','delete_category']);
+
         $pharmacy = \App\Role::create([
             'name'           => 'pharmacy',
             'display_name'   => 'Pharmacy',

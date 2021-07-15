@@ -35,9 +35,11 @@
             <div class="content-body">
                 <section id="configuration">
                     <div class="row">
+                    @if( auth()->user()->isAbleTo('create_brand') )
                         <div class="col-md-12 mb-1">
                             <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular) </a>
                         </div>
+                    @endif
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -61,8 +63,12 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        @if( auth()->user()->isAbleTo('edit_brand') )
+                                                            <th>@lang('site.edit')</th>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_brand') )
+                                                            <th>@lang('site.delete')</th>
+                                                        @endif
                                                         <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </thead>
@@ -71,8 +77,12 @@
                                                     <tr>
                                                         <td> {{++$index}} </td>
                                                         <td> {{ $row->name }} </td>
-                                                        <td> @include('dashboard.buttons.edit') </td>
-                                                        <td> @include('dashboard.buttons.delete') </td>
+                                                        @if( auth()->user()->isAbleTo('edit_brand') )
+                                                            <td> @include('dashboard.buttons.edit') </td>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_brand') )
+                                                            <td> @include('dashboard.buttons.delete') </td>
+                                                        @endif
                                                         <td>
                                                             <figure class="col-md-3 col-sm-6 col-12" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                                                                 <a href="{{ asset($row->image_path) }}" itemprop="contentUrl">
@@ -87,8 +97,12 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        @if( auth()->user()->isAbleTo('edit_brand') )
+                                                            <th>@lang('site.edit')</th>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_brand') )
+                                                            <th>@lang('site.delete')</th>
+                                                        @endif
                                                         <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </tfoot>

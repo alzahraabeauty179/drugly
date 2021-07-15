@@ -52,9 +52,11 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form action="{{ route('dashboard.' . $module_name_plural . '.store') }}" method="post"
-                                            enctype="multipart/form-data">
-                    
+                                        <form method="POST" enctype="multipart/form-data"
+                                        @if( auth()->user()->isAbleTo('create_brand') )
+                                            action="{{ route('dashboard.' . $module_name_plural . '.store') }}" 
+                                        @endif
+                                        >
                                             {{ method_field('post') }}
                     
                                             @include('dashboard.'.$module_name_plural.'.form')
