@@ -24,7 +24,7 @@ return [
     'user'=>'مستخدم',
     'logout'=>'تسجيل خروج',
 
-    'all'=>'الكل',
+    'all'=>'كل',
 
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
