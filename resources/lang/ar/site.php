@@ -160,6 +160,10 @@ return [
     'select' =>'أختر',
     'logo'=>'الشعار',
 
+    //products
+    'products'=>'المنتجات',
+    'product'=>'منتج',
+
     //skills
     'skills'=>'المهارات',
     'skill'=>'مهارة',

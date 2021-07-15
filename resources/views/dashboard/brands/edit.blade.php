@@ -26,7 +26,7 @@
                 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home', ) }}">@lang('site.home')</a>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home')</a>
                             <li class="breadcrumb-item"><a href="{{route('dashboard.brands.index')}}">@lang('site.'.$module_name_plural)</a></li>
                             <li class="breadcrumb-item active">@lang('site.update') @lang('site.'.$module_name_singular)</li>
                         </ol>
@@ -52,21 +52,26 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+<<<<<<< HEAD
                                         <form method="POST" enctype="multipart/form-data" 
                                         @if( auth()->user()->isAbleTo('edit_brand') )
                                             action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}"
                                         @endif
                                         >
+=======
+                                        <form method="POST" enctype="multipart/form-data"
+                                            action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}">
+>>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
                                             @method('PUT')
 
                                             @include('dashboard.'.$module_name_plural.'.form')
-                                            
+
                                             <div class="form-group">
                                                 <button data-repeater-create="" class="btn btn-primary">
                                                     <i class="fa fa-cog"></i> @lang('site.update')
                                                 </button>
                                             </div>
-                    
+
                                         </form> {{-- end of form --}}
                                     </div>
                                 </div>

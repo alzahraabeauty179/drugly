@@ -5,19 +5,7 @@
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
-        <div class="container-fluid row d-flex justify-content-center">
-            @if(session('success'))
-                <div class="alert alert-success col-sm-6 text-center" role="alert">
-                    {!! session('success') !!}
-                </div>
-            @endif
 
-            @if(session('error'))
-                <div class="alert alert-danger col-sm-6 text-center" role="alert">
-                    {!! session('error') !!}
-                </div>
-            @endif
-        </div>
 
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
@@ -58,16 +46,8 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-<<<<<<< HEAD
-                                    <form class="form row" method="POST" enctype="multipart/form-data" 
-                                    @if( auth()->user()->isAbleTo('edit_category') )
-                                        action="{{ route('dashboard.subcategories.update', ['subcategory' => $row->id]) }}"
-                                    @endif
-                                    >
-=======
                                     <form class="form row" method="POST" enctype="multipart/form-data"
-                                        action="{{ route('dashboard.subcategories.update', ['subcategory' => $row->id]) }}">
->>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
+                                        action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
                                         @method('PUT')
 
                                         @include('dashboard.'.$module_name_plural.'.form')

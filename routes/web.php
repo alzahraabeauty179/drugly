@@ -56,10 +56,15 @@ Route::group(
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');
 
+<<<<<<< HEAD
             ######################### Users #########################
             Route::resource('users', 'UserController');
+=======
+            ######################### products #########################
+            Route::resource('products', 'ProductController');
+>>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
 
         });
-       
+
     }
 );
