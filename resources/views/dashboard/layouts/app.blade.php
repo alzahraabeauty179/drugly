@@ -20,6 +20,9 @@
         rel="stylesheet" />
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/css-rtl/vendors.min.css') }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/css/forms/selects/select2.min.css') }}">
+
     <link rel="stylesheet" type="text/css"
         href="{{ asset('dashboard_files/app-assets/vendors/css/forms/icheck/icheck.css') }}" />
     <link rel="stylesheet" type="text/css"
@@ -56,7 +59,7 @@
 
 
     <!-- BEGIN Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/css/style-rtl.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/assets/css/style-rtl.css') }}" />
     <!-- END Custom CSS-->
     @stack('style')
 </head>
@@ -79,6 +82,12 @@
     <!-- BEGIN VENDOR JS-->
     <script src="{{ asset('dashboard_files/app-assets/vendors/js/vendors.min.js') }}" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
+
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="{{ asset('dashboard_files/app-assets/vendors/js/tables/datatable/datatables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('dashboard_files/app-assets/vendors/js/forms/select/select2.full.min.js') }}" type="text/javascript"></script>
+    <!-- END PAGE VENDOR JS-->
+
     <!-- BEGIN PAGE VENDOR JS-->
     <script src="{{ asset('dashboard_files/app-assets/vendors/js/charts/raphael-min.js') }}" type="text/javascript">
     </script>
@@ -95,6 +104,12 @@
     <script src="{{ asset('dashboard_files/app-assets/js/scripts/customizer.min.js') }}" type="text/javascript">
     </script>
     <!-- END maoqe3 JS-->
+
+    <!-- BEGIN PAGE LEVEL JS-->
+        <script src="{{ asset('dashboard_files/app-assets/js/scripts/tables/datatables/datatable-basic.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('dashboard_files/app-assets/js/scripts/forms/select/form-select2.min.js') }}" type="text/javascript"></script>
+    <!-- END PAGE LEVEL JS-->
+
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="{{ asset('dashboard_files/app-assets/js/scripts/pages/dashboard-ecommerce.min.js') }}"
         type="text/javascript"></script>

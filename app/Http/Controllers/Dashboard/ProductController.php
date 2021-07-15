@@ -3,21 +3,18 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\BackEndController;
-use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\DataTables\UsersDataTable;
-use DataTables;
 
-
-class CategoryController extends BackEndController
+class ProductController extends BackEndController
 {
-    public function __construct(Category $model)
+    public function __construct(Product $model)
     {
         parent::__construct($model);
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -29,7 +26,7 @@ class CategoryController extends BackEndController
     {
 
         $rules = [
-            'image' => 'nullable|image|max:2048',
+            'image' => 'required|image|max:2048',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
@@ -40,7 +37,7 @@ class CategoryController extends BackEndController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-        $request_data['owner_id'] = auth()->user()->id;
+        // $request_data['owner_id'] = auth()->user()->id;
 
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
@@ -71,7 +68,7 @@ class CategoryController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        $category = $this->model->findOrFail($id);
+        $product = $this->model->findOrFail($id);
         $rules = [
             'image' => 'nullable|image|max:2000',
         ];
@@ -85,33 +82,32 @@ class CategoryController extends BackEndController
 
         $request_data = $request->except(['_token', 'image']);
         if ($request->image) {
-            if ($category->image != null) {
-                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
+            if ($product->image != null) {
+                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $product->image);
             }
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         } //end of if
 
-        $category->update($request_data);
+        $product->update($request_data);
         session()->flash('success', __('site.updated_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
-    
+
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, Request $request)
     {
-        $category = $this->model->findOrFail($id);
-        if ($category->image != null) {
-            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
+        $product = $this->model->findOrFail($id);
+        if ($product->image != null) {
+            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $product->image);
         }
-        $category->delete();
+        $product->delete();
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
-
 }

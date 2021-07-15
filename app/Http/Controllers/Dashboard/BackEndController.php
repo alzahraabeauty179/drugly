@@ -26,11 +26,11 @@ class BackEndController extends Controller
 
     public function index(Request $request)
     {
-
+        $rows =  $this->model->get();
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
         // return $module_name_plural;
-        return view('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
+        return view('dashboard.' . $module_name_plural . '.index', compact('rows','module_name_singular', 'module_name_plural'));
     } //end of index
 
 
@@ -64,8 +64,10 @@ class BackEndController extends Controller
 
     protected function filter($rows)
     {
-
-        return $rows;
+        if($this->getSingularModelName() == "category")
+            return $this->model->whereNull('parent_id');
+        else
+            return $rows;
     }
     public function getClassNameFromModel()
     {

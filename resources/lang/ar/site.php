@@ -8,6 +8,10 @@ return [
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
 
+    // Brand
+    'brand'  => 'ماركة تجارية',
+    'brands' => 'مركات تجارية',
+    'update' => 'تحديث',
     //users
     'actions'=>'الأحداث',
     'add'=>'أضف',
@@ -20,7 +24,7 @@ return [
     'user'=>'مستخدم',
     'logout'=>'تسجيل خروج',
 
-    'all'=>'الكل',
+    'all'=>'كل',
 
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
@@ -144,6 +148,12 @@ return [
     //categories
     'categories'=>'الأقسام',
     'category'=>'قسم',
+    'subcategory'=>'قسم فرعي',
+    'subcategories'=>'الاقسام الفرعية',
+
+    //products
+    'products'=>'المنتجات',
+    'product'=>'منتج',
 
     //skills
     'skills'=>'المهارات',

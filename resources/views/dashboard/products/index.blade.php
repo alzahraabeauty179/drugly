@@ -61,8 +61,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        <th>@lang('site.actions')</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -70,8 +69,10 @@
                                                     <tr>
                                                         <td> {{++$index}} </td>
                                                         <td> {{ $row->name }} </td>
-                                                        <td> @include('dashboard.buttons.edit') </td>
-                                                        <td> @include('dashboard.buttons.delete') </td>
+                                                        <td>
+                                                            @include('dashboard.buttons.edit')
+                                                            @include('dashboard.buttons.delete')
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -79,8 +80,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        <th>@lang('site.actions')</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
