@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\BackEndController;
+use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
 use App\Models\Category;
 use App\Models\CategoryTranslation;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\DataTables\UsersDataTable;
+use DataTables;
+
 
 class CategoryController extends BackEndController
 {
@@ -139,4 +143,5 @@ class CategoryController extends BackEndController
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
+
 }

@@ -16,18 +16,26 @@ class Category extends Model implements TranslatableContract
 
     protected $guarded = [];
 
-    protected $append = ['image_path'];
+    protected $appends = ['image_path', 'parent_name'];
 
     public function getImagePathAttribute(){
         return $this->image != null ? asset('uploads/categories_images/'.$this->image) :  asset('uploads/categories_images/default.png') ;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    function parent() : BelongsTo
-    {
+    public function parent(){
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+    
+    public function child(){
         return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function getParentNameAttribute(){
+        return $this->parent_id == null ? null : $this->child->name ;
+    }
+
+    public function transLand(){
+        return $this->hasMany(CategoryTranslation::class, 'category_id')->orderBy('name', 'ASC');
     }
 
 }

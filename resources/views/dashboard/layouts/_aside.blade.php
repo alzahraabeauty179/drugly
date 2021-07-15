@@ -24,16 +24,7 @@
                     class="ft-minus"
                     data-toggle="tooltip"
                     data-placement="left"
-<<<<<<< HEAD
                     data-original-title="@lang('site.' . auth()->user()->type)"
-=======
-                    @if( auth()->user()->hasRole('store') )
-                        data-original-title="Store Account"
-                    @else
-                        data-original-title="Pharmacy Account"
-                    @endif
-
->>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
                 ></i>
             </li>{{-- Account Type --}}
             @if( auth()->user()->hasRole('store') )
@@ -64,6 +55,15 @@
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
                 <ul class="menu-content">
                     <li>
+                        <a class="menu-item" href="{{ route('dashboard.category.datatable', ) }}">@lang('site.categories')</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="{{ route('dashboard.categories.create', ) }}">@lang('site.add') @lang('site.category')</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="add-sub-category.html">Add Sub Category</a>
+                    </li>
+                    <li><a class="menu-item" href="#">Soon</a></li>
                         <a class="menu-item" href="{{route('dashboard.products.index')}}">@lang('site.all') @lang('site.products')</a>
                     </li>
                     {{-- <li>

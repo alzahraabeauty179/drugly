@@ -1,5 +1,6 @@
 <?php
 
+use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Dashboard\CategoryController;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,25 +45,28 @@ Route::group(
     ],
     function () {
 
-        Route::get('/dashboard/home','HomeController@index')->name('dashboard.home');
-
         Route::prefix('dashboard')->name('dashboard.')->middleware(['auth'])->group(function () {
+
+            Route::get('/', 'HomeController@index')->name('home');
+            Route::get('/home', 'HomeController@index')->name('home');
 
             ######################### Brands #########################
             Route::resource('brands', 'BrandController');
 
             ######################### Categories #########################
             Route::resource('categories', 'CategoryController');
+            Route::get('category', function (CategoryDataTable $dataTable) {
+                return $dataTable->render('dashboard.categories.index');
+            })->name('category.datatable');
+
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');
 
-<<<<<<< HEAD
             ######################### Users #########################
             Route::resource('users', 'UserController');
-=======
-            ######################### products #########################
+
+            ######################### Products #########################
             Route::resource('products', 'ProductController');
->>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
 
         });
 

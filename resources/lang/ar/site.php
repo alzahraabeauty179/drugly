@@ -31,7 +31,7 @@ return [
     'beauty_company'=>'شركة تجميل',
     'pharmacy'=>'الصيدلية',
 
-    'all'=>'الكل',
+    'all'=>'كل',
 
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
