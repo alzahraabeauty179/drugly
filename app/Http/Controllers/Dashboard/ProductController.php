@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Models\Product;
 use Illuminate\Validation\Rule;
@@ -10,9 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends BackEndController
 {
-    public function __construct(Product $model)
+    public function __construct(Product $model, ProductDataTable $proDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $proDataTable);
     }
 
 

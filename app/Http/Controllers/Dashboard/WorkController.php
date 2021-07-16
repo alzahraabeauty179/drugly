@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\WorkDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Work;
 use App\User;
@@ -10,33 +11,33 @@ use Illuminate\Support\Facades\DB;
 
 class WorkController extends BackEndController
 {
-    public function __construct(Work $model)
+    public function __construct(Work $model, WorkDataTable $workDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $workDataTable);
     }
 
-    public function index(Request $request)
-    {
-        //get all data of Model
-        $rows = $this->model;
-        $rows = $this->filter($rows);
-        // ------------------------------------------  this id old way with database elquant and scope not sign on it 
-        // $rows = DB::select('select user_id, users.name AS name ,  sum(calls) AS calls, sum(whats) AS whats, sum(meeting) AS meeting, sum(care) AS care, sum(nocare) AS nocare from works JOIN users ON works.user_id = users.id GROUP BY 1, 2',);
+    // public function index()
+    // {
+    //     //get all data of Model
+    //     $rows = $this->model;
+    //     $rows = $this->filter($rows);
+    //     // ------------------------------------------  this id old way with database elquant and scope not sign on it 
+    //     // $rows = DB::select('select user_id, users.name AS name ,  sum(calls) AS calls, sum(whats) AS whats, sum(meeting) AS meeting, sum(care) AS care, sum(nocare) AS nocare from works JOIN users ON works.user_id = users.id GROUP BY 1, 2',);
 
-        $rows = Work::selectRaw(' user_id, users.name AS name ,
-                                          sum(calls) AS calls, sum(whats) AS whats,
-                                         sum(meeting) AS meeting, sum(care) AS care, 
-                                         sum(nocare) AS nocare
-                                          ')
-            ->join('users', 'users.id', '=', 'user_id')
-            ->groupBy(['works.user_id', 'users.name'])
-            ->get();
+    //     $rows = Work::selectRaw(' user_id, users.name AS name ,
+    //                                       sum(calls) AS calls, sum(whats) AS whats,
+    //                                      sum(meeting) AS meeting, sum(care) AS care, 
+    //                                      sum(nocare) AS nocare
+    //                                       ')
+    //         ->join('users', 'users.id', '=', 'user_id')
+    //         ->groupBy(['works.user_id', 'users.name'])
+    //         ->get();
 
-        $module_name_plural = $this->getClassNameFromModel();
-        $module_name_singular = $this->getSingularModelName();
-        // return $module_name_plural;
-        return view('dashboard.' . $module_name_plural . '.index', compact('rows', 'module_name_singular', 'module_name_plural'));
-    } //end of index
+    //     $module_name_plural = $this->getClassNameFromModel();
+    //     $module_name_singular = $this->getSingularModelName();
+    //     // return $module_name_plural;
+    //     return view('dashboard.' . $module_name_plural . '.index', compact('rows', 'module_name_singular', 'module_name_plural'));
+    // } //end of index
 
     /**
      * Store a newly created resource in storage.

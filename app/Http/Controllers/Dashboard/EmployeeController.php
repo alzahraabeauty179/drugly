@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\UserDataTable;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
 class EmployeeController extends BackEndController
 {
-    public function __construct(User $model)
+    public function __construct(User $model, UserDataTable $userDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $userDataTable);
     }
 
     /**

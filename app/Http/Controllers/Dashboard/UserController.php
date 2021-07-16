@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\UserDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
+use App\Models\Brand;
+use App\Models\BrandTranslation;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\UserTranslation;
@@ -15,9 +18,9 @@ class UserController extends BackEndController
     /**
      * Constructor.
      */
-    public function __construct(User $model)
+    public function __construct(User $model, UserDataTable $userDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $userDataTable);
     }
 
     public function isExists(Request $request, $id)

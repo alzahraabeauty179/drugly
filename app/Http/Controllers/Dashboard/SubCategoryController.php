@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -11,11 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class SubCategoryController extends Controller
 {
-    protected $model;
 
-    public function __construct(Category $model)
+    public function __construct(Category $model, CategoryDataTable $subCatDataTable)
     {
-        $this->model = $model;
+        parent::__construct($model, $subCatDataTable);
     }
 
     public function isExists(Request $request, $id)

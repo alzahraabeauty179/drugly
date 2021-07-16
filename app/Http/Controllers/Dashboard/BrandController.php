@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\BrandDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 use App\Models\Brand;
@@ -14,9 +15,9 @@ class BrandController extends BackEndController
     /**
      * Constructor.
      */
-    public function __construct(Brand $model)
+    public function __construct(Brand $model, BrandDataTable $brandDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $brandDataTable);
     }
 
     public function isExists(Request $request, $id)

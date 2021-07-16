@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\CategoryDataTable;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -10,9 +11,9 @@ use Illuminate\Support\Facades\Storage;
 class OwnerController extends BackEndController
 {
 
-    public function __construct(Owner $model)
+    public function __construct(Owner $model, CategoryDataTable $userDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $userDataTable);
     }
 
 
