@@ -26,8 +26,8 @@
                                         <div class="col text-left">
                                             <!-- <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Follow</button> -->
                                             <div class="btn-group d-none d-md-block float-left ml-2" role="group" aria-label="Basic example">
-                                                <button type="button" class="btn btn-success"><i class="fa fa-dashcube"></i> Message</button>
-                                                <button type="button" id="edit_profile" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-cog"></i></button>
+                                                <button type="button" class="btn btn-success"><i class="fa fa-dashcube"></i> @lang('site.message') </button>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_profile"><i class="fa fa-cog"></i> @lang('site.profile') </button>
                                             </div>
                                         </div>
                                     </div>
@@ -39,13 +39,13 @@
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <ul class="navbar-nav mr-auto">
                                             <li class="nav-item active">
-                                                <a class="nav-link" href="#profile"><i class="ft-user"></i> Profile <span class="sr-only">(current)</span></a>
+                                                <a class="nav-link" href="#profile"><i class="ft-user"></i> @lang('site.profile') <span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#notifications"><i class="fa fa-bell-o"></i> Notifications</a>
+                                                <a class="nav-link" href="#notifications"><i class="fa fa-bell-o"></i> @lang('site.notifications') </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#ads"><i class="ft-tv"></i> Advertisements </a>
+                                                <a class="nav-link" href="#ads"><i class="ft-tv"></i> @lang('site.advertisements') </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -56,15 +56,15 @@
                 </div>
 
                 <section id="profile" class="timeline-center timeline-wrapper">
-                    <h3 class="page-title text-center">Profile</h3>
+                    <h3 class="page-title text-center"> @lang('site.profile') </h3>
                     <ul class="timeline">
                         <li class="timeline-line"></li>
                         <li class="timeline-item">
                             <div class="timeline-card card border-grey border-lighten-2">
                                 <div class="card-header">
-                                    <h4 class="card-title"><a href="#"> @lang('site.' . auth()->user()->type ) Information</a></h4>
+                                    <h4 class="card-title"><a href="#"> @lang('site.' . auth()->user()->type ) @lang('site.information')</a></h4>
                                     <p class="card-subtitle text-muted mb-0 pt-1">
-                                        <span class="font-small-3">@lang('site.' . auth()->user()->type ) information will be show in the website.</span>
+                                        <span class="font-small-3"> @lang('site.' . auth()->user()->type ) @lang('site.information_hint')</span>
                                     </p>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -79,36 +79,40 @@
                                     <div class="card">
                                         <div class="card-header">
                                             <!-- <h4 class="card-title" id="heading-social-buttons">Social Accounts</h4> -->
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_info"><i class="fa fa-cog"></i> @lang('site.website') </button>
                                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
                                                 <div class="social-buttons">
                                                     <!-- Social Icons Outline Buttons -->
-                                                    <a href="#" class="btn btn-social-icon btn-sm mr-1 btn-linkedin"><span class="fa fa-linkedin"></span></a>
-                                                    <a href="#" class="btn btn-social-icon btn-sm mr-1 btn-pinterest"><span class="fa fa-pinterest-p"></span></a>
-                                                    <a href="#" class="btn btn-social-icon btn-sm mr-1 btn-google"><span class="fa fa-google"></span></a>
-                                                    <a href="#" class="btn btn-social-icon btn-sm mr-1 btn-facebook"><span class="fa fa-facebook"></span></a>
+                                                    <a @if( is_null($app_settings) ) href="#" @else href="{{$app_settings->twitter_link}}" @endif class="btn btn-social-icon btn-sm mr-1 btn-linkedin"><span class="fa fa-twitter"></span></a>
+                                                    <a @if( is_null($app_settings) ) href="#" @else href="{{$app_settings->youtube_link}}" @endif class="btn btn-social-icon btn-sm mr-1 btn-pinterest"><span class="fa fa-youtube"></span></a>
+                                                    <a @if( is_null($app_settings) ) href="#" @else href="{{$app_settings->instagram_link}}" @endif class="btn btn-social-icon btn-sm mr-1 btn-google"><span class="fa fa-instagram"></span></a>
+                                                    <a @if( is_null($app_settings) ) href="#" @else href="{{$app_settings->facebook_link}}" @endif class="btn btn-social-icon btn-sm mr-1 btn-facebook"><span class="fa fa-facebook"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="card-content">
+                                            <div class="timeline-card card border-grey border-lighten-2">
+                                                <img    class="img-fluid" alt="@lang('site.' . auth()->user()->type) @lang('site.logo')" 
+                                                    @if( is_null($app_settings) )
+                                                        src="{{ asset('uploads/app_settings_images/default.jpg') }}"
+                                                    @else
+                                                        src="{{ asset($app_settings->image_path) }}"
+                                                    @endif
+                                                >
+                                            </div>
                                             <div class="card-body">
-                                                <h4 class="card-title">@lang('site.' . auth()->user()->type) Name</h4>
-                                                <p class="card-text">Jelly beans sugar plum</p>
+                                                <h4 class="card-title"> @lang('site.' . auth()->user()->type) @lang('site.name') </h4>
+                                                <p class="card-text">   @if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {{ $app_settings->name }} @endif</p>
                                                 
-                                                <h4 class="card-title">@lang('site.' . auth()->user()->type) Description</h4>
-                                                <p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop chupa chups donut fruitcake cake.</p>
+                                                <h4 class="card-title">  @lang('site.description') </h4>
+                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->description !!} @endif</p>
 
-                                                <h4 class="card-title"> About Us </h4>
-                                                <p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop chupa chups donut fruitcake cake.</p>
+                                                <h4 class="card-title">  @lang('site.about_us') </h4>
+                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->about_us !!} @endif</p>
 
-                                                <h4 class="card-title"> Privacy Policy </h4>
-                                                <p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop chupa chups donut fruitcake cake.</p>
-
-                                                <h4 class="card-title">@lang('site.' . auth()->user()->type) Website Link </h4>
-                                                <p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop chupa chups donut fruitcake cake.</p>
-
-                                                <h4 class="card-title">@lang('site.' . auth()->user()->type) Address </h4>
-                                                <p class="card-text">Sweet roll marzipan pastry halvah. Cake bear claw sweet. Tootsie roll pie marshmallow lollipop chupa chups donut fruitcake cake.</p>
+                                                <h4 class="card-title">  @lang('site.privacy_policy') </h4>
+                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->privacy_policy !!} @endif</p>
                                             </div>
                                         </div>
                                     </div>
@@ -119,15 +123,15 @@
                 </section>
 
                 <section id="notifications" class="timeline-center timeline-wrapper">
-                    <h3 class="page-title text-center"> Notifications </h3>
+                    <h3 class="page-title text-center"> @lang('site.notifications') </h3>
                     <ul class="timeline">
                         <li class="timeline-line"></li>
                         <li class="timeline-item">
                             <div class="timeline-card card border-grey border-lighten-2">
                                 <div class="card-header">
-                                    <h4 class="card-title"><a href="#"> Notifications & Announcements </a></h4>
+                                    <h4 class="card-title"><a href="#"> @lang('site.notifications_and_announcements') </a></h4>
                                     <p class="card-subtitle text-muted mb-0 pt-1">
-                                        <span class="font-small-3">Orders notifications and dashboard announcements.</span>
+                                        <span class="font-small-3">@lang('site.notifications_and_announcements_hint')</span>
                                     </p>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -187,15 +191,15 @@
                 </section>
 
                 <section id="ads" class="timeline-center timeline-wrapper">
-                    <h3 class="page-title text-center"> Advertisements </h3>
+                    <h3 class="page-title text-center"> @lang('site.advertisements') </h3>
                     <ul class="timeline">
                         <li class="timeline-line"></li>
                         <li class="timeline-item">
                             <div class="timeline-card card border-grey border-lighten-2">
                                 <div class="card-header">
-                                    <h4 class="card-title"><a href="#">Published Advertisement</a></h4>
+                                    <h4 class="card-title"><a href="#"> @lang('site.published_advertisements')</a></h4>
                                     <p class="card-subtitle text-muted mb-0 pt-1">
-                                        <span class="font-small-3">This advertisements will be show in the website.</span>
+                                        <span class="font-small-3"> @lang('site.advertisements_hint') </span>
                                     </p>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -262,5 +266,5 @@
             <!-- </div> -->
         </div>
     </div>
-    @include('dashboard.'.$module_name_plural.'.form')
+    @include('dashboard.'.$module_name_plural.'.modals')
 @endsection

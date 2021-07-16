@@ -55,7 +55,7 @@
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{ route('dashboard.category.datatable', ) }}">@lang('site.categories')</a>
+                        <a class="menu-item" href="{{ route('dashboard.categories.index', ) }}">@lang('site.categories')</a>
                     </li>
                     <li>
                         <a class="menu-item" href="{{ route('dashboard.categories.create', ) }}">@lang('site.add') @lang('site.category')</a>
@@ -74,7 +74,8 @@
                         <a class="menu-item" href="{{ route('dashboard.subproducts.create') }}">@lang('site.add') @lang('site.subcategory')</a>
                     </li> --}}
                 </ul>
-            </li>{{-- products --}}
+            </li>
+            {{-- products --}}
 
             <li class="nav-item">
                 <a><i class="ft-tag"></i><span class="menu-title" data-i18n="">Trademarks</span></a>
