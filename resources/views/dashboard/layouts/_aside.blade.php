@@ -19,43 +19,38 @@
             </li>{{-- Dashboard --}}
 
             <li class="navigation-header">
-                @if( auth()->user()->hasRole('store') )
-                    <span>Store Account</span>
-                @else
-                    <span>Pharmacy Account</span>
-                @endif
+                <span>@lang('site.' . auth()->user()->type)</span>
                 <i
                     class="ft-minus"
                     data-toggle="tooltip"
                     data-placement="left"
-                    @if( auth()->user()->hasRole('store') )
-                        data-original-title="Store Account"
-                    @else
-                        data-original-title="Pharmacy Account"
-                    @endif
-
+                    data-original-title="@lang('site.' . auth()->user()->type)"
                 ></i>
             </li>{{-- Account Type --}}
+            @if( auth()->user()->hasRole('store') )
+                @if( auth()->user()->isAbleTo('show_brands') )
+                    <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">@lang('site.brands')</span></a>
+                    </li>{{-- Brands --}}
+                @endif
 
-            <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span class="menu-title" data-i18n="">@lang('site.brands')</span></a>
-            </li>{{-- Brands --}}
-
-            <li class="nav-item">
-                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.categories')</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="{{route('dashboard.category.datatable')}}">@lang('site.all') @lang('site.categories')</a>
-                    </li>
-                    {{-- <li>
-                        <a class="menu-item" href="{{ route('dashboard.categories.create') }}">@lang('site.add') @lang('site.category')</a>
-                    </li> --}}
-                    <li><a class="menu-item" href="{{ route('dashboard.subcategories.index') }}">@lang('site.all') @lang('site.subcategories')</a></li>
-                    {{-- <li>
-                        <a class="menu-item" href="{{ route('dashboard.subcategories.create') }}">@lang('site.add') @lang('site.subcategory')</a>
-                    </li> --}}
-                </ul>
-            </li>{{-- Categories --}}
-
+                @if( auth()->user()->isAbleTo('show_categories') )
+                    <li class="nav-item">
+                        <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.categories')</span></a>
+                        <ul class="menu-content">
+                            <li>
+                                <a class="menu-item" href="{{route('dashboard.categories.index')}}">@lang('site.all') @lang('site.categories')</a>
+                            </li>
+                            {{-- <li>
+                                <a class="menu-item" href="{{ route('dashboard.categories.create') }}">@lang('site.add') @lang('site.category')</a>
+                            </li> --}}
+                            <li><a class="menu-item" href="{{ route('dashboard.subcategories.index') }}">@lang('site.all') @lang('site.subcategories')</a></li>
+                            {{-- <li>
+                                <a class="menu-item" href="{{ route('dashboard.subcategories.create') }}">@lang('site.add') @lang('site.subcategory')</a>
+                            </li> --}}
+                        </ul>
+                    </li>{{-- Categories --}}
+                @endif
+            @endif
             <li class="nav-item">
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
                 <ul class="menu-content">

@@ -3,8 +3,22 @@
 @section('title', __('site.update')  .' '.  __('site.' . $module_name_singular) )
 
 @section('content')
-<div class="app-content content">
+    <div class="app-content content">
         <div class="content-wrapper">
+            <div class="container-fluid row d-flex justify-content-center">
+                @if(session('success'))
+                    <div class="alert alert-success col-sm-6 text-center" role="alert">
+                        {!! session('success') !!}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                        {!! session('error') !!}
+                    </div>
+                @endif
+            </div>
+            
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-1">
                     <h3 class="content-header-title">@lang('site.update') @lang('site.'.$module_name_singular)</h3>
@@ -38,15 +52,23 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
+<<<<<<< HEAD
+                                        <form method="POST" enctype="multipart/form-data" 
+                                        @if( auth()->user()->isAbleTo('edit_brand') )
+                                            action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}"
+                                        @endif
+                                        >
+=======
                                         <form method="POST" enctype="multipart/form-data"
                                             action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}">
+>>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
                                             @method('PUT')
 
                                             @include('dashboard.'.$module_name_plural.'.form')
 
                                             <div class="form-group">
                                                 <button data-repeater-create="" class="btn btn-primary">
-                                                    <i class="ft-plus"></i> @lang('site.update')
+                                                    <i class="fa fa-cog"></i> @lang('site.update')
                                                 </button>
                                             </div>
 

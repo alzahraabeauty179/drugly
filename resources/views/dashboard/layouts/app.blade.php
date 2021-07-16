@@ -20,8 +20,13 @@
         rel="stylesheet" />
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/css-rtl/vendors.min.css') }}" />
-
+    <!-- for select -->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/css/forms/selects/select2.min.css') }}">
+    <!-- for images -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/default-skin/default-skin.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/default-skin/default-skin.css') }}">
 
     <link rel="stylesheet" type="text/css"
         href="{{ asset('dashboard_files/app-assets/vendors/css/forms/icheck/icheck.css') }}" />
@@ -98,6 +103,11 @@
     <script src="{{ asset('dashboard_files/app-assets/vendors/js/timeline/horizontal-timeline.js') }}"
         type="text/javascript"></script>
     <!-- END PAGE VENDOR JS-->
+    <!-- for images -->
+    <script src="{{ asset('dashboard_files/app-assets/vendors/js/gallery/masonry/masonry.pkgd.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe-ui-default.min.js') }}" type="text/javascript"></script>
+
     <!-- BEGIN maoqe3 JS-->
     <script src="{{ asset('dashboard_files/app-assets/js/core/app-menu.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('dashboard_files/app-assets/js/core/app.min.js') }}" type="text/javascript"></script>
@@ -106,8 +116,12 @@
     <!-- END maoqe3 JS-->
 
     <!-- BEGIN PAGE LEVEL JS-->
+        <!-- for datatable -->
         <script src="{{ asset('dashboard_files/app-assets/js/scripts/tables/datatables/datatable-basic.min.js') }}" type="text/javascript"></script>
+        <!-- for select -->
         <script src="{{ asset('dashboard_files/app-assets/js/scripts/forms/select/form-select2.min.js') }}" type="text/javascript"></script>
+        <!-- for images -->
+        <script src="{{ asset('dashboard_files/app-assets/js/scripts/gallery/photo-swipe/photoswipe-script.min.js') }}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
 
     <!-- BEGIN PAGE LEVEL JS-->

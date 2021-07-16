@@ -15,13 +15,18 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('full_name');
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('active')->default(1);
+            
             $table->string('password');
             $table->string('image')->nullable();
-            $table->tinyInteger('type')->default(0)->comment('0=> show his data only 1=> show all data');
+
+            $table->enum('type', ['super_admin', 'medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
+
             $table->rememberToken();
             $table->timestamps();
         });

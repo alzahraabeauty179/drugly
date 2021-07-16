@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="app-content content">
-        <div class="container-fluid row d-flex justify-content-center ">
+        <div class="container-fluid row d-flex justify-content-center">
             @if(session('success'))
                 <div class="alert alert-success col-sm-6 text-center" role="alert">
                     {!! session('success') !!}
@@ -35,9 +35,11 @@
             <div class="content-body">
                 <section id="configuration">
                     <div class="row">
+                    @if( auth()->user()->isAbleTo('create_category') )
                         <div class="col-md-12 mb-1">
                             <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular) </a>
                         </div>
+                    @endif
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -62,8 +64,13 @@
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
                                                         <th>@lang('site.category')</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        @if( auth()->user()->isAbleTo('edit_category') )
+                                                            <th>@lang('site.edit')</th>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_category') )
+                                                            <th>@lang('site.delete')</th>
+                                                        @endif
+                                                        <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -72,8 +79,19 @@
                                                         <td> {{++$index}} </td>
                                                         <td> {{ $row->name }} </td>
                                                         <td> {{  $row->parent->name }} </td>
-                                                        <td> @include('dashboard.buttons.edit') </td>
-                                                        <td> @include('dashboard.buttons.delete') </td>
+                                                        @if( auth()->user()->isAbleTo('edit_category') )
+                                                            <td> @include('dashboard.buttons.edit') </td>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_category') )
+                                                            <td> @include('dashboard.buttons.delete') </td>
+                                                        @endif
+                                                        <td>
+                                                            <figure class="col-md-3 col-sm-6 col-12" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+                                                                <a href="{{ asset($row->image_path) }}" itemprop="contentUrl">
+                                                                    <img class="img-thumbnail img-fluid" src="{{ asset($row->image_path) }}" itemprop="thumbnail" alt="{{ $row->description }}" />
+                                                                </a>
+                                                            </figure>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -82,8 +100,13 @@
                                                         <th>#</th>
                                                         <th>@lang('site.'.$module_name_singular)</th>
                                                         <th>@lang('site.category')</th>
-                                                        <th>@lang('site.edit')</th>
-                                                        <th>@lang('site.delete')</th>
+                                                        @if( auth()->user()->isAbleTo('edit_category') )
+                                                            <th>@lang('site.edit')</th>
+                                                        @endif
+                                                        @if( auth()->user()->isAbleTo('delete_category') )
+                                                            <th>@lang('site.delete')</th>
+                                                        @endif
+                                                        <th>@lang('site.logo')</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>

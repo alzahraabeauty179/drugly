@@ -12,6 +12,8 @@ return [
     'brand'  => 'ماركة تجارية',
     'brands' => 'مركات تجارية',
     'update' => 'تحديث',
+    'repeated_data'=>'تكرار البيانات ، إذا كان اسم موجودًا من قبل!',
+
     //users
     'actions'=>'الأحداث',
     'add'=>'أضف',
@@ -23,6 +25,11 @@ return [
     'admin'=>'مسئول',
     'user'=>'مستخدم',
     'logout'=>'تسجيل خروج',
+    'edit_profile'=>'تعديل الملف الشخصي',
+    'super_admin'=>'مدير التطبيق',
+    'medical_store'=>'مخزن الادوية',
+    'beauty_company'=>'شركة تجميل',
+    'pharmacy'=>'الصيدلية',
 
     'all'=>'كل',
 
@@ -150,6 +157,8 @@ return [
     'category'=>'قسم',
     'subcategory'=>'قسم فرعي',
     'subcategories'=>'الاقسام الفرعية',
+    'select' =>'أختر',
+    'logo'=>'الشعار',
 
     //products
     'products'=>'المنتجات',

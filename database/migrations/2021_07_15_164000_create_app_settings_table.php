@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTable extends Migration
+class CreateAppSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,24 @@ class CreateBrandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('app_settings', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('owner_id')->unsigned();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->tinyInteger('active')->default(1);
+            $table->string('email')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->string('image')->nullable();
+
+            $table->string('facebook_link')->nullable();
+            $table->string('twitter_link')->nullable();
+            $table->string('instagram_link')->nullable();
+            $table->string('youtube_link')->nullable();
             
+            $table->decimal('ad_price')->nullable();
+            $table->integer('ad_duration')->nullable();
+
             $table->timestamps();
         });
     }
@@ -33,6 +42,6 @@ class CreateBrandsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('app_settings');
     }
 }

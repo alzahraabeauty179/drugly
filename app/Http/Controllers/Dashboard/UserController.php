@@ -3,38 +3,38 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Dashboard\BackEndController;
-use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
-use App\Models\Category;
-use App\Models\CategoryTranslation;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\UserTranslation;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
-use App\DataTables\UsersDataTable;
-use DataTables;
 
-
-class CategoryController extends BackEndController
+class UserController extends BackEndController
 {
-    public function __construct(Category $model)
+    
+    /**
+     * Constructor.
+     */
+    public function __construct(User $model)
     {
         parent::__construct($model);
     }
 
     public function isExists(Request $request, $id)
     {
-        $ownerData = Category::where('owner_id', auth()->user()->id)->whereNull('parent_id')->pluck('id')->toArray();
+        $ownerData = Brand::where('owner_id', auth()->user()->id)->pluck('id')->toArray();
         $result = 0;
 
         foreach (config('translatable.locales') as $locale)
             if( is_null($id) )
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)->count();
+                $result += BrandTranslation::where('name', $request[$locale . '.name'])->whereIn('brand_id', $ownerData)->count();
             else
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)
-                                              ->where('category_id', '!=', $id)->count();
+                $result += BrandTranslation::where('name', $request[$locale . '.name'])->whereIn('brand_id', $ownerData)
+                                           ->where('brand_id', '!=', $id)->count();
 
         return $result;
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -49,12 +49,13 @@ class CategoryController extends BackEndController
             return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.create');
 
         }else{
+            // return $request;
             $rules = [
                 'image' => 'required|image|max:2048',
             ];
             foreach (config('translatable.locales') as $locale) {
                 $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:200',
+                    $locale . '.name' => ['required','string','min:3','max:200'],
                     $locale . '.description' => 'nullable|string|min:3|max:500',
                 ];
             }
@@ -62,26 +63,15 @@ class CategoryController extends BackEndController
 
             $request_data = $request->except(['_token', 'image']);
             $request_data['owner_id'] = auth()->user()->id;
-
+            // return $request_data;
             if ($request->image) {
                 $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
             }
 
             $this->model->create($request_data);
             session()->flash('success', __('site.add_successfuly'));
-            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+            return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -99,8 +89,7 @@ class CategoryController extends BackEndController
             return redirect()->back();
 
         }else{
-
-            $category = $this->model->findOrFail($id);
+            $brand = $this->model->findOrFail($id);
             $rules = [
                 'image' => 'nullable|image|max:2000',
             ];
@@ -114,18 +103,18 @@ class CategoryController extends BackEndController
 
             $request_data = $request->except(['_token', 'image']);
             if ($request->image) {
-                if ($category->image != null) {
-                    Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
+                if ($brand->image != null) {
+                    Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
                 }
                 $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
             } //end of if
 
-            $category->update($request_data);
+            $brand->update($request_data);
             session()->flash('success', __('site.updated_successfuly'));
             return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
         }
     }
-    
+
     /**
      * Remove the specified resource from storage.
      * 
@@ -135,13 +124,12 @@ class CategoryController extends BackEndController
      */
     public function destroy($id, Request $request)
     {
-        $category = $this->model->findOrFail($id);
-        if ($category->image != null) {
-            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
+        $brand = $this->model->findOrFail($id);
+        if ($brand->image != null) {
+            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
         }
-        $category->delete();
+        $brand->delete();
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
-
 }

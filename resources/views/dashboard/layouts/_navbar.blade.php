@@ -12,7 +12,7 @@
                 ></a>
             </li>
             <li class="nav-item">
-                <a class="navbar-brand" href="index.html"
+                <a class="navbar-brand" href="{{ route('dashboard.home') }}"
                 ><img
                     class="brand-logo"
                     alt="maoqe3 admin logo"
@@ -344,19 +344,19 @@
                     data-toggle="dropdown"
                     ><span class="avatar avatar-online"
                     ><img
-                        src="{{ asset('dashboard_files/app-assets/images/portrait/small/avatar-s-1.png') }}"
-                        alt="avatar" /><i></i></span
-                    ><span class="user-name">{{auth()->user()->name}}</span></a
+                        src="{{ asset(auth()->user()->image_path) }}"
+                        alt="{{ auth()->user()->full_name }}" /><i></i></span
+                    ><span class="user-name">{{auth()->user()->full_name}}</span></a
                 >
                 <div class="dropdown-menu dropdown-menu-left">
-                    <a class="dropdown-item" href="user-profile.html"
-                    ><i class="ft-user"></i> Edit Profile</a
+                    <a class="dropdown-item" href="{{route('dashboard.users.edit', auth()->user())}}"
+                    ><i class="ft-user"></i> @lang('site.edit_profile') </a
                     >
                     <div class="dropdown-divider"></div>
                     <a  class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"
-                    ><i class="ft-power"></i> Logout </a>
+                    ><i class="ft-power"></i> @lang('site.logout') </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

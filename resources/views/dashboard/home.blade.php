@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-{{-- @section('title', __('site.' . $module_name_plural . '.add')) --}}
+@section('title', __('site.home'))
 
 @section('content')
   <div class="content-wrapper">

@@ -12,15 +12,20 @@ return [
     'brand'  => 'Brand',
     'brands' => 'Brands',
     'update' => 'Update',
+    'repeated_data'=>'Repeated data, where is name exist before!',
 
     'login'=>'Sign In',
     'register'=>'Sign Up',
+    'edit_profile'=>'Edit Profile',
     'logout'=>'Logout',
     'home'=>'Home',
     'login_your_account'=>'Login To Your Account',
     'login_to_cont'=>'Log in to continue in our website',
-
     'register_to_cont'=>'Register to continue in our website',
+    'super_admin'=>'Super Admin',
+    'medical_store'=>'Medical Store',
+    'beauty_company'=>'Beauty Company',
+    'pharmacy'=>'Pharmacy',
 
     'all'=>'All',
     'full_name'=>'Full Name',
@@ -91,6 +96,9 @@ return [
     'category'=>'Category',
     'subcategory'=>'Sub Category',
     'subcategories'=>'Sub Categories',
+    'select' =>'Select',
+    'logo'=>'Logo',
+
     'meta_desc'=>'Meta Description',
     'meta_keywords'=>'Meta Keywords',
 

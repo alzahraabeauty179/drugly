@@ -5,7 +5,19 @@
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
+        <div class="container-fluid row d-flex justify-content-center">
+            @if(session('success'))
+                <div class="alert alert-success col-sm-6 text-center" role="alert">
+                    {!! session('success') !!}
+                </div>
+            @endif
 
+            @if(session('error'))
+                <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                    {!! session('error') !!}
+                </div>
+            @endif
+        </div>
 
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
@@ -24,7 +36,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="content-body">
             <section id="form-control-repeater">
@@ -46,8 +57,16 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
+<<<<<<< HEAD
+                                    <form class="form row" method="POST" enctype="multipart/form-data" 
+                                    @if( auth()->user()->isAbleTo('edit_category') )
+                                        action="{{ route('dashboard.categories.update', ['category' => $row->id]) }}"
+                                    @endif
+                                    >
+=======
                                     <form class="form row" method="POST" enctype="multipart/form-data"
                                         action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
+>>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
                                         @method('PUT')
 
                                         @include('dashboard.'.$module_name_plural.'.form')
@@ -55,7 +74,7 @@
 
                                         <div class="form-group col-md-6">
                                             <button data-repeater-create="" class="btn btn-primary">
-                                                <i class="ft-plus"></i> @lang('site.update')
+                                                <i class="fa fa-cog"></i> @lang('site.update')
                                             </button>
                                         </div>
 

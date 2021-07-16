@@ -5,7 +5,19 @@
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
+        <div class="container-fluid row d-flex justify-content-center">
+            @if(session('success'))
+                <div class="alert alert-success col-sm-6 text-center" role="alert">
+                    {!! session('success') !!}
+                </div>
+            @endif
 
+            @if(session('error'))
+                <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                    {!! session('error') !!}
+                </div>
+            @endif
+        </div>
 
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
@@ -24,7 +36,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="content-body">
             <section id="form-control-repeater">
@@ -45,7 +56,15 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
+<<<<<<< HEAD
+                                    <form class="form row" enctype="multipart/form-data" method="POST" 
+                                    @if( auth()->user()->isAbleTo('create_category') )
+                                        action="{{ route('dashboard.categories.store') }}"
+                                    @endif
+                                    >
+=======
                                     <form class="form row" enctype="multipart/form-data" method="POST" action="{{ route('dashboard.'.$module_name_plural.'.store') }}">
+>>>>>>> 65792737e2bbe49a8f8e5b0a967b3a54d4d3b3bc
                                         @method('POST')
 
                                         @include('dashboard.'.$module_name_plural.'.form')

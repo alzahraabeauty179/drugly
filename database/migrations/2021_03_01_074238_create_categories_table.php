@@ -22,7 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('parent_id')->nullable()->unsigned();
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
 
-            $table->integer('active')->default(0);
+            $table->tinyInteger('active')->default(1);
             $table->string('image')->nullable();
 
             $table->timestamps();

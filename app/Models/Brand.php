@@ -17,7 +17,7 @@ class Brand extends Model implements TranslatableContract
     protected $append = ['image_path'];
 
     public function getImagePathAttribute(){
-        return $this->image != null ? asset('uploads/brand_images/'.$this->image) :  asset('uploads/brand_images/default.png') ;
+        return $this->image != null ? asset('uploads/brands_images/'.$this->image) :  asset('uploads/brands_images/default.png') ;
     }
 
 }
