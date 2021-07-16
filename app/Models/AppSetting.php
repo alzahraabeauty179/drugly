@@ -14,4 +14,10 @@ class AppSetting extends Model implements TranslatableContract
     public $translatedAttributes = ['area_name', 'area_desc'];
 
     protected $guarded = [];
+
+    protected $append = ['image_path'];
+
+    public function getImagePathAttribute(){
+        return $this->image != null ? asset('uploads/app_settings_images/'.$this->image) :  asset('uploads/app_settings_images/default.jpg') ;
+    }
 }

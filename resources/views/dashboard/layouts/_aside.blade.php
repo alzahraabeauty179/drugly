@@ -74,7 +74,8 @@
                         <a class="menu-item" href="{{ route('dashboard.subproducts.create') }}">@lang('site.add') @lang('site.subcategory')</a>
                     </li> --}}
                 </ul>
-            </li>{{-- products --}}
+            </li>
+            {{-- products --}}
 
             <li class="nav-item">
                 <a><i class="ft-tag"></i><span class="menu-title" data-i18n="">Trademarks</span></a>
