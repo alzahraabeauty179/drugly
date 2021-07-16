@@ -1,7 +1,3 @@
-@php
-    $module_name_singular = 'category';
-    $module_name_plural   = 'categories';
-@endphp
 @extends('dashboard.layouts.app')
 
 @section('title', __('site.'.$module_name_plural))

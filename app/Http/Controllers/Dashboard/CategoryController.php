@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
 use App\Models\Category;
@@ -15,10 +16,11 @@ use DataTables;
 
 class CategoryController extends BackEndController
 {
-    public function __construct(Category $model)
+    public function __construct(Category $model, CategoryDataTable $catDataTable)
     {
-        parent::__construct($model);
+        parent::__construct($model, $catDataTable);
     }
+
 
     public function isExists(Request $request, $id)
     {
@@ -26,12 +28,11 @@ class CategoryController extends BackEndController
         $result = 0;
 
         foreach (config('translatable.locales') as $locale)
-            if( is_null($id) )
+            if (is_null($id))
                 $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)->count();
             else
                 $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)
-                                              ->where('category_id', '!=', $id)->count();
-
+                    ->where('category_id', '!=', $id)->count();
         return $result;
     }
 
@@ -43,12 +44,10 @@ class CategoryController extends BackEndController
      */
     public function store(Request $request)
     {
-        if( $this->isExists($request, null) != 0 )
-        {
+        if ($this->isExists($request, null) != 0) {
             session()->flash('error', __('site.repeated_data'));
-            return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.create');
-
-        }else{
+            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.create');
+        } else {
             $rules = [
                 'image' => 'required|image|max:2048',
             ];
@@ -58,6 +57,7 @@ class CategoryController extends BackEndController
                     $locale . '.description' => 'nullable|string|min:3|max:500',
                 ];
             }
+
             $request->validate($rules);
 
             $request_data = $request->except(['_token', 'image']);
@@ -93,12 +93,10 @@ class CategoryController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        if( $this->isExists($request, $id) != 0 )
-        {
+        if ($this->isExists($request, $id) != 0) {
             session()->flash('error', __('site.repeated_data'));
             return redirect()->back();
-
-        }else{
+        } else {
 
             $category = $this->model->findOrFail($id);
             $rules = [
@@ -125,7 +123,7 @@ class CategoryController extends BackEndController
             return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
         }
     }
-    
+
     /**
      * Remove the specified resource from storage.
      * 
@@ -143,5 +141,4 @@ class CategoryController extends BackEndController
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
-
 }

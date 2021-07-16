@@ -55,9 +55,6 @@ Route::group(
 
             ######################### Categories #########################
             Route::resource('categories', 'CategoryController');
-            Route::get('category', function (CategoryDataTable $dataTable) {
-                return $dataTable->render('dashboard.categories.index');
-            })->name('category.datatable');
 
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');

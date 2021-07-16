@@ -8,30 +8,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Yajra\DataTables\Services\DataTable;
 
 class BackEndController extends Controller
 {
 
     protected $model;
+    protected $dataTable;
 
-    public function __construct(Model $model)
+    public function __construct(Model $model, DataTable $datatable)
     {
         $this->model = $model;
+        $this->dataTable = $datatable;
         // $this->middleware(['permission:read-'   . $this->getClassNameFromModel()])->only('index');
         // $this->middleware(['permission:create-' . $this->getClassNameFromModel()])->only('create');
         // $this->middleware(['permission:update-' . $this->getClassNameFromModel()])->only('update');
         // $this->middleware(['permission:delete-' . $this->getClassNameFromModel()])->only('delete');
     }
 
-    public function index(Request $request)
+    // public function index(Request $request)
+    // {
+    //     $rows =  $this->model->get();
+    //     $module_name_plural = $this->getClassNameFromModel();
+    //     $module_name_singular = $this->getSingularModelName();
+    //     // return $module_name_plural;
+    //     return view('dashboard.' . $module_name_plural . '.index', compact('rows','module_name_singular', 'module_name_plural'));
+    // } //end of index
+
+
+    public function index()
     {
-        $rows =  $this->model->get();
+        // return $this->dataTable->get();
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
-        // return $module_name_plural;
-        return view('dashboard.' . $module_name_plural . '.index', compact('rows','module_name_singular', 'module_name_plural'));
-    } //end of index
+
+        return $this->dataTable->render('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
+    }
 
 
     public function create(Request $request)
@@ -64,7 +76,7 @@ class BackEndController extends Controller
 
     protected function filter($rows)
     {
-        if($this->getSingularModelName() == "category")
+        if ($this->getSingularModelName() == "category")
             return $this->model->whereNull('parent_id');
         else
             return $rows;
