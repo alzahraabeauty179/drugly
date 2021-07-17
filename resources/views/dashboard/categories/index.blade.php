@@ -62,14 +62,9 @@
 
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
-<<<<<<< HEAD
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-=======
 {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
->>>>>>> b2c95c5493346479f860a29065bd504552833405
 
 {{-- end  datatables style for yajar package --}}
 @endpush

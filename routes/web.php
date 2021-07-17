@@ -55,18 +55,19 @@ Route::group(
 
             ######################### Categories #########################
             Route::resource('categories', 'CategoryController');
-<<<<<<< HEAD
-=======
             Route::get('categories', function (CategoryDataTable $dataTable) {
                 return $dataTable->render('dashboard.categories.index');
             })->name('categories.index');
->>>>>>> 49b1c1e1632bee077282ed38ea07db085049017d
 
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');
 
             ######################### Users #########################
             Route::resource('users', 'UserController');
+
+            ######################### App Settings #########################
+            Route::resource('app_settings', 'AppSettingController');
+
 
             ######################### Products #########################
             Route::resource('products', 'ProductController');

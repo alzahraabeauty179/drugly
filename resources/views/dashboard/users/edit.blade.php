@@ -103,9 +103,9 @@
                                             </div>
                                             <div class="card-body">
                                                 <h4 class="card-title"> @lang('site.' . auth()->user()->type) @lang('site.name') </h4>
-                                                <p class="card-text">   @if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {{ $app_settings->name }} @endif</p>
+                                                <p class="card-text"> @if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {{ $app_settings->name }} @endif</p>
                                                 
-                                                <h4 class="card-title">  @lang('site.description') </h4>
+                                                <h4 class="card-title"> @lang('site.' . auth()->user()->type) @lang('site.description') </h4>
                                                 <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->description !!} @endif</p>
 
                                                 <h4 class="card-title">  @lang('site.about_us') </h4>
@@ -268,3 +268,13 @@
     </div>
     @include('dashboard.'.$module_name_plural.'.modals')
 @endsection
+
+@push('script')
+    @if( Session::has('updateProfileErrorMessage') )
+        <script>
+            $(document).ready(function(){
+                $('#edit_profile').modal({show: true});
+            });
+        </script>
+    @endif
+@endpush
