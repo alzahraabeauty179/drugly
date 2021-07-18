@@ -65,10 +65,18 @@ return [
     'youtube_link'=>'رابط اليوتيوب',
     'requirements'=>'يجب ادخال هذه البيانات',
 
+    'current_password_not_correct'=>'كلمة المرور الحالية ليست صحيحة!',
+    'profile_updated_successfully'=>'تم تحديث بيانات الملف الشخصي بنجاح',
+
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
 
     'rememberMe'=>'تذكرنى',
+
+    
+    // app settings
+    'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
+    'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
 
     //slider
     'slider'=>'الاسليدر',

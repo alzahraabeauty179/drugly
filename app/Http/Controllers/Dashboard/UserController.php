@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\UserDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
-use App\Models\Brand;
-use App\Models\BrandTranslation;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\AppSetting;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Validator;
+use Hash;
 
 class UserController extends BackEndController
 {
@@ -69,8 +68,8 @@ class UserController extends BackEndController
             'full_name'  => 'required|string|min:3|max:200',
             'email' => 'required|string|email|max:191|unique:users,email,'. $id,
             'phone' => 'nullable|regex:/^\+?\d[0-9-]{9,11}$/|unique:users,phone,'. $id,
-            'current_password'=>'nullable|string|min:8',
-            'new_password'    =>'nullable|string|min:8|confirmed',
+            'current_password'=>'nullable|string',
+            'new_password'    =>'nullable|string|min:8|confirmed'
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -78,7 +77,7 @@ class UserController extends BackEndController
         if($validator->fails())
 			return redirect()->back()->with(["updateProfileErrorMessage" => $validator->errors()->first()]);
 
-        $request_data=$request->except(['password', 'image']);
+        $request_data=$request->except(['current_password', 'new_password', 'new_password_confirmation', 'image']);
 
         // store image
         if ($request->image) {
@@ -93,13 +92,14 @@ class UserController extends BackEndController
             {
                 $request_data += ['password' => Hash::make($request->new_password)];
             }else
-                return redirect()->back()->with(["message_type"=>"error", "updateProfileErrorMessage" => __('site.old_password_not_correct') ]);
+                return redirect()->back()->with(["message_type"=>"error", 
+                                                 "updateProfileErrorMessage" => __('site.current_password_not_correct') ]);
         }
 
         $user->update($request_data);
 
-        session()->flash('success', __('site.updated_successfully'));
-        return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
+        session()->flash('success', __('site.profile_updated_successfully'));
+        return redirect()->back();
     }
 
     /**
@@ -111,12 +111,6 @@ class UserController extends BackEndController
      */
     public function destroy($id, Request $request)
     {
-        // $brand = $this->model->findOrFail($id);
-        // if ($brand->image != null) {
-        //     Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
-        // }
-        // $brand->delete();
-        // session()->flash('success', __('site.deleted_successfuly'));
-        // return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        //
     }
 }

@@ -62,6 +62,9 @@ return [
     'instagram_link'=>'Instagram Link',
     'youtube_link'=>'YouTube Link',
     'requirements'=>'Requirements',
+
+    'current_password_not_correct'=>'The current password is not accurate!',
+    'profile_updated_successfully'=>'Profile Updated Successfully',
     
     'full_name'=>'Full Name',
     'have_account'=>'already have an account ? ',
@@ -69,6 +72,10 @@ return [
     'for_account'=>'For An Account',
     'forgot_password'=>'Forgot Password ?',
     'rememberMe'=>'Remember Me',
+
+    // app settings
+    'website_updated_successfully'=>'Website informaion updated successfully',
+    'website_info_added_successfully'=>'Website information added successfully',
 
     //team
     'team'=>'Company Team',
@@ -312,8 +319,8 @@ return [
         'address' => 'Arabic Address',
         'description' => 'Arabic description ',
         'position' => 'Arabic position ',
-        'privacy_policy'=>' Arabic Privacy Policy',
-        'about_us'=>'Arabic About',
+        'privacy_policy'=>' Arabic privacy policy',
+        'about_us'=>'Arabic about',
     ],
 
     'en'    => [
@@ -324,8 +331,8 @@ return [
         'address' => 'English Address',
         'description' => 'English description ',
         'position' => 'English position ',
-        'privacy_policy'=>' English Privacy Policy',
-        'about_us'=>'English About',
+        'privacy_policy'=>' English privacy policy',
+        'about_us'=>'English about',
     ],
 
 ];
