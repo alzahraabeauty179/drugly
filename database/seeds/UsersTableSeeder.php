@@ -13,8 +13,8 @@ class UsersTableSeeder extends Seeder
     { 
         $user = \App\User::create([
             'full_name'=> 'Mo Store',
-            'email'    => 'mo_store@app.com',
-            'password' => \Hash::make('123456789')
+            'email'    => 'mo@app.com',
+            'password' => encrypt('12345')
         ]);
 
         $user->attachRole('store');

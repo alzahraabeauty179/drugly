@@ -10,7 +10,7 @@ use App\Models\Category;
 use App\Models\CategoryTranslation;
 use Illuminate\Support\Facades\Storage;
 
-class SubCategoryController extends Controller
+class SubCategoryController extends BackEndController
 {
 
     public function __construct(Category $model, CategoryDataTable $subCatDataTable)
@@ -33,22 +33,6 @@ class SubCategoryController extends Controller
         return $result;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-        //get all data of Model
-        $rows = $this->model->whereNotNull('parent_id')->paginate(10);
-
-        $module_name_plural   = "subcategories";
-        $module_name_singular = "subcategory";
-
-        // return $module_name_plural;
-        return view('dashboard.' . $module_name_plural . '.index', compact('rows', 'module_name_singular', 'module_name_plural'));
-    } //end of index
 
     protected function append()
     {

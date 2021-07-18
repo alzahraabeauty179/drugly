@@ -51,7 +51,7 @@ class BrandController extends BackEndController
         }else{
             // return $request;
             $rules = [
-                'image' => 'required|image|max:2048',
+                'image' => 'nullable|image|max:2048',
             ];
             foreach (config('translatable.locales') as $locale) {
                 $rules += [

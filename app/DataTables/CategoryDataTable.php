@@ -28,15 +28,14 @@ class CategoryDataTable extends DataTable
             })->editColumn('created_at', function (Category $d) {
                 return $d->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Category $l) {
+            ->addColumn('action', function (Category $row) {
                 $module_name_singular = 'category';
                 $module_name_plural   = 'categories';
-                $row                  = $l;
-                return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row'));
+                return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
                 // return '<a  href="' . route("dashboard.categories.edit", ["category" => $l]) . '" class="btn btn-info">edit</>';
             })
 
-            ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
+            // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
             ->filter(function ($query) {
                 return $query
                     ->whereTranslationLike('name', "%" . request()->search['value'] . "%")
@@ -96,7 +95,7 @@ class CategoryDataTable extends DataTable
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                // ->width(60)
                 ->addClass('text-center'),
         ];
     }

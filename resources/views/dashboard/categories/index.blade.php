@@ -24,8 +24,10 @@
             <section id="configuration">
                 <div class="row">
                     <div class="col-md-12 mb-1">
+                        @if( auth()->user()->isAbleTo('edit_category') )
                         <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
-                                class="ft-plus"></i> @lang('site.add')  @lang('site.'.$module_name_singular )</a>
+                                class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular )</a>
+                        @endif
                     </div>
                     <div class="col-12">
                         <div class="card">
@@ -62,21 +64,23 @@
 
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
 
 {{-- end  datatables style for yajar package --}}
 @endpush
 @push('script')
- {{-- start datatables script for yajar package --}}
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- DataTables -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+{{-- start datatables script for yajar package --}}
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 
-    {!! $dataTable->scripts() !!}
+{!! $dataTable->scripts() !!}
 
 
 @endpush
