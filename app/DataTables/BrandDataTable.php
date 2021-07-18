@@ -21,7 +21,29 @@ class BrandDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'brand.action');
+            ->addColumn('name', function (Brand $n) {
+                return $n->translation->name;
+            })->addColumn('description', function (Brand $d) {
+                return $d->translation->description;
+            })->editColumn('created_at', function (Brand $d) {
+                return $d->created_at->diffForHumans();
+            })
+            ->addColumn('action', function (Brand $row) {
+                $module_name_singular = 'brand';
+                $module_name_plural   = 'brands';
+                // if( auth()->user()->isAbleTo('edit_brand') )
+                    return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
+            })
+
+            // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
+            ->filter(function ($query) {
+                return $query
+                    ->whereTranslationLike('name', "%" . request()->search['value'] . "%")
+                    ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                    ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                    ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
+                    ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
+            });
     }
 
     /**
@@ -43,18 +65,18 @@ class BrandDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('brand-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('brand-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(1)
+            ->buttons(
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            );
     }
 
     /**
@@ -65,15 +87,17 @@ class BrandDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('name'),
+            Column::make('description'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                // ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

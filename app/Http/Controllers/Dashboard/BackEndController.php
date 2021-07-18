@@ -41,7 +41,7 @@ class BackEndController extends Controller
         // return $this->dataTable->get();
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
-
+        
         return $this->dataTable->render('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
     }
 

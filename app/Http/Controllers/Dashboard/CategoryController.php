@@ -49,7 +49,9 @@ class CategoryController extends BackEndController
             return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.create');
         } else {
             $rules = [
-                'image' => 'required|image|max:2048',
+                'image'     => 'nullable|image|max:2048',
+                'parent_id' => ['required', Rule::exists('categories','id')->where(function ($query) { $query->whereNull('parent_id'); }),],
+
             ];
             foreach (config('translatable.locales') as $locale) {
                 $rules += [
