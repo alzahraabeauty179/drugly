@@ -11,6 +11,7 @@ use App\User;
 use App\Models\AppSetting;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Validator;
 
 class UserController extends BackEndController
 {
@@ -62,29 +63,43 @@ class UserController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        // $brand = $this->model->findOrFail($id);
-        // $rules = [
-        //     'image' => 'nullable|image|max:2000',
-        // ];
-        // foreach (config('translatable.locales') as $locale) {
-        //     $rules += [
-        //         $locale . '.name'        => 'required|string|min:3|max:200',
-        //         $locale . '.description' => 'nullable|string|min:3|max:500',
-        //     ];
-        // }
-        // $request->validate($rules);
+        $user = $this->model->findOrFail($id);
+        $rules = [
+            'image' => 'nullable|image|max:2000',
+            'full_name'  => 'required|string|min:3|max:200',
+            'email' => 'required|string|email|max:191|unique:users,email,'. $id,
+            'phone' => 'nullable|regex:/^\+?\d[0-9-]{9,11}$/|unique:users,phone,'. $id,
+            'current_password'=>'nullable|string|min:8',
+            'new_password'    =>'nullable|string|min:8|confirmed',
+        ];
 
-        // $request_data = $request->except(['_token', 'image']);
-        // if ($request->image) {
-        //     if ($brand->image != null) {
-        //         Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
-        //     }
-        //     $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        // } //end of if
+        $validator = Validator::make($request->all(), $rules);
 
-        // $brand->update($request_data);
-        // session()->flash('success', __('site.updated_successfuly'));
-        // return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        if($validator->fails())
+			return redirect()->back()->with(["updateProfileErrorMessage" => $validator->errors()->first()]);
+
+        $request_data=$request->except(['password', 'image']);
+
+        // store image
+        if ($request->image) {
+            if ($user->image != null) {
+                Storage::disk('public_uploads')->delete('/users_images/' . $user->image);
+            }
+            $request_data['image'] = $this->uploadImage($request->image, 'users_images');
+        } //end of if
+
+        if($request->has('new_password') && $request->get('new_password') != ''){
+            if ( Hash::check($request->current_password, $user->password) ) 
+            {
+                $request_data += ['password' => Hash::make($request->new_password)];
+            }else
+                return redirect()->back()->with(["message_type"=>"error", "updateProfileErrorMessage" => __('site.old_password_not_correct') ]);
+        }
+
+        $user->update($request_data);
+
+        session()->flash('success', __('site.updated_successfully'));
+        return redirect()->route('dashboard.'.$this->getClassNameFromModel().'.index');
     }
 
     /**

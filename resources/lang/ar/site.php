@@ -33,16 +33,18 @@ return [
     'all'=>'كل',
     'website'=>'الموقع الاليكتروني',
     'information'=>'معلومات',
-    'information_hint'=>'سيتم عرض المعلومات في الموقع الاكتروني.',
+    'information_hint'=>'سيتم عرض المعلومات في الموقع الاليكتروني.',
     'not_set_yet'=>'لم يتم تعيينه مسبقًا ',
     'about_us'=>'نبذة عن نشاط الشركة/المخزن',
-    'privacy_policy'=>'الشروط والاحكاام',
+    'privacy_policy'=>'الشروط والاحكام',
     'notifications'=>'الاشعارات',
     'notifications_and_announcements'=>'الاشعارات والتبيهات',
     'notifications_and_announcements_hint'=>'اشعارات الطلبات والتنبيهات الصادرة من لوحة التحكم الرئسية.',
     'advertisements'=>'الاعلانات',
     'site.advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
 
+    'update_profile_hint'=>'قم بتحديث بيانات الحاب الشخصي بكل سهولة.',
+    'personal_information'=>'البيانات الشخصية',
     'first_name'=>'الاسم الاول',
     'last_name'=>'الاسم الآخير',
     'contact_number'=>'رقم الهاتف',
@@ -54,7 +56,14 @@ return [
     'new_password_confirmation'=>'تاكيد كلمة السر الجديدة',
     'cancel'=>'اغلاق',
     'save'=>'حفظ',
-
+    'update_site_information'=>'تحديث بيانات الموقع الاليكتروني',
+    'update_site_information_hint'=>'قم بتحديث بيانات موقعك الاليكتروني بكل سهولة.',
+    'contact_information'=>'بيانات التواصل',
+    'facebook_link'=>'رابط الفيس بوك',
+    'twitter_link'=>'رابط توتر',
+    'instagram_link'=>' رابط الانستجرام',
+    'youtube_link'=>'رابط اليوتيوب',
+    'requirements'=>'يجب ادخال هذه البيانات',
 
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
@@ -255,6 +264,8 @@ return [
         'position' => ' الوظيفة  باللغه العربيه ',
         'question' => ' السؤال  باللغه العربيه ',
         'answer' => ' الجواب  باللغه العربيه ',
+        'privacy_policy'=>' الشروط والاحكام باللغه العربية',
+        'about_us'=>'عن باللغه العربية',
     ],
 
     'en'    => [
@@ -267,6 +278,8 @@ return [
         'description' => 'الوصف  باللغه الإنجليزيه ',
         'question' => ' السؤال  باللغه الانجليزية ',
         'answer' => ' الجواب  باللغه الانجليزية ',
+        'privacy_policy'=>' الشروط والاحكام باللغه الانجليزية',
+        'about_us'=>'عن باللغه الانجليزية',
     ],
 
 ];

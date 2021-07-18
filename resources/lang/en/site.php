@@ -53,6 +53,15 @@ return [
     'new_password_confirmation'=>'New Password Confirmation',
     'cancel'=>'Cancel',
     'save'=>'Save',
+
+    'update_site_information'=>'Update Website Information',
+    'update_site_information_hint'=>'Be free to update your website information.',
+    'contact_information'=>'Contact Information',
+    'facebook_link'=>'Facebook Link',
+    'twitter_link'=>'Twitter Link',
+    'instagram_link'=>'Instagram Link',
+    'youtube_link'=>'YouTube Link',
+    'requirements'=>'Requirements',
     
     'full_name'=>'Full Name',
     'have_account'=>'already have an account ? ',
@@ -303,6 +312,8 @@ return [
         'address' => 'Arabic Address',
         'description' => 'Arabic description ',
         'position' => 'Arabic position ',
+        'privacy_policy'=>' Arabic Privacy Policy',
+        'about_us'=>'Arabic About',
     ],
 
     'en'    => [
@@ -313,6 +324,8 @@ return [
         'address' => 'English Address',
         'description' => 'English description ',
         'position' => 'English position ',
+        'privacy_policy'=>' English Privacy Policy',
+        'about_us'=>'English About',
     ],
 
 ];

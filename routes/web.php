@@ -62,6 +62,10 @@ Route::group(
             ######################### Users #########################
             Route::resource('users', 'UserController');
 
+            ######################### App Settings #########################
+            Route::resource('app_settings', 'AppSettingController');
+
+
             ######################### Products #########################
             Route::resource('products', 'ProductController');
 
