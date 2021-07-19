@@ -180,14 +180,14 @@
                                         <div class="form-group">
                                             <label for="projectinput3" class="sr-only">@lang('site.email')</label>
                                             <input  type="email" id="projectinput3" class="form-control @error('email') is-invalid @enderror" 
-                                                    placeholder="@lang('site.email')" name="email">
+                                                    placeholder="@lang('site.email')" name="email" value="{{ !is_null($app_settings) ? $app_settings->email : old('email') }}">
                                         </div>
                                     </div><!-- end email col-md-6 -->
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="projectinput4" class="sr-only">@lang('site.contact_number')</label>
                                             <input  type="text" id="projectinput4" class="form-control @error('phone') is-invalid @enderror" 
-                                                    placeholder="@lang('site.phone')" name="phone">
+                                                    placeholder="@lang('site.phone')" name="phone" value="{{ !is_null($app_settings) ? $app_settings->phone : old('phone') }}">
                                         </div>
                                     </div><!-- end phone col-md-6 -->
                                 </div><!-- end contact_information row -->
@@ -197,14 +197,14 @@
                                         <div class="form-group">
                                             <label for="projectinput1" class="sr-only"> @lang('site.facebook_link') </label>
                                             <input  type="text" id="projectinput1" class="form-control @error('facebook_link') is-invalid @enderror" 
-                                                    placeholder="@lang('site.facebook_link')" name="facebook_link">
+                                                    placeholder="@lang('site.facebook_link')" name="facebook_link" value="{{ !is_null($app_settings) ? $app_settings->facebook_link : old('facebook_link') }}">
                                         </div>
                                     </div><!-- end facebook_link col-md-6 -->
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="projectinput2" class="sr-only"> @lang('site.twitter_link') </label>
                                             <input   type="text" id="projectinput2" class="form-control  @error('twitter_link') is-invalid @enderror" 
-                                                    placeholder="@lang('site.twitter_link')" name="twitter_link">
+                                                    placeholder="@lang('site.twitter_link')" name="twitter_link" value="{{ !is_null($app_settings) ? $app_settings->twitter_link : old('twitter_link') }}">
                                         </div>
                                     </div><!-- end twitter_link col-md-6 -->
                                 </div><!-- end links row 1 -->
@@ -214,14 +214,14 @@
                                         <div class="form-group">
                                             <label for="projectinput1" class="sr-only"> @lang('site.instagram_link') </label>
                                             <input  type="text" id="projectinput1" class="form-control @error('instagram_link') is-invalid @enderror" 
-                                                    placeholder="@lang('site.instagram_link')" name="instagram_link">
+                                                    placeholder="@lang('site.instagram_link')" name="instagram_link" value="{{ !is_null($app_settings) ? $app_settings->instagram_link : old('instagram_link') }}">
                                         </div>
                                     </div><!-- end instagram_link col-md-6 -->
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="projectinput2" class="sr-only"> @lang('site.youtube_link') </label>
                                             <input  type="text" id="projectinput2" class="form-control @error('youtube_link') is-invalid @enderror" 
-                                                    placeholder="@lang('site.youtube_link')" name="youtube_link">
+                                                    placeholder="@lang('site.youtube_link')" name="youtube_link" value="{{ !is_null($app_settings) ? $app_settings->youtube_link : old('youtube_link') }}">
                                         </div>
                                     </div><!-- end youtube_link col-md-6 -->
                                 </div><!-- end links row 2 -->

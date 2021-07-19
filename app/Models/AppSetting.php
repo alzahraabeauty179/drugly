@@ -11,7 +11,7 @@ class AppSetting extends Model implements TranslatableContract
 {
     use Translatable;
     
-    public $translatedAttributes = ['area_name', 'area_desc'];
+    public $translatedAttributes = ['name', 'description', 'about_us', 'privacy_policy'];
 
     protected $guarded = [];
 
