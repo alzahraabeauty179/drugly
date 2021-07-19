@@ -26,7 +26,7 @@ class CreateAppSettingTranslationsTable extends Migration
 
             $table->unique(['app_setting_id', 'locale']);
 
-            $table->foreign('app_setting_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('app_setting_id')->references('id')->on('app_settings')->onDelete('cascade');
         });
     }
 
