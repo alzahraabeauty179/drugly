@@ -55,7 +55,7 @@ Route::group(
 
             ######################### Categories #########################
             Route::resource('categories', 'CategoryController');
-            Route::get('sub/cat', 'CategoryController@dataAjax')->name('ajax');
+            Route::get('sub/cat', 'CategoryController@subCategory')->name('subcat');
 
             ######################### Sub Categories #########################
             Route::resource('subcategories', 'SubCategoryController');

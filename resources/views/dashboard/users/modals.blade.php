@@ -5,37 +5,33 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="container-fluid row d-flex justify-content-center ">
-                    @if( Session::has('updateProfileErrorMessage') )
-                        <div class="alert col-sm-6 text-center alert-{{session('message_type') == 'success' ?  'success'  :  'warning' }}"
-                             role="alert">
-                            {{session('updateProfileErrorMessage')}}
-                        </div>
-                    @endif
-                </div>
-            </div>
-    
             <div class="card">
+
                 <div class="card-header">
                     <h4 class="card-title">Update Profile Information</h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
-                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <li><a class="close" data-dismiss="modal" aria-label="Close"><i class="ft-x"></i></a></li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="card-content collpase show">
                     <div class="card-body">
                         <div class="card-text">
                             <p class="card-text">@lang('site.update_profile_hint')</p>
                         </div>
+
+                        
+                        <div class="container-fluid row d-flex justify-content-center ">
+                            @if( Session::has('updateProfileErrorMessage') )
+                                <div class="alert col-sm-6 text-center alert-{{session('message_type') == 'success' ?  'success'  :  'warning' }}"
+                                        role="alert">
+                                    {{session('updateProfileErrorMessage')}}
+                                </div>
+                            @endif
+                        </div><!-- end alert -->
 
                         <form   class="form" method="POST" enctype="multipart/form-data" 
                                 action="{{ route('dashboard.users.update', ['user' => $row->id]) }}"
@@ -128,14 +124,7 @@
     
     <div class="modal-dialog" role="document">
 
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div><!-- end modal-header -->
-
+        <div class="modal-content" style="width: 140%;">
 
             <div class="card">
 
@@ -144,9 +133,7 @@
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
-                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <li><a class="close" data-dismiss="modal" aria-label="Close"><i class="ft-x"></i></a></li>
                         </ul>
                     </div>
                 </div> <!-- end card-header -->
@@ -159,10 +146,29 @@
                             <p class="card-text">@lang('site.update_site_information_hint')</p>
                         </div><!-- end card-text -->
 
+                        <div class="container-fluid row d-flex justify-content-center" style="margin-top: 20px;">
+                            @if( Session::has('updateWebsiteErrorMessage') )
+                                <div class="alert col-sm-6 text-center alert-{{session('message_type') == 'success' ?  'success'  :  'warning' }}"
+                                        role="alert">
+                                    {{session('updateWebsiteErrorMessage')}}
+                                </div>
+                            @endif
+                        </div><!-- end alert -->
+
                         <form   class="form" method="POST" enctype="multipart/form-data" 
-                                action="{{ route('dashboard.app_settings.update', ['app_setting' => auth()->user()->id]) }}"
+                                @if( is_null($app_settings) )
+                                    action="{{ route('dashboard.app_settings.store') }}"
+                                @else
+                                    action="{{ route('dashboard.app_settings.update', [ 'app_setting' => $app_settings->id ]) }}"
+                                @endif
                         >
-                            @method('PUT')
+                        
+                            @if( is_null($app_settings) )
+                                @method('POST')
+                            @else
+                                @method('PUT')
+                            @endif
+                            
                             {{ csrf_field() }}
 
                             <div class="form-body">
@@ -242,13 +248,12 @@
                                             </div>
                                         </fieldset>
                                     </div> <!-- end logo col-md-12 -->
-                                <div><!-- end name & logo row -->
+                                <!-- end name & logo row -->
 
-                                <div class="row">
                                     @foreach (config('translatable.locales') as $index => $locale)
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="{{ $locale }}[description]">@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.description')</label>
+                                                <label for="{{ $locale }}[description]"> @lang('site.' . $locale . '.description')</label>
                                                 <textarea   id="{{ $locale }}[description]" rows="5" class="form-control @error($locale . ' .description') is-invalid @enderror" 
                                                             name="{{ $locale }}[description]" 
                                                             placeholder="@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.description')" >
@@ -257,12 +262,12 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <!-- end description col-md-6 -->
+                                    <!-- end description col-md-12 -->
 
                                     @foreach (config('translatable.locales') as $index => $locale)
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="{{ $locale }}[about_us]">@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.about_us')</label>
+                                                <label for="{{ $locale }}[about_us]"> @lang('site.' . $locale . '.about_us')</label>
                                                 <textarea   id="{{ $locale }}[about_us]" rows="5" class="form-control @error($locale . ' .about_us') is-invalid @enderror" 
                                                             name="{{ $locale }}[about_us]" 
                                                             placeholder="@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.about_us')" >
@@ -271,12 +276,12 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <!-- end about_us col-md-6 -->
+                                    <!-- end about_us col-md-12 -->
 
                                     @foreach (config('translatable.locales') as $index => $locale)
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="{{ $locale }}[privacy_policy]">@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.privacy_policy')</label>
+                                                <label for="{{ $locale }}[privacy_policy]"> @lang('site.' . $locale . '.privacy_policy')</label>
                                                 <textarea   id="{{ $locale }}[privacy_policy]" rows="5" class="form-control @error($locale . ' .privacy_policy') is-invalid @enderror" 
                                                             name="{{ $locale }}[privacy_policy]" 
                                                             placeholder="@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.privacy_policy')" >
@@ -285,7 +290,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <!-- end privacy_policy col-md-6 -->
+                                    <!-- end privacy_policy col-md-12 -->
                                 </div><!-- end description and about_us and privacy_policy row -->
 
                             </div></div><!-- بلا هدف two /divs -->

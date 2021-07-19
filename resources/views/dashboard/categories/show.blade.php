@@ -98,7 +98,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-            url: '{!! route('dashboard.ajax') !!}',
+            url: '{!! route('dashboard.subcat') !!}',
             data: function (d) {
                 d.subCategory = '{!! request()->category !!}';
                 d.email = 'mo'; // for test sending data

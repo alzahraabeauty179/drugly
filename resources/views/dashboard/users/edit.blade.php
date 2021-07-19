@@ -5,6 +5,7 @@
 @section('content')
     <div class="app-content content">
         <div class="content-wrapper">
+
             <div class="content-header row">
             </div>
             <div class="content-body"><div id="user-profile">
@@ -53,6 +54,20 @@
                             </nav>
                         </div>
                     </div>
+                </div>
+                
+                <div class="container-fluid row d-flex justify-content-center">
+                    @if(session('success'))
+                        <div class="alert alert-success col-sm-6 text-center" role="alert">
+                            {!! session('success') !!}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                            {!! session('error') !!}
+                        </div>
+                    @endif
                 </div>
 
                 <section id="profile" class="timeline-center timeline-wrapper">
@@ -274,6 +289,14 @@
         <script>
             $(document).ready(function(){
                 $('#edit_profile').modal({show: true});
+            });
+        </script>
+    @endif
+
+    @if( Session::has('updateWebsiteErrorMessage') )
+        <script>
+            $(document).ready(function(){
+                $('#edit_info').modal({show: true});
             });
         </script>
     @endif

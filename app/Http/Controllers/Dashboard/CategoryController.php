@@ -64,7 +64,7 @@ class CategoryController extends BackEndController
             ];
             foreach (config('translatable.locales') as $locale) {
                 $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:200',
+                    $locale . '.name'        => 'required|string|min:3|max:191',
                     $locale . '.description' => 'nullable|string|min:3|max:500',
                 ];
             }
@@ -118,7 +118,7 @@ class CategoryController extends BackEndController
             ];
             foreach (config('translatable.locales') as $locale) {
                 $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:200',
+                    $locale . '.name'        => 'required|string|min:3|max:191',
                     $locale . '.description' => 'nullable|string|min:3|max:500',
                 ];
             }
@@ -157,7 +157,7 @@ class CategoryController extends BackEndController
     }
 
 
-    public function dataAjax()
+    public function subCategory()
     {
         // $x = $this->model->whereNull('parent_id');
         // return Datatables::of($x->newQuery())->make(true);

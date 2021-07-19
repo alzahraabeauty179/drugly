@@ -57,8 +57,11 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form row" method="POST" enctype="multipart/form-data"
-                                        action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
+                                    <form class="form row" method="POST" enctype="multipart/form-data" 
+                                    @if( auth()->user()->isAbleTo('edit_category') )
+                                        action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}"
+                                    @endif
+                                    >
                                         @method('PUT')
 
                                         @include('dashboard.'.$module_name_plural.'.form')
