@@ -11,6 +11,11 @@ use Yajra\DataTables\Services\DataTable;
 
 class CategoryDataTable extends DataTable
 {
+    protected $model;
+    public function __construct(Category $model)
+    {
+        $this->model = $model;
+    }
     /**
      * Build DataTable class.
      *
@@ -19,14 +24,15 @@ class CategoryDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $query = $this->query();
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function (Category $n) {
-                return $n->translation->name;
-            })->addColumn('description', function (Category $d) {
-                return $d->translation->description;
-            })->editColumn('created_at', function (Category $d) {
-                return $d->created_at->diffForHumans();
+            ->addColumn('name', function ($query) {
+                return '<a href="'.route('dashboard.categories.show', ['category' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
+            })->addColumn('description', function ($query) {
+                return $query->translation->description;
+            })->editColumn('created_at', function ($query) {
+                return $query->created_at->diffForHumans();
             })
             ->addColumn('action', function (Category $row) {
                 $module_name_singular = 'category';
@@ -38,12 +44,17 @@ class CategoryDataTable extends DataTable
             // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
             ->filter(function ($query) {
                 return $query
-                    ->whereTranslationLike('name', "%" . request()->search['value'] . "%")
-                    ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
-                    ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
-                    ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
-                    ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
-            });
+                    ->whereNUll('parent_id')
+                    ->where(function ($w) {
+                        return $w->whereTranslationLike('name', "%" . request()->search['value'] . "%")
+                            ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                            ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
+                    });
+            })
+            ->rawColumns(['action', 'name']); // this is for show view and url 
+
     }
 
     /**
@@ -52,9 +63,9 @@ class CategoryDataTable extends DataTable
      * @param \App\Models\Category $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model)
+    public function query()
     {
-        return $model->newQuery();
+        return $this->model->whereNUll('parent_id')->newQuery();
     }
 
     /**

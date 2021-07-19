@@ -4,15 +4,14 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
-use App\Http\Controllers\Dashboard\Datatables\CategoryDatatablesController;
 use App\Models\Category;
 use App\Models\CategoryTranslation;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\DataTables\UsersDataTable;
 use DataTables;
 
+// use Yajra\Datatables\Datatables;
 
 class CategoryController extends BackEndController
 {
@@ -21,6 +20,14 @@ class CategoryController extends BackEndController
         parent::__construct($model, $catDataTable);
     }
 
+    // public function index()
+    // {
+    //     // return $this->dataTable->get();
+    //     $module_name_plural = $this->getClassNameFromModel();
+    //     $module_name_singular = $this->getSingularModelName();
+
+    //     return VIEW('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
+    // }
 
     public function isExists(Request $request, $id)
     {
@@ -50,7 +57,9 @@ class CategoryController extends BackEndController
         } else {
             $rules = [
                 'image'     => 'nullable|image|max:2048',
-                'parent_id' => ['required', Rule::exists('categories','id')->where(function ($query) { $query->whereNull('parent_id'); }),],
+                'parent_id' => ['required', Rule::exists('categories', 'id')->where(function ($query) {
+                    $query->whereNull('parent_id');
+                }),],
 
             ];
             foreach (config('translatable.locales') as $locale) {
@@ -83,7 +92,10 @@ class CategoryController extends BackEndController
      */
     public function show($id)
     {
-        //
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+
+        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
     }
 
     /**
@@ -142,5 +154,48 @@ class CategoryController extends BackEndController
         $category->delete();
         session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+    }
+
+
+    public function dataAjax()
+    {
+        // $x = $this->model->whereNull('parent_id');
+        // return Datatables::of($x->newQuery())->make(true);
+
+        $query = $this->model->where('parent_id', request()->subCategory);
+        // return response()->json( Datatables::of($x)->make(true));
+
+        return Datatables::of($query)
+            ->addColumn('name', function ($query) {
+                return  $query->translation->name;
+            })->addColumn('description', function ($query) {
+                return $query->translation->description;
+            })->editColumn('created_at', function ($query) {
+                return $query->created_at->diffForHumans();
+            })
+            ->addColumn('action', function ($query) {
+                $module_name_singular = 'category';
+                $module_name_plural   = 'categories';
+                $row = $query;
+                return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
+                // return '<a  href="' . route("dashboard.categories.edit", ["category" => $l]) . '" class="btn btn-info">edit</>';
+            })
+
+            // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
+            ->filter(function ($query) {
+                return $query
+                    ->where('parent_id', request()->subCategory)
+                    ->where(function ($w) {
+                        return $w->whereTranslationLike('name', "%" . request()->search['value'] . "%")
+                            ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                            ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
+                    });
+            })
+            ->rawColumns(['action', 'name']) // this is for show view and url 
+            // ->Button::make('excel')
+
+            ->make(true);
     }
 }

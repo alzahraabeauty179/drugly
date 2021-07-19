@@ -42,12 +42,12 @@
                         <a class="menu-item" href="{{ route('dashboard.categories.create') }}">@lang('site.add')
                             @lang('site.category')</a>
                     </li>
-                    <li><a class="menu-item" href="{{ route('dashboard.subcategories.index') }}">@lang('site.all')
+                    {{-- <li><a class="menu-item" href="{{ route('dashboard.subcategories.index') }}">@lang('site.all')
                             @lang('site.subcategories')</a></li>
-                    {{-- <li>
+                    <li>
                                 <a class="menu-item" href="{{ route('dashboard.subcategories.create') }}">@lang('site.add')
-                    @lang('site.subcategory')</a>
-            </li> --}}
+                    @lang('site.subcategory')</a> --}}
+            </li>
         </ul>
         </li>{{-- Categories --}}
         @endif

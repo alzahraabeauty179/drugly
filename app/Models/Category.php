@@ -34,8 +34,4 @@ class Category extends Model implements TranslatableContract
         return $this->parent_id == null ? null : $this->child->name ;
     }
 
-    public function transLand(){
-        return $this->hasMany(CategoryTranslation::class, 'category_id')->orderBy('name', 'ASC');
-    }
-
 }
