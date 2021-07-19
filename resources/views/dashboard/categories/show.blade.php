@@ -24,7 +24,7 @@
             <section id="configuration">
                 <div class="row">
                     <div class="col-md-12 mb-1">
-                        @if( auth()->user()->isAbleTo('edit_category') )
+                        @if (auth()->user()->can('create-'.$module_name_plural))
                         <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
                                 class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular )</a>
                         @endif

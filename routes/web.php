@@ -50,6 +50,8 @@ Route::group(
             Route::get('/', 'HomeController@index')->name('home');
             Route::get('/home', 'HomeController@index')->name('home');
 
+            Route::resource('roles', 'RoleController');
+
             ######################### Brands #########################
             Route::resource('brands', 'BrandController');
 
@@ -64,8 +66,7 @@ Route::group(
             Route::resource('users', 'UserController');
 
             ######################### App Settings #########################
-            Route::resource('app_settings', 'AppSettingController');
-
+            Route::resource('appsettings', 'AppSettingController');
 
             ######################### Products #########################
             Route::resource('products', 'ProductController');

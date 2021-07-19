@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\CategoryDataTable;
-use App\Http\Controllers\Dashboard\BackEndController;
 use App\Models\Category;
-use App\Models\CategoryTranslation;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,34 +11,11 @@ use DataTables;
 
 // use Yajra\Datatables\Datatables;
 
-class CategoryController extends BackEndController
+class CategoryController extends BackEndDatatableController
 {
     public function __construct(Category $model, CategoryDataTable $catDataTable)
     {
         parent::__construct($model, $catDataTable);
-    }
-
-    // public function index()
-    // {
-    //     // return $this->dataTable->get();
-    //     $module_name_plural = $this->getClassNameFromModel();
-    //     $module_name_singular = $this->getSingularModelName();
-
-    //     return VIEW('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'));
-    // }
-
-    public function isExists(Request $request, $id)
-    {
-        $ownerData = Category::where('owner_id', auth()->user()->id)->whereNull('parent_id')->pluck('id')->toArray();
-        $result = 0;
-
-        foreach (config('translatable.locales') as $locale)
-            if (is_null($id))
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)->count();
-            else
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)
-                    ->where('category_id', '!=', $id)->count();
-        return $result;
     }
 
     /**
@@ -51,37 +26,34 @@ class CategoryController extends BackEndController
      */
     public function store(Request $request)
     {
-        if ($this->isExists($request, null) != 0) {
-            session()->flash('error', __('site.repeated_data'));
-            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.create');
-        } else {
-            $rules = [
-                'image'     => 'nullable|image|max:2048',
-                'parent_id' => ['required', Rule::exists('categories', 'id')->where(function ($query) {
-                    $query->whereNull('parent_id');
+
+        $rules = [
+            'image'     => 'nullable|image|max:2048',
+            'parent_id' => ['nullable', Rule::exists('categories', 'id')->where(function ($query) {
+                $query->whereNull('parent_id');
+            }),]
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->where(function ($query) {
+                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id); });
                 }),],
-
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
-            foreach (config('translatable.locales') as $locale) {
-                $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:191',
-                    $locale . '.description' => 'nullable|string|min:3|max:500',
-                ];
-            }
-
-            $request->validate($rules);
-
-            $request_data = $request->except(['_token', 'image']);
-            $request_data['owner_id'] = auth()->user()->id;
-
-            if ($request->image) {
-                $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-            }
-
-            $this->model->create($request_data);
-            session()->flash('success', __('site.add_successfuly'));
-            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
         }
+
+        $request->validate($rules);
+
+        $request_data = $request->except(['_token', 'image']);
+        $request_data['owner_id'] = auth()->user()->id;
+
+        if ($request->image) {
+            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
+        }
+
+        $this->model->create($request_data);
+        session()->flash('success', __('site.add_successfuly'));
+        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
     /**
@@ -107,35 +79,32 @@ class CategoryController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        if ($this->isExists($request, $id) != 0) {
-            session()->flash('error', __('site.repeated_data'));
-            return redirect()->back();
-        } else {
+        $category = $this->model->findOrFail($id);
+        $rules = [
+            'image' => 'nullable|image|max:2000',
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')->where(function ($query) {
+                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id); });
+                }),],
 
-            $category = $this->model->findOrFail($id);
-            $rules = [
-                'image' => 'nullable|image|max:2000',
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
-            foreach (config('translatable.locales') as $locale) {
-                $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:191',
-                    $locale . '.description' => 'nullable|string|min:3|max:500',
-                ];
-            }
-            $request->validate($rules);
-
-            $request_data = $request->except(['_token', 'image']);
-            if ($request->image) {
-                if ($category->image != null) {
-                    Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
-                }
-                $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-            } //end of if
-
-            $category->update($request_data);
-            session()->flash('success', __('site.updated_successfuly'));
-            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
         }
+        $request->validate($rules);
+
+        $request_data = $request->except(['_token', 'image']);
+        if ($request->image) {
+            if ($category->image != null) {
+                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
+            }
+            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
+        } //end of if
+
+        $category->update($request_data);
+        session()->flash('success', __('site.updated_successfuly'));
+        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
     /**
