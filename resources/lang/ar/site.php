@@ -27,7 +27,7 @@ return [
     'logout'=>'تسجيل خروج',
     'edit_profile'=>'تعديل الملف الشخصي',
     'super_admin'=>'مدير التطبيق',
-    'medical_store'=>'مخزن الادوية',
+    'medical_store'=>'مخزن أدوية',
     'beauty_company'=>'شركة تجميل',
     'pharmacy'=>'الصيدلية',
     'all'=>'كل',

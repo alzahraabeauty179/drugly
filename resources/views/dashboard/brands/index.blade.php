@@ -4,6 +4,19 @@
 
 @section('content')
 <div class="app-content content">
+    <div class="container-fluid row d-flex justify-content-center">
+        @if(session('success'))
+            <div class="alert alert-success col-sm-6 text-center" role="alert">
+                {!! session('success') !!}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                {!! session('error') !!}
+            </div>
+        @endif
+    </div>
 
     <div class="content-wrapper">
         <div class="content-header row">
@@ -23,12 +36,12 @@
         <div class="content-body">
             <section id="configuration">
                 <div class="row">
-                    <div class="col-md-12 mb-1">
+                    {{-- <div class="col-md-12 mb-1">
                         @if( auth()->user()->isAbleTo('create_brand') )
                         <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
                                 class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular )</a>
                         @endif
-                    </div>
+                    </div> --}}
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">

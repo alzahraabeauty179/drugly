@@ -62,7 +62,7 @@
                     aria-haspopup="true"
                     aria-expanded="false"
                     ><i class="flag-icon flag-icon-gb"></i
-                    ><span class="selected-language"></span> EN</a
+                    ><span class="selected-language"></span> {{ strtoupper(App::getLocale()) }}</a
                 >
                 <div class="dropdown-menu" aria-labelledby="dropdown-flag">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

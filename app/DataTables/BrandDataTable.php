@@ -23,9 +23,14 @@ class BrandDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('name', function (Brand $n) {
                 return $n->translation->name;
-            })->addColumn('description', function (Brand $d) {
-                return $d->translation->description;
-            })->editColumn('created_at', function (Brand $d) {
+            })
+            // ->addColumn('description', function (Brand $d) {
+            //     return $d->translation->description;
+            // })
+            ->addColumn('logo', function (Brand $d) {
+                return '<image src="'.$d->image_path.'" width="40" height="40" />';
+            })->rawColumns(['logo', 'action'])
+            ->editColumn('created_at', function (Brand $d) {
                 return $d->created_at->diffForHumans();
             })
             ->addColumn('action', function (Brand $row) {
@@ -39,7 +44,7 @@ class BrandDataTable extends DataTable
             ->filter(function ($query) {
                 return $query
                     ->whereTranslationLike('name', "%" . request()->search['value'] . "%")
-                    ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                    // ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
                     ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
                     ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
                     ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
@@ -90,7 +95,8 @@ class BrandDataTable extends DataTable
 
             Column::make('id'),
             Column::make('name'),
-            Column::make('description'),
+            // Column::make('description'),
+            Column::make('logo'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

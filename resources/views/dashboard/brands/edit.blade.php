@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form method="POST" enctype="multipart/form-data" 
+                                        <form method="POST" enctype="multipart/form-data" class="form row"
                                         @if( auth()->user()->isAbleTo('edit_brand') )
                                             action="{{ route('dashboard.brands.update', ['brand' => $row->id]) }}"
                                         @endif
