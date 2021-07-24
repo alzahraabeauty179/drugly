@@ -2,6 +2,17 @@
 
 return [
 
+    'ar'    => [
+        'name'          => 'arabic name ',
+        'description'   => ' arabic description ',
+    ],
+
+    'en'    => [
+        'name'          => 'english name ',
+        'description'   => ' english description ',
+    ],
+
+
     'dashboard'=>'Dashboard',
     'users'=>'Users',
     'desc'=>'Here you can add- delete- update ',
@@ -311,28 +322,6 @@ return [
     'sales_links'=>'Sales Links',
 
     'or'=>'Or',
-    'ar' => [
-        'name' => 'Arabic name ',
-        'about' => 'Arabic About',
-        'history' => 'Arabic History',
-        'vision' => 'Arabic Vision',
-        'address' => 'Arabic Address',
-        'description' => 'Arabic description ',
-        'position' => 'Arabic position ',
-        'privacy_policy'=>' Arabic privacy policy',
-        'about_us'=>'Arabic about',
-    ],
-
-    'en'    => [
-        'name' => 'English name ',
-        'about' => 'English About',
-        'history' => 'English History',
-        'vision' => 'English Vision',
-        'address' => 'English Address',
-        'description' => 'English description ',
-        'position' => 'English position ',
-        'privacy_policy'=>' English privacy policy',
-        'about_us'=>'English about',
-    ],
+    
 
 ];

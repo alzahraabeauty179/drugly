@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Dashboard;
 use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Models\Product;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends BackEndController
+class ProductController extends BackEndDatatableController
 {
     public function __construct(Product $model, ProductDataTable $proDataTable)
     {
@@ -25,9 +24,9 @@ class ProductController extends BackEndController
      */
     public function store(Request $request)
     {
-
+        // return $request;
         $rules = [
-            'image' => 'required|image|max:2048',
+            'image' => 'nullable|image|max:2048',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [

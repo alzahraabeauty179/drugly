@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\DataTables\AppSettingDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 
 use App\Models\AppSetting;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
-use Validator;
 
 class AppSettingController extends BackEndController
 {
@@ -17,9 +14,9 @@ class AppSettingController extends BackEndController
     /**
      * Constructor.
      */
-    public function __construct(AppSetting $model, AppSettingDataTable $appsettingDataTable)
+    public function __construct(AppSetting $model)
     {
-        parent::__construct($model, $appsettingDataTable);
+        parent::__construct($model);
     }
 
     /**
@@ -49,10 +46,8 @@ class AppSettingController extends BackEndController
             ];
         }
 
-        $validator = Validator::make($request->all(), $rules);
+        $request->validate($rules);
 
-        if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
@@ -97,10 +92,7 @@ class AppSettingController extends BackEndController
             ];
         }
 
-        $validator = Validator::make($request->all(), $rules);
-
-        if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+        $request->validate($rules);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;

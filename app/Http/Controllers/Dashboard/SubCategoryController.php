@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Storage;
 class SubCategoryController extends BackEndController
 {
 
-    public function __construct(Category $model, CategoryDataTable $subCatDataTable)
+    public function __construct(Category $model)
     {
-        parent::__construct($model, $subCatDataTable);
+        parent::__construct($model);
     }
 
     public function isExists(Request $request, $id)

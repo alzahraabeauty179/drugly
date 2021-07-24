@@ -24,7 +24,7 @@
             <section id="configuration">
                 <div class="row">
                     <div class="col-md-12 mb-1">
-                        @if( auth()->user()->isAbleTo('edit_category') )
+                        @if( auth()->user()->can('create-'.$module_name_plural) )
                         <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
                                 class="ft-plus"></i> @lang('site.add') @lang('site.'.$module_name_singular )</a>
                         @endif
@@ -45,20 +45,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-
-                                    <table class="table table-bordered" id="data-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
-                                                <th>action</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-
+                                    {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
                                 </div>
                             </div>
                         </div>
@@ -75,12 +62,13 @@
 
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
-{{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">  --}}
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-{{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
-
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 
+{{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
+
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
 
 {{-- end  datatables style for yajar package --}}
 @endpush
@@ -91,35 +79,12 @@
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-{{-- ----------------------------------------------- --}}
-{{-- <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script> --}}
-{{-- ----------------------------------------------- --}}
-<script>
-    $(function() {
-    $('#data-table').DataTable({       
-        dom: "Blfrtip",
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: '{!! route('dashboard.ajax') !!}',
-            data: function (d) {
-                d.name = 'HAMADA';
-                d.email = 'aya';
-            }
-        },
+<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
-        type : 'POST',
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'name', name: 'name' , orderable: false, },
-            { data: 'description', name: 'description', orderable: false, },
-            { data: 'created_at', name: 'created_at' },
-            { data: 'updated_at', name: 'updated_at' },
-            { data: 'action', name: 'action' , orderable: false, searchable: false}
-        ], 
-    });
-});
-</script>
+{!! $dataTable->scripts() !!}
 
 @endpush
+
+
+

@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             // $table->integer('owner_id')->unsigned();
             // $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
 
-            // $table->integer('parent_id')->nullable()->unsigned();
-            // $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
+            $table->integer('category_id')->nullable()->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->tinyInteger('active')->default(0);
             $table->string('image')->nullable();
