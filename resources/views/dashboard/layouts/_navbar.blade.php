@@ -345,8 +345,8 @@
                     ><span class="avatar avatar-online"
                     ><img
                         src="{{ asset(auth()->user()->image_path) }}"
-                        alt="{{ auth()->user()->full_name }}" /><i></i></span
-                    ><span class="user-name">{{auth()->user()->full_name}}</span></a
+                        alt="{{ auth()->user()->name }}" /><i></i></span
+                    ><span class="user-name">{{auth()->user()->name}}</span></a
                 >
                 <div class="dropdown-menu dropdown-menu-left">
                     <a class="dropdown-item" href="{{route('dashboard.users.edit', auth()->user())}}"

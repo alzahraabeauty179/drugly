@@ -25,7 +25,7 @@
             </li>{{-- Account Type --}}
 
             @if (auth()->user()->can('read-roles'))
-            <li class="nav-item"><a href="{{route('dashboard.roles.index')}}"><i class="ft-bold"></i><span
+            <li class="nav-item"><a href="{{route('dashboard.roles.index')}}"><i class="ft-compass"></i><span
                         class="menu-title" data-i18n="">@lang('site.roles')</span></a>
             </li>
             @endif{{-- roles --}}

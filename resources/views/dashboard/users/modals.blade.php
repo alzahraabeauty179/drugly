@@ -157,9 +157,9 @@
 
                         <form   class="form" method="POST" enctype="multipart/form-data" 
                                 @if( is_null($app_settings) )
-                                    action="{{ route('dashboard.app_settings.store') }}"
+                                    action="{{ route('dashboard.appsettings.store') }}"
                                 @else
-                                    action="{{ route('dashboard.app_settings.update', [ 'app_setting' => $app_settings->id ]) }}"
+                                    action="{{ route('dashboard.appsettings.update', [ 'app_setting' => $app_settings->id ]) }}"
                                 @endif
                         >
                         

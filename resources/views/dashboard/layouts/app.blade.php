@@ -130,6 +130,39 @@
     <!-- END PAGE LEVEL JS-->
 
     @stack('script')
+    {{csrf_field()}}
+    <!--################## FIREBASE SCRIPT ##################-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyC0ikwpxt9iSASEtG3MC-ShcaHajoG7Cno",
+            authDomain: "drugly-36099.firebaseapp.com",
+            projectId: "drugly-36099",
+            storageBucket: "drugly-36099.appspot.com",
+            messagingSenderId: "680734245586",
+            appId: "1:680734245586:web:2b4020b3663fdc281d630b",
+            measurementId: "G-XE5K3HWJJY"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        // Show what happen when received a new notification
+        messaging.onMessage( function(payload) {
+            console.log('onMessage: ', payload);
+        }); // increament the notification with 1 and add it to the notifies dropdown list
+
+    </script>
+
 </body>
 
 </html>

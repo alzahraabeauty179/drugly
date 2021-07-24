@@ -29,9 +29,15 @@ class CategoryDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('name', function ($query) {
                 return '<a href="'.route('dashboard.categories.show', ['category' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
-            })->addColumn('description', function ($query) {
-                return $query->translation->description;
-            })->editColumn('created_at', function ($query) {
+            })
+            // ->addColumn('description', function ($query) {
+            //     return $query->translation->description;
+            // })
+            ->addColumn('logo', function (Brand $d) {
+                return '<image src="'.$query->image_path.'" width="40" height="40" />';
+            })->rawColumns(['logo', 'action'])
+
+            ->editColumn('created_at', function ($query) {
                 return $query->created_at->diffForHumans();
             })
             ->addColumn('action', function (Category $row) {
@@ -47,7 +53,7 @@ class CategoryDataTable extends DataTable
                     ->whereNUll('parent_id')
                     ->where(function ($w) {
                         return $w->whereTranslationLike('name', "%" . request()->search['value'] . "%")
-                            ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                            // ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
                             ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
@@ -100,7 +106,8 @@ class CategoryDataTable extends DataTable
         return [
             Column::make('id'),
             Column::computed('name'),
-            Column::computed('description'),
+            // Column::computed('description'),
+            Column::make('logo'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

@@ -22,7 +22,7 @@
                                 <div class="media-body pt-3 px-2">
                                     <div class="row">
                                         <div class="col">
-                                        <h3 class="card-title">{{ auth()->user()->full_name}}</h3>
+                                        <h3 class="card-title">{{ auth()->user()->name}}</h3>
                                         </div>
                                         <div class="col text-left">
                                             <!-- <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Follow</button> -->

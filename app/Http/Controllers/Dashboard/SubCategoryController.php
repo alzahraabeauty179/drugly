@@ -18,22 +18,6 @@ class SubCategoryController extends BackEndController
         parent::__construct($model);
     }
 
-    public function isExists(Request $request, $id)
-    {
-        $ownerData = Category::where('owner_id', auth()->user()->id)->where('parent_id', $request->parent_id)->pluck('id')->toArray();
-        $result = 0;
-
-        foreach (config('translatable.locales') as $locale)
-            if( is_null($id) )
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)->count();
-            else
-                $result += CategoryTranslation::where('name', $request[$locale . '.name'])->whereIn('category_id', $ownerData)
-                                              ->where('category_id', '!=', $id)->count();
-
-        return $result;
-    }
-
-
     protected function append()
     {
         $categories = $this->model->whereNull('parent_id')->get();
@@ -62,6 +46,7 @@ class SubCategoryController extends BackEndController
         })->save(public_path('uploads/' . $path . '/' . $imageName));
         return $imageName;
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -70,35 +55,30 @@ class SubCategoryController extends BackEndController
      */
     public function store(Request $request)
     {
-        if( $this->isExists($request, null) != 0 )
-        {
-            session()->flash('error', __('site.repeated_data'));
-            return redirect()->route('dashboard.subcategories.create');
-
-        }else{
-            $rules = [
-                'parent_id' => 'required|exists:categories,id',
-                'image'       => 'required|image|max:2048',
+        $rules = [
+            'parent_id' => 'required|exists:categories,id',
+            'image'       => 'required|image|max:2048',
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->where(function ($query) {
+                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id)->where('parent_id', $request->parent_id); });
+                }),],
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
-            foreach (config('translatable.locales') as $locale) {
-                $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:200',
-                    $locale . '.description' => 'nullable|string|min:3|max:500',
-                ];
-            }
-            $request->validate($rules);
-
-            $request_data = $request->except(['_token', 'image']);
-            $request_data['owner_id']  = auth()->user()->id;
-        
-            if ($request->image) {
-                $request_data['image'] = $this->uploadImage($request->image, 'categories_images');
-            }
-
-            $this->model->create($request_data);
-            session()->flash('success', __('site.add_successfuly'));
-            return redirect()->route('dashboard.subcategories.index');
         }
+        $request->validate($rules);
+
+        $request_data = $request->except(['_token', 'image']);
+        $request_data['owner_id']  = auth()->user()->id;
+    
+        if ($request->image) {
+            $request_data['image'] = $this->uploadImage($request->image, 'categories_images');
+        }
+
+        $this->model->create($request_data);
+        session()->flash('success', __('site.add_successfuly'));
+        return redirect()->route('dashboard.subcategories.index');
     }
 
     /**
@@ -136,37 +116,31 @@ class SubCategoryController extends BackEndController
      */
     public function update(Request $request, $id)
     {
-        if( $this->isExists($request, $id) != 0 )
-        {
-            session()->flash('error', __('site.repeated_data'));
-            return redirect()->back();
-
-        }else{
-                
-            $subcategory = $this->model->findOrFail($id);
-            $rules = [
-                'image' => 'nullable|image|max:2000',
+        $subcategory = $this->model->findOrFail($id);
+        $rules = [
+            'image' => 'nullable|image|max:2000',
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->ignore($subcategory->id, 'category_id')->where(function ($query) {
+                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id)->where('parent_id', $request->parent_id); });
+                }),],
+                $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
-            foreach (config('translatable.locales') as $locale) {
-                $rules += [
-                    $locale . '.name'        => 'required|string|min:3|max:200',
-                    $locale . '.description' => 'nullable|string|min:3|max:500',
-                ];
-            }
-            $request->validate($rules);
-
-            $request_data = $request->except(['_token', 'image']);
-            if ($request->image) {
-                if ($subcategory->image != null) {
-                    Storage::disk('public_uploads')->delete('categories_images/' . $subcategory->image);
-                }
-                $request_data['image'] = $this->uploadImage($request->image, 'categories_images');
-            } //end of if
-
-            $subcategory->update($request_data);
-            session()->flash('success', __('site.updated_successfuly'));
-            return redirect()->route('dashboard.subcategories.index');
         }
+        $request->validate($rules);
+
+        $request_data = $request->except(['_token', 'image']);
+        if ($request->image) {
+            if ($subcategory->image != null) {
+                Storage::disk('public_uploads')->delete('categories_images/' . $subcategory->image);
+            }
+            $request_data['image'] = $this->uploadImage($request->image, 'categories_images');
+        } //end of if
+
+        $subcategory->update($request_data);
+        session()->flash('success', __('site.updated_successfuly'));
+        return redirect()->route('dashboard.subcategories.index');
     }
 
     /**

@@ -51,7 +51,7 @@ return [
     'notifications_and_announcements'=>'الاشعارات والتبيهات',
     'notifications_and_announcements_hint'=>'اشعارات الطلبات والتنبيهات الصادرة من لوحة التحكم الرئسية.',
     'advertisements'=>'الاعلانات',
-    'site.advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
+    'advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
 
     'update_profile_hint'=>'قم بتحديث بيانات الحاب الشخصي بكل سهولة.',
     'personal_information'=>'البيانات الشخصية',
@@ -83,7 +83,12 @@ return [
 
     'rememberMe'=>'تذكرنى',
 
-    
+    # roles
+    'roles'=>'الأدارات',
+    'role' =>'الادارة',
+    'create'=>'أضافة',
+    'appsettings'=>'إعدادات التطبيق',
+
     // app settings
     'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
     'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',

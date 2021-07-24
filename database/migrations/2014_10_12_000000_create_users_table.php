@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             
             $table->string('password');
             $table->string('image')->nullable();
+            $table->string('fcm_token')->nullable();
 
             $table->enum('type', ['super_admin', 'medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
 

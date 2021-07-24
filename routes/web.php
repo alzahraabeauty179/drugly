@@ -36,6 +36,7 @@ Route::group(['middleware' => ['guest']], function () {
     });
 });
 
+Route::post('/update-user-FCM', 'FireBaseController@updateUserFCM')->name('updateUserFCM');
 
 Route::group(
     [

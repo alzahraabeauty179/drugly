@@ -49,7 +49,7 @@ return [
     'notifications_and_announcements'=>'Notifications And Announcements',
     'notifications_and_announcements_hint'=>'Orders notifications and dashboard announcements.',
     'advertisements'=>'Advertisements',
-    'site.advertisements_hint'=>'This advertisements will be show in the website.',
+    'advertisements_hint'=>'This advertisements will be show in the website.',
 
     'update_profile_hint'=>'Be free to update your personal information.',
     'personal_information'=>'Personal Information',
@@ -83,6 +83,12 @@ return [
     'for_account'=>'For An Account',
     'forgot_password'=>'Forgot Password ?',
     'rememberMe'=>'Remember Me',
+
+    # roles
+    'roles'=>'Roles',
+    'role' =>'Role',
+    'create'=>'Create',
+    'appsettings'=>'App Settings',
 
     // app settings
     'website_updated_successfully'=>'Website informaion updated successfully',
