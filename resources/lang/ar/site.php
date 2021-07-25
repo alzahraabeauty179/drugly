@@ -89,9 +89,12 @@ return [
     'create'=>'أضافة',
     'appsettings'=>'إعدادات التطبيق',
 
-    // app settings
+    # app settings
     'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
     'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
+
+    # notifications
+    'read_all_notis'=>'أقرء جميع الأشعارات',
 
     //slider
     'slider'=>'الاسليدر',

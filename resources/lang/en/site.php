@@ -90,9 +90,12 @@ return [
     'create'=>'Create',
     'appsettings'=>'App Settings',
 
-    // app settings
+    # app settings
     'website_updated_successfully'=>'Website informaion updated successfully',
     'website_info_added_successfully'=>'Website information added successfully',
+
+    # notifications
+    'read_all_notis'=>'Read all notifications',
 
     //team
     'team'=>'Company Team',

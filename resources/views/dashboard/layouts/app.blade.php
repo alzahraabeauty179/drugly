@@ -130,8 +130,9 @@
     <!-- END PAGE LEVEL JS-->
 
     @stack('script')
-    {{csrf_field()}}
+
     <!--################## FIREBASE SCRIPT ##################-->
+    {{csrf_field()}}
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
 
@@ -157,12 +158,60 @@
         const messaging = firebase.messaging();
 
         // Show what happen when received a new notification
+        var noticount = $('#noti-counter').val();
+
         messaging.onMessage( function(payload) {
-            console.log('onMessage: ', payload);
+
+            if(!$('.noti-class').hasClass('badge-danger')){
+                $('.noti-class').addClass('badge-danger')
+                noticount = 0;
+                noticount++;
+            }else{
+                noticount++;
+            }
+
+            $('#noti-counter').text(noticount);
+            $('#noti-new-counter').text(noticount+' New');
+            
+            if( $("#noti-list > a").length  < 11 ){
+
+                if( $("#noti-list > a").length == 0 )
+                    $('#noti-list').empty();
+
+                $('#noti-list').prepend(`
+                    <a href="`+payload.data['link']+`" class="noti-open" title="`+payload.data['flag']+`">
+                        <div class="media">
+                        <div class="media-left align-self-center">
+                            <i class="ft-check-circle icon-bg-circle bg-cyan"></i>
+                        </div>
+                        <div class="media-body">
+                            <h6 class="media-heading">`+payload.notification['body']+`</h6>
+                            <small>
+                            <time
+                                class="media-meta text-muted"
+                                datetime="2015-06-11T18:29:20+08:00"
+                                >Last week</time
+                            ></small
+                            >
+                        </div>
+                        </div> </a
+                    >
+                `);
+            }
         }); // increament the notification with 1 and add it to the notifies dropdown list
 
     </script>
 
+    <script>
+        $('.noti-open').click( function(event){
+            $('#noti-counter').text('');
+            $('#noti-new-counter').text('');
+
+            if($('.noti-class').hasClass('badge-danger'))
+                $('.noti-class').removeClass('badge-danger')
+        });// when user open all notifications or one of them reset all nptis counters to zero
+
+    </script>
 </body>
 
 </html>

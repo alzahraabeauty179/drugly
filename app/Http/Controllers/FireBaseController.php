@@ -53,4 +53,7 @@ class FireBaseController extends Controller
         return response()->json( ['status'=>200] );
     }
 
+    # CURL
+    //curl -X POST -H "Authorization: key=AAAAnn7sQtI:APA91bFyMITrS9VBQrVE_-LRhFo0IiOv8l1t7M_Sg5NZNVfnRv9NeLLH33WbBTK_XZcLi0ZKYlvju3bsXiBG-SHlXEDhRMm5o-cJzbn1eCLmKC1gDGbxcn8pcMX73p2iYe5XL4Od6ZdJ" -H "Content-Type: application/json" -d "{\"to\": \"epxBJqkZ-8-z8ny9x9-lje:APA91bEfhZOffdFZKzy_ohn76UhXf9d7HW7xqvxdTrgOyBvHCogQgH7j-16r-NPbwU0LRP8bhzKfB9Fs70AVl9c3rz1g3TrigPEz29t423dBhSC0OHiFY3cvQNcioHFOS0Y6G9DoQeTj\", \"notification\": { \"title\": \"Drugly\", \"body\": \"You have a new notification to see!\", \"icon\": \"/firebase_logo.png\" }, \"data\":{\"link\" : \"firebase.com\", \"flag\": \"test\"} }" "https://fcm.googleapis.com/fcm/send"
+
 }
