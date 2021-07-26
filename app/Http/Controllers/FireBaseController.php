@@ -14,9 +14,12 @@ class FireBaseController extends Controller
     * @var string $mobileType ios or android
     */
     public $to;
-    public $messageBody;
+    public $body;
     public $title;
     public $sound;
+    public $type;
+    public $link;
+    public $date;
 
     public function getFieldsToSend() 
     { 
@@ -24,9 +27,13 @@ class FireBaseController extends Controller
             "priority" => "high",
             "notification" => [
                 "title"=> $this->title,
-                "body" => $this->messageBody,
+                "body" => $this->body,
             ],
-            "data"=> $this,
+            "data"=> [
+                "type"=> $this->type,
+                "link"=> $this->link,
+                "date"=> $this->date,
+            ],
             "to"  => $this->to, //in single case
             // "reqisteration_ids"=> $this->fcmList //in list case
         ];

@@ -161,33 +161,34 @@
                                     <div class="card">
                                         <div class="card-content collapse show">
                                             <div class="card-body card-dashboard">
-                                                @if( isset($notifications) && $notifications->count() > 0 )
+                                                @if( count(auth()->user()->notifications) > 0 )
                                                     <table class="table table-striped table-bordered zero-configuration">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>@lang('site.type')</th>
-                                                                <th>@lang('site.from')</th>
+                                                                <th>@lang('site.title')</th>
                                                                 <th>@lang('site.content')</th>
                                                                 <th>@lang('site.send_date')</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($notifications as $index=>$row)
+                                                        @foreach(auth()->user()->notifications as $index=>$noti)
                                                             <tr>
                                                                 <td> {{++$index}} </td>
-                                                                <td> @lang('site.' .  $row->type) </td>
-                                                                <td> {{ $row->from }} </td>
-                                                                <td> @lang('site.content') </td>
-                                                                <td> {{ $row->created_at }} </td>
+                                                                <td> 
+                                                                    @if( \Illuminate\Support\Str::snake(class_basename($noti->type, '_')) == 'announcement')
+                                                                        @lang('site.app_manager')
+                                                                    @endif 
+                                                                </td>
+                                                                <td> @lang('site.' . $noti->data['message']) </td>
+                                                                <td> {{ Carbon\Carbon::parse($noti->data['sendAt'])->format('d M Y h:m') }} </td>
                                                             </tr>
                                                         @endforeach
                                                         </tbody>
                                                         <tfoot>
                                                             <tr>
                                                                 <th>#</th>
-                                                                <th>@lang('site.type')</th>
-                                                                <th>@lang('site.from')</th>
+                                                                <th>@lang('site.title')</th>
                                                                 <th>@lang('site.content')</th>
                                                                 <th>@lang('site.send_date')</th>
                                                             </tr>

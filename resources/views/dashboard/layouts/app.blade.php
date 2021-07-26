@@ -161,6 +161,8 @@
         var noticount = $('#noti-counter').val();
 
         messaging.onMessage( function(payload) {
+            $('#no-notifications').hide();
+            $('#show-more').removeAttr('style');
 
             if(!$('.noti-class').hasClass('badge-danger')){
                 $('.noti-class').addClass('badge-danger')
@@ -171,15 +173,33 @@
             }
 
             $('#noti-counter').text(noticount);
-            $('#noti-new-counter').text(noticount+' New');
-            
-            if( $("#noti-list > a").length  < 11 ){
+            $('#noti-new-counter').text(noticount+' {{ __("site.new") }}');
 
-                if( $("#noti-list > a").length == 0 )
-                    $('#noti-list').empty();
-
+            if( payload.data['type'] == 'announcement' )
+            {
                 $('#noti-list').prepend(`
-                    <a href="`+payload.data['link']+`" class="noti-open" title="`+payload.data['flag']+`">
+                    <a href="`+payload.data['link']+`">
+                        <div class="media">
+                            <div class="media-left align-self-center">
+                                <i class="ft-shield icon-bg-circle bg-cyan"></i>
+                            </div>
+                            <div class="media-body">
+                                <h6 class="media-heading">{{ __('site.app_manager') }}</h6>
+                                <p class="notification-text font-small-3 text-muted">
+                                    `+payload.notification['body']+`
+                                </p>
+                                <small>
+                                    <time class="media-meta text-muted" datetime="`+payload.data['date']+`">
+                                        {{ Carbon\Carbon::parse(`+payload.data['date']+`)->diffForHumans() }}
+                                    </time>
+                                </small>
+                            </div>
+                        </div> 
+                    </a>
+                `);
+            }else{
+                $('#noti-list').prepend(`
+                    <a href="`+payload.data['link']+`">
                         <div class="media">
                         <div class="media-left align-self-center">
                             <i class="ft-check-circle icon-bg-circle bg-cyan"></i>
@@ -203,12 +223,17 @@
     </script>
 
     <script>
-        $('.noti-open').click( function(event){
+        $('.notis-open').click( function(event){
             $('#noti-counter').text('');
             $('#noti-new-counter').text('');
 
             if($('.noti-class').hasClass('badge-danger'))
-                $('.noti-class').removeClass('badge-danger')
+                $('.noti-class').removeClass('badge-danger');
+ 
+            $.post("{{ route('dashboard.markAsRead') }}",{'_token':$('input[name=_token]').val()},function(data){
+                console.log(token, 'Saved to database successfully.');
+            });
+  
         });// when user open all notifications or one of them reset all nptis counters to zero
 
     </script>

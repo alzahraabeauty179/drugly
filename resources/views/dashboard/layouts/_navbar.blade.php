@@ -77,15 +77,17 @@
                 </li>
 
                 {{-- Notifications Start --}}
-                <li class="dropdown dropdown-notification nav-item">
+                <li class="dropdown dropdown-notification nav-item notis-open">
                     <a
                         class="nav-link nav-link-label"
                         href="#"
                         data-toggle="dropdown"
                         ><i class="ficon ft-bell"></i
                         ><span id="noti-counter"
-                        class="badge badge-pill badge-default noti-class badge-default badge-up"
-                        >0</span
+                        class="badge badge-pill badge-default noti-class 
+                                @if(count(auth()->user()->unreadNotifications) != 0) badge-danger @endif
+                                badge-default badge-up"
+                        >{{ count(auth()->user()->unreadNotifications) }}</span
                         ></a
                     >
                     <ul
@@ -101,10 +103,26 @@
                             </h6>
                         </li><!-- new count -->
                         <li class="scrollable-container media-list" id="noti-list">
+                            @forelse(auth()->user()->unreadNotifications as $noti)
+                                @include( 'dashboard.notification.type.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
+                            @empty
+                                <a id="no-notifications">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <h6 class="media-heading">@lang('site.no_notifications')</h6>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforelse
                         </li><!-- body -->
-                        <li class="dropdown-menu-footer">
+                        
+                        <li id="show-more" class="dropdown-menu-footer" 
+                            @if(count(auth()->user()->unreadNotifications) == 0)
+                                style="display: none;" 
+                            @endif
+                        >
                             <a
-                                class="dropdown-item text-muted text-center noti-open"
+                                class="dropdown-item text-muted text-center"
                                 href="{{route('dashboard.users.edit', auth()->user()).'#notifications'}}"
                                 >@lang('site.read_all_notis')</a
                             >

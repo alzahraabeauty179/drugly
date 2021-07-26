@@ -94,7 +94,13 @@ return [
     'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
 
     # notifications
-    'read_all_notis'=>'أقرء جميع الأشعارات',
+    'read_all_notis'   =>'أقرء جميع الأشعارات',
+    'welcome_to_drugly'=>'مرحبا بك في تطبيق Drugly!',
+    'no_notifications'=>'ليس لديك اشعارات جديدة, حتي الأن!',
+    'app_manager'=>'مدير التطبيق',
+    'new' => ' جديد ',
+    'content'=>'المحتوي',
+    'send_date'=>'تاريخ الارسال',
 
     //slider
     'slider'=>'الاسليدر',

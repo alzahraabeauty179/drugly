@@ -96,6 +96,12 @@ return [
 
     # notifications
     'read_all_notis'=>'Read all notifications',
+    'welcome_to_drugly'=>'Welcome To Drugly App!',
+    'no_notifications'=>"You didn't have any new notifications, yet!",
+    'app_manager'=>'App Manager',
+    'new' => ' New ',
+    'content'=>'Content',
+    'send_date'=>'Send Date',
 
     //team
     'team'=>'Company Team',
