@@ -65,7 +65,7 @@ class UserController extends BackEndController
         $user = $this->model->findOrFail($id);
         $rules = [
             'image' => 'nullable|image|max:2000',
-            'full_name'  => 'required|string|min:3|max:200',
+            'name'  => 'required|string|min:3|max:200',
             'email' => 'required|string|email|max:191|unique:users,email,'. $id,
             'phone' => 'nullable|regex:/^\+?\d[0-9-]{9,11}$/|unique:users,phone,'. $id,
             'current_password'=>'nullable|string',
@@ -73,7 +73,6 @@ class UserController extends BackEndController
         ];
 
         $validator = Validator::make($request->all(), $rules);
-
         if($validator->fails())
 			return redirect()->back()->with(["updateProfileErrorMessage" => $validator->errors()->first()]);
 

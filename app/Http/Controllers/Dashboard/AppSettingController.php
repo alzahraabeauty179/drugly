@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\AppSetting;
 use Illuminate\Support\Facades\Storage;
 
+use Validator;
+
 class AppSettingController extends BackEndController
 {
 
@@ -46,9 +48,10 @@ class AppSettingController extends BackEndController
             ];
         }
 
-        $request->validate($rules);
-
-
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails())
+			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+   
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
 
@@ -92,7 +95,9 @@ class AppSettingController extends BackEndController
             ];
         }
 
-        $request->validate($rules);
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails())
+			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;

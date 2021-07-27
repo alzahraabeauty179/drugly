@@ -73,7 +73,7 @@ return [
     'instagram_link'=>'Instagram Link',
     'youtube_link'=>'YouTube Link',
     'requirements'=>'Requirements',
-
+    'update_profile_info'=>'Update Profile Information',
     'current_password_not_correct'=>'The current password is not accurate!',
     'profile_updated_successfully'=>'Profile Updated Successfully',
     
@@ -102,6 +102,7 @@ return [
     'new' => ' New ',
     'content'=>'Content',
     'send_date'=>'Send Date',
+    'announcemnet'=>'Announcemnet',
 
     //team
     'team'=>'Company Team',
@@ -337,6 +338,34 @@ return [
     'sales_links'=>'Sales Links',
 
     'or'=>'Or',
+
+    'ar' => [
+        'address'=>'Address in Arabic',
+        'about' => 'About the company in Arabic',
+        'history' => 'History of the company in Arabic',
+        'vision' => "Company's goal in Arabic",
+        'name' => 'Name in Arabic',
+        'description' => 'Description in Arabic',
+        'position' => 'Position in Arabic',
+        'question' => 'Question in Arabic',
+        'answer' => 'Answer in Arabic',
+        'privacy_policy'=>'Terms and Conditions in Arabic',
+        'about_us'=>'About us in Arabic',
+    ],
+
+    'en' => [
+        'address'=>'Address in English',
+        'about' => 'About the company in English',
+        'history' => 'Company history in English',
+        'vision' => "Company's objective in English",
+        'name' => 'Name in English',
+        'position' => 'Position in English',
+        'description' => 'Description in English',
+        'question' => 'Question in English',
+        'answer' => 'Answer in english',
+        'privacy_policy'=>'Terms and Conditions in English',
+        'about_us'=>'About us in English',
+    ],
     
 
 ];

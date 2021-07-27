@@ -99,6 +99,3 @@
 {!! $dataTable->scripts() !!}
 
 @endpush
-
-
-

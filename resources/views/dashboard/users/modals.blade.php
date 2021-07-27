@@ -8,7 +8,7 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h4 class="card-title">Update Profile Information</h4>
+                    <h4 class="card-title">@lang('site.update_profile_info')</h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -44,8 +44,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="projectinput1" class="sr-only"> @lang('site.full_name') </label>
-                                            <input  type="text" id="projectinput1" class="form-control @error('email') is-invalid @enderror" 
-                                                    value="{{auth()->user()->full_name}}" placeholder="@lang('site.full_name')" name="full_name">
+                                            <input  type="text" id="projectinput1" class="form-control @error('full_name') is-invalid @enderror" 
+                                                    value="{{auth()->user()->name}}" placeholder="@lang('site.full_name')" name="name">
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                                 @if( is_null($app_settings) )
                                     action="{{ route('dashboard.appsettings.store') }}"
                                 @else
-                                    action="{{ route('dashboard.appsettings.update', [ 'app_setting' => $app_settings->id ]) }}"
+                                    action="{{ route('dashboard.appsettings.update', [ 'appsetting' => $app_settings->id ]) }}"
                                 @endif
                         >
                         
@@ -232,7 +232,14 @@
                                     @foreach (config('translatable.locales') as $index => $locale)
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="{{ $locale }}[name]">@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.name')</label>
+                                                <label for="{{ $locale }}[name]">
+                                                    @if( auth()->user()->type == 'super_admin' )
+                                                        @lang('site.website')
+                                                    @else
+                                                        @lang('site.' . auth()->user()->type) 
+                                                    @endif
+                                                    @lang('site.' . $locale . '.name')
+                                                </label>
                                                 <input  type="text" id="{{ $locale }}[name]" class="form-control @error($locale . ' .name') is-invalid @enderror" 
                                                         value="{{ !is_null($app_settings) ? $app_settings->translate($locale)->name : old($locale . '.name') }}"
                                                         placeholder="@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.name')" name="{{ $locale }}[name]">
@@ -267,7 +274,7 @@
                                     @foreach (config('translatable.locales') as $index => $locale)
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="{{ $locale }}[about_us]"> @lang('site.' . $locale . '.about_us')</label>
+                                                <label for="{{ $locale }}[about_us]"> @lang('site.' . $locale . '.about_us') </label>
                                                 <textarea   id="{{ $locale }}[about_us]" rows="5" class="form-control @error($locale . ' .about_us') is-invalid @enderror" 
                                                             name="{{ $locale }}[about_us]" 
                                                             placeholder="@lang('site.' . auth()->user()->type) @lang('site.' . $locale . '.about_us')" >

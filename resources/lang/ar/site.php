@@ -34,6 +34,7 @@ return [
     'group'=>'نوع المستخدم',
     'admin'=>'مسئول',
     'user'=>'مستخدم',
+    'profile'=>'الملف الشخصي',
     'logout'=>'تسجيل خروج',
     'edit_profile'=>'تعديل الملف الشخصي',
     'super_admin'=>'مدير التطبيق',
@@ -74,7 +75,7 @@ return [
     'instagram_link'=>' رابط الانستجرام',
     'youtube_link'=>'رابط اليوتيوب',
     'requirements'=>'يجب ادخال هذه البيانات',
-
+    'update_profile_info'=>'تحديث الملف الشخصي',
     'current_password_not_correct'=>'كلمة المرور الحالية ليست صحيحة!',
     'profile_updated_successfully'=>'تم تحديث بيانات الملف الشخصي بنجاح',
 
@@ -101,6 +102,7 @@ return [
     'new' => ' جديد ',
     'content'=>'المحتوي',
     'send_date'=>'تاريخ الارسال',
+    'announcemnet'=>'تصريح',
 
     //slider
     'slider'=>'الاسليدر',

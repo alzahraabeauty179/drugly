@@ -70,6 +70,7 @@
                     @endif
                 </div>
 
+                <!-- Prifile -->
                 <section id="profile" class="timeline-center timeline-wrapper">
                     <h3 class="page-title text-center"> @lang('site.profile') </h3>
                     <ul class="timeline">
@@ -136,7 +137,7 @@
                         </li>
                     </ul>
                 </section>
-
+                <!-- Notifications -->
                 <section id="notifications" class="timeline-center timeline-wrapper">
                     <h3 class="page-title text-center"> @lang('site.notifications') </h3>
                     <ul class="timeline">
@@ -162,7 +163,7 @@
                                         <div class="card-content collapse show">
                                             <div class="card-body card-dashboard">
                                                 @if( count(auth()->user()->notifications) > 0 )
-                                                    <table class="table table-striped table-bordered zero-configuration">
+                                                    <table class="table table-striped table-bordered zero-configuration" id="myNotisTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -180,7 +181,9 @@
                                                                         @lang('site.app_manager')
                                                                     @endif 
                                                                 </td>
-                                                                <td> @lang('site.' . $noti->data['message']) </td>
+                                                                <td> 
+                                                                    @include( 'dashboard.users.notis.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
+                                                                </td>
                                                                 <td> {{ Carbon\Carbon::parse($noti->data['sendAt'])->format('d M Y h:m') }} </td>
                                                             </tr>
                                                         @endforeach
@@ -205,7 +208,7 @@
                         </li>
                     </ul>
                 </section>
-
+                <!-- Advertisements -->
                 <section id="ads" class="timeline-center timeline-wrapper">
                     <h3 class="page-title text-center"> @lang('site.advertisements') </h3>
                     <ul class="timeline">
@@ -285,7 +288,33 @@
     @include('dashboard.'.$module_name_plural.'.modals')
 @endsection
 
+@push('style')
+
+{{-- start datatables style for yajar package --}}
+<!-- Bootstrap CSS -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
+{{-- end  datatables style for yajar package --}}
+@endpush
+
 @push('script')
+    {{-- start datatables script for yajar package --}}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous">
+    </script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#myNotisTable').DataTable();
+        } );
+    </script>
+
     @if( Session::has('updateProfileErrorMessage') )
         <script>
             $(document).ready(function(){

@@ -43,7 +43,7 @@ class Announcement extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => 'welcome_to_drugly',
+            'message' => ['en'=>'Welcome To Drugly App!', 'ar'=>'مرحبا بك في تطبيق Drugly!'],
             'sendAt'  => Carbon::now()
         ];
     }
