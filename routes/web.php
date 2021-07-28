@@ -75,7 +75,7 @@ Route::group(
             ######################### Notifications #########################
             Route::get('/test', 'NotificationController@create')->name('testNotifies');
             Route::post('/mark-as-read', 'NotificationController@markAsRead')->name('markAsRead');
-            
+            Route::resource('notifications', 'NotificationController');
 
         });
 

@@ -142,6 +142,23 @@
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js"></script>
 
     <script>
+        function makeAsReed(){
+            $('.notis-open').click( function(event){
+
+                if($('.noti-class').hasClass('badge-danger'))
+                    $.post("{{ route('dashboard.markAsRead') }}",{'_token':$('input[name=_token]').val()});
+
+                $('#noti-counter').text('');
+                $('#noti-new-counter').text('');
+
+                if($('.noti-class').hasClass('badge-danger'))
+                    $('.noti-class').removeClass('badge-danger');
+
+            });// when user open all notifications or one of them reset all nptis counters to zero
+        }
+    </script>
+
+    <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         var firebaseConfig = {
@@ -218,25 +235,15 @@
                     >
                 `);
             }
+
+            makeAsReed()// when user open all notifications or one of them reset all nptis counters to zero
+
         }); // increament the notification with 1 and add it to the notifies dropdown list
 
-    </script>
-
-    <script>
-        $('.notis-open').click( function(event){
-            $('#noti-counter').text('');
-            $('#noti-new-counter').text('');
-
-            if($('.noti-class').hasClass('badge-danger'))
-                $('.noti-class').removeClass('badge-danger');
- 
-            $.post("{{ route('dashboard.markAsRead') }}",{'_token':$('input[name=_token]').val()},function(data){
-                console.log(token, 'Saved to database successfully.');
-            });
-  
-        });// when user open all notifications or one of them reset all nptis counters to zero
+        makeAsReed()// when user open all notifications or one of them reset all nptis counters to zero
 
     </script>
+
 </body>
 
 </html>

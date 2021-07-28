@@ -7,21 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-use Carbon\Carbon;
-
-class Announcement extends Notification
+class NewAdvertisement extends Notification
 {
     use Queueable;
 
-    private $message;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct()
     {
-        $this->message = $message;
+        //
     }
 
     /**
@@ -32,21 +29,7 @@ class Announcement extends Notification
      */
     public function via($notifiable)
     {
-        return [CustomDbAnnouncementChannel::class]; //<-- important custom Channel defined here
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return json 
-     */
-    public function toDatabase($notifiable)
-    {
-        return [
-            'message' => [ 'en'=>$this->message['en'], 'ar'=>$this->message['ar'] ],
-            'sendAt'  => Carbon::now()
-        ];
+        return ['mail'];
     }
 
     /**

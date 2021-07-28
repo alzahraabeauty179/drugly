@@ -5,13 +5,24 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\DataTables\NotificationDataTable;
 use App\User;
+use App\Models\Notification;
 use App\Notifications\Announcement;
 use App\Http\Controllers\FireBaseController;
 use Carbon\Carbon;
 
 class NotificationController extends Controller
 {
+
+    /**
+     * Constructor.
+     */
+    // public function __construct(Notification $model, NotificationDataTable $notificationDataTable)
+    // {
+    //     parent::__construct($model, $notificationDataTable);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +38,7 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {  
         // $user = User::findOrFail();
 
@@ -44,7 +55,8 @@ class NotificationController extends Controller
         $fire->sound    = true;
         $fire->send();
 
-        auth()->user()->notify(new Announcement());
+        $message = ['en'=>'Welcome To Drugly App!', 'ar'=>'مرحبا بك في تطبيق Drugly!'];
+        auth()->user()->notify(new Announcement($message));
     }
 
    /**
@@ -110,7 +122,7 @@ class NotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         //
     }

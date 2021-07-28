@@ -102,7 +102,8 @@ return [
     'new' => ' جديد ',
     'content'=>'المحتوي',
     'send_date'=>'تاريخ الارسال',
-    'announcemnet'=>'تصريح',
+    'announcement'=>'تصريح',
+    'announcements'=>'التصريحات',
 
     //slider
     'slider'=>'الاسليدر',

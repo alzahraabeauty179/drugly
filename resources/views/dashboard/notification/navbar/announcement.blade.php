@@ -6,7 +6,11 @@
         <div class="media-body">
             <h6 class="media-heading">@lang('site.app_manager')</h6>
             <p class="notification-text font-small-3 text-muted">
-                @lang('site.' . $noti->data['message'])
+                @if( empty($noti->data['message'][App::getLocale()]) )
+                    @lang('site.' . $noti->data['message'])
+                @else
+                    {{ $noti->data['message'][App::getLocale()] }}
+                @endif
             </p>
             <small>
                 {{-- $comment->created_at->diffForHumans(); --}}

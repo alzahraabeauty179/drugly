@@ -104,7 +104,7 @@
                         </li><!-- new count -->
                         <li class="scrollable-container media-list" id="noti-list">
                             @forelse(auth()->user()->unreadNotifications as $noti)
-                                @include( 'dashboard.notification.type.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
+                                @include( 'dashboard.notification.navbar.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
                             @empty
                                 <a id="no-notifications">
                                     <div class="media">

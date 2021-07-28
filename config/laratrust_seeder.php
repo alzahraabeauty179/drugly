@@ -9,6 +9,7 @@ return [
             'brands'              => 'c,r,u,d',
             'products'            => 'c,r,u,d',
             'appsettings'         => 'c,r,u,d',
+            'announcements'       => 'c,r,u,d',
         ],
     ],
     // 'permission_structure' => [

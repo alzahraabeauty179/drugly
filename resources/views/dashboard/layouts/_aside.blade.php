@@ -26,7 +26,11 @@
 
             @if (auth()->user()->can('read-roles'))
             <li class="nav-item"><a href="{{route('dashboard.roles.index')}}"><i class="ft-compass"></i><span
-                        class="menu-title" data-i18n="">@lang('site.roles')</span></a>
+                class="menu-title" data-i18n="">@lang('site.roles')</span></a>
+            </li>
+
+            <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i class="fa fa-bullhorn"></i><span
+                class="menu-title" data-i18n="">@lang('site.announcements')</span></a>
             </li>
             @endif{{-- roles --}}
 

@@ -102,7 +102,8 @@ return [
     'new' => ' New ',
     'content'=>'Content',
     'send_date'=>'Send Date',
-    'announcemnet'=>'Announcemnet',
+    'announcement'=>'Announcement',
+    'announcements'=>'Announcements',
 
     //team
     'team'=>'Company Team',

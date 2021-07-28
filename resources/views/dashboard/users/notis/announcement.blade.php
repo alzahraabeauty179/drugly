@@ -2,7 +2,7 @@
     <i class="ft-bell"></i>
 </a>
 
-<!-- Modal Announcemnet Notify -->
+<!-- Modal Announcement Notify -->
 
 <div class="modal fade" id="showNoti-{{$noti->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -11,7 +11,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">@lang('site.announcemnet')</h4>
+                    <h4 class="card-title">@lang('site.announcement')</h4>
                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -48,4 +48,4 @@
     </div>
 </div>
 
-<!-- ./End Modal Announcemnet Notify -->
+<!-- ./End Modal Announcement Notify -->
