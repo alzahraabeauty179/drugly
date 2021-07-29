@@ -76,6 +76,12 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous">
+    </script>
     
     <!--################## FIREBASE SCRIPT ##################-->
     {{csrf_field()}}
@@ -108,7 +114,6 @@
         messaging.requestPermission()
         .then( function() {
             console.log('Permission Accepted');
-            console.log($('input[name=_token]').val());
         	return messaging.getToken();
         })
         .then( function(token) {
@@ -119,7 +124,21 @@
         .catch( function(error) {
             // console.log(error);
             console.log('Permission Denied, you will not be apple to get real time notifications!');
-        })
+        });
+
+        var user_token = messaging.getToken();
+        user_token.then(function(token) {
+            console.log(token) // "Some User token"
+            $('#set-token').val(token);
+        });
+       
+        // console.log(messaging.getToken('vapidKey') );
+        // let userToken = AuthUser(data)
+        // console.log(userToken) // Promise { <pending> }
+
+        // userToken.then(function(result) {
+        // console.log(result) // "Some User token"
+        // })
     </script>
 
 </body>

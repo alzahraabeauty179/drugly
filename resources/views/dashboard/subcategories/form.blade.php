@@ -34,7 +34,7 @@
     <div class="text-bold-600 font-medium-2">
         @lang('site.categories')
     </div>
-    <select class="select2 form-control @error($locale . ' .description') is-invalid @enderror" 
+    <select class="select2 form-control @error($locale . ' .parent_id') is-invalid @enderror" 
             id="category_id" name="parent_id"
     >
         <optgroup label="@lang('site.select')">
@@ -47,7 +47,7 @@
         </optgroup>
     </select>
 
-    @error($locale . '.description')
+    @error($locale . '.parent_id')
     <small class=" text text-danger" role="alert">
         <strong>{{ $message }}</strong>
     </small>

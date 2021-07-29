@@ -20,6 +20,8 @@
         rel="stylesheet" />
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/css-rtl/vendors.min.css') }}" />
+    <!-- for checkbox/switch -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/css/forms/toggle/switchery.min.css') }}">
     <!-- for select -->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/app-assets/vendors/css/forms/selects/select2.min.css') }}">
     <!-- for images -->
@@ -116,6 +118,9 @@
     <!-- END maoqe3 JS-->
 
     <!-- BEGIN PAGE LEVEL JS-->
+        <!-- for checkbox/switch -->
+        <script src="{{ asset('dashboard_files/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('dashboard_files/app-assets/vendors/js/forms/toggle/switchery.min.js') }}" type="text/javascript"></script>
         <!-- for datatable -->
         <script src="{{ asset('dashboard_files/app-assets/js/scripts/tables/datatables/datatable-basic.min.js') }}" type="text/javascript"></script>
         <!-- for select -->

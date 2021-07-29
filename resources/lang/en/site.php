@@ -104,7 +104,13 @@ return [
     'send_date'=>'Send Date',
     'announcement'=>'Announcement',
     'announcements'=>'Announcements',
-
+    'notification' =>'Notification',
+    'no_beauty_pharmacies'=>"You didn't have pharmacies yet!",
+    'no_beauty_companies'=>"You didn't have beauty companies yet!",
+    'no_medical_stores'=>"You didn't have medical stores yet!",
+    'custom_users'=>'Custom Users',
+    'all_users'   =>'All Users',
+    
     //team
     'team'=>'Company Team',
     'teams'=>'Company Team',
@@ -352,6 +358,8 @@ return [
         'answer' => 'Answer in Arabic',
         'privacy_policy'=>'Terms and Conditions in Arabic',
         'about_us'=>'About us in Arabic',
+        'title'=>' Title in Arabic',
+        'content'=>'Content in Arabic',
     ],
 
     'en' => [
@@ -363,9 +371,11 @@ return [
         'position' => 'Position in English',
         'description' => 'Description in English',
         'question' => 'Question in English',
-        'answer' => 'Answer in english',
+        'answer' => 'Answer in English',
         'privacy_policy'=>'Terms and Conditions in English',
         'about_us'=>'About us in English',
+        'title'=>' Title in English',
+        'content'=>'Content in English',
     ],
     
 

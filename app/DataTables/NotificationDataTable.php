@@ -20,8 +20,29 @@ class NotificationDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
-            ->addColumn('action', 'notificationdatatable.action');
+        ->eloquent($query)
+        ->addColumn('type', function (Notification $n) {
+            return \Illuminate\Support\Str::snake( class_basename($n->type, ' ') );
+        })
+        ->editColumn('created_at', function (Notification $d) {
+            return $d->created_at->diffForHumans();
+        })
+        ->addColumn('action', function (Notification $row) {
+            $module_name_singular = 'notification';
+            $module_name_plural   = 'notifications';
+
+            return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
+        })
+
+        // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
+        ->filter(function ($query) {
+            return $query
+                ->where('type', "%" . request()->search['value'] . "%")
+                // ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
+                ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
+                ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
+        });
     }
 
     /**
@@ -30,7 +51,7 @@ class NotificationDataTable extends DataTable
      * @param \App\Models\NotificationDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(NotificationDataTable $model)
+    public function query(Notification $model)
     {
         return $model->newQuery();
     }
@@ -65,15 +86,17 @@ class NotificationDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('type'),
+            // Column::make('description'),
+            // Column::make('logo'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                // ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
