@@ -14,14 +14,21 @@ class Announcement extends Notification
     use Queueable;
 
     private $message;
+    private $title;
+    private $notifiersNo;
+    private $notifiers;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $title, $notifiersNo, $notifiers)
     {
-        $this->message = $message;
+        $this->message     = $message;
+        $this->title       = $title;
+        $this->notifiersNo = $notifiersNo;
+        $this->notifiers   = $notifiers;
     }
 
     /**
@@ -44,7 +51,10 @@ class Announcement extends Notification
     public function toDatabase($notifiable)
     {
         return [
+            'title' => [ 'en'=>$this->title['en'], 'ar'=>$this->title['ar'] ],
             'message' => [ 'en'=>$this->message['en'], 'ar'=>$this->message['ar'] ],
+            'notifiersNo'=>$this->notifiersNo,
+            'notifiers'  =>$this->notifiers,
             'sendAt'  => Carbon::now()
         ];
     }

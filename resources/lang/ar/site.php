@@ -97,6 +97,8 @@ return [
     # notifications
     'read_all_notis'   =>'أقرء جميع الأشعارات',
     'welcome_to_drugly'=>'مرحبا بك في تطبيق Drugly!',
+    'drugly'=>'تطبيق الصيدليات',
+    'have_new_notify'=>'ليدك اشعار جديد, قم بتفقدة الآن!',
     'no_notifications'=>'ليس لديك اشعارات جديدة, حتي الأن!',
     'app_manager'=>'مدير التطبيق',
     'new' => ' جديد ',
@@ -110,6 +112,8 @@ return [
     'no_medical_stores'=>"ليس لديك مخازن طبية حتي الآن!",
     'custom_users'=>'بعض المسخدميين',
     'all_users'   =>'جميع المستخدميين',
+    'send_to_all_users'=>'إرسال إلى جميع المستخدميين',
+
 
     //slider
     'slider'=>'الاسليدر',

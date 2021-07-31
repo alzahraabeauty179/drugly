@@ -35,9 +35,27 @@
 
 <div class="form-group col-md-6">
     <div class="text-bold-600 font-medium-2">
+        @lang('site.all_users')
+    </div>
+    <div class="form-group pb-1">
+        <div class="float-right">
+        <input type="checkbox" name="all_users" id="switchery0" class="switchery" @error('users_id') @else checked @enderror />
+        </div>
+        <label for="switchery0" class="font-medium-2 text-bold-600">@lang('site.send_to_all_users')</label>
+        
+        @error('users_id')
+        <small class=" text text-danger" role="alert">
+            <strong>{{ $message }}</strong>
+        </small>
+        @enderror
+    </div>
+</div>
+
+<div class="form-group col-md-6" id="custom-users" style=" @error('users_id') @else display:none @enderror">
+    <div class="text-bold-600 font-medium-2">
         @lang('site.custom_users')
     </div>
-    <select class="select2 form-control @error($locale . ' .users_id') is-invalid @enderror" 
+    <select class="select2 form-control @error('users_id') is-invalid @enderror" 
             id="users_id" name="users_id[]" multiple="multiple"
     >
         <optgroup label="@lang('site.medical_store')">
@@ -85,69 +103,17 @@
             @endforelse
         </optgroup>
     </select>
-
-    @error($locale . '.users_id')
-    <small class=" text text-danger" role="alert">
-        <strong>{{ $message }}</strong>
-    </small>
-    @enderror
 </div>
 
-<div class="form-group col-md-6">
-    <div class="text-bold-600 font-medium-2">
-        @lang('site.all_users')
-    </div>
-    <div class="form-group pb-1">
-              <div class="float-right">
-                <input type="checkbox" name="switchery" id="switchery0" class="switchery" checked/>
-              </div>
-              <label for="switchery0" class="font-medium-2 text-bold-600">Switchery Default</label>
-            </div>
-</div>
-
-<!-- <div class="form-group col-md-6">
-    <div class="text-bold-600 font-medium-2">
-        @lang('site.users')
-    </div>
-    <select class="select2 form-control" multiple="multiple">		
-        <optgroup label="Central Time Zone">
-            <option value="AL">Alabama</option>
-            <option value="AR">Arkansas</option>
-            <option value="IL">Illinois</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="OK">Oklahoma</option>
-            <option value="SD">South Dakota</option>
-            <option value="TX">Texas</option>
-            <option value="TN">Tennessee</option>
-            <option value="WI">Wisconsin</option>
-        </optgroup>
-        <optgroup label="Eastern Time Zone">
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="IN">Indiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="OH">Ohio</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WV">West Virginia</option>
-        </optgroup>
-    </select>
-</div> -->
+@push('script')
+    <script>
+        $(document).ready( function () {
+            $('#switchery0').click(function() {
+                if( $('#custom-users').css('display') == 'none' )
+                    $('#custom-users').removeAttr('style');
+                else
+                    $('#custom-users').css('display', 'none')
+            });
+        });
+    </script>
+@endpush

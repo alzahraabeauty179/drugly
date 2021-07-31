@@ -24,8 +24,11 @@
                     <div class="card-body">
                         <div class="card-text">
                             <p class="card-text">
-                                @php $local = App::getLocale(); @endphp
-                                {{ json_decode($noti->data)->message->$local }}
+                                @if(gettype($noti->data) == 'string')
+                                    {{ json_decode($noti->data)->message->$local }}
+                                @else
+                                    {{ $noti->data['message'][App::getLocale()] }}
+                                @endif
                             </p>
                         </div>
                     </div>

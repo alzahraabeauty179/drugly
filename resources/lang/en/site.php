@@ -97,6 +97,8 @@ return [
     # notifications
     'read_all_notis'=>'Read all notifications',
     'welcome_to_drugly'=>'Welcome To Drugly App!',
+    'drugly'=>'Drugly',
+    'have_new_notify'=>'You have new notification, check it out!',
     'no_notifications'=>"You didn't have any new notifications, yet!",
     'app_manager'=>'App Manager',
     'new' => ' New ',
@@ -110,6 +112,7 @@ return [
     'no_medical_stores'=>"You didn't have medical stores yet!",
     'custom_users'=>'Custom Users',
     'all_users'   =>'All Users',
+    'send_to_all_users'=>'Send to all users',
     
     //team
     'team'=>'Company Team',

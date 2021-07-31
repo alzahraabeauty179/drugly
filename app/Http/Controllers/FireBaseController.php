@@ -14,6 +14,7 @@ class FireBaseController extends Controller
     * @var string $mobileType ios or android
     */
     public $to;
+    public $fcmList;
     public $body;
     public $title;
     public $sound;
@@ -23,20 +24,36 @@ class FireBaseController extends Controller
 
     public function getFieldsToSend() 
     { 
-        return [
-            "priority" => "high",
-            "notification" => [
-                "title"=> $this->title,
-                "body" => $this->body,
-            ],
-            "data"=> [
-                "type"=> $this->type,
-                "link"=> $this->link,
-                "date"=> $this->date,
-            ],
-            "to"  => $this->to, //in single case
-            // "reqisteration_ids"=> $this->fcmList //in list case
-        ];
+        if( $this->flag == "list")
+            return [
+                "priority" => "high",
+                "notification" => [
+                    "title"=> $this->title,
+                    "body" => $this->body,
+                ],
+                "data"=> [
+                    "type"=> $this->type,
+                    "link"=> $this->link,
+                    "date"=> $this->date,
+                ],
+                // "to"  => $this->to, //in single case
+                "reqisteration_ids"=> $this->fcmList //in list case
+            ];
+        else
+            return [
+                "priority" => "high",
+                "notification" => [
+                    "title"=> $this->title,
+                    "body" => $this->body,
+                ],
+                "data"=> [
+                    "type"=> $this->type,
+                    "link"=> $this->link,
+                    "date"=> $this->date,
+                ],
+                "to"  => $this->to, //in single case
+                // "reqisteration_ids"=> $this->fcmList //in list case
+            ];
     }
 
     public function send()

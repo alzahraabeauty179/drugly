@@ -9,6 +9,8 @@ use App\User;
 use App\Models\Notification;
 use App\Notifications\Announcement;
 use App\Http\Controllers\FireBaseController;
+use Illuminate\Support\Facades\Notification as Notifies;
+
 use Carbon\Carbon;
 
 class NotificationController extends BackEndController
@@ -67,21 +69,25 @@ class NotificationController extends BackEndController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Send real time notification to one or more of users.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  string  $flag
+     * @param  string  $to
+     * @param  array  $fcmList
+     * @return firebase Response
      */
-    public function store(Request $request)
+    public function setFirebase($flag, $to, $fcmList)
     {
-        dd($request);
-        // $user = User::findOrFail();
-
         $fire = new FireBaseController;
-        # Set FireBase 
-        $fire->to       = auth()->user()->fcm_token;
-        $fire->title    = __('site.app_manager');
-        $fire->body     = __('site.welcome_to_drugly');
+        # Set FireBase
+        if( $flag == "list" ) 
+            $fire->fcmList  = $fcmList;
+        else
+            $fire->to       = $to;
+
+        $fire->flag     = $flag;
+        $fire->title    = __('site.drugly');
+        $fire->body     = __('site.have_new_notify');
 
         $fire->type     = 'announcement';
         $fire->link     = 'javascript:void(0)';
@@ -89,9 +95,51 @@ class NotificationController extends BackEndController
 
         $fire->sound    = true;
         $fire->send();
+    }
 
-        $message = ['en'=>'Welcome To Drugly App!', 'ar'=>'مرحبا بك في تطبيق Drugly!'];
-        auth()->user()->notify(new Announcement($message));
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $rules = ['users_id'=>'required_without:all_users'];
+
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [
+                $locale . '.title'   => 'required|string|min:3|max:70',
+                $locale . '.content' => 'required|string|min:3|max:200',
+            ];
+        }
+        $request->validate($rules);
+    
+        # Set Firebase
+        if( isset($request->all_users) ){
+            $users         = User::where('type', '!=', 'super_admin')->get();
+            $fcmList       = User::where('type', '!=', 'super_admin')->pluck('fcm_token')->toArray();
+            $notifiers     = 'all_users';
+            $notifiersNo   = count($users);
+        }  
+        else{ 
+            $users         = User::whereIn('id', $request->users_id)->get();
+            $fcmList       = User::whereIn('id', $request->users_id)->pluck('fcm_token')->toArray();
+            $notifiers     = $request->users_id;
+            $notifiersNo   = count($request->users_id);
+        }
+        
+        # Set Notification Database
+        $this->setFirebase('list', null, $fcmList);
+        
+        # Set Notification Database
+        $title   = ['en'=>$request['en']['title'],   'ar'=>$request['ar']['title']];
+        $message = ['en'=>$request['en']['content'], 'ar'=>$request['ar']['content']];
+
+        // auth()->user()->notify(new Announcement($message, $title, $notifiers, $notifiersNo));
+        Notifies::send($users, new Announcement($message, $title, $notifiers, $notifiersNo));
+   
+        return redirect()->route('dashboard.notifications.index');
     }
 
     /**

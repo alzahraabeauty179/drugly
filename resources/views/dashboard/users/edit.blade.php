@@ -162,44 +162,41 @@
                                     <div class="card">
                                         <div class="card-content collapse show">
                                             <div class="card-body card-dashboard">
-                                                @if( count(auth()->user()->notifications) > 0 )
-                                                    <table class="table table-striped table-bordered zero-configuration" id="myNotisTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>@lang('site.title')</th>
-                                                                <th>@lang('site.content')</th>
-                                                                <th>@lang('site.send_date')</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach(auth()->user()->notifications as $index=>$noti)
-                                                            <tr>
-                                                                <td> {{++$index}} </td>
-                                                                <td> 
-                                                                    @if( \Illuminate\Support\Str::snake(class_basename($noti->type, '_')) == 'announcement')
-                                                                        @lang('site.app_manager')
-                                                                    @endif 
-                                                                </td>
-                                                                <td> 
-                                                                    @include( 'dashboard.users.notis.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
-                                                                </td>
-                                                                <td> {{ Carbon\Carbon::parse($noti->data['sendAt'])->format('d M Y h:m') }} </td>
-                                                            </tr>
-                                                        @endforeach
-                                                        </tbody>
-                                                        <tfoot>
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>@lang('site.title')</th>
-                                                                <th>@lang('site.content')</th>
-                                                                <th>@lang('site.send_date')</th>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
-                                                @else
-                                                    <h4>@lang('site.no_records')</h4>
-                                                @endif
+                                                @php $local = App::getLocale(); @endphp
+                                                <table class="table table-striped table-bordered zero-configuration" id="myNotisTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>@lang('site.title')</th>
+                                                            <th>@lang('site.content')</th>
+                                                            <th>@lang('site.send_date')</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @forelse(auth()->user()->notifications as $index=>$noti)
+                                                        <tr>
+                                                            <td> {{++$index}} </td>
+                                                            <td> 
+                                                                {{ $noti->data['title'][App::getLocale()] }}
+                                                            </td>
+                                                            <td> 
+                                                                @include( 'dashboard.users.notis.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
+                                                            </td>
+                                                            <td> {{ Carbon\Carbon::parse($noti->data['sendAt'])->format('d M Y h:m') }} </td>
+                                                        </tr>
+                                                        @empty
+                                                        <tr><td colspan="4" style="text-align: center;"><h4>@lang('site.no_records')</h4></td></tr>
+                                                    @endforelse
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>@lang('site.title')</th>
+                                                            <th>@lang('site.content')</th>
+                                                            <th>@lang('site.send_date')</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +231,7 @@
                                         <div class="card-content collapse show">
                                             <div class="card-body card-dashboard">
                                                 @if( isset($ads) && $ads->count() > 0 )
-                                                    <table class="table table-striped table-bordered zero-configuration">
+                                                    <table class="table table-striped table-bordered zero-configuration" id="myAdsTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>#</th>
@@ -245,7 +242,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @foreach($ads as $index=>$row)
+                                                        @forelse($ads as $index=>$row)
                                                             <tr>
                                                                 <td> {{++$index}} </td>
                                                                 <td> {{ $row->title }} </td>
@@ -258,7 +255,9 @@
                                                                     </figure>
                                                                 </td>
                                                             </tr>
-                                                        @endforeach
+                                                            @empty
+                                                            <tr><td colspan="4" style="text-align: center;"><h4>@lang('site.no_records')</h4></td></tr>
+                                                        @endforelse
                                                         </tbody>
                                                         <tfoot>
                                                             <tr>

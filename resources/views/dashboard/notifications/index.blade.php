@@ -56,6 +56,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
+                                    @php $local = App::getLocale(); @endphp
                                     <table class="table table-striped table-bordered zero-configuration" id="myAnnouncesTable">
                                         <thead>
                                             <tr>
@@ -70,9 +71,11 @@
                                             <tr>
                                                 <td> {{++$index}} </td>
                                                 <td> 
-                                                    @if( \Illuminate\Support\Str::snake(class_basename($noti->type, '_')) == 'announcement')
-                                                        @lang('site.app_manager')
-                                                    @endif 
+                                                    @if(gettype($noti->data) == 'string')
+                                                        {{ json_decode($noti->data)->title->$local }}
+                                                    @else
+                                                        {{ $noti->data['title'][App::getLocale()] }}
+                                                    @endif
                                                 </td>
                                                 <td> 
                                                     @include( 'dashboard.users.notis.' . \Illuminate\Support\Str::snake( class_basename($noti->type, '_') ) )
@@ -80,7 +83,7 @@
                                                 <td> {{ Carbon\Carbon::parse(json_decode($noti->data)->sendAt)->format('d M Y h:m') }} </td>
                                             </tr>
                                             @empty
-                                                <tr><td colspan="4"><h4>@lang('site.no_records')</h4></td></tr>
+                                                <tr><td colspan="4" style="text-align: center;"><h4>@lang('site.no_records')</h4></td></tr>
                                         @endforelse
                                         </tbody>
                                         <tfoot>
