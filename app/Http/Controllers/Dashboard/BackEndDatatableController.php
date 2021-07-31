@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use Yajra\DataTables\Services\DataTable;
@@ -68,8 +69,13 @@ class BackEndDatatableController extends Controller
 
     public function destroy($id, Request $request)
     {
-        $this->model->findOrFail($id)->delete();
+        $model = $this->model->findOrFail($id);   
+    
+        if (isset($model->image)) {
+            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $model->image);
+        }
 
+        $model->delete(); 
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.'.$this->getClassNameFromModel() . '.index');
     } //end of destroy function

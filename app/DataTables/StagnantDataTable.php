@@ -2,76 +2,76 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Stagnant;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable
+class StagnantDataTable extends DataTable
 {
+
     protected $model;
-    public function __construct(Category $model)
+    public function __construct(Stagnant $model)
     {
         $this->model = $model;
     }
+
     /**
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable()
     {
         $query = $this->query();
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
-                return '<a href="'.route('dashboard.categories.show', ['category' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
+            ->addIndexColumn()
+            ->addColumn('name',  function ($query) {
+                return '<a href="'.route('dashboard.stagnants.show', ['stagnant' => $query->id]).'" >'. $query->name .'</a>';
             })
-            // ->addColumn('description', function ($query) {
-            //     return $query->translation->description;
-            // })
-            ->addColumn('logo', function ($query) {
-                return '<image src="'.$query->image_path.'" width="40" height="40" />';
+            ->addColumn('description', function ($query) {
+                return  $query->description;
             })
-
+            ->addColumn('amount', function ($query) {
+                return  $query->amount;
+            })
+            ->addColumn('price',  function ($query) {
+                return  $query->price;
+            })
+            ->addColumn('image', function ($query) {
+                return '<image src="' . $query->image_path . '" width="40" height="40" />';
+            })
             ->editColumn('created_at', function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Category $row) {
-                $module_name_singular = 'category';
-                $module_name_plural   = 'categories';
+            ->addColumn('action', function ($query) {
+                $module_name_singular = 'stagnant';
+                $module_name_plural   = 'stagnants';
+                $row                  = $query;
                 return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
                 // return '<a  href="' . route("dashboard.categories.edit", ["category" => $l]) . '" class="btn btn-info">edit</>';
+            })->addColumn('exchange', function ($query) {
+                return '<a  href="' . route("dashboard.stagnants.create", ["stagnant" => $query->id]) . '" class="btn btn-success btn-sm"><i class="fa fa-exchange">'. __("site.exchange").' </i> </>';
             })
-
             // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
-            ->filter(function ($query) {
-                return $query
-                    ->whereNUll('parent_id')
-                    ->where(function ($w) {
-                        return $w->whereTranslationLike('name', "%" . request()->search['value'] . "%")
-                            // ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
-                            ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
-                            ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
-                            ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
-                    });
-            })
-            ->rawColumns(['action', 'name', 'logo']); // this is for show view and url 
+
+            ->rawColumns(['action', 'image', 'exchange', 'name']); // this is for show view and url 
 
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Category $model
+     * @param \App\Models\Stagnant $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query()
     {
-        return $this->model->whereNUll('parent_id')->newQuery();
+        return $this->model->whereNull('stagnant_id')->newQuery();
     }
 
     /**
@@ -82,7 +82,7 @@ class CategoryDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('category-table')
+            ->setTableId('stagnant-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -104,16 +104,19 @@ class CategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
+
             Column::make('id'),
-            Column::computed('name'),
-            // Column::computed('description'),
-            Column::make('logo'),
+            Column::make('name'),
+            Column::make('description'),
+            Column::make('amount'),
+            Column::make('price'),
+            Column::computed('image'),
             Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::computed('exchange'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                // ->width(60)
+                ->width(60)
                 ->addClass('text-center'),
         ];
     }
@@ -125,6 +128,6 @@ class CategoryDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Category_' . date('YmdHis');
+        return 'Stagnant_' . date('YmdHis');
     }
 }

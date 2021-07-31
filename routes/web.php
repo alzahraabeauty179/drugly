@@ -77,6 +77,10 @@ Route::group(
             Route::post('/mark-as-read', 'NotificationController@markAsRead')->name('markAsRead');
             Route::resource('notifications', 'NotificationController');
 
+              ######################### stagnants #########################
+              Route::resource('stagnants', 'StagnantsController');
+
+
         });
 
     }
