@@ -10,6 +10,7 @@ return [
             'products'            => 'c,r,u,d',
             'appsettings'         => 'c,r,u,d',
             'notifications'       => 'c,r,u,d',
+            'stagnants'           => 'c,r,u,d',
         ],
     ],
     // 'permission_structure' => [

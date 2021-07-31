@@ -26,11 +26,12 @@
 
             @if (auth()->user()->can('read-roles'))
             <li class="nav-item"><a href="{{route('dashboard.roles.index')}}"><i class="ft-compass"></i><span
-                class="menu-title" data-i18n="">@lang('site.roles')</span></a>
+                        class="menu-title" data-i18n="">@lang('site.roles')</span></a>
             </li>
 
-            <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i class="fa fa-bullhorn"></i><span
-                class="menu-title" data-i18n="">@lang('site.announcements')</span></a>
+            <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i
+                        class="fa fa-bullhorn"></i><span class="menu-title"
+                        data-i18n="">@lang('site.announcements')</span></a>
             </li>
             @endif{{-- roles --}}
 
@@ -59,6 +60,9 @@
             @endif{{-- categories --}}
 
 
+
+
+
             @if (auth()->user()->can('read-products'))
             <li class="nav-item">
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
@@ -77,7 +81,23 @@
             </li>
             @endif{{-- products --}}
 
-
+            @if (auth()->user()->can('read-stagnants'))
+            <li class="nav-item">
+                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.stagnants')</span></a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('dashboard.stagnants.index')}}">@lang('site.all')
+                            @lang('site.stagnants')</a>
+                    </li>
+                    @if (auth()->user()->can('create-stagnants'))
+                    <li>
+                        <a class="menu-item" href="{{ route('dashboard.stagnants.create') }}">@lang('site.add')
+                            @lang('site.stagnants')</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif{{-- stagnants --}}
 
             <li class="nav-item">
                 <a><i class="ft-tag"></i><span class="menu-title" data-i18n="">Trademarks</span></a>

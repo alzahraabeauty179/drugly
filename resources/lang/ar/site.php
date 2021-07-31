@@ -331,4 +331,10 @@ return [
         'content'=>'المحتوي باللغة الانجليزية',
     ],
 
+        // stagnants
+        'stagnants'     => 'الرواكد',
+        'stagnant'      => 'راكد',
+        'amount'        => 'الكميه',
+        'expiry_date'   => 'تاريخ الصلاحيه',
+        'discount'      => 'التخفيض',
 ];

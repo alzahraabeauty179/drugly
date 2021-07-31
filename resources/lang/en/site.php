@@ -381,5 +381,11 @@ return [
         'content'=>'Content in English',
     ],
     
+    // stagnants
+    'stagnants'     => 'stagnants',
+    'stagnant'      => 'stagnant',
+    'amount'        => 'amount',
+    'expiry_date'   => 'expiry_date',
+    'discount'      => 'discount',
 
 ];
