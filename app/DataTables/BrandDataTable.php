@@ -11,6 +11,15 @@ use Yajra\DataTables\Services\DataTable;
 
 class BrandDataTable extends DataTable
 {
+    protected $model;
+    /**
+     * Constructor.
+     */
+    public function __construct(Brand $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Build DataTable class.
      *
@@ -19,19 +28,21 @@ class BrandDataTable extends DataTable
      */
     public function dataTable($query)
     {
+        $query = $this->query();
+
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function (Brand $n) {
-                return $n->translation->name;
+            ->addColumn('name', function ($query) {
+                return '<a href="'.route('dashboard.brands.show', ['brand' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
             })
             // ->addColumn('description', function (Brand $d) {
             //     return $d->translation->description;
             // })
-            ->addColumn('logo', function (Brand $d) {
-                return '<image src="'.$d->image_path.'" width="40" height="40" />';
+            ->addColumn('logo', function ($query) {
+                return '<image src="'.$query->image_path.'" width="40" height="40" />';
             })->rawColumns(['logo', 'action'])
-            ->editColumn('created_at', function (Brand $d) {
-                return $d->created_at->diffForHumans();
+            ->editColumn('created_at', function ($query) {
+                return $query->created_at->diffForHumans();
             })
             ->addColumn('action', function (Brand $row) {
                 $module_name_singular = 'brand';
@@ -57,9 +68,9 @@ class BrandDataTable extends DataTable
      * @param \App\Models\Brand $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Brand $model)
+    public function query()
     {
-        return $model->newQuery();
+        return $this->model->where('created_by', auth()->user()->id)->newQuery();
     }
 
     /**

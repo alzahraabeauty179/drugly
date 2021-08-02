@@ -33,7 +33,7 @@ class BrandController extends BackEndDatatableController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('brand_translations', 'name')->where(function ($query) {
-                    $query->join('brands', function($j){ return $j->where('brands.owner_id', '=', auth()->user()->id); });
+                    $query->join('brands', function($j){ return $j->where('brands.store_id', '=', auth()->user()->store_id); });
                 }),],               
                 $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
@@ -41,7 +41,9 @@ class BrandController extends BackEndDatatableController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-        $request_data['owner_id'] = auth()->user()->id;
+        $request_data['store_id']   = auth()->user()->store_id;
+        $request_data['created_by'] = auth()->user()->id;
+
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
@@ -68,7 +70,7 @@ class BrandController extends BackEndDatatableController
         foreach (config('translatable.locales') as $locale) {
             $rules += [       
                 $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('brand_translations', 'name')->ignore($brand->id, 'brand_id')->where(function ($query) {
-                    $query->join('brands', function($j){ return $j->where('brands.owner_id', '=', auth()->user()->id); });
+                    $query->join('brands', function($j){ return $j->where('brands.store_id', '=', auth()->user()->store_id); });
                 }),],  
 
                 $locale . '.description' => 'nullable|string|min:3|max:500',

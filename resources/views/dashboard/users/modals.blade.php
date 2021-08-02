@@ -157,9 +157,17 @@
 
                         <form   class="form" method="POST" enctype="multipart/form-data" 
                                 @if( is_null($app_settings) )
-                                    action="{{ route('dashboard.appsettings.store') }}"
+                                    @if( auth()->user()->type == "super_admin" )
+                                        action="{{ route('dashboard.appsettings.store') }}"
+                                    @else
+                                        action="{{ route('dashboard.stores.store') }}"
+                                    @endif
                                 @else
-                                    action="{{ route('dashboard.appsettings.update', [ 'appsetting' => $app_settings->id ]) }}"
+                                    @if( auth()->user()->type == "super_admin" )
+                                        action="{{ route('dashboard.appsettings.update', [ 'appsetting' => $app_settings->id ]) }}"
+                                    @else
+                                        action="{{ route('dashboard.stores.update', [ 'appsetting' => $app_settings->id ]) }}"
+                                    @endif
                                 @endif
                         >
                         

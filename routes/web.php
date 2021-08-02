@@ -69,6 +69,9 @@ Route::group(
             ######################### App Settings #########################
             Route::resource('appsettings', 'AppSettingController');
 
+            ######################### Stores #########################
+            Route::resource('stores', 'StoreController');
+
             ######################### Products #########################
             Route::resource('products', 'ProductController');
 
@@ -77,8 +80,8 @@ Route::group(
             Route::post('/mark-as-read', 'NotificationController@markAsRead')->name('markAsRead');
             Route::resource('notifications', 'NotificationController');
 
-              ######################### stagnants #########################
-              Route::resource('stagnants', 'StagnantsController');
+            ######################### Stagnants #########################
+            Route::resource('stagnants', 'StagnantsController');
 
 
         });

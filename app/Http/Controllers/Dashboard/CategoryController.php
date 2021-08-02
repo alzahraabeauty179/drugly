@@ -36,7 +36,7 @@ class CategoryController extends BackEndDatatableController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->where(function ($query) {
-                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id); });
+                    $query->join('categories', function($j){ return $j->where('categories.store_id', '=', auth()->user()->store_id); });
                 }),],
                 $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
@@ -45,8 +45,9 @@ class CategoryController extends BackEndDatatableController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-        $request_data['owner_id'] = auth()->user()->id;
-
+        $request_data['store_id'] = auth()->user()->store_id;
+        $request_data['created_by'] = auth()->user()->id;
+        
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
@@ -86,7 +87,7 @@ class CategoryController extends BackEndDatatableController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->ignore($category->id, 'category_id')->where(function ($query) {
-                    $query->join('categories', function($j){ return $j->where('categories.owner_id', '=', auth()->user()->id); });
+                    $query->join('categories', function($j){ return $j->where('categories.store_id', '=', auth()->user()->store_id); });
                 }),],
 
                 $locale . '.description' => 'nullable|string|min:3|max:500',

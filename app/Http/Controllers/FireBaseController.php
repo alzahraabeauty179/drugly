@@ -67,6 +67,7 @@ class FireBaseController extends Controller
         curl_setopt( $curl,CURLOPT_POSTFIELDS, json_encode( $this->getFieldsToSend() ) );
         $ret = curl_exec($curl);
         curl_close($curl);
+          
         return $ret;
     }
 

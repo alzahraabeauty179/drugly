@@ -16,8 +16,11 @@ class CreateBrandsTable extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('owner_id')->unsigned();
-            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('store_id')->unsigned();
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+
+            $table->integer('created_by')->unsigned();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->tinyInteger('active')->default(1);
             $table->string('image')->nullable();

@@ -9,6 +9,7 @@ return [
             'brands'              => 'c,r,u,d',
             'products'            => 'c,r,u,d',
             'appsettings'         => 'c,r,u,d',
+            'storesettings'       => 'c,r,u,d',
             'notifications'       => 'c,r,u,d',
             'stagnants'           => 'c,r,u,d',
         ],

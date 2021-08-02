@@ -24,10 +24,16 @@ class CreateUsersTable extends Migration
             
             $table->string('password');
             $table->string('image')->nullable();
-            $table->string('fcm_token')->nullable();
 
             $table->enum('type', ['super_admin', 'medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
 
+            $table->integer('store_id')->nullable()->unsigned();
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+
+            $table->integer('app_setting_id')->nullable()->unsigned();
+            $table->foreign('app_setting_id')->references('id')->on('app_settings')->onDelete('cascade');
+            
+            $table->string('fcm_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -115,7 +115,6 @@ class NotificationController extends BackEndController
         }
         $request->validate($rules);
     
-        # Set Firebase
         if( isset($request->all_users) ){
             $users         = User::where('type', '!=', 'super_admin')->get();
             $fcmList       = User::where('type', '!=', 'super_admin')->pluck('fcm_token')->toArray();
@@ -129,7 +128,7 @@ class NotificationController extends BackEndController
             $notifiersNo   = count($request->users_id);
         }
         
-        # Set Notification Database
+        # Set Firebase
         $this->setFirebase('list', null, $fcmList);
         
         # Set Notification Database

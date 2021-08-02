@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\AppSetting;
+use App\Models\Store;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -45,7 +46,11 @@ class UserController extends BackEndController
         $module_name_plural   = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
 
-        $app_settings = AppSetting::where('owner_id', auth()->user()->id)->first();
+        if( auth()->user()->type == "super_admin" )
+            $app_settings = AppSetting::where('owner_id', auth()->user()->id)->first();
+        else
+            $app_settings  = Store::where('owner_id', auth()->user()->id)->first();
+
         $append = ['app_settings' => $app_settings];
    
         $row = $this->model->findOrFail($id);
