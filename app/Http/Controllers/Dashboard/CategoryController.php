@@ -45,7 +45,8 @@ class CategoryController extends BackEndDatatableController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-        $request_data['store_id'] = auth()->user()->store_id;
+        // store_id will change to setting_id cause now the suber admin is used that but the right store do
+        $request_data['store_id'] = auth()->user()->app_setting_id;
         $request_data['created_by'] = auth()->user()->id;
         
         if ($request->image) {
@@ -126,7 +127,10 @@ class CategoryController extends BackEndDatatableController
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 
-
+    /**
+     * Display the specified sub/areas resource.
+     *
+     */
     public function subCategory()
     {
         // $x = $this->model->whereNull('parent_id');

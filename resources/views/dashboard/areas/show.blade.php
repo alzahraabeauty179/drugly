@@ -5,20 +5,6 @@
 @section('content')
 <div class="app-content content">
 
-    <div class="container-fluid row d-flex justify-content-center">
-        @if(session('success'))
-            <div class="alert alert-success col-sm-6 text-center" role="alert">
-                {!! session('success') !!}
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="alert alert-danger col-sm-6 text-center" role="alert">
-                {!! session('error') !!}
-            </div>
-        @endif
-    </div>
-
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
@@ -29,7 +15,9 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
-                        <li class="breadcrumb-item active">@lang('site.'.$module_name_plural )</li>
+                        <li class="breadcrumb-item">@lang('site.'.$module_name_plural )</li>
+                        <li class="breadcrumb-item active">{{$row->name}}</li>
+
                     </ol>
                 </div>
             </div>
@@ -59,7 +47,19 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-                                    {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
+
+                                    <table class="table table-bordered" id="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Created At</th>
+                                                <th>Updated At</th>
+                                                <th>action</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
                                 </div>
                             </div>
                         </div>
@@ -76,13 +76,12 @@
 
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+{{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">  --}}
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-
 {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
 
-{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+
 
 {{-- end  datatables style for yajar package --}}
 @endpush
@@ -93,9 +92,29 @@
 <!-- DataTables -->
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script>
+    $(function() {
+    $('#data-table').DataTable({       
+        dom: "Blfrtip",
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{!! route('dashboard.subarea') !!}',
+            data: function (d) {
+                d.subArea = '{!! request()->area !!}';
+            }
+        },
 
-{!! $dataTable->scripts() !!}
+        type : 'POST',
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' , orderable: false, },
+            { data: 'created_at', name: 'created_at' },
+            { data: 'updated_at', name: 'updated_at' },
+            { data: 'action', name: 'action' , orderable: false, searchable: false}
+        ], 
+    });
+});
+</script>
 
 @endpush

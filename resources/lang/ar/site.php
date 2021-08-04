@@ -54,7 +54,7 @@ return [
     'advertisements'=>'الاعلانات',
     'advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
 
-    'update_profile_hint'=>'قم بتحديث بيانات الحاب الشخصي بكل سهولة.',
+    'update_profile_hint'=>'قم بتحديث بيانات الحساب الشخصي بكل سهولة.',
     'personal_information'=>'البيانات الشخصية',
     'first_name'=>'الاسم الاول',
     'last_name'=>'الاسم الآخير',
@@ -83,6 +83,10 @@ return [
     'forgot_password'=>'هل نسيت كلمة السر ؟',
 
     'rememberMe'=>'تذكرنى',
+
+    # areas
+    'areas'=>'المناطق',
+    'area'=>'منطقة',
 
     # roles
     'roles'=>'الأدارات',

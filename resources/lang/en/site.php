@@ -84,6 +84,10 @@ return [
     'forgot_password'=>'Forgot Password ?',
     'rememberMe'=>'Remember Me',
 
+    # areas
+    'areas'=>'Areas',
+    'area'=>'Area',
+
     # roles
     'roles'=>'Roles',
     'role' =>'Role',

@@ -1,21 +1,21 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('site.update')  .' '.  __('site.' . $module_name_singular) )
+@section('title', __('site.update') .' '. __('site.' . $module_name_singular) )
 
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="container-fluid row d-flex justify-content-center">
             @if(session('success'))
-                <div class="alert alert-success col-sm-6 text-center" role="alert">
-                    {!! session('success') !!}
-                </div>
+            <div class="alert alert-success col-sm-6 text-center" role="alert">
+                {!! session('success') !!}
+            </div>
             @endif
 
             @if(session('error'))
-                <div class="alert alert-danger col-sm-6 text-center" role="alert">
-                    {!! session('error') !!}
-                </div>
+            <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                {!! session('error') !!}
+            </div>
             @endif
         </div>
 
@@ -31,12 +31,12 @@
                         <li class="breadcrumb-item"><a
                                 href="{{ route('dashboard.'.$module_name_plural.'.index') }}">@lang('site.'.$module_name_plural)</a>
                         </li>
-                        <li class="breadcrumb-item active">@lang('site.update') @lang('site.'.$module_name_singular)</li>
+                        <li class="breadcrumb-item active">@lang('site.update') @lang('site.'.$module_name_singular)
+                        </li>
                     </ol>
                 </div>
             </div>
         </div>
-
 
         <div class="content-body">
             <section id="form-control-repeater">
@@ -45,7 +45,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title text-capitlaize" id="file-repeater"><i
-                                        class="ft-plus"></i>@lang('site.update') @lang('site.'.$module_name_singular)</h4>
+                                        class="ft-plus"></i>@lang('site.update') @lang('site.'.$module_name_singular)
+                                </h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -59,7 +60,7 @@
                             <div class="card-content collapse show">
                                 <div class="card-body">
                                     <form class="form row" method="POST" enctype="multipart/form-data"
-                                        action="{{ route('dashboard.subcategories.update', ['subcategory' => $row->id]) }}">
+                                        action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
                                         @method('PUT')
 
                                         @include('dashboard.'.$module_name_plural.'.form')
@@ -67,7 +68,7 @@
 
                                         <div class="form-group col-md-6">
                                             <button data-repeater-create="" class="btn btn-primary">
-                                                <i class="ft-plus"></i> @lang('site.update')
+                                                <i class="fa fa-cog"></i> @lang('site.update')
                                             </button>
                                         </div>
 

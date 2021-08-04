@@ -72,6 +72,11 @@ Route::group(
             ######################### Stores #########################
             Route::resource('stores', 'StoreController');
 
+            ######################### Stores #########################
+            Route::resource('areas', 'AreaController');
+            Route::get('sub/areas', 'AreaController@subAreas')->name('subarea');
+
+
             ######################### Products #########################
             Route::resource('products', 'ProductController');
 

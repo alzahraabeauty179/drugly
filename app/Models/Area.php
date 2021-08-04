@@ -9,7 +9,7 @@ class Area extends Model
 {
     use Translatable;
     
-    public $translatedAttributes = ['area_name', 'area_desc'];
+    public $translatedAttributes = ['name'];
 
     protected $guarded = [];
 

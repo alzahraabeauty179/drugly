@@ -24,16 +24,25 @@
                     data-original-title="@lang('site.' . auth()->user()->type)"></i>
             </li>{{-- Account Type --}}
 
+            @if (auth()->user()->can('read-areas'))
+            <li class="nav-item"><a href="{{route('dashboard.areas.index')}}"><i
+                        class="ft-globe"></i><span class="menu-title"
+                        data-i18n="">@lang('site.areas')</span></a>
+            </li>
+            @endif{{-- areas --}}
+
             @if (auth()->user()->can('read-roles'))
             <li class="nav-item"><a href="{{route('dashboard.roles.index')}}"><i class="ft-compass"></i><span
                         class="menu-title" data-i18n="">@lang('site.roles')</span></a>
             </li>
+            @endif{{-- roles --}}
 
+            @if (auth()->user()->can('read-notifications'))
             <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i
                         class="fa fa-bullhorn"></i><span class="menu-title"
                         data-i18n="">@lang('site.announcements')</span></a>
             </li>
-            @endif{{-- roles --}}
+            @endif{{-- notifications --}}
 
             @if (auth()->user()->can('read-brands'))
             <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span

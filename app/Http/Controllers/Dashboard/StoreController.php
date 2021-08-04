@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 
 use App\Models\Store;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 
 use Validator;
@@ -60,7 +61,9 @@ class StoreController extends BackEndController
             $request_data['image'] = $this->uploadImage($request->logo, 'store_settings_images');
         }
 
-        $this->model->create($request_data);
+        $setting = $this->model->create($request_data);
+        User::update(['store_id'=>$setting->id]);
+
         session()->flash('success', __('site.website_info_added_successfully'));
 
         return redirect()->back();

@@ -37,11 +37,11 @@
 
 <div class="form-group col-md-5">
     <div class="text-bold-600 font-medium-2">
-        @lang('site.parent_id')
+        @lang('site.categories')
     </div>
     <select class="select2 form-control @error('parent_id') is-invalid @enderror" id="category_id" name="parent_id">
-        <option value="">@lang('site.parent')</option>
-        @foreach(App\Models\Category::whereNull('parent_id')->get() as $category)
+        <option value="" selected></option>
+        @foreach(App\Models\Category::whereNull('parent_id')->where('created_by', auth()->user()->id)->get() as $category)
         <option value="{{$category->id}}" {{ isset($row) && $row->parent_id == $category->id  ? 'selected' : '' }}>
             {{$category->name}}
         </option>
@@ -58,11 +58,11 @@
     <div class="col-md-1"></div>
 
 <fieldset class="form-group col-md-6">
-    <label for="basicInputFile">Upload Photo</label>
+    <label for="basicInputFile">@lang('site.upload_photo')</label>
     <div class="custom-file">
         <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror "
             id="inputGroupFile01">
-        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        <label class="custom-file-label" for="inputGroupFile01">@lang('site.choose_file')</label>
         @error('image')
         <small class=" text text-danger" role="alert">
             <strong>{{ $message }}</strong>

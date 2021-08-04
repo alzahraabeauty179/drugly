@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 
 use App\Models\AppSetting;
+use App\User;
 use Illuminate\Support\Facades\Storage;
 
 use Validator;
@@ -60,7 +61,9 @@ class AppSettingController extends BackEndController
             $request_data['image'] = $this->uploadImage($request->logo, 'app_settings_images');
         }
 
-        $this->model->create($request_data);
+        $setting = $this->model->create($request_data);
+        User::update(['app_setting_id'=>$setting->id]);
+
         session()->flash('success', __('site.website_info_added_successfully'));
 
         return redirect()->back();
