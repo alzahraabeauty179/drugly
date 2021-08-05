@@ -64,7 +64,9 @@ return [
     'new_password_confirmation'=>'New Password Confirmation',
     'cancel'=>'Cancel',
     'save'=>'Save',
-
+    'set_store_settings'=>'Please, set your store website settings first!</br>
+    You will find it in your profile page.',
+    'only_for_stores' => 'Only used by stores accounts!',
     'update_site_information'=>'Update Website Information',
     'update_site_information_hint'=>'Be free to update your website information.',
     'contact_information'=>'Contact Information',
@@ -97,6 +99,13 @@ return [
     # app settings
     'website_updated_successfully'=>'Website informaion updated successfully',
     'website_info_added_successfully'=>'Website information added successfully',
+
+    # Roles
+    'stores' => 'Stores Settings',
+    'users_roles'=>'Users Roles',
+    'user_role'=>'User Role',
+    'done'=>'Action done successfully',
+    'user_have_this_role'=>'This user already have this role!',
 
     # notifications
     'read_all_notis'=>'Read all notifications',

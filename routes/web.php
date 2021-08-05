@@ -51,7 +51,10 @@ Route::group(
             Route::get('/', 'HomeController@index')->name('home');
             Route::get('/home', 'HomeController@index')->name('home');
 
+            ######################### Roles #########################
             Route::resource('roles', 'RoleController');
+            Route::get('user/role', 'RoleController@userRoleIndex')->name('user.role.index');
+            Route::post('user/role', 'RoleController@userRoleCreateUpdate')->name('user.role.createUpdate');
 
             ######################### Brands #########################
             Route::resource('brands', 'BrandController');
@@ -69,10 +72,10 @@ Route::group(
             ######################### App Settings #########################
             Route::resource('appsettings', 'AppSettingController');
 
-            ######################### Stores #########################
+            ######################### Stores Settings #########################
             Route::resource('stores', 'StoreController');
 
-            ######################### Stores #########################
+            ######################### Areas #########################
             Route::resource('areas', 'AreaController');
             Route::get('sub/areas', 'AreaController@subAreas')->name('subarea');
 

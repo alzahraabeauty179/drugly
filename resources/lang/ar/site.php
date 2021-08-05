@@ -67,6 +67,9 @@ return [
     'new_password_confirmation'=>'تاكيد كلمة السر الجديدة',
     'cancel'=>'اغلاق',
     'save'=>'حفظ',
+    'set_store_settings'=>'من فضلك ، قم بتعيين إعدادات الموقع الاليكتروني لمتجرك أولاً! </br>
+    ستجده في صفحة ملفك الشخصي.',
+    'only_for_stores' => 'يستخدم فقط من قبل حسابات المخازن!',
     'update_site_information'=>'تحديث بيانات الموقع الاليكتروني',
     'update_site_information_hint'=>'قم بتحديث بيانات موقعك الاليكتروني بكل سهولة.',
     'contact_information'=>'بيانات التواصل',
@@ -93,10 +96,17 @@ return [
     'role' =>'الادارة',
     'create'=>'أضافة',
     'appsettings'=>'إعدادات التطبيق',
+    'done'=>'تمت العملية بنجاح',
+    'user_have_this_role'=>'هذا المستخدم لدية هذه الصالحة بالفعل!',
 
     # app settings
     'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
     'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
+
+    # Roles
+    'stores' => 'إعدادات المخازن',
+    'users_roles'=>'صلاحيات المستخدميين',
+    'user_role'=>'صلاحية المستخدم',
 
     # notifications
     'read_all_notis'   =>'أقرء جميع الأشعارات',

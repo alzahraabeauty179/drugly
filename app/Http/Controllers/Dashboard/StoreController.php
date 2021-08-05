@@ -62,10 +62,10 @@ class StoreController extends BackEndController
         }
 
         $setting = $this->model->create($request_data);
-        User::update(['store_id'=>$setting->id]);
+        User::where('id', auth()->user()->id)->update(['store_id'=>$setting->id]);
 
         session()->flash('success', __('site.website_info_added_successfully'));
-
+        dd('hi');
         return redirect()->back();
     }
 

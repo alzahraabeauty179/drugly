@@ -166,7 +166,7 @@
                                     @if( auth()->user()->type == "super_admin" )
                                         action="{{ route('dashboard.appsettings.update', [ 'appsetting' => $app_settings->id ]) }}"
                                     @else
-                                        action="{{ route('dashboard.stores.update', [ 'appsetting' => $app_settings->id ]) }}"
+                                        action="{{ route('dashboard.stores.update', [ 'store' => $app_settings->id ]) }}"
                                     @endif
                                 @endif
                         >

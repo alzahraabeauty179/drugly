@@ -40,7 +40,7 @@ class BrandDataTable extends DataTable
             // })
             ->addColumn('logo', function ($query) {
                 return '<image src="'.$query->image_path.'" width="40" height="40" />';
-            })->rawColumns(['logo', 'action'])
+            })->rawColumns(['name', 'logo', 'action'])
             ->editColumn('created_at', function ($query) {
                 return $query->created_at->diffForHumans();
             })

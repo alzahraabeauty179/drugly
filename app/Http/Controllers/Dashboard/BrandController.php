@@ -26,6 +26,11 @@ class BrandController extends BackEndDatatableController
      */
     public function store(Request $request)
     {
+        if( is_null(auth()->user()->store_id) )
+        {
+            auth()->user()->type == "super_admin"?  session()->flash('error', __('site.only_for_stores')) : session()->flash('error', __('site.set_store_settings'));
+            return redirect()->back();
+        }
         // return $request;
         $rules = [
             'image' => 'nullable|image|max:2048',
@@ -41,8 +46,8 @@ class BrandController extends BackEndDatatableController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-        // store_id will change to setting_id cause now the suber admin is used that but the right store do
-        $request_data['store_id'] = auth()->user()->app_setting_id;
+
+        $request_data['store_id'] = auth()->user()->store_id;
         $request_data['created_by'] = auth()->user()->id;
 
         if ($request->image) {
