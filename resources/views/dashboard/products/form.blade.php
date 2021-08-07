@@ -32,6 +32,56 @@
     </div>
 @endforeach
 
+<div class="form-group col-md-6">
+    <div class="text-bold-600 font-medium-2">
+        @lang('site.categories')
+    </div>
+    <select class="select2 form-control @error($locale . ' .category_id') is-invalid @enderror"
+            id="category_id" name="category_id"
+    >
+        <optgroup label="@lang('site.select')">
+            @foreach(App\Models\Category::all() as $category)
+                <option value="{{$category->id}}"
+                    {{ isset($row) && $row->id == $category->id  ? 'selected' : '' }} >
+                    {{$category->name}}
+                </option>
+            @endforeach
+        </optgroup>
+    </select>
+
+    @error($locale . '.category_id')
+    <small class=" text text-danger" role="alert">
+        <strong>{{ $message }}</strong>
+    </small>
+    @enderror
+</div>
+
+
+
+<div class="form-group col-md-6">
+    <div class="text-bold-600 font-medium-2">
+        @lang('site.brands')
+    </div>
+    <select class="select2 form-control @error($locale . ' .brand_id') is-invalid @enderror"
+            id="brand_id" name="brand_id"
+    >
+        <optgroup label="@lang('site.select')">
+            @foreach(App\Models\Brand::all() as $brand)
+                <option value="{{$brand->id}}"
+                    {{ isset($row) && $row->id == $brand->id  ? 'selected' : '' }} >
+                    {{$brand->name}}
+                </option>
+            @endforeach
+        </optgroup>
+    </select>
+
+    @error($locale . '.brand_id')
+    <small class=" text text-danger" role="alert">
+        <strong>{{ $message }}</strong>
+    </small>
+    @enderror
+</div>
+
 <fieldset class="form-group col-md-12">
     <label for="basicInputFile">Upload Photo</label>
     <div class="custom-file">

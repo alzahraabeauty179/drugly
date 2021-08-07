@@ -79,6 +79,24 @@
             </li>
             @endif{{-- categories --}}
 
+            @if (auth()->user()->can('read-products'))
+            <li class="nav-item">
+                <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" href="{{route('dashboard.products.index')}}">@lang('site.all')
+                            @lang('site.products')</a>
+                    </li>
+                    @if (auth()->user()->can('create-products'))
+                    <li>
+                        <a class="menu-item" href="{{ route('dashboard.products.create') }}">@lang('site.add')
+                            @lang('site.category')</a>
+                    </li>
+                    @endif
+                </ul>
+            </li>
+            @endif{{-- products --}}
+
 
 
 
@@ -88,12 +106,12 @@
                 <a><i class="ft-folder"></i><span class="menu-title" data-i18n="">@lang('site.products')</span></a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{ route('dashboard.products.index', ) }}">@lang('site.products')</a>
+                        <a class="menu-item" href="{{ route('dashboard.products.index') }}">@lang('site.products')</a>
                     </li>
 
                     @if (auth()->user()->can('create-products'))
                     <li>
-                        <a class="menu-item" href="{{ route('dashboard.products.create', ) }}">@lang('site.add')
+                        <a class="menu-item" href="{{ route('dashboard.products.create') }}">@lang('site.add')
                             @lang('site.product')</a>
                     </li>
                     @endif
