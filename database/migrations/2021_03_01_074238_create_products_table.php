@@ -28,6 +28,8 @@ class CreateProductsTable extends Migration
             $table->double('amount');
             $table->double('unit_price');
 
+            $table->date('expiry_date');
+
             // $table->integer('parent_id')->nullable()->unsigned();
             // $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
 
