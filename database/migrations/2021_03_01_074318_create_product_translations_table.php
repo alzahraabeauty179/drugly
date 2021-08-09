@@ -22,9 +22,13 @@ class CreateProductTranslationsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
 
+            $table->string('unit');
+
+            $table->string('type');
+
             $table->unique(['product_id', 'locale']);
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

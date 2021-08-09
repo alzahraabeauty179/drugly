@@ -15,23 +15,21 @@ class ProductController extends BackEndDatatableController
         parent::__construct($model, $proDataTable);
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // return $request;
         $rules = [
             'image' => 'nullable|image|max:2048',
+            'amount' => 'required',
+            'unit_price' => 'required',
+            'expiry_date' => 'required',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => 'required|string|min:3|max:200',
                 $locale . '.description' => 'nullable|string|min:3|max:500',
+                $locale . '.unit' => 'required|string|min:2|max:200',
+                $locale . '.type' => 'required|string|min:2|max:200',
             ];
         }
         $request->validate($rules);
