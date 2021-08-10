@@ -18,11 +18,19 @@ return [
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
 
+	// Subscriptions
+	'subscriptions'=>'الأشتراكات',
+	'subscription'=>'أشتراك',
+	'for'=>'النوع',
+	'duriation'=>'المدة',
+	'/month'   =>'x / شهر',
+
     // Brand
     'brand'  => 'ماركة تجارية',
     'brands' => 'مركات تجارية',
     'update' => 'تحديث',
     'repeated_data'=>'تكرار البيانات ، إذا كان اسم موجودًا من قبل!',
+	'created_at'=>'تاريخ الأنشاء',
 
     //users
     'actions'=>'الأحداث',
@@ -274,6 +282,7 @@ return [
     //Noty Messages
     'add_successfuly'=>'تم اضافة الحقل بنجاح',
     'deleted_successfuly'=>'تم حذف الحقل بنجاح',
+	'deleted_successfully'=>'تم حذف الحقل بنجاح',
     'updated_successfuly'=>'تم تعديل الحقل بنجاح',
     'messageSent_successfully'=>'شكرا لتواصلك معنا !! تم ارسال الرسالة بنجاح',
     'get_in_touch'=>'ابق على تواصل معنا',

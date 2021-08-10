@@ -1,0 +1,419 @@
+# Webalizer V2.23-08 Incremental Data - 08/10/2021 04:22:47
+2021 8 10 4 22 47
+1520 1377 4 110 29 6 57523661 232 10 0 0 0
+1 2 464 8 10
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+4 4 1426656 1 4 1 0 0
+1514 1372 56094293 2 227 8 0 0
+2 1 2712 1 1 1 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+2 1 2712 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+2 2 164160 2 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+4 0 1075411 3 0 0
+170 132 6275899 18 0 0
+134 130 4192022 17 0 0
+285 263 9889792 67 0 0
+159 144 4026137 52 0 0
+41 30 5158921 12 0 0
+91 90 3595337 5 0 0
+100 85 4879002 4 0 0
+0 0 0 0 0 0
+4 4 1426656 4 0 0
+0 0 0 0 0 0
+464 438 15268919 32 0 0
+64 58 1568693 15 0 0
+0 0 0 0 0 0
+0
+0
+0
+1377
+0
+0
+0
+0
+0
+0
+0
+5
+35
+0
+31
+0
+0
+0
+0
+0
+2
+49
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+21
+0
+0
+0
+0
+0
+# -urls- 
+/public/dashboard_files/app-assets/vendors/js/timeline/horizontal-timeline.js
+0 25 0 84664 0 0 0 0
+/public/assets/libs/bootstrap/popper.min.js
+0 8 0 55565 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/minimal/_all.css
+0 12 0 17667 0 0 0 0
+/public/dashboard_files/app-assets/images/portrait/small/avatar-s-1.png
+1 26 0 175987 0 0 0 0
+/public/dashboard_files/app-assets/fonts/feather/fonts/feather2467.ttf
+0 16 0 878012 0 0 0 0
+/public/assets/images/hero-shape.png
+1 7 0 203670 0 0 0 0
+/public/uploads/app_settings_images/default.jpg
+1 1 0 36056 0 0 0 0
+/public/dashboard_files/app-assets/js/core/app-menu.min.js
+0 25 0 95662 0 0 0 0
+/public/assets/libs/website/main.js
+0 7 0 6115 0 0 0 0
+/public/assets/libs/fontawesome/webfonts/fa-solid-900.woff2
+0 7 0 549176 0 0 0 0
+/public/js/app.js
+0 4 0 1370567 0 0 0 0
+/public/dashboard_files/app-assets/images/portrait/small/avatar-s-6.png
+1 25 0 171239 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/gallery/photo-swipe/default-skin/default-skin.css
+0 13 0 43055 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/forms/toggle/switchery.min.js
+0 29 0 191038 0 0 0 0
+/public/dashboard_files/app-assets/js/scripts/customizer.min.js
+0 28 0 66032 0 0 0 0
+/public/dashboard_files/app-assets/fonts/feather/style.min.css
+0 12 0 27196 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js
+0 27 0 50947 0 0 0 0
+/public/en/dashboard/roles/2/edit
+0 1 0 8132 0 0 0 0
+/public/en/dashboard/user/role
+0 11 0 97427 0 1 0 0
+/public/assets/libs/website/main.css
+0 7 0 35284 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/app.min.css
+0 11 0 4192 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/pages/users.min.css
+0 11 0 6589 0 0 0 0
+/public/assets/libs/fontawesome/webfonts/fa-brands-400.woff2
+0 7 0 539151 0 0 0 0
+/public/_ignition/health-check
+0 2 0 524 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/vendors.min.js
+0 25 0 1665067 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/toggle/switchery.min.css
+0 13 0 8096 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/vendors.min.css
+0 14 0 6265 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe-ui-default.min.js
+0 26 0 106282 0 0 0 0
+/public/en/dashboard/products
+0 10 0 40764 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/core/colors/palette-gradient.min.css
+0 12 0 51039 0 0 0 0
+/public/dashboard_files/app-assets/js/core/app.min.js
+0 25 0 54305 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/forms/select/select2.full.min.js
+0 26 0 559134 0 0 0 0
+/public/assets/libs/fontawesome/all.min.css
+0 7 0 92183 0 0 0 0
+/public/assets/libs/animate-wow/wow.min.js
+0 8 0 25174 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/core/menu/menu-types/vertical-menu.min.css
+0 12 0 26187 0 0 0 0
+/public/
+0 14 0 71097 0 0 0 0
+/public/dashboard_files/app-assets/fonts/font-awesome/css/font-awesome.min.css
+0 12 0 1291072 0 0 0 0
+/public/en/dashboard/notifications/create
+0 3 0 23573 0 0 0 0
+/public/en/dashboard/home
+0 8 0 59027 0 0 0 0
+/public/dashboard_files/app-assets/images/logo/maoqe3-logo.png
+1 27 0 48598 0 0 0 0
+/public/en/dashboard/roles/create
+0 5 0 40355 2 0 0 0
+/public/en/dashboard/users/2/edit
+0 2 0 22310 0 0 0 0
+/public/dashboard_files/assets/css/style-rtl.css
+0 11 0 7128 0 0 0 0
+/public/dashboard_files/app-assets/images/ico/apple-icon-120.png
+1 20 0 123704 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/custom-rtl.min.css
+0 12 0 10599 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/bootstrap-extended.css
+0 11 0 121561 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe.min.js
+0 27 0 339280 0 0 0 0
+/public/login
+0 9 0 29729 0 1 0 0
+/public/dashboard_files/app-assets/css-rtl/core/colors/palette-climacon.css
+0 11 0 24706 0 0 0 0
+/public/dashboard_files/app-assets/js/scripts/gallery/photo-swipe/photoswipe-script.min.js
+0 27 0 35749 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/weather-icons/climacons.min.css
+0 13 0 57127 0 0 0 0
+/public/assets/libs/bootstrap/bootstrap.min.js
+0 8 0 129925 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/extensions/unslider-min.js
+0 26 0 66200 0 0 0 0
+/public/en/dashboard/subscriptions/1/edit
+0 2 0 16055 0 0 0 0
+/public/assets/images/hero-bg.jpg
+1 7 0 2398800 0 0 0 0
+/public/en/dashboard/areas/create
+0 3 0 22581 0 0 0 0
+/public/dashboard_files/app-assets/fonts/meteocons/style.min.css
+0 11 0 97317 0 0 0 0
+/public/assets/libs/magnific-popup/magnific-popup.css
+0 7 0 14854 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/gallery/masonry/masonry.pkgd.min.js
+0 26 0 199986 0 0 0 0
+/public/en/dashboard/roles/1/edit
+0 1 0 8108 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/extensions/unslider.css
+0 12 0 13912 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/icheck.css
+0 12 0 7244 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/charts/raphael-min.js
+0 26 0 843572 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/charts/morris.min.js
+0 26 0 269335 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/custom.css
+0 12 0 10455 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/line/_all.css
+0 12 0 24515 0 0 0 0
+/public/en/dashboard/subscriptions
+0 25 0 146700 1 0 0 0
+/public/assets/images/shapes/bg-intro-about.webp
+0 7 0 68163 0 0 0 0
+/public/assets/images/shapes/sec-shape.webp
+0 7 0 388343 0 0 0 0
+/public/en/dashboard/areas
+0 14 0 67550 0 0 0 0
+/public/assets/libs/bootstrap/bootstrap.min.css
+0 7 0 162413 0 0 0 0
+/public/dashboard_files/app-assets/fonts/feather/fonts/feather2467.woff
+0 2 0 117223 0 0 0 0
+/public/dashboard_files/app-assets/js/scripts/forms/select/form-select2.min.js
+0 28 0 54747 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/colors.css
+0 11 0 279950 0 0 0 0
+/public/assets/libs/animate-wow/animate.min.css
+0 7 0 42269 0 0 0 0
+/
+0 6 0 1590816 4 1 0 0
+/public/dashboard_files/app-assets/images/portrait/small/avatar-s-3.png
+1 25 0 171865 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/selects/select2.min.css
+0 14 0 32196 0 0 0 0
+/public/en/dashboard/brands
+0 6 0 28810 0 0 0 0
+/public/assets/libs/fontawesome/webfonts/fa-regular-400.woff
+0 1 0 16548 0 0 0 0
+/public/dashboard_files/app-assets/js/scripts/pages/dashboard-ecommerce.min.js
+0 28 0 32569 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/futurico/futurico.css
+0 12 0 9124 0 0 0 0
+/public/en/dashboard/subscriptions/create
+0 10 0 78259 0 1 0 0
+/public/dashboard_files/app-assets/js/scripts/tables/datatables/datatable-basic.min.js
+0 28 0 22490 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/square/_all.css
+0 12 0 17788 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/charts/morris.css
+0 12 0 7075 0 0 0 0
+/public/css/app.css
+0 4 0 103542 0 0 0 0
+/public/vendor/datatables/buttons.server-side.js
+0 15 0 32371 0 0 0 0
+/public/en/dashboard/notifications
+0 11 0 85159 0 0 0 0
+/public/en/dashboard/categories/create
+0 3 0 23221 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/gallery/photo-swipe/photoswipe.css
+0 13 0 21021 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/polaris/polaris.css
+0 12 0 9255 0 0 0 0
+/public/en/dashboard/categories
+0 5 0 14484 0 0 0 0
+/public/assets/libs/owlcarousel/owl.carousel.min.css
+0 7 0 9609 0 0 0 0
+/public/assets/libs/fontawesome/webfonts/fa-regular-400.woff2
+0 6 0 81179 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/components.css
+0 11 0 153142 0 0 0 0
+/public/assets/libs/jquery/jquery-3.6.0.min.js
+0 8 0 275540 0 0 0 0
+/public/dashboard_files/app-assets/fonts/simple-line-icons/style.min.css
+0 11 0 686708 0 0 0 0
+/public/dashboard_files/app-assets/images/portrait/small/avatar-s-2.png
+1 25 0 188698 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/forms/icheck/flat/_all.css
+0 12 0 16517 0 0 0 0
+/public/dashboard_files/app-assets/images/carousel/07.jpg
+1 1 0 92647 0 0 0 0
+/public/dashboard_files/app-assets/vendors/css/extensions/pace.css
+0 12 0 5980 0 0 0 0
+/public/en/dashboard/products/create
+0 1 0 7846 0 0 0 0
+/public/dashboard_files/app-assets/fonts/flag-icon-css/css/flag-icon.min.css
+0 12 0 40032 0 0 0 0
+/public/assets/libs/owlcarousel/owl.carousel.min.js
+0 8 0 93876 0 0 0 0
+/public/assets/libs/owlcarousel/owl.theme.default.min.css
+0 7 0 5481 0 0 0 0
+/public/en/dashboard/roles
+0 14 0 79705 0 0 0 0
+/public/dashboard_files/app-assets/css-rtl/bootstrap.css
+0 12 0 306075 0 0 0 0
+/public/dashboard_files/app-assets/vendors/js/tables/datatable/datatables.min.js
+0 25 0 25455816 0 0 0 0
+/public/assets/libs/magnific-popup/jquery.magnific-popup.min.js
+0 8 0 61341 0 0 0 0
+# End Of Table - urls
+# -sites- (monthly)
+88.99.244.11
+0 2 1 2712 1 1628569367 0 0
+/
+156.195.146.225
+0 1173 1061 45478206 6 1628547500 0 0
+/public/en/dashboard/subscriptions/create
+105.45.54.149
+0 341 311 10616087 2 1628519054 0 0
+/public/en/dashboard/categories
+105.43.14.212
+0 4 4 1426656 1 1628450548 0 0
+/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+88.99.244.11
+0 2 1 2712 1 1628569367 0 0
+/
+# End Of Table - sites (daily)
+# -referrers- 
+http://drugly.4soft-eg.com/public/en/dashboard/roles
+0 28
+http://drugly.4soft-eg.com/public/en/dashboard/subscriptions
+0 367
+http://drugly.4soft-eg.com/public/en/dashboard/areas
+0 30
+http://drugly.4soft-eg.com/public/en/dashboard/users/2/edit
+0 3
+http://drugly.4soft-eg.com/public/en/dashboard/user/role
+0 72
+http://drugly.4soft-eg.com/public/en/dashboard/home
+0 127
+- (Direct Request)
+0 40
+http://drugly.4soft-eg.com/
+0 1
+http://drugly.4soft-eg.com/public/
+0 168
+http://drugly.4soft-eg.com/public/en/dashboard/roles/create
+0 119
+http://drugly.4soft-eg.com/public/en/dashboard/products
+0 14
+http://drugly.4soft-eg.com/public/en/dashboard/subscriptions/1
+0 1
+http://drugly.4soft-eg.com/public/en/dashboard/categories/create
+0 3
+http://drugly.4soft-eg.com/public/en/dashboard/subscriptions/create
+0 184
+http://drugly.4soft-eg.com/public/en/dashboard/areas/create
+0 2
+http://drugly.4soft-eg.com/public/dashboard_files/app-assets/vendors/css/forms/icheck/icheck.css
+0 72
+http://drugly.4soft-eg.com/public/login
+0 23
+http://drugly.4soft-eg.com/public/en/dashboard/notifications/create
+0 4
+http://drugly.4soft-eg.com/public/dashboard_files/app-assets/fonts/feather/style.min.css
+0 18
+http://drugly.4soft-eg.com/public/en/dashboard/brands
+0 7
+http://drugly.4soft-eg.com/public/en/dashboard/notifications
+0 95
+http://drugly.4soft-eg.com/public/en/dashboard/roles/1/edit
+0 1
+http://drugly.4soft-eg.com/public/dashboard_files/app-assets/css-rtl/app.min.css
+0 33
+http://drugly.4soft-eg.com/public/assets/libs/website/main.css
+0 14
+http://drugly.4soft-eg.com/public/assets/libs/fontawesome/all.min.css
+0 21
+http://drugly.4soft-eg.com/public/dashboard_files/app-assets/css-rtl/vendors.min.css
+0 60
+http://drugly.4soft-eg.com/public/en/dashboard/roles/2/edit
+0 1
+http://drugly.4soft-eg.com/public/en/dashboard/categories
+0 6
+http://drugly.4soft-eg.com/public/en/dashboard/subscriptions/1/edit
+0 6
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 Edg/92.0.
+0 171
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36
+0 174
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36
+0 1
+WhatsApp/2.21.14.24 A
+0 2
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0
+0 1171
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36
+0 1
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

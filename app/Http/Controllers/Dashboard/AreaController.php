@@ -11,6 +11,9 @@ use DataTables;
 
 class AreaController extends BackEndDatatableController
 {
+	/**
+     * Constructor.
+     */
     public function __construct(Area $model, AreaDataTable $areaDataTable)
     {
         parent::__construct($model, $areaDataTable);

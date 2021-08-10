@@ -49,13 +49,17 @@
                                             <div class="text-bold-600 font-medium-2">
                                                 @lang('site.users')
                                             </div>
+                                        	@if( isset($row) )
+                                        		<span>{{ $row->user->name }}</span>
+                                        	@else
                                             <select class="select2 form-control" id="user_id" name="user_id">
                                                 @foreach($users as $user)
-                                                <option value="{{$user->id}}" {{ isset($row) && $row->user_id == $user->id  ? 'selected' : '' }}>
+                                                <option value="{{$user->id}}">
                                                     {{$user->name.' - '.__('site.' . $user->type) }}
                                                 </option>
                                                 @endforeach
                                             </select>
+                                        	@endif
                                         </div>
                                     </div>
 

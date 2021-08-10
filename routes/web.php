@@ -32,8 +32,8 @@ Auth::routes();
 Route::group(['middleware' => ['guest']], function () {
 
     Route::get('/', function () {
-        return view('auth.login');
-    });
+    	return view('home');
+	});
 });
 
 Route::post('/update-user-FCM', 'FireBaseController@updateUserFCM')->name('updateUserFCM');
@@ -90,6 +90,9 @@ Route::group(
 
             ######################### Stagnants #########################
             Route::resource('stagnants', 'StagnantsController');
+        
+        	######################### Subscriptions #########################
+            Route::resource('subscriptions', 'SubscriptionController');
 
 
         });

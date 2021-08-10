@@ -18,6 +18,8 @@ class CreateSubscriptionsTable extends Migration
             
             $table->decimal('price', 5,2);
             $table->integer('duriation');
+        
+			$table->enum('type', ['medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
 
             $table->tinyInteger('active')->default(1);
             $table->string('image')->nullable();

@@ -47,6 +47,13 @@
                 </ul>
             </li>
             @endif{{-- Roles --}}
+        
+        	@if (auth()->user()->can('read-subscriptions'))
+            <li class="nav-item"><a href="{{route('dashboard.subscriptions.index')}}"><i
+                        class="ft-cpu"></i><span class="menu-title"
+                        data-i18n="">@lang('site.subscriptions')</span></a>
+            </li>
+            @endif{{-- Subscriptions --}}
 
             @if (auth()->user()->can('read-notifications'))
             <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i

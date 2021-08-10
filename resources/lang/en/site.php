@@ -19,11 +19,19 @@ return [
     'description'=>'Description ',
     'language'=>'Language',
 
+	// Subscriptions
+	'subscriptions'=>'Subscriptions',
+	'subscription'=>'Subscription',
+	'for'=>'For',
+	'duriation'=>'Duriation',
+	'/month'   =>' x / Month',
+
     // Brand
     'brand'  => 'Brand',
     'brands' => 'Brands',
     'update' => 'Update',
     'repeated_data'=>'Repeated data, where is name exist before!',
+	'created_at'=>'Created At',
 
     'login'=>'Sign In',
     'register'=>'Sign Up',
@@ -349,6 +357,7 @@ return [
     //Noty Messages
     'add_successfuly'=>'Record added Successfully',
     'deleted_successfuly'=>'Record deleted Successfully',
+	'deleted_successfully'=>'Record deleted Successfully',
     'updated_successfuly'=>'Record updated Successfully',
     'messageSent_successfully'=>'Thank you !! Message Sent Successfully',
     'get_in_touch'=>'Get In Touch With Us',

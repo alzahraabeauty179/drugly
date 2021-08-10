@@ -62,7 +62,7 @@ class AppSettingController extends BackEndController
         }
 
         $setting = $this->model->create($request_data);
-        User::update(['app_setting_id'=>$setting->id]);
+        User::where('id', auth()->user()->id)->update(['app_setting_id'=>$setting->id]);
 
         session()->flash('success', __('site.website_info_added_successfully'));
 
