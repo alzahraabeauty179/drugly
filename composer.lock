@@ -982,16 +982,6 @@
                 "thumbnail",
                 "watermark"
             ],
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/interventionphp",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/Intervention",
-                    "type": "github"
-                }
-            ],
             "time": "2021-07-22T14:31:53+00:00"
         },
         {
@@ -1125,17 +1115,7 @@
                 "psr-17",
                 "psr-7"
             ],
-<<<<<<< HEAD
             "time": "2021-05-18T14:41:54+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-09-03T14:29:41+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
@@ -1185,17 +1165,7 @@
                 "laminas",
                 "zf"
             ],
-<<<<<<< HEAD
             "time": "2021-06-24T12:49:22+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
-                }
-            ],
-            "time": "2020-09-14T14:23:00+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "laravel/framework",
@@ -1612,103 +1582,49 @@
             "time": "2020-12-15T20:20:05+00:00"
         },
         {
-            "name": "lcobucci/clock",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lcobucci/clock.git",
-                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/clock/zipball/353d83fe2e6ae95745b16b3d911813df6a05bfb3",
-                "reference": "353d83fe2e6ae95745b16b3d911813df6a05bfb3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "infection/infection": "^0.17",
-                "lcobucci/coding-standard": "^6.0",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/php-code-coverage": "9.1.4",
-                "phpunit/phpunit": "9.3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Lcobucci\\Clock\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Luís Cobucci",
-                    "email": "lcobucci@gmail.com"
-                }
-            ],
-            "description": "Yet another clock abstraction",
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2020-08-27T18:56:02+00:00"
-        },
-        {
             "name": "lcobucci/jwt",
-            "version": "4.1.4",
+            "version": "3.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lcobucci/jwt.git",
-                "reference": "71cf170102c8371ccd933fa4df6252086d144de6"
+                "reference": "511629a54465e89a31d3d7e4cf0935feab8b14c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/71cf170102c8371ccd933fa4df6252086d144de6",
-                "reference": "71cf170102c8371ccd933fa4df6252086d144de6",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/511629a54465e89a31d3d7e4cf0935feab8b14c1",
+                "reference": "511629a54465e89a31d3d7e4cf0935feab8b14c1",
                 "shasum": ""
             },
             "require": {
-                "ext-hash": "*",
-                "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-openssl": "*",
-                "ext-sodium": "*",
-                "lcobucci/clock": "^2.0",
-                "php": "^7.4 || ^8.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
-                "infection/infection": "^0.21",
-                "lcobucci/coding-standard": "^6.0",
-                "mikey179/vfsstream": "^1.6.7",
-                "phpbench/phpbench": "^1.0@alpha",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^0.12",
-                "phpstan/phpstan-deprecation-rules": "^0.12",
-                "phpstan/phpstan-phpunit": "^0.12",
-                "phpstan/phpstan-strict-rules": "^0.12",
-                "phpunit/php-invoker": "^3.1",
-                "phpunit/phpunit": "^9.5"
+                "mikey179/vfsstream": "~1.5",
+                "phpmd/phpmd": "~2.2",
+                "phpunit/php-invoker": "~1.1",
+                "phpunit/phpunit": "^5.7 || ^7.3",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "suggest": {
+                "lcobucci/clock": "*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Lcobucci\\JWT\\": "src"
-                }
+                },
+                "files": [
+                    "compat/class-aliases.php",
+                    "compat/json-exception-polyfill.php",
+                    "compat/lcobucci-clock-polyfill.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1716,7 +1632,7 @@
             ],
             "authors": [
                 {
-                    "name": "Luís Cobucci",
+                    "name": "Luís Otávio Cobucci Oblonczyk",
                     "email": "lcobucci@gmail.com",
                     "role": "Developer"
                 }
@@ -1726,21 +1642,7 @@
                 "JWS",
                 "jwt"
             ],
-<<<<<<< HEAD
-            "funding": [
-                {
-                    "url": "https://github.com/lcobucci",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/lcobucci",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-03-23T23:53:08+00:00"
-=======
             "time": "2021-02-16T09:40:01+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "league/commonmark",
@@ -1809,35 +1711,6 @@
                 "md",
                 "parser"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://enjoy.gitstore.app/repositories/thephpleague/commonmark",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.colinodell.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.paypal.me/colinpodell/10.00",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/colinodell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/colinodell",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/league/commonmark",
-                    "type": "tidelift"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-07-17T17:13:23+00:00"
         },
         {
@@ -2091,12 +1964,6 @@
                 "secure",
                 "server"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/sephster",
-                    "type": "github"
-                }
-            ],
             "time": "2021-07-27T08:17:08+00:00"
         },
         {
@@ -2161,19 +2028,6 @@
                 "php",
                 "phpspreadsheet"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://laravel-excel.com/commercial-support",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/patrickbrouwers",
-                    "type": "github"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-07-08T10:11:21+00:00"
         },
         {
@@ -2235,15 +2089,6 @@
                 "stream",
                 "zip"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://opencollective.com/zipstream",
-                    "type": "open_collective"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2020-05-30T13:11:16+00:00"
         },
         {
@@ -2549,16 +2394,6 @@
                 "logging",
                 "psr-3"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/Seldaek",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/monolog/monolog",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-23T07:42:52+00:00"
         },
         {
@@ -2605,21 +2440,7 @@
             "keywords": [
                 "enum"
             ],
-<<<<<<< HEAD
             "time": "2021-07-05T08:18:36+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/mnapoli",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/myclabs/php-enum",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-11-14T18:14:52+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "nesbot/carbon",
@@ -2698,16 +2519,6 @@
                 "date",
                 "datetime",
                 "time"
-            ],
-            "funding": [
-                {
-                    "url": "https://opencollective.com/Carbon",
-                    "type": "open_collective"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-07-28T13:16:28+00:00"
         },
@@ -3738,16 +3549,6 @@
                 "queue",
                 "set"
             ],
-            "funding": [
-                {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ramsey/collection",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-08-06T03:41:06+00:00"
         },
         {
@@ -3831,21 +3632,7 @@
                 "identifier",
                 "uuid"
             ],
-<<<<<<< HEAD
-            "funding": [
-                {
-                    "url": "https://github.com/ramsey",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/ramsey/uuid",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-08-06T22:30:43+00:00"
-=======
-            "time": "2020-08-18T17:17:46+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "santigarcor/laratrust",
@@ -4053,20 +3840,6 @@
                 "console",
                 "terminal"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-27T19:10:22+00:00"
         },
         {
@@ -4116,20 +3889,6 @@
             ],
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-21T12:38:00+00:00"
         },
         {
@@ -4231,20 +3990,6 @@
             ],
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-23T15:55:36+00:00"
         },
         {
@@ -4313,20 +4058,6 @@
             ],
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-23T15:55:36+00:00"
         },
         {
@@ -4434,20 +4165,6 @@
             ],
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-23T15:54:19+00:00"
         },
         {
@@ -4565,20 +4282,6 @@
             ],
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-27T17:08:17+00:00"
         },
         {
@@ -4674,20 +4377,6 @@
             ],
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-29T07:06:27+00:00"
         },
         {
@@ -4753,20 +4442,6 @@
             "keywords": [
                 "mime",
                 "mime-type"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-07-21T12:40:44+00:00"
         },
@@ -4956,20 +4631,6 @@
                 "polyfill",
                 "portable",
                 "shim"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-05-27T12:26:48+00:00"
         },
@@ -5171,20 +4832,6 @@
                 "portable",
                 "shim"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-05-27T12:26:48+00:00"
         },
         {
@@ -5307,7 +4954,6 @@
                 "shim"
             ],
             "time": "2021-02-19T12:13:01+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "symfony/polyfill-php80",
@@ -5373,23 +5019,7 @@
                 "portable",
                 "shim"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-28T13:41:28+00:00"
-=======
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "symfony/polyfill-php81",
@@ -5451,20 +5081,6 @@
                 "portable",
                 "shim"
             ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-05-21T13:25:03+00:00"
         },
         {
@@ -5510,20 +5126,6 @@
             ],
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-23T15:54:19+00:00"
         },
         {
@@ -5593,20 +5195,6 @@
                 "http-message",
                 "psr-17",
                 "psr-7"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-07-27T17:25:39+00:00"
         },
@@ -5680,20 +5268,6 @@
                 "routing",
                 "uri",
                 "url"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-07-23T15:55:36+00:00"
         },
@@ -5901,20 +5475,6 @@
             ],
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
             "time": "2021-07-25T09:39:16+00:00"
         },
         {
@@ -6046,20 +5606,6 @@
             "keywords": [
                 "debug",
                 "dump"
-            ],
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
             ],
             "time": "2021-07-27T01:56:02+00:00"
         },
@@ -6286,19 +5832,6 @@
                 "jquery",
                 "laravel"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/yajra",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/yajra",
-                    "type": "patreon"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-07-01T02:53:11+00:00"
         },
         {
@@ -6359,19 +5892,6 @@
                 "jquery",
                 "laravel"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/yajra",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/yajra",
-                    "type": "patreon"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-06-20T12:32:31+00:00"
         },
         {
@@ -6443,19 +5963,6 @@
                 "jquery",
                 "laravel"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/yajra",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/yajra",
-                    "type": "patreon"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-06-28T01:24:17+00:00"
         }
     ],
@@ -6634,11 +6141,7 @@
                 "laravel",
                 "page"
             ],
-<<<<<<< HEAD
             "time": "2021-07-20T14:01:22+00:00"
-=======
-            "time": "2021-03-08T13:56:01+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "facade/ignition-contracts",
@@ -6687,11 +6190,7 @@
                 "flare",
                 "ignition"
             ],
-<<<<<<< HEAD
             "time": "2020-10-16T08:27:54+00:00"
-=======
-            "time": "2020-07-14T10:10:28+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "fakerphp/faker",
@@ -6813,15 +6312,6 @@
                 "throwable",
                 "whoops"
             ],
-<<<<<<< HEAD
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/denis-sokolov",
-                    "type": "github"
-                }
-            ],
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             "time": "2021-07-13T12:00:00+00:00"
         },
         {
@@ -6937,11 +6427,7 @@
                 "test double",
                 "testing"
             ],
-<<<<<<< HEAD
             "time": "2021-02-24T09:51:49+00:00"
-=======
-            "time": "2021-02-24T09:51:00+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "myclabs/deep-copy",
@@ -7438,17 +6924,7 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
             "time": "2021-03-28T07:26:59+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-07-26T12:20:09+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -7498,17 +6974,7 @@
                 "filesystem",
                 "iterator"
             ],
-<<<<<<< HEAD
             "time": "2020-09-28T05:57:25+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-07-19T06:46:01+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "phpunit/php-invoker",
@@ -7561,11 +7027,7 @@
             "keywords": [
                 "process"
             ],
-<<<<<<< HEAD
             "time": "2020-09-28T05:58:55+00:00"
-=======
-            "time": "2015-06-21T13:50:34+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "phpunit/php-text-template",
@@ -7612,17 +7074,7 @@
             "description": "Simple template engine.",
             "homepage": "https://github.com/sebastianbergmann/php-text-template/",
             "keywords": [
-<<<<<<< HEAD
                 "template"
-=======
-                "timer"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             ],
             "time": "2020-10-26T05:33:50+00:00"
         },
@@ -7671,17 +7123,7 @@
             "description": "Utility class for timing",
             "homepage": "https://github.com/sebastianbergmann/php-timer/",
             "keywords": [
-<<<<<<< HEAD
                 "timer"
-=======
-                "tokenizer"
-            ],
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
             ],
             "time": "2020-10-26T13:16:10+00:00"
         },
@@ -7772,16 +7214,6 @@
                 "testing",
                 "xunit"
             ],
-            "funding": [
-                {
-                    "url": "https://phpunit.de/donate.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
             "time": "2021-07-31T15:17:34+00:00"
         },
         {
@@ -7826,7 +7258,6 @@
                     "role": "lead"
                 }
             ],
-<<<<<<< HEAD
             "description": "Library for parsing CLI options",
             "homepage": "https://github.com/sebastianbergmann/cli-parser",
             "time": "2020-09-28T06:08:49+00:00"
@@ -7867,17 +7298,6 @@
                 "BSD-3-Clause"
             ],
             "authors": [
-=======
-            "description": "Server side syntax highlighter that supports 185 languages. It's a PHP port of highlight.js",
-            "keywords": [
-                "code",
-                "highlight",
-                "highlight.js",
-                "highlight.php",
-                "syntax"
-            ],
-            "funding": [
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
                 {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de",
@@ -7931,17 +7351,7 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-<<<<<<< HEAD
             "time": "2020-09-28T05:30:19+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T08:15:22+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/comparator",
@@ -8005,7 +7415,6 @@
                 "compare",
                 "equality"
             ],
-<<<<<<< HEAD
             "time": "2020-10-26T15:49:45+00:00"
         },
         {
@@ -8045,9 +7454,6 @@
                 "BSD-3-Clause"
             ],
             "authors": [
-=======
-            "funding": [
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
                 {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de",
@@ -8112,17 +7518,7 @@
                 "unidiff",
                 "unified diff"
             ],
-<<<<<<< HEAD
             "time": "2020-10-26T13:10:38+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:59:04+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/environment",
@@ -8175,17 +7571,7 @@
                 "environment",
                 "hhvm"
             ],
-<<<<<<< HEAD
             "time": "2020-09-28T05:52:38+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:53:42+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/exporter",
@@ -8252,17 +7638,7 @@
                 "export",
                 "exporter"
             ],
-<<<<<<< HEAD
             "time": "2020-09-28T05:24:23+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:47:53+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/global-state",
@@ -8316,7 +7692,6 @@
             "keywords": [
                 "global state"
             ],
-<<<<<<< HEAD
             "time": "2021-06-11T13:31:12+00:00"
         },
         {
@@ -8356,9 +7731,6 @@
                 "BSD-3-Clause"
             ],
             "authors": [
-=======
-            "funding": [
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
                 {
                     "name": "Sebastian Bergmann",
                     "email": "sebastian@phpunit.de",
@@ -8414,17 +7786,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-<<<<<<< HEAD
             "time": "2020-10-26T13:12:34+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:40:27+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/object-reflector",
@@ -8469,17 +7831,7 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
-<<<<<<< HEAD
             "time": "2020-10-26T13:14:26+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:37:18+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/recursion-context",
@@ -8532,17 +7884,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-<<<<<<< HEAD
             "time": "2020-10-26T13:17:30+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:34:24+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/resource-operations",
@@ -8587,17 +7929,7 @@
             ],
             "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
-<<<<<<< HEAD
             "time": "2020-09-28T06:45:17+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:30:19+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/type",
@@ -8643,17 +7975,7 @@
             ],
             "description": "Collection of value objects that represent the types of the PHP type system",
             "homepage": "https://github.com/sebastianbergmann/type",
-<<<<<<< HEAD
             "time": "2021-06-15T12:49:02+00:00"
-=======
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2020-11-30T07:25:11+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "sebastian/version",
@@ -8696,11 +8018,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-<<<<<<< HEAD
             "time": "2020-09-28T06:39:44+00:00"
-=======
-            "time": "2016-10-03T07:35:21+00:00"
->>>>>>> 8ffc611f2d5e7d2b344ec9440a142175c22089b4
         },
         {
             "name": "theseer/tokenizer",
@@ -8740,12 +8058,6 @@
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
-            "funding": [
-                {
-                    "url": "https://github.com/theseer",
-                    "type": "github"
-                }
-            ],
             "time": "2021-07-28T10:34:58+00:00"
         },
         {
@@ -8811,6 +8123,5 @@
     "platform": {
         "php": "^7.2.5|^8.0"
     },
-    "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "platform-dev": []
 }
