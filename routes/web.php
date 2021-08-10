@@ -82,6 +82,7 @@ Route::group(
 
             ######################### Products #########################
             Route::resource('products', 'ProductController');
+            Route::get('product', 'ProductController@downloadSheet')->name('download.sheetExcel');
 
             ######################### Notifications #########################
             Route::get('/test', 'NotificationController@store')->name('testNotifies');

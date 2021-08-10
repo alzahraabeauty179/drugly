@@ -4,7 +4,7 @@
 <div class="form-group col-md-12 mb-2">
     <div class="form-group">
         <label class="bmd-label-floating">@lang('site.name')</label>
-        <input type="text" class="form-control @error('name') is-invalid
+        <input type="text"  class="form-control @error('name') is-invalid
             @enderror " name="name" value="{{ isset($row) ? $row->name : old('name') }}">
 
         @error('name')
