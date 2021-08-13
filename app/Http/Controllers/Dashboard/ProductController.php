@@ -6,6 +6,7 @@ use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Imports\ProductsImport;
 use App\Models\Product;
+use App\Models\ProductLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\UsersImport;
@@ -42,13 +43,18 @@ class ProductController extends BackEndDatatableController
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
+        $log_data = $request->except(['_token', 'image','type','active','owner_id','category_id','brand_id','name','description']);
         // $request_data['owner_id'] = auth()->user()->id;
 
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
 
-        $this->model->create($request_data);
+        $product=$this->model->create($request_data);
+
+        $log_data['product_id']=$product->id;
+        ProductLog::create($log_data);
+
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
