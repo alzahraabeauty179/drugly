@@ -18,6 +18,10 @@ class CreateProductLogTranslationsTable extends Migration
 
             $table->integer('product_log_id')->unsigned();
             $table->string('locale')->index();
+            
+            $table->string('name');
+            $table->text('description')->nullable();
+
 
             $table->string('unit');
 

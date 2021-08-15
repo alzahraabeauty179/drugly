@@ -77,7 +77,8 @@
                             <div class="card-header">
                                 <h4 class="card-title text-capitlaize" id="file-repeater"><i
                                         class="ft-plus"></i>@lang('site.add') @lang('site.'.$module_name_singular)</h4>
-                                <a href="{{ route('dashboard.download.sheetExcel', ) }}" class="btn btn-info"> Download Excel </a>
+                                <a href="{{ route('dashboard.download.sheetExcel', ) }}" class="btn btn-info"> Download
+                                    Excel </a>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -94,7 +95,31 @@
                                         action="{{ route('dashboard.'.$module_name_plural.'.store') }}">
                                         @method('POST')
                                         @csrf
+                                        <div class="form-group col-md-4">
+                                            <div class="text-bold-600 font-medium-2">
+                                                @lang('site.categories')
+                                            </div>
+                                            <select
+                                                class="select2 form-control @error('category_id') is-invalid @enderror"
+                                                id="category_id" name="category_id" required>
+                                                <optgroup label="@lang('site.select')">
+                                                    @foreach(App\Models\Category::all() as $category)
+                                                    <option value="{{$category->id}}"
+                                                        {{ isset($row) && $row->id == $category->id  ? 'selected' : '' }}>
+                                                        {{$category->name}}
+                                                    </option>
+                                                    @endforeach
+                                                </optgroup>
+                                            </select>
 
+                                            @error('category_id')
+                                            <small class=" text text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </small>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-2"></div>
                                         <fieldset class="form-group col-md-6">
                                             <label for="basicInputFile">Upload Excel</label>
                                             <div class="custom-file">

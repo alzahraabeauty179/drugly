@@ -12,7 +12,7 @@ class ProductLog extends Model implements TranslatableContract
 {
     use Translatable;
 
-    public $translatedAttributes = ['unit'];
+    public $translatedAttributes = ['name', 'description', 'unit', 'type'];
 
     protected $guarded = [];
 
