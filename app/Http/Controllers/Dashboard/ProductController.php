@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\DataTables\ProductDataTable;
+use App\Exports\ProductsExport;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Imports\ProductsCollectionImport;
 use App\Imports\ProductsImport;
@@ -130,11 +131,25 @@ class ProductController extends BackEndDatatableController
     }
 
 
-    public function downloadSheet()
+    public function downloadNewSheet()
     {
-        $file = Storage::disk('public_uploads')->download('\sheetExcel/products.xlsx');
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/newProducts.xlsx');
 
         return $file;
+    }
+    
+    public function downloadUpdateSheet()
+    {
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/updateProducts.xlsx');
+
+        return $file;
+    }
+
+    public function exportWithCategory(Request $request){
+        // return $request;
+        // $expor = new ProductsExport($request->category_id);
+        // return $expor->query();
+        return (new ProductsExport($request->category_id));
     }
 
 
