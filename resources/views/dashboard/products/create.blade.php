@@ -177,6 +177,12 @@
                                         action="{{ route('dashboard.'.$module_name_plural.'.store') }}">
                                         @method('POST')
                                         @csrf
+
+                                        <div class="col-md-12 form-group">
+                                            <input type="submit" class="btn btn-info" value="download Excel" formmethod="POST" formaction="{{ route('dashboard.proCat.sheetExcel') }}">
+                                            <input type="hidden" name="update_sheet" value =1>
+                                        </div>
+
                                         <div class="form-group col-md-4">
                                             <div class="text-bold-600 font-medium-2">
                                                 @lang('site.categories')
@@ -222,11 +228,8 @@
                                             <button data-repeater-create="" class="btn btn-primary">
                                                 <i class="ft-plus"></i> @lang('site.Upload')
                                             </button>
-
-                                            <input type="submit" value="download Excel" formmethod="POST" formaction="{{ route('dashboard.proCat.sheetExcel') }}">
                                         
                                         </div>
-
                                     </form>
                                 </div>
                             </div>

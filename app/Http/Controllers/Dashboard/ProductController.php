@@ -7,6 +7,7 @@ use App\Exports\ProductsExport;
 use App\Http\Controllers\Dashboard\BackEndController;
 use App\Imports\ProductsCollectionImport;
 use App\Imports\ProductsImport;
+use App\Imports\ProductsUpdateImport;
 use App\Models\Product;
 use App\Models\ProductLog;
 use Illuminate\Http\Request;
@@ -23,14 +24,21 @@ class ProductController extends BackEndDatatableController
     public function store(Request $request)
     {
         // return $request;
-        if ($request->file()) {
-
+        if ($request->file() && $request->update_sheet == 1) {
+            // return $this->storeFromExcel($request);
+            Excel::import(new ProductsUpdateImport($request->category_id), $request->excel);
+            // Excel::import(new ProductsImport, $request->excel);
+            session()->flash('success', __('site.updated_successfuly'));
+            return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+        }
+        elseif ($request->file()) {
             // return $this->storeFromExcel($request);
             Excel::import(new ProductsCollectionImport($request->category_id), $request->excel);
             // Excel::import(new ProductsImport, $request->excel);
             session()->flash('success', __('site.add_successfuly'));
             return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
         }
+       
 
         $rules = [
             'image' => 'nullable|image|max:2048',
@@ -87,6 +95,7 @@ class ProductController extends BackEndDatatableController
      */
     public function update(Request $request, $id)
     {
+
         $product = $this->model->findOrFail($id);
         $rules = [
             'image' => 'nullable|image|max:2000',
