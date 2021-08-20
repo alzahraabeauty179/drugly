@@ -32,8 +32,7 @@ class ProductsUpdateImport implements ToCollection
      */
     public function collection(Collection $rows)
     {
-        // $this->validate($rows);
-
+        // $this->validat($rows);
         foreach ($rows as $index => $row) {
             if ($index <> 0) {
                 $product = Product::updateOrCreate(
@@ -77,7 +76,7 @@ class ProductsUpdateImport implements ToCollection
         }
     }
 
-    public function validate($rows)
+    public function validat($rows)
     {
         Validator::make($rows->toArray(), [
             '*.0'  => ['nullable',  Rule::exists('products')->where(function ($query) {
@@ -85,8 +84,8 @@ class ProductsUpdateImport implements ToCollection
             }),],
             '*.1'  => 'required',
             '*.2'  => 'required',
-            '*.3'  => 'required|integer|between:1,2',
-            '*.5'  => 'required|min',
+            '*.3'  => 'required|min',
+            '*.5'  => 'required|integer|between:1,2',
             '*.6'  => 'required|max:200',
             '*.7'  => 'required|max:500',
             '*.8'  => 'required',

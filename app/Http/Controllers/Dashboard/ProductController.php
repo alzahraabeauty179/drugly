@@ -26,6 +26,7 @@ class ProductController extends BackEndDatatableController
         // return $request;
         if ($request->file() && $request->update_sheet == 1) {
             // return $this->storeFromExcel($request);
+
             Excel::import(new ProductsUpdateImport($request->category_id), $request->excel);
             // Excel::import(new ProductsImport, $request->excel);
             session()->flash('success', __('site.updated_successfuly'));

@@ -150,9 +150,9 @@
                 </div>
             </section>
         </div>
-         {{-- end add from excel sheet and download excel temp for upload it  --}}
+        {{-- end add from excel sheet and download excel temp for upload it  --}}
 
-          {{-- start update from excel sheet and download excel temp for  this category  --}}
+        {{-- start update from excel sheet and download excel temp for  this category  --}}
         <div class="content-body">
             <section id="form-control-repeater">
                 <div class="row">
@@ -160,7 +160,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title text-capitlaize" id="file-repeater"><i
-                                        class="ft-plus"></i>@lang('site.update') @lang('site.'.$module_name_singular)</h4>
+                                        class="ft-plus"></i>@lang('site.update') @lang('site.'.$module_name_singular)
+                                </h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -171,6 +172,23 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            @if(count($errors->getMessages()) > 0)
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong>Validation Errors:</strong>
+                                <ul>
+                                    @foreach($errors->getMessages() as $errorMessages)
+                                        @foreach($errorMessages as $errorMessage)
+                                            <li>
+                                                {{ $errorMessage }}
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            </li>
+                                        @endforeach
+                                    @endforeach
+                                </ul>
+                            </div>                           
+                            @endif
+
                             <div class="card-content collapse show">
                                 <div class="card-body">
                                     <form class="form row" enctype="multipart/form-data" method="POST"
@@ -179,8 +197,10 @@
                                         @csrf
 
                                         <div class="col-md-12 form-group">
-                                            <input type="submit" class="btn btn-info" value="download Excel" formmethod="POST" formaction="{{ route('dashboard.proCat.sheetExcel') }}">
-                                            <input type="hidden" name="update_sheet" value =1>
+                                            <input type="submit" class="btn btn-info" value="download Excel"
+                                                formmethod="POST"
+                                                formaction="{{ route('dashboard.proCat.sheetExcel') }}">
+                                            <input type="hidden" name="update_sheet" value=1>
                                         </div>
 
                                         <div class="form-group col-md-4">
@@ -211,7 +231,7 @@
                                         <fieldset class="form-group col-md-6">
                                             <label for="basicInputFile">Upload Excel</label>
                                             <div class="custom-file">
-                                                <input type="file" name="excel" 
+                                                <input type="file" name="excel"
                                                     class="custom-file-input @error('excel') is-invalid @enderror "
                                                     id="inputGroupFile01">
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose
@@ -228,7 +248,7 @@
                                             <button data-repeater-create="" class="btn btn-primary">
                                                 <i class="ft-plus"></i> @lang('site.Upload')
                                             </button>
-                                        
+
                                         </div>
                                     </form>
                                 </div>
@@ -238,7 +258,7 @@
                 </div>
             </section>
         </div>
-         {{-- end add from excel sheet and download excel temp for this category  --}}
+        {{-- end add from excel sheet and download excel temp for this category  --}}
 
     </div>
 </div>
