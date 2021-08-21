@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
+use App\Models\Log;
+
 class BackEndController extends Controller
 {
 
@@ -91,5 +93,25 @@ class BackEndController extends Controller
             $constraint->aspectRatio();
         })->save(public_path('uploads/' . $path . '/' . $imageName));
         return $imageName;
+    }
+
+	/**
+	 * Add log for each model's add or edit actions.
+	 * 	 
+	 * @pram array $date
+	 * 
+	 * @param string table name log_type
+	 * @param int record id log_id
+	 * @param string message translated in site lang files
+	 * @param int user id action_by
+	 */
+	protected function addLog($data)
+    {
+    	Log::create([
+        	'log_type'=>$data['log_type'],
+        	'log_id'=>$data['log_id'],
+        	'message'=>$data['message'],
+        	'action_by'=>$data['action_by'],
+        ]);
     }
 }

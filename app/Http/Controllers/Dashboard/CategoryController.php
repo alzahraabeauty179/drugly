@@ -59,7 +59,16 @@ class CategoryController extends BackEndDatatableController
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
 
-        $this->model->create($request_data);
+        $category = $this->model->create($request_data);
+    
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $category->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_added',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
+    
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
@@ -111,25 +120,16 @@ class CategoryController extends BackEndDatatableController
         } //end of if
 
         $category->update($request_data);
+    	
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $category->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_updated',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
+    
         session()->flash('success', __('site.updated_successfuly'));
-        return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id, Request $request)
-    {
-        $category = $this->model->findOrFail($id);
-        if ($category->image != null) {
-            Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
-        }
-        $category->delete();
-        session()->flash('success', __('site.deleted_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
 

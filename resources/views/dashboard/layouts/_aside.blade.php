@@ -9,13 +9,18 @@
                     data-original-title="General"></i>
             </li>{{-- General --}}
 
-            <li class="nav-item">
+			<!-- <li class="nav-item">
                 <a href="index.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
                 <ul class="menu-content">
                     <li class="active"><a class="menu-item" href="#">Setting</a></li>
                     <li><a class="menu-item" href="#">Soon</a></li>
                     <li><a class="menu-item" href="#">Soon</a></li>
                 </ul>
+            </li> -->
+        	
+        	<li class="nav-item"><a href="{{route('dashboard.home')}}"><i
+                        class="ft-home"></i><span class="menu-title"
+                        data-i18n="">@lang('site.dashboard')</span></a>
             </li>{{-- Dashboard --}}
 
             <li class="navigation-header">
@@ -23,13 +28,6 @@
                 <i class="ft-minus" data-toggle="tooltip" data-placement="left"
                     data-original-title="@lang('site.' . auth()->user()->type)"></i>
             </li>{{-- Account Type --}}
-
-            @if (auth()->user()->can('read-areas'))
-            <li class="nav-item"><a href="{{route('dashboard.areas.index')}}"><i
-                        class="ft-globe"></i><span class="menu-title"
-                        data-i18n="">@lang('site.areas')</span></a>
-            </li>
-            @endif{{-- Areas --}}
 
             @if (auth()->user()->can('read-roles'))
             <li class="nav-item">
@@ -48,12 +46,26 @@
             </li>
             @endif{{-- Roles --}}
         
+        	@if (auth()->user()->can('read-areas'))
+            <li class="nav-item"><a href="{{route('dashboard.areas.index')}}"><i
+                        class="ft-globe"></i><span class="menu-title"
+                        data-i18n="">@lang('site.areas')</span></a>
+            </li>
+            @endif{{-- Areas --}}
+        
         	@if (auth()->user()->can('read-subscriptions'))
             <li class="nav-item"><a href="{{route('dashboard.subscriptions.index')}}"><i
                         class="ft-cpu"></i><span class="menu-title"
                         data-i18n="">@lang('site.subscriptions')</span></a>
             </li>
             @endif{{-- Subscriptions --}}
+        
+        	@if (auth()->user()->can('read-subscribers'))
+            <li class="nav-item"><a href="{{route('dashboard.subscribers.index')}}"><i
+                        class="ft-airplay"></i><span class="menu-title"
+                        data-i18n="">@lang('site.subscribers')</span></a>
+            </li>
+            @endif{{-- subscribers --}}
 
             @if (auth()->user()->can('read-notifications'))
             <li class="nav-item"><a href="{{route('dashboard.notifications.index')}}"><i
@@ -61,6 +73,13 @@
                         data-i18n="">@lang('site.announcements')</span></a>
             </li>
             @endif{{-- Notifications --}}
+        
+        	@if (auth()->user()->can('read-advertisements'))
+            <li class="nav-item"><a href="{{route('dashboard.advertisements.index')}}"><i
+                        class="ft-tv"></i><span class="menu-title"
+                        data-i18n="">@lang('site.advertisements')</span></a>
+            </li>
+            @endif{{-- Advertisement --}}
 
             @if (auth()->user()->can('read-brands'))
             <li class="nav-item"><a href="{{route('dashboard.brands.index')}}"><i class="ft-bold"></i><span
@@ -123,47 +142,21 @@
             </li>
             @endif{{-- stagnants --}}
 
-            <li class="nav-item">
-                <a><i class="ft-tag"></i><span class="menu-title" data-i18n="">Trademarks</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="trademarks.html">All Trademark</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="add-trademark.html">Add Trademark</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Trademarks --}}
-
-            <li class="nav-item">
-                <a><i class="ft-shopping-cart"></i><span class="menu-title" data-i18n="">Products</span></a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="products.html">All Product</a></li>
-                    <li>
-                        <a class="menu-item" href="add-product.html">Add Product</a>
-                    </li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Products --}}
-
-            <li class="nav-item">
+            {{--<li class="nav-item">
                 <a><i class="fa fa-money"></i><span class="menu-title" data-i18n="">Offers prices</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#">Soon</a></li>
                     <li><a class="menu-item" href="#">Soon</a></li>
                     <li><a class="menu-item" href="#">Soon</a></li>
                 </ul>
-            </li>{{-- Offers prices --}}
+            </li> Offers prices --}}
+        
+        	@if (auth()->user()->can('read-logs'))
+            <li class="nav-item"><a href="{{route('dashboard.logs.index')}}"><i class="ft-package"></i><span
+                        class="menu-title" data-i18n="">@lang('site.logs')</span></a>
+            </li>
+            @endif{{-- Logs --}}
 
-            <li class="nav-item">
-                <a><i class="ft-activity"></i><span class="menu-title" data-i18n="">Consulting</span></a>
-                <ul class="menu-content">
-                    <li><a class="menu-item" href="#">All Consulting</a></li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                    <li><a class="menu-item" href="#">Soon</a></li>
-                </ul>
-            </li>{{-- Consulting --}}
         </ul>
     </div>
 </div>

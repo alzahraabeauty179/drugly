@@ -22,10 +22,18 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
-    protected $append = ['image_path'];
+    protected $append = ['image_path', 'national_id_image_path', 'license_image_path'];
 
     public function getImagePathAttribute(){
         return $this->image != null ? asset('uploads/users_images/'.$this->image) :  asset('dashboard_files/app-assets/images/portrait/small/avatar-s-1.png') ;
+    }
+
+	public function getNationalIdImagePathAttribute(){
+        return $this->national_id_image != null ? asset('uploads/users_images/'.$this->national_id_image) :  asset('dashboard_files/app-assets/images/carousel/06.jpg') ;
+    }
+
+	public function getLicenseImagePathAttribute(){
+        return $this->license_image != null ? asset('uploads/users_images/'.$this->license_image) :  asset('dashboard_files/app-assets/images/carousel/06.jpg') ;
     }
 
     /**

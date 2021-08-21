@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateAdvertisementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('advertisements', function (Blueprint $table) {
             $table->increments('id');
             
-            $table->decimal('price', 5,2);
-            $table->integer('duriation');
+            $table->date('end_date');
+        	$table->enum('display_method', ['horizontal', 'vertical', 'longitudinal'])->default('horizontal');
+			
+        	$table->integer('owner_id')->unsigned()->nullable();
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         
-			$table->enum('type', ['medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
-
-            $table->tinyInteger('active')->default(1);
-
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
+            $table->tinyInteger('active')->default(1);
+            $table->string('image')->nullable();
 
             $table->timestamps();
         });
@@ -37,6 +39,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('advertisements');
     }
 }

@@ -50,7 +50,8 @@ class AreaController extends BackEndDatatableController
             $rules += [
                 $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('area_translations', 'name')->where(function ($query) {
                     $query->join('areas', function($j){ 
-                        return $_REQUEST['parent_id']  != ''? $j->where('parent_id', '!=', $_REQUEST['parent_id']) : $j;
+                    	return $j->where('parent_id', '!=', $_REQUEST['parent_id']);
+                        // return $_REQUEST['parent_id'] != ''? $j->where('parent_id', $_REQUEST['parent_id']) : $j;
                     });
                 }),],
             ];

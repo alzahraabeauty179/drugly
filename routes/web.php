@@ -16,16 +16,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-
-
-
-
 // define("PAGINATE_NUMBER", 6);
 // date_default_timezone_set('Africa/Cairo');
-
 
 Auth::routes();
 
@@ -34,6 +26,9 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('/', function () {
     	return view('home');
 	});
+
+	Route::post('user/register', 'Dashboard\UserController@store')->name('user.store');
+	
 });
 
 Route::post('/update-user-FCM', 'FireBaseController@updateUserFCM')->name('updateUserFCM');
@@ -82,9 +77,7 @@ Route::group(
 
             ######################### Products #########################
             Route::resource('products', 'ProductController');
-            Route::get('product', 'ProductController@downloadNewSheet')->name('download.sheetExcel');
-            Route::get('productUpdate', 'ProductController@downloadUpdateSheet')->name('download.sheetExcelUpdate');
-            Route::post('product/cat', 'ProductController@exportWithCategory')->name('proCat.sheetExcel');
+            Route::get('product', 'ProductController@downloadSheet')->name('download.sheetExcel');
 
             ######################### Notifications #########################
             Route::get('/test', 'NotificationController@store')->name('testNotifies');
@@ -96,8 +89,16 @@ Route::group(
         
         	######################### Subscriptions #########################
             Route::resource('subscriptions', 'SubscriptionController');
-
-
+        	
+        	######################### Subscribers #########################
+            Route::resource('subscribers', 'SubscriberController');
+        
+        	######################### Advertisements #########################
+            Route::resource('advertisements', 'AdvertisementController');
+        
+        	######################### Logs #########################
+            Route::resource('logs', 'LogController');
+        
         });
 
     }

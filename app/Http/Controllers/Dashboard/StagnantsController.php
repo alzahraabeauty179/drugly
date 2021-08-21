@@ -37,7 +37,16 @@ class StagnantsController extends BackEndDatatableController
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
 
-        $this->model->create($request_data);
+        $stagnant = $this->model->create($request_data);
+    	
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $stagnant->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_added',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
+    
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }
@@ -64,6 +73,15 @@ class StagnantsController extends BackEndDatatableController
         } //end of if
 
         $stagnant->update($request_data);
+    	
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $stagnant->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_updated',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
+    
         session()->flash('success', __('site.updated_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
     }

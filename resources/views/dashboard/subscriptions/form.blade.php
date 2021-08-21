@@ -83,17 +83,3 @@
     </small>
     @enderror
 </div>
-
-<fieldset class="form-group col-md-6">
-    <label for="basicInputFile">@lang('site.upload_photo')</label>
-    <div class="custom-file">
-        <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror "
-            id="inputGroupFile01">
-        <label class="custom-file-label" for="inputGroupFile01">@lang('site.choose_file')</label>
-        @error('image')
-        <small class=" text text-danger" role="alert">
-            <strong>{{ $message }}</strong>
-        </small>
-        @enderror
-    </div>
-</fieldset>

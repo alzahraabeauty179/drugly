@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\DataTables\BrandDataTable;
-use Illuminate\Http\Request;
-use App\Models\Brand;
+use App\DataTables\AdvertisementDataTable;
+use App\Models\Advertisement;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use DataTables;
 
-class BrandController extends BackEndDatatableController
+class AdvertisementController extends BackEndDatatableController
 {
-    /**
+	/**
      * Constructor.
      */
-    public function __construct(Brand $model, BrandDataTable $brandDataTable)
+	public function __construct(Advertisement $model, AdvertisementDataTable $adDataTable)
     {
-        parent::__construct($model, $brandDataTable);
+        parent::__construct($model, $adDataTable);
     }
 
     /**
@@ -26,42 +27,38 @@ class BrandController extends BackEndDatatableController
      */
     public function store(Request $request)
     {
-        if( is_null(auth()->user()->store_id) )
-        {
-            auth()->user()->type == "super_admin"?  session()->flash('error', __('site.only_for_stores')) : session()->flash('error', __('site.set_store_settings'));
-            return redirect()->back();
-        }
-        // return $request;
-        $rules = [
-            'image' => 'nullable|image|max:2048',
+		$rules = [
+            'image'     		=> 'required|image|max:2048',
+            'end_date' 			=> 'required|date',
+        	'owner_id' 			=> 'nullable|exists:users,id',
+        	'display_method'	=> 'required|in:horizontal,vertical,longitudinal',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('brand_translations', 'name')->where(function ($query) {
-                    $query->join('brands', function($j){ return $j->where('brands.store_id', '=', auth()->user()->store_id); });
-                }),],               
-                $locale . '.description' => 'nullable|string|min:3|max:500',
+                $locale . '.title'		=> ['required', 'string', 'min:3', 'max:191', Rule::unique('advertisement_translations', 'title')],
+                $locale . '.content' 	=> 'nullable|string|min:3|max:500',
             ];
         }
+
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
-
-        $request_data['store_id'] = auth()->user()->store_id;
-        $request_data['created_by'] = auth()->user()->id;
-
+            
+		$request_data['created_by'] = auth()->user()->id;
+        
         if ($request->image) {
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         }
+   		
+        $ad = $this->model->create($request_data);
 
-        $brand = $this->model->create($request_data);
-    	
     	$data = [
         	'log_type'	=> $this->getClassNameFromModel(),
-        	'log_id'  	=> $brand->id,
+        	'log_id'  	=> $ad->id,
     		'message' 	=> $this->getSingularModelName().'_has_been_added',
         	'action_by'	=> auth()->user()->id,
     	];
+	
     	$this->addLog($data);
     
         session()->flash('success', __('site.add_successfuly'));
@@ -77,38 +74,38 @@ class BrandController extends BackEndDatatableController
      */
     public function update(Request $request, $id)
     {
-
-        $brand = $this->model->findOrFail($id);
+        $advertisement = $this->model->findOrFail($id);
         $rules = [
-            'image' => 'nullable|image|max:2000',
+            'image' 			=> 'nullable|image|max:2000',
+            'end_date' 			=> 'nullable|date',
+        	'display_method'	=> 'required|in:horizontal,vertical,longitudinal',
         ];
         foreach (config('translatable.locales') as $locale) {
-            $rules += [       
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('brand_translations', 'name')->ignore($brand->id, 'brand_id')->where(function ($query) {
-                    $query->join('brands', function($j){ return $j->where('brands.store_id', '=', auth()->user()->store_id); });
-                }),],  
+            $rules += [
+                $locale . '.title'		=> ['required', 'string', 'min:3', 'max:191', Rule::unique('advertisement_translations', 'title')->ignore($advertisement->id, 'advertisement_id')],
 
-                $locale . '.description' => 'nullable|string|min:3|max:500',
+                $locale . '.content' 	=> 'nullable|string|min:3|max:500',
             ];
         }
         $request->validate($rules);
 
         $request_data = $request->except(['_token', 'image']);
         if ($request->image) {
-            if ($brand->image != null) {
-                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $brand->image);
+            if ($advertisement->image != null) {
+                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $advertisement->image);
             }
             $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
         } //end of if
 
-        $brand->update($request_data);
-    	
-    	$data = [
+        $advertisement->update($request_data);
+    
+        $data = [
         	'log_type'	=> $this->getClassNameFromModel(),
-        	'log_id'  	=> $brand->id,
+        	'log_id'  	=> $advertisement->id,
     		'message' 	=> $this->getSingularModelName().'_has_been_updated',
         	'action_by'	=> auth()->user()->id,
     	];
+	
     	$this->addLog($data);
     
         session()->flash('success', __('site.updated_successfuly'));

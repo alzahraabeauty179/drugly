@@ -263,6 +263,21 @@
         wow
         animate__animated animate__fadeIn animate__slow
       " style="background-image: url(assets/images/shapes/bg-intro-about.webp)">
+    
+    	<div class="container-fluid row d-flex justify-content-center">
+        	@if(session('success'))
+            	<div class="alert alert-success col-sm-6 text-center" role="alert">
+                	{!! session('success') !!}
+            	</div>
+        	@endif
+
+        	@if(session('error'))
+            	<div class="alert alert-danger col-sm-6 text-center" role="alert">
+                	{!! session('error') !!}
+            	</div>
+        	@endif
+    	</div>
+    
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-md-6">
@@ -457,166 +472,79 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
+						<!-- Pharmacy Subscriptions -->
                         <div class="tab-pane fade show active" id="pills-pharmacy" role="tabpanel"
                             aria-labelledby="pills-pharmacy-tab">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT Scan</h3>
+                            	@forelse(App\Models\Subscription::where('active', 1)->where('type', 'pharmacy')->get() as $row)
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>{{ $row->name }}</h3>
+                                        	</div>
+                                        	<div class="price">
+                                            	<span><sup>$</sup>{{ $row->price }}</span>
+                                        	</div>
+                                        	<div class="pricing-features">
+                                            	{!! $row->description !!}
+                                        	</div>
+                                        	<div class="pricing-footer">
+                                            	<a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#register_{{$row->id}}">
+                                                	@lang('site.subscribe_now')
+                                            	</a>
+                                        	</div>
+                                    	</div>
+                                    	@component('components.register',['subscription'=>$row ?? NULL]) @endcomponent
+                                	</div>
+                            		@empty
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>@lang('site.will_be_ready_soon')</h3>
                                         </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>350</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT Scan</h3>
-                                        </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>350</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT Scan</h3>
-                                        </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>350</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    	</div>
+                                	</div>
+                            	@endforelse
                             </div>
                         </div>
+                    	<!-- ./Pharmacy Subscriptions -->
+                    
+                    	<!-- Story Subscriptions -->
                         <div class="tab-pane fade" id="pills-warehouse" role="tabpanel"
                             aria-labelledby="pills-warehouse-tab">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT</h3>
+                            	@forelse(App\Models\Subscription::where('active', 1)->where('type', 'medical_store')->get() as $row)
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>{{ $row->name }}</h3>
+                                        	</div>
+                                        	<div class="price">
+                                            	<span><sup>$</sup>{{ $row->price }}</span>
+                                        	</div>
+                                        	<div class="pricing-features">
+                                            	{!! $row->description !!}
+                                        	</div>
+                                        	<div class="pricing-footer">
+                                            	<a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#register_{{$row->id}}">
+                                                	@lang('site.subscribe_now')
+                                            	</a>
+                                        	</div>
+                                    	</div>
+                                    	@component('components.register',['subscription'=>$row ?? NULL]) @endcomponent
+                                	</div>
+                            		@empty
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>@lang('site.will_be_ready_soon')</h3>
                                         </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>400</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT</h3>
-                                        </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>400</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="pricing-table">
-                                        <div class="pricing-header">
-                                            <h3>Body CT</h3>
-                                        </div>
-                                        <div class="price">
-                                            <span><sup>$</sup>400</span>
-                                        </div>
-                                        <div class="pricing-features">
-                                            <ul>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                                <li>Kidney function tests</li>
-                                                <li>C-reactive protein (CRP) test</li>
-                                                <li>Cholesterol and lipid tests</li>
-                                                <li>Oestrogen blood test</li>
-                                                <li>Thyroid function tests</li>
-                                            </ul>
-                                        </div>
-                                        <div class="pricing-footer">
-                                            <a href="/checkout" class="btn">Appointment Now</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    	</div>
+                                	</div>
+                            	@endforelse
                             </div>
                         </div>
+                    	<!-- ./Story Subscriptions -->
                     </div>
                 </div>
             </div>
@@ -781,6 +709,7 @@
     <script src="{{asset('assets/libs/animate-wow/wow.min.js')}}"></script>
     <script src="{{asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{asset('assets/libs/website/main.js')}}"></script>
+	@stack('script')
 </body>
 
 </html>

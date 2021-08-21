@@ -21,7 +21,8 @@ class CreateSubscribersTable extends Migration
 
             $table->integer('subscriber_id')->unsigned();
             $table->foreign('subscriber_id')->references('id')->on('users')->onDelete('cascade');
-
+        
+			$table->enum('payment_method', ['cash', 'visa', 'vodafone_cash'])->default('cash');
             $table->enum('status', ['waiting', 'accepting', 'rejecting', 'finished'])->default('waiting');
 
             $table->date('start_date')->nullable();

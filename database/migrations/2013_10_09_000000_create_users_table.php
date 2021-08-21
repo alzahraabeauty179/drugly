@@ -29,8 +29,7 @@ class CreateUsersTable extends Migration
 
             $table->enum('type', ['super_admin', 'medical_store', 'beauty_company', 'pharmacy'])->default('medical_store');
 
-            $table->integer('area_id')->unsigned()->nullable();
-            // $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->string('areas')->nullable();
 
             $table->integer('store_id')->unsigned()->nullable();
             // $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');

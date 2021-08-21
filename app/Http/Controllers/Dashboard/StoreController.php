@@ -63,9 +63,17 @@ class StoreController extends BackEndController
 
         $setting = $this->model->create($request_data);
         User::where('id', auth()->user()->id)->update(['store_id'=>$setting->id]);
+    
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $setting->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_added',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
 
         session()->flash('success', __('site.website_info_added_successfully'));
-        return redirect()->back();
+        return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
     }
 
     /**
@@ -112,8 +120,16 @@ class StoreController extends BackEndController
         } //end of if
 
         $Store->update($request_data);
+    	
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> $Store->id,
+    		'message' 	=> $this->getSingularModelName().'_has_been_updated',
+        	'action_by'	=> auth()->user()->id,
+    	];
+    	$this->addLog($data);
+    
         session()->flash('success', __('site.website_updated_successfully'));
-  
-        return redirect()->back();
+        return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
     }
 }

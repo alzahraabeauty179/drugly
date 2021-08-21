@@ -30,27 +30,24 @@ class SubscriptionController extends BackEndDatatableController
     public function store(Request $request)
     {
         $rules = [
-            'image'     => 'nullable|image|max:2048',
         	'type'		=> 'required|string|in:medical_store,beauty_company,pharmacy',
         	'price'		=> 'required|numeric|min:0',
         	'duriation'	=> 'required|integer|min:1',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('subscription_translations', 'name')],
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('subscription_translations', 'name')->where(function ($query) {
+                    $query->join('subscriptions', function($j){ return $j->where('subscriptions.type', $_REQUEST['type']); });
+                }),],
                 $locale . '.description' => 'required|string|min:3|max:500',
             ];
         }
 
         $request->validate($rules);
 
-        $request_data = $request->except(['_token', 'image']);
+        $request_data = $request->except(['_token']);
 
         $request_data['created_by'] = auth()->user()->id;
-        
-        if ($request->image) {
-            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        }
 
         $this->model->create($request_data);
         session()->flash('success', __('site.add_successfuly'));
@@ -68,26 +65,23 @@ class SubscriptionController extends BackEndDatatableController
     {
         $subscription = $this->model->findOrFail($id);
         $rules = [
-            'image'     => 'nullable|image|max:2048',
         	'type'		=> 'required|string|in:medical_store,beauty_company,pharmacy',
         	'price'		=> 'required|numeric|min:0',
         	'duriation'	=> 'required|integer|min:1',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('subscription_translations', 'name')->ignore($subscription->id, 'subscription_id')],
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('subscription_translations', 'name')
+                                             											   ->ignore($subscription->id, 'subscription_id')
+                                             											   ->where(function ($query) {
+                    						$query->join('subscriptions', function($j){ return $j->where('subscriptions.type', $_REQUEST['type']); });
+                							}),],
                 $locale . '.description' => 'required|string|min:3|max:500',
             ];
         }
         $request->validate($rules);
 
-        $request_data = $request->except(['_token', 'image']);
-        if ($request->image) {
-            if ($category->image != null) {
-                Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $category->image);
-            }
-            $request_data['image'] = $this->uploadImage($request->image, $this->getClassNameFromModel() . '_images');
-        } //end of if
+        $request_data = $request->except(['_token']);
 
         $subscription->update($request_data);
         session()->flash('success', __('site.updated_successfuly'));

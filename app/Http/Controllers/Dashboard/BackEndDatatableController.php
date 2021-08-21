@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use Yajra\DataTables\Services\DataTable;
 
+use App\Models\Log;
+
 class BackEndDatatableController extends Controller
 {
 
@@ -74,7 +76,16 @@ class BackEndDatatableController extends Controller
         if (isset($model->image)) {
             Storage::disk('public_uploads')->delete($this->getClassNameFromModel() . '_images/' . $model->image);
         }
-
+		
+    	$data = [
+        	'log_type'	=> $this->getClassNameFromModel(),
+        	'log_id'  	=> null,
+    		'message' 	=> $this->getSingularModelName().'_has_been_deleted',
+        	'action_by'	=> auth()->user()->id,
+    	];
+	
+    	$this->addLog($data);
+    
         $model->delete(); 
         session()->flash('success', __('site.deleted_successfully'));
         return redirect()->route('dashboard.'.$this->getClassNameFromModel() . '.index');
@@ -111,5 +122,25 @@ class BackEndDatatableController extends Controller
             $constraint->aspectRatio();
         })->save(public_path('uploads/' . $path . '/' . $imageName));
         return $imageName;
+    }
+
+	/**
+	 * Add log for each model's add or edit actions.
+	 * 	 
+	 * @pram array $date
+	 * 
+	 * @param string table name log_type
+	 * @param int record id log_id
+	 * @param string message translated in site lang files
+	 * @param int user id action_by
+	 */
+	protected function addLog($data)
+    {
+    	Log::create([
+        	'log_type'=>$data['log_type'],
+        	'log_id'=>$data['log_id'],
+        	'message'=>$data['message'],
+        	'action_by'=>$data['action_by'],
+        ]);
     }
 }
