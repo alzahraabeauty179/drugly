@@ -22,13 +22,15 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
-            $table->integer('brand_id')->unsigned();
+            $table->integer('brand_id')->unsigned()->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
 
             $table->double('amount');
             $table->double('unit_price');
 
-            $table->date('expiry_date');
+            $table->date('expiry_date')->nullable();
+
+            $table->string('brand')->nullable(); // this is for insert from excel becous user cannot add brand_id for product in excel
 
             // $table->integer('parent_id')->nullable()->unsigned();
             // $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
