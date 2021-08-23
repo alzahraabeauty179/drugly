@@ -69,7 +69,8 @@ Route::group(
 
             ######################### Stores Settings #########################
             Route::resource('stores', 'StoreController');
-
+            Route::post('search-by-product', 'StoreController@searchByProduct')->name('stores.searchByProduct');
+            
             ######################### Areas #########################
             Route::resource('areas', 'AreaController');
             Route::get('sub/areas', 'AreaController@subAreas')->name('subarea');

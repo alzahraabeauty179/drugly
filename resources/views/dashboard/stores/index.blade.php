@@ -119,6 +119,8 @@
 
 @push('style')
 
+{{csrf_field()}}
+
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
 <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -150,58 +152,17 @@
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
 <script>
     $(document).on('keyup','#search-by-products',function(event){
-        $('#storedatatable-table_wrapper').css('display', 'none');
-        console.log($('#search-by-products').val());
-        // document.getElementById('search-by-products').addEventListener('keypress',function(e){
-            
-        //     if ( isEnglish(e.charCode) ){ lang = "en"; }
-        //     else{ lang = "ar"; }
-                
-        //     $.post('/anjez/search',{'keyword':$('#search').val(),'_token':$('input[name=_token]').val(),'language':lang},function(data){
-            
-        //         if(typeof data["organizations"] != "undefined"){
-                    
-        //                 var orgs_arr= data.organizations.map(function (value, index, array) {
 
-        //                     return value.name; 
-                        
-        //                 });
-                        
-        //         }else{ orgs_arr = []; }
-                
-        //         if(typeof data["services"] != "undefined"){
-                    
-        //             var servs_arr= data.services.map(function (value, index, array) {
-
-        //                     return value.name; 
-                        
-        //                 });
-                        
-        //         }else{ servs_arr = []; }
-                
-        //         var FinalServicesIds = orgs_arr.concat(servs_arr);
-            
-        //         $( "#search" ).autocomplete({
-                    
-        //             source: FinalServicesIds
-                    
-        //         });
-                
-        //     });
-
-            
-        // });
-
+        var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}";
+        console.log(type, $('#search-by-products').val());
+ 
+        $.post("{{ route('dashboard.stores.searchByProduct') }}",{'keyword':$('#search-by-products').val(),'type':type,'_token':$('input[name=_token]').val()},function(data){
+            //
+        });
     });
-    
-    // $(document).on('click','#search-by-products',function(event){
-                    
-    //     $.post('/anjez/searchResult',{'keyword':$('#search').val(),'_token':$('input[name=_token]').val(),'language':lang},function(data){
-            
-    //             if(data.status==200)    {  location.href = data.url;   }
 
-    //     }); 
-        
-    // });
+    $(document).on('click','#search-by-products',function(event){
+        //
+    });
 </script>
 @endpush

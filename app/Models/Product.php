@@ -30,4 +30,12 @@ class Product extends Model implements TranslatableContract
         return $this->belongsTo(Product::class, 'parent_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    function store() : BelongsTo
+    {
+        return $this->belongsTo(Store::class, 'owner_id');
+    }
+
 }

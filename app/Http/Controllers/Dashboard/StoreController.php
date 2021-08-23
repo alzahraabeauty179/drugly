@@ -5,9 +5,11 @@ use Illuminate\Http\Request;
 
 use App\DataTables\StoreDataTable;
 use App\Models\Store;
+use App\Models\Product;
 use App\User;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Resources\ProductResource;
+use Illuminate\Database\Eloquent\Builder;
 use Validator;
 
 class StoreController extends BackEndController
@@ -105,6 +107,34 @@ class StoreController extends BackEndController
         $module_name_singular = $this->getSingularModelName();
 
         return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+    }
+
+    /**
+     * Search in stores by product name to return 
+     * the related stores.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json data
+     */
+    public function searchByProduct(Request $request)
+    {
+        $products = Product::whereTranslationLike('name', "%" . $request->keyword . "%")
+                    ->orWhereTranslationLike('description', "%" . $request->keyword . "%")
+                    ->whereHas('store', function (Builder $q) { $q->where('type', $request->type); })
+                    ->where('active', 1)->get();
+    
+        return response()->json( ['status'=>200,'products'=>ProductResource::collection($products)] );
+    }
+
+    /**
+     * Get the selected product from all the stores have it.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json data
+     */
+    public static function searchResult(Request $request)
+    {
+        //                     
     }
 
     /**
