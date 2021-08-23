@@ -18,6 +18,9 @@ return [
     'desc'=>'Here you can add- delete- update ',
     'description'=>'Description ',
     'language'=>'Language',
+    'warehouses'=>'Warehouses',
+    'show'=>'Show',
+    'cosmetic_companies'=>'Cosmetic Companies',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',

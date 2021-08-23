@@ -23,6 +23,8 @@ class CreateStoresTable extends Migration
             $table->string('phone')->unique()->nullable();
             $table->string('image')->nullable();
 
+            $table->enum('type', ['medical_store', 'beauty_company'])->default('medical_store');
+
             $table->string('facebook_link')->nullable();
             $table->string('twitter_link')->nullable();
             $table->string('instagram_link')->nullable();

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-
-use App\Http\Controllers\Dashboard\BackEndController;
 use Illuminate\Http\Request;
 
+use App\DataTables\StoreDataTable;
 use App\Models\Store;
 use App\User;
 use Illuminate\Support\Facades\Storage;
@@ -14,12 +13,28 @@ use Validator;
 class StoreController extends BackEndController
 {
 
-    /**
+    protected $model;
+    protected $dataTable;
+	/**
      * Constructor.
      */
-    public function __construct(Store $model)
+    public function __construct(Store $model, StoreDataTable $datatable)
     {
-        parent::__construct($model);
+        $this->model = $model;
+        $this->dataTable = $datatable;
+    }
+
+    /**
+     * Show all model data.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        
+        return $this->dataTable->render('dashboard.' . $module_name_plural . '.index', compact('module_name_plural'));
     }
 
     /**
@@ -61,6 +76,8 @@ class StoreController extends BackEndController
             $request_data['image'] = $this->uploadImage($request->logo, 'store_settings_images');
         }
 
+        $request_data['type'] = auth()->user()->type;
+
         $setting = $this->model->create($request_data);
         User::where('id', auth()->user()->id)->update(['store_id'=>$setting->id]);
     
@@ -74,6 +91,20 @@ class StoreController extends BackEndController
 
         session()->flash('success', __('site.website_info_added_successfully'));
         return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+
+        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
     }
 
     /**

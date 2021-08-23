@@ -18,6 +18,9 @@ return [
     'users'=>'المشرفين',
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
+    'warehouses'=>'المستودعات',
+    'show'=>'عرض',
+    'cosmetic_companies'=>'شركات مستحضرات التجميل',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

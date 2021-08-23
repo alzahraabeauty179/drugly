@@ -142,7 +142,7 @@
             </li>
             @endif{{-- stagnants --}}
 
-            {{--<li class="nav-item">
+            {{-- <li class="nav-item">
                 <a><i class="fa fa-money"></i><span class="menu-title" data-i18n="">Offers prices</span></a>
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#">Soon</a></li>
@@ -156,6 +156,18 @@
                         class="menu-title" data-i18n="">@lang('site.logs')</span></a>
             </li>
             @endif{{-- Logs --}}
+
+            @if ( auth()->user()->type == "pharmacy" )
+            <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'medical_store') }}"><i class="ft-package"></i><span
+                        class="menu-title" data-i18n="">@lang('site.warehouses')</span></a>
+            </li>
+            @endif{{-- Show stores for pharmacies --}}
+
+            @if ( auth()->user()->type == "pharmacy" )
+            <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'cosmetic_company') }}"><i class="ft-layers"></i><span
+                        class="menu-title" data-i18n="">@lang('site.cosmetic_companies')</span></a>
+            </li>
+            @endif{{-- Show stores for pharmacies --}}
 
         </ul>
     </div>
