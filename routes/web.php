@@ -75,9 +75,11 @@ Route::group(
             Route::get('sub/areas', 'AreaController@subAreas')->name('subarea');
 
 
-            ######################### Products #########################
-            Route::resource('products', 'ProductController');
-            Route::get('product', 'ProductController@downloadSheet')->name('download.sheetExcel');
+           ######################### Products #########################
+           Route::resource('products', 'ProductController');
+           Route::get('product', 'ProductController@downloadNewSheet')->name('download.sheetExcel');
+           Route::get('productUpdate', 'ProductController@downloadUpdateSheet')->name('download.sheetExcelUpdate');
+           Route::post('product/cat', 'ProductController@exportWithCategory')->name('proCat.sheetExcel');
 
             ######################### Notifications #########################
             Route::get('/test', 'NotificationController@store')->name('testNotifies');
