@@ -116,11 +116,6 @@
             console.log('Permission Accepted');
         	return messaging.getToken();
         })
-        // .then( function(token) {
-        //     $.post("{{ route('updateUserFCM') }}",{'fcm_token':token,'_token':$('input[name=_token]').val()},function(data){
-        //         console.log(token, 'Saved to database successfully.');
-        //     });
-        // })
         .catch( function(error) {
             // console.log(error);
             console.log('Permission Denied, you will not be apple to get real time notifications!');
@@ -131,14 +126,6 @@
             console.log(token) // "Some User token"
             $('#set-token').val(token);
         });
-       
-        // console.log(messaging.getToken('vapidKey') );
-        // let userToken = AuthUser(data)
-        // console.log(userToken) // Promise { <pending> }
-
-        // userToken.then(function(result) {
-        // console.log(result) // "Some User token"
-        // })
     </script>
 
 </body>

@@ -164,127 +164,45 @@
                 products_name = data.products.map(function (value, index, array) { return value.name; });
        
             $("#search-by-products").autocomplete({ source: products_name });
-        }).then( function(){
-            $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
-                $("#storedatatable-table_wrapper").css('display', 'none')
+        })
+    });
+
+    $(document).on('click','#search-by-products',function(event){
+        $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
+            
+            if( $('#search-by-products').val() != "" )
+            {
+                $("#storedatatable-table_wrapper").empty();
+
+                var container = "";
+
+                $.each(data,function(key,val){
+                    container +=    `<tr>
+                                        <td>`+val.name+' '+val.type+`</td>
+                                        <td>`+val.amount+' '+val.unit+`</td>
+                                        <td>$ `+val.unitPrice+`</td>
+                                        <td>`+val.storeName+`</td>
+                                    </tr>`;
+                });
+                console.log(data,container);
                 $("#products-container").append(`
                     <table class="table table-striped table-bordered cat-configuration">
                         <thead>
                             <tr>
-                                <th class="active">
-                                    <input type="checkbox" class="select-all checkbox"
-                                        name="select-all" />
-                                </th>
                                 <th>Product Name</th>
                                 <th>Available</th>
+                                <th>Unit Price</th>
                                 <th>Store Name</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" class="select-item checkbox"
-                                        name="select-item" value="1000" />
-                                </td>
-                                <td>Product Test 1</td>
-                                <td>50 Units</td>
-                                <td>Store Test 1</td>
-                            </tr>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" class="select-item checkbox"
-                                        name="select-item" value="1000" />
-                                </td>
-                                <td>Product Test 2</td>
-                                <td>50 Units</td>
-                                <td>Store Test 2</td>
-                            </tr>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" class="select-item checkbox"
-                                        name="select-item" value="1000" />
-                                </td>
-                                <td>Product Test 3</td>
-                                <td>50 Units</td>
-                                <td>Store Test 3</td>
-                            </tr>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" class="select-item checkbox"
-                                        name="select-item" value="1000" />
-                                </td>
-                                <td>Product Test 4</td>
-                                <td>50 Units</td>
-                                <td>Store Test 4</td>
-                            </tr>
+                            `+
+                            container
+                            +`
                         </tbody>
                     </table>
                 `);
-            });
-        });
-    });
-
-    // $(document).on('click','#search-by-products',function(event){
-    //     $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
-    //         $("#storedatatable-table_wrapper").css('display', 'none')
-    //         $("#products-container").append(`
-    //             <table class="table table-striped table-bordered cat-configuration">
-    //                 <thead>
-    //                     <tr>
-    //                         <th class="active">
-    //                             <input type="checkbox" class="select-all checkbox"
-    //                                 name="select-all" />
-    //                         </th>
-    //                         <th>Product Name</th>
-    //                         <th>Available</th>
-    //                         <th>Store Name</th>
-    //                     </tr>
-    //                 </thead>
-    //                 <tbody>
-    //                     <tr>
-    //                         <td class="active">
-    //                             <input type="checkbox" class="select-item checkbox"
-    //                                 name="select-item" value="1000" />
-    //                         </td>
-    //                         <td>Product Test 1</td>
-    //                         <td>50 Units</td>
-    //                         <td>Store Test 1</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td class="active">
-    //                             <input type="checkbox" class="select-item checkbox"
-    //                                 name="select-item" value="1000" />
-    //                         </td>
-    //                         <td>Product Test 2</td>
-    //                         <td>50 Units</td>
-    //                         <td>Store Test 2</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td class="active">
-    //                             <input type="checkbox" class="select-item checkbox"
-    //                                 name="select-item" value="1000" />
-    //                         </td>
-    //                         <td>Product Test 3</td>
-    //                         <td>50 Units</td>
-    //                         <td>Store Test 3</td>
-    //                     </tr>
-    //                     <tr>
-    //                         <td class="active">
-    //                             <input type="checkbox" class="select-item checkbox"
-    //                                 name="select-item" value="1000" />
-    //                         </td>
-    //                         <td>Product Test 4</td>
-    //                         <td>50 Units</td>
-    //                         <td>Store Test 4</td>
-    //                     </tr>
-    //                 </tbody>
-    //             </table>
-    //         `);
-    //     });
-    // });
-    $(function (e) {
-        $(".select-all").click(function () {
-            $(".select-item").prop('checked', $(this).prop('checked'));
+            }
         });
     });
 </script>
