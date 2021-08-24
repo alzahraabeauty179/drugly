@@ -39,7 +39,7 @@ class BrandDataTable extends DataTable
             //     return $d->translation->description;
             // })
             ->addColumn('logo', function ($query) {
-                return '<image src="'.$query->image_path.'" width="40" height="40" />';
+                return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;" />';
             })->rawColumns(['name', 'logo', 'action'])
             ->editColumn('created_at', function ($query) {
                 return $query->created_at->diffForHumans();

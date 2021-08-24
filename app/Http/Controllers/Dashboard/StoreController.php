@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Builder;
 use Validator;
+use DB;
 
 class StoreController extends BackEndController
 {
@@ -118,12 +119,17 @@ class StoreController extends BackEndController
      */
     public function searchByProduct(Request $request)
     {
-        $products = Product::whereTranslationLike('name', "%" . $request->keyword . "%")
-                    ->orWhereTranslationLike('description', "%" . $request->keyword . "%")
-                    ->whereHas('store', function (Builder $q) { $q->where('type', $request->type); })
-                    ->where('active', 1)->get();
+        if( is_null($request->keyword) )
+            $products = [];
+        else
+            $products = Product::join('product_translations', 'products.id', '=', 'product_translations.product_id')
+                        ->select('product_translations.name', 'product_translations.type', DB::raw('COUNT(*) AS total'))
+                        ->whereTranslationLike('name', "%" . $request->keyword . "%")
+                        ->orWhereTranslationLike('description', "%" . $request->keyword . "%")
+                        ->whereHas('store', function (Builder $q) { $q->where('type', $_REQUEST['type']); })
+                        ->where('active', 1)->groupBy('product_translations.name', 'product_translations.type')->get();
     
-        return response()->json( ['status'=>200,'products'=>ProductResource::collection($products)] );
+        return response()->json( ['products'=>ProductResource::collection($products)] );
     }
 
     /**
@@ -134,7 +140,10 @@ class StoreController extends BackEndController
      */
     public static function searchResult(Request $request)
     {
-        //                     
+        $products = Product::whereTranslationLike('name', "%" . $request->keyword . "%")
+                    ->whereHas('store', function (Builder $q) { $q->where('type', $_REQUEST['type']); })->get();
+        
+        return response()->json( ['products'=>ProductResource::collection($products)] );
     }
 
     /**

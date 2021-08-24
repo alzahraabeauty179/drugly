@@ -83,8 +83,12 @@
 {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
 
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
-
 {{-- end  datatables style for yajar package --}}
+<style>
+    img:hover {
+        transform: scale(7.1);
+    }
+</style>
 @endpush
 @push('script')
 {{-- start datatables script for yajar package --}}

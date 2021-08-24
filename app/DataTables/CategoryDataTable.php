@@ -34,7 +34,7 @@ class CategoryDataTable extends DataTable
             //     return $query->translation->description;
             // })
             ->addColumn('logo', function ($query) {
-                return '<image src="'.$query->image_path.'" width="40" height="40" />';
+                return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;" />';
             })
 
             ->editColumn('created_at', function ($query) {

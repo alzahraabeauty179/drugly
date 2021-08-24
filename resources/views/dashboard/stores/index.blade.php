@@ -103,7 +103,7 @@
                             </div>
                             <!-- ./Advanced Search -->
                             <div class="card-content collapse show">
-                                <div class="card-body card-dashboard">
+                                <div class="card-body card-dashboard" id="products-container">
                                     {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
                                 </div>
                             </div>
@@ -134,8 +134,12 @@
 {{-- end  datatables style for yajar package --}}
 
 {{-- Search by products  --}}
+<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+<script src="{{ asset('js/jquery-ui.js') }}"></script>
 @endpush
+
+
 @push('script')
 {{-- start datatables script for yajar package --}}
 <!-- jQuery -->
@@ -151,18 +155,138 @@
 {{-- Search by products  --}}
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
 <script>
-    $(document).on('keyup','#search-by-products',function(event){
+    var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}", products_name = [];
 
-        var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}";
-        console.log(type, $('#search-by-products').val());
- 
+    $(document).on('keyup','#search-by-products',function(event){
         $.post("{{ route('dashboard.stores.searchByProduct') }}",{'keyword':$('#search-by-products').val(),'type':type,'_token':$('input[name=_token]').val()},function(data){
-            //
+            
+            if( data["products"].length != 0)
+                products_name = data.products.map(function (value, index, array) { return value.name; });
+       
+            $("#search-by-products").autocomplete({ source: products_name });
+        }).then( function(){
+            $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
+                $("#storedatatable-table_wrapper").css('display', 'none')
+                $("#products-container").append(`
+                    <table class="table table-striped table-bordered cat-configuration">
+                        <thead>
+                            <tr>
+                                <th class="active">
+                                    <input type="checkbox" class="select-all checkbox"
+                                        name="select-all" />
+                                </th>
+                                <th>Product Name</th>
+                                <th>Available</th>
+                                <th>Store Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="active">
+                                    <input type="checkbox" class="select-item checkbox"
+                                        name="select-item" value="1000" />
+                                </td>
+                                <td>Product Test 1</td>
+                                <td>50 Units</td>
+                                <td>Store Test 1</td>
+                            </tr>
+                            <tr>
+                                <td class="active">
+                                    <input type="checkbox" class="select-item checkbox"
+                                        name="select-item" value="1000" />
+                                </td>
+                                <td>Product Test 2</td>
+                                <td>50 Units</td>
+                                <td>Store Test 2</td>
+                            </tr>
+                            <tr>
+                                <td class="active">
+                                    <input type="checkbox" class="select-item checkbox"
+                                        name="select-item" value="1000" />
+                                </td>
+                                <td>Product Test 3</td>
+                                <td>50 Units</td>
+                                <td>Store Test 3</td>
+                            </tr>
+                            <tr>
+                                <td class="active">
+                                    <input type="checkbox" class="select-item checkbox"
+                                        name="select-item" value="1000" />
+                                </td>
+                                <td>Product Test 4</td>
+                                <td>50 Units</td>
+                                <td>Store Test 4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `);
+            });
         });
     });
 
-    $(document).on('click','#search-by-products',function(event){
-        //
+    // $(document).on('click','#search-by-products',function(event){
+    //     $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
+    //         $("#storedatatable-table_wrapper").css('display', 'none')
+    //         $("#products-container").append(`
+    //             <table class="table table-striped table-bordered cat-configuration">
+    //                 <thead>
+    //                     <tr>
+    //                         <th class="active">
+    //                             <input type="checkbox" class="select-all checkbox"
+    //                                 name="select-all" />
+    //                         </th>
+    //                         <th>Product Name</th>
+    //                         <th>Available</th>
+    //                         <th>Store Name</th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     <tr>
+    //                         <td class="active">
+    //                             <input type="checkbox" class="select-item checkbox"
+    //                                 name="select-item" value="1000" />
+    //                         </td>
+    //                         <td>Product Test 1</td>
+    //                         <td>50 Units</td>
+    //                         <td>Store Test 1</td>
+    //                     </tr>
+    //                     <tr>
+    //                         <td class="active">
+    //                             <input type="checkbox" class="select-item checkbox"
+    //                                 name="select-item" value="1000" />
+    //                         </td>
+    //                         <td>Product Test 2</td>
+    //                         <td>50 Units</td>
+    //                         <td>Store Test 2</td>
+    //                     </tr>
+    //                     <tr>
+    //                         <td class="active">
+    //                             <input type="checkbox" class="select-item checkbox"
+    //                                 name="select-item" value="1000" />
+    //                         </td>
+    //                         <td>Product Test 3</td>
+    //                         <td>50 Units</td>
+    //                         <td>Store Test 3</td>
+    //                     </tr>
+    //                     <tr>
+    //                         <td class="active">
+    //                             <input type="checkbox" class="select-item checkbox"
+    //                                 name="select-item" value="1000" />
+    //                         </td>
+    //                         <td>Product Test 4</td>
+    //                         <td>50 Units</td>
+    //                         <td>Store Test 4</td>
+    //                     </tr>
+    //                 </tbody>
+    //             </table>
+    //         `);
+    //     });
+    // });
+    $(function (e) {
+        $(".select-all").click(function () {
+            $(".select-item").prop('checked', $(this).prop('checked'));
+        });
     });
 </script>
+
 @endpush

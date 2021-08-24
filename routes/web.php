@@ -70,6 +70,7 @@ Route::group(
             ######################### Stores Settings #########################
             Route::resource('stores', 'StoreController');
             Route::post('search-by-product', 'StoreController@searchByProduct')->name('stores.searchByProduct');
+            Route::post('search-result', 'StoreController@searchResult')->name('stores.searchResult');
             
             ######################### Areas #########################
             Route::resource('areas', 'AreaController');
