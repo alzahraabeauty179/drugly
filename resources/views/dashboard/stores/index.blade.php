@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('site.'.$module_name_plural))
+@section('title', isset($_REQUEST['medical_store'])? __('site.warehouses'):__('site.cosmetic_companies'))
 
 @section('content')
 <div class="app-content content">
@@ -57,43 +57,33 @@
                                     <div class="col-md-5">
                                         <div class="row d-flex justify-content-center align-items-center">
                                             <!-- Search by products -->
-                                            <div class="col-6">
+                                            <div class="col-6" style="display: block ruby;">
+                                                <i class="ficon ft-search" id="find-product" style="cursor: pointer;"></i>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" id="search-by-products">
+                                                    <input type="text" placeholder="@lang('site.product_search')" class="form-control" id="search-by-products">
                                                 </div>
                                             </div>
                                             <!-- ./Search by products -->
-
-                                            <!-- Upload Excel -->
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <form action="">
-                                                        <label for="">Upload Excel</label>
-                                                        <input type="file" class="form-control-file" />
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- ./Upload Excel -->
                                         </div>
                                     </div>
 
                                     <!-- Result Filter -->
-                                    <div class="col-md-4">
+                                    <div  id="search-result-filter" class="col-md-4" style="display: none;">
                                         <div class="row d-flex justify-content-center align-items-center">
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck2">
+                                                        name="customCheck" id="discount-rate">
                                                     <label class="custom-control-label" style="margin-left: 20px;"
-                                                        for="customCheck2">Discount Rate</label>
+                                                        for="discount-rate">@lang('site.discount_rate')</label>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck3">
+                                                        name="customCheck" id="top-units">
                                                     <label class="custom-control-label" style="margin-left: 20px;"
-                                                        for="customCheck3">Top Units</label>
+                                                        for="top-units">@lang('site.top_units')</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,10 +107,9 @@
 </div>
 @endsection
 
-@push('style')
-
 {{csrf_field()}}
 
+@push('style')
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
 <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -134,6 +123,8 @@
 {{-- end  datatables style for yajar package --}}
 
 {{-- Search by products  --}}
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
@@ -149,10 +140,12 @@
 
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-
 {!! $dataTable->scripts() !!}
 
 {{-- Search by products  --}}
+<!-- DataTables -->
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
 <script>
     var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}", products_name = [];
@@ -167,42 +160,66 @@
         })
     });
 
-    $(document).on('click','#search-by-products',function(event){
-        $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
-            
-            if( $('#search-by-products').val() != "" )
+    function dispalySearchResult(data)
+    {
+        if( $('#search-by-products').val() != "" )
             {
                 $("#storedatatable-table_wrapper").empty();
 
-                var container = "";
+                var container = "", url = "{{ route('dashboard.stores.show', [ 'store' => ':id']) }}";
 
-                $.each(data,function(key,val){
-                    container +=    `<tr>
-                                        <td>`+val.name+' '+val.type+`</td>
+                $.each(data.products,function(key,val){
+                    url         =   url.replace(':id', val.storeId);
+                    container   +=  `<tr>
+                                        <td>`+val.storeId+`</td>
+                                        <td>`+val.storeName+`</td>
                                         <td>`+val.amount+' '+val.unit+`</td>
                                         <td>$ `+val.unitPrice+`</td>
-                                        <td>`+val.storeName+`</td>
+                                        <td><a href="`+url+`" title="{{__('site.show')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.show')}}"><i class="ft-eye"> {{__('site.show')}} </i></a></td>
                                     </tr>`;
                 });
-                console.log(data,container);
+       
                 $("#products-container").append(`
-                    <table class="table table-striped table-bordered cat-configuration">
+                    <table class="table table-striped table-bordered cat-configuration" id="searchResultTable">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Available</th>
-                                <th>Unit Price</th>
-                                <th>Store Name</th>
+                                <th>{{__('site.id')}}</th>
+                                <th>{{isset($_REQUEST['medical_store'])? __('site.warehouses') : __('site.cosmetic_companies')}}</th>
+                                <th>{{__('site.available')}}</th>
+                                <th>{{__('site.unit_price')}}</th>
+                                <th>{{__('site.show')}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             `+
-                            container
+                                container
                             +`
                         </tbody>
                     </table>
                 `);
             }
+    }
+
+    $(document).on('click','#find-product',function(event){
+        $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
+            dispalySearchResult(data);
+        }).then( function(){
+            $('#searchResultTable').DataTable();
+            $('#search-result-filter').css('display', '');
+        }).then( function(){
+            $(document).on('click','.custom-control-input',function(event){
+                if(this.id == "top-units")
+                    $('#discount-rate').prop('checked', false);
+                else if(this.id == "discount-rate")
+                    $('#top-units').prop('checked', false);
+                
+                $.post("{{ route('dashboard.stores.searchResultFilter') }}",{'keyword':$('#search-by-products').val(),'filter':this.id,'_token':$('input[name=_token]').val(),'type':type},function(data){
+                    dispalySearchResult(data);
+                }).then( function(){
+                    $('#searchResultTable').DataTable();
+                });
+                console.log( this.id ,$('#search-by-products').val());
+            })
         });
     });
 </script>

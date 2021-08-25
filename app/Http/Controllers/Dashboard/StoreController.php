@@ -147,6 +147,25 @@ class StoreController extends BackEndController
     }
 
     /**
+     * Add filter to the search result.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json data
+     */
+    public static function searchResultFilter(Request $request)
+    {
+        $products = Product::whereTranslationLike('name', "%" . $request->keyword . "%")
+                    ->whereHas('store', function (Builder $q) { $q->where('type', $_REQUEST['type']); });
+        
+        if($request->filter == "discount-rate")
+            $products = $products->orderBy('unit_price', 'asc')->get();
+        elseif($request->filter == "top-units")
+            $products = $products->orderBy('amount', 'desc')->get();
+        
+        return response()->json( ['products'=>ProductResource::collection($products)] );
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

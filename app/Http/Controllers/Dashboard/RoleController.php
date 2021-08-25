@@ -82,12 +82,11 @@ class RoleController extends BackEndDatatableController
     public function userRoleCreateUpdate(Request $request)
     {
         $isExist = RoleUser::where('user_id', $request->user_id)->where('role_id', $request->role_id)->first();
-        //createUserRoleError - updateUserRoleError
+
         $rules = [
             'user_id' => 'required|exists:users,id',
             'role_id' => 'required|exists:roles,id'
         ];
-        
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
 			return is_null($isExist)? redirect()->back()->with(["createUserRoleError" => $validator->errors()->first()]) 

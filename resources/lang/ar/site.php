@@ -21,6 +21,12 @@ return [
     'warehouses'=>'المستودعات',
     'show'=>'عرض',
     'cosmetic_companies'=>'شركات مستحضرات التجميل',
+    'store'=>'المخزن',
+    'unit_price'=>'سعر الوحدة',
+	'available'=>'متاح',
+    'product_search'=>'بحث بالمنتج',
+    'discount_rate'=>'معدل الخصم',
+	'top_units'=>'أعلى الوحدات',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

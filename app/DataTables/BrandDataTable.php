@@ -54,6 +54,7 @@ class BrandDataTable extends DataTable
             // ->setRowClass('{{ $id % 2 == 0 ? "alert-success" : "alert-primary" }}')
             ->filter(function ($query) {
                 return $query
+                    ->where('created_by', auth()->user()->id)
                     ->whereTranslationLike('name', "%" . request()->search['value'] . "%")
                     // ->orwhereTranslationLike('description', "%" . request()->search['value'] . "%")
                     ->orwhere('id', 'like', "%" . request()->search['value'] . "%")

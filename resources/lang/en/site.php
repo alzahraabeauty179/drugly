@@ -21,6 +21,12 @@ return [
     'warehouses'=>'Warehouses',
     'show'=>'Show',
     'cosmetic_companies'=>'Cosmetic Companies',
+    'store'=>'Store',
+    'unit_price'=>'Unit Price',
+	'available'=>'Available',
+    'product_search'=>'Product Search...',
+    'discount_rate'=>'Discount Rate',
+	'top_units'=>'Top Units',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',

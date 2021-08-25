@@ -37,7 +37,8 @@
         <div class="content-body">
             <section id="configuration">
                 @php
-                    $users = App\User::all();
+               
+                    $users = App\User::whereNotHas('roles');
                     $roles = App\Role::all();
                 @endphp
                 <div class="row">
@@ -127,13 +128,10 @@
 
 @push('script')
     {{-- start datatables script for yajar package --}}
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-            crossorigin="anonymous">
-    </script>
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <!-- BS JavaScript -->
+    <!-- <script type="text/javascript" src="{{asset('assets\libs\bootstrap\bootstrap.min.js')}}"></script> -->
 
     <script>
         $(document).ready( function () {
@@ -144,7 +142,7 @@
     @if( Session::has('createUserRoleError') )
         <script>
             $(document).ready(function(){
-                $('#edit_profile').modal({show: true});
+                $('#add_user_role').modal({show: true});
             });
         </script>
     @endif
