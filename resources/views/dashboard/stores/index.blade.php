@@ -162,63 +162,75 @@
 
     function dispalySearchResult(data)
     {
-        if( $('#search-by-products').val() != "" )
-            {
-                $("#storedatatable-table_wrapper").empty();
+        if( $('#search-by-products').val().length !== 0 )
+        {
+            $("#storedatatable-table_wrapper").empty();
 
-                var container = "", url = "{{ route('dashboard.stores.show', [ 'store' => ':id']) }}";
+            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}";
 
-                $.each(data.products,function(key,val){
-                    url         =   url.replace(':id', val.storeId);
-                    container   +=  `<tr>
-                                        <td>`+val.storeId+`</td>
-                                        <td>`+val.storeName+`</td>
-                                        <td>`+val.amount+' '+val.unit+`</td>
-                                        <td>$ `+val.unitPrice+`</td>
-                                        <td><a href="`+url+`" title="{{__('site.show')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.show')}}"><i class="ft-eye"> {{__('site.show')}} </i></a></td>
-                                    </tr>`;
-                });
-       
-                $("#products-container").append(`
-                    <table class="table table-striped table-bordered cat-configuration" id="searchResultTable">
-                        <thead>
-                            <tr>
-                                <th>{{__('site.id')}}</th>
-                                <th>{{isset($_REQUEST['medical_store'])? __('site.warehouses') : __('site.cosmetic_companies')}}</th>
-                                <th>{{__('site.available')}}</th>
-                                <th>{{__('site.unit_price')}}</th>
-                                <th>{{__('site.show')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            `+
-                                container
-                            +`
-                        </tbody>
-                    </table>
-                `);
-            }
+            $.each(data.products,function(key,val){
+                url         =   url.replace(':id', val.storeId);
+                container   +=  `<tr>
+                                    <td>`+val.storeId+`</td>
+                                    <td>`+val.storeName+`</td>
+                                    <td>`+val.amount+' '+val.unit+`</td>
+                                    <td>$ `+val.unitPrice+`</td>
+                                    <td><a href="`+url+`" title="{{__('site.start_order')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.start_order')}}"><i class="ft-eye"> {{__('site.start_order')}} </i></a></td>
+                                </tr>`;
+            });
+    
+            $("#products-container").append(`
+                <table class="table table-striped table-bordered cat-configuration" id="searchResultTable">
+                    <thead>
+                        <tr>
+                            <th>{{__('site.id')}}</th>
+                            <th>{{isset($_REQUEST['medical_store'])? __('site.warehouses') : __('site.cosmetic_companies')}}</th>
+                            <th>{{__('site.available')}}</th>
+                            <th>{{__('site.unit_price')}}</th>
+                            <th>{{__('site.start_order')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        `+
+                            container
+                        +`
+                    </tbody>
+                </table>
+            `);
+        }
     }
 
     $(document).on('click','#find-product',function(event){
+
         $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
             dispalySearchResult(data);
         }).then( function(){
+            if($("#searchResultTable_wrapper").length)
+                $("#searchResultTable_wrapper").remove();
+
             $('#searchResultTable').DataTable();
-            $('#search-result-filter').css('display', '');
+
+            if($('#search-by-products').val().length)
+                $('#search-result-filter').css('display', '');
         }).then( function(){
             $(document).on('click','.custom-control-input',function(event){
-                if(this.id == "top-units")
-                    $('#discount-rate').prop('checked', false);
-                else if(this.id == "discount-rate")
-                    $('#top-units').prop('checked', false);
                 
-                $.post("{{ route('dashboard.stores.searchResultFilter') }}",{'keyword':$('#search-by-products').val(),'filter':this.id,'_token':$('input[name=_token]').val(),'type':type},function(data){
-                    $("#searchResultTable_wrapper").remove();
-                    dispalySearchResult(data);
-                }).then( function(){
-                    $('#searchResultTable').DataTable();
-                });
+                if( $('#search-by-products').val().length !== 0 )
+                {
+                    if(this.id == "top-units")
+                        $('#discount-rate').prop('checked', false);
+                    else if(this.id == "discount-rate")
+                        $('#top-units').prop('checked', false);
+                    
+                    $.post("{{ route('dashboard.stores.searchResultFilter') }}",{'keyword':$('#search-by-products').val(),'filter':this.id,'_token':$('input[name=_token]').val(),'type':type},function(data){
+                        dispalySearchResult(data);
+                    }).then( function(){
+                        if($("#searchResultTable_wrapper").length)
+                            $("#searchResultTable_wrapper").remove();
+
+                        $('#searchResultTable').DataTable();
+                    });
+                }
             })
         });
     });

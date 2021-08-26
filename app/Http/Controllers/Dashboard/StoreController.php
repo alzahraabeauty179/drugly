@@ -12,6 +12,7 @@ use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Builder;
 use Validator;
 use DB;
+use DataTables;
 
 class StoreController extends BackEndController
 {
@@ -108,6 +109,50 @@ class StoreController extends BackEndController
         $module_name_singular = $this->getSingularModelName();
 
         return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+    }
+
+    /**
+     * Display the store products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function Products()
+    {
+        $query = Product::whereHas('store', function(Builder $q){
+                            $q->where('id', request()->store);
+                        });
+
+        return Datatables::of($query)
+            ->addColumn('check', function ($query) {
+                return  '<input type="checkbox" class="select-item checkbox"
+                name="select-item" value="'.$query->id.'" />';
+            })
+            ->addColumn('name', function ($query) {
+                return  $query->translation->name;
+            })
+            ->addColumn('type', function ($query) {
+                return  $query->translation->type;
+            })
+            ->addColumn('available', function ($query) {
+                return $query->amount.' '.$query->unit;
+            })
+            ->addColumn('unit_price', function ($query) {
+                return '$ '.$query->unit_price;
+            })
+
+            ->filter(function ($query) {
+                return $query
+                    ->where('owner_id', request()->store)
+                    ->where(function ($w) {
+                        return $w->whereTranslationLike('name', "%" . request()->search['value'] . "%")
+                            ->orwhereTranslationLike('type', "%" . request()->search['value'] . "%")
+                            ->orwhereTranslationLike('unit', "%" . request()->search['value'] . "%")
+                            ->orwhere('amount', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('unit_price', 'like', "%" . request()->search['value'] . "%");
+                    });
+            })
+            ->rawColumns(['check', 'name'])
+            ->make(true);
     }
 
     /**

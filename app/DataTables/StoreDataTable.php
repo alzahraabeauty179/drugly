@@ -32,8 +32,8 @@ class StoreDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('store', function ($query) {
-                return '<a href="'.route('dashboard.stores.show', [ 'store' => $query->id ]).'" ><i class="glyphicon glyphicon-edit"></i> '. __('site.' . $query->translation->name) .'</a>';
+            ->addColumn('name', function ($query) {
+                return '<a href="'.route('dashboard.stores.show', [ 'store' => $query->id ]).'" ><i class="glyphicon glyphicon-edit"></i> '.$query->translation->name.'</a>';
             })
             ->addColumn('email', function ($query) {
                 return $query->email;
@@ -41,7 +41,7 @@ class StoreDataTable extends DataTable
             ->addColumn('action', function (Store $row) {
                 $module_name_singular = 'store';
                 $module_name_plural   = 'stores';
-                return view('dashboard.buttons.show', compact('module_name_singular', 'module_name_plural', 'row'));
+                return view('dashboard.buttons.start_order', compact('module_name_singular', 'module_name_plural', 'row'));
             })
             ->filter(function ($query) {
                 return $query
@@ -53,7 +53,7 @@ class StoreDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['store', 'action']);
+            ->rawColumns(['name', 'action']);
     }
 
     /**

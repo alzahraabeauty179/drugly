@@ -32,6 +32,10 @@ return [
 	'recently'=>'حديثا',
     'published_advertisements'=>'الإعلانات المُعلنة',
     'status'=>'حالة الإشتراك',
+    'make_order'=>'قم بالطلب',
+    'start_order'=>'بدأ طلبية',
+    'show_products'=>'عرض المنتجات',
+    'open'=>'فتح',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
