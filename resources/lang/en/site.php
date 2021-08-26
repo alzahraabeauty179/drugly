@@ -27,6 +27,11 @@ return [
     'product_search'=>'Product Search...',
     'discount_rate'=>'Discount Rate',
 	'top_units'=>'Top Units',
+    'my_advertisements'=>'My Advertisements',
+    'subscribes_details'=>'Subscribes Details',
+	'recently'=>'Recently',
+    'published_advertisements'=>'Published Advertisements',
+    'status'=>'Status',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -89,6 +94,7 @@ return [
 	'horizontal'=>'Horizontal',
 	'vertical'=>'Vertical',
 	'longitudinal'=>'Longitudinal',
+    'views' => 'Views',
 
 	// Logs
 	'logs'=>'Logs',
@@ -196,7 +202,7 @@ return [
     'website_info_added_successfully'=>'Website information added successfully',
 
     # Roles
-    'stores' => 'Stores Settings',
+    'stores' => 'Stores',
     'users_roles'=>'Users Roles',
     'user_role'=>'User Role',
     'done'=>'Action done successfully',

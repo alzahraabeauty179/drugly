@@ -45,9 +45,11 @@
                                             <li class="nav-item">
                                                 <a class="nav-link" href="#notifications"><i class="fa fa-bell-o"></i> @lang('site.notifications') </a>
                                             </li>
+                                            @if( auth()->user()->type != "super_admin" )
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#ads"><i class="ft-tv"></i> @lang('site.advertisements') </a>
+                                                <a class="nav-link" href="#ads"><i class="ft-tv"></i> @lang('site.my_advertisements') </a>
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -217,32 +219,32 @@
                         </li>
                     </ul>
                 </section>
-                <!-- Advertisements -->
-                <section id="ads" class="timeline-center timeline-wrapper">
-                    <h3 class="page-title text-center"> @lang('site.advertisements') </h3>
-                    <ul class="timeline">
-                        <li class="timeline-line"></li>
-                        <li class="timeline-item">
-                            <div class="timeline-card card border-grey border-lighten-2">
-                                <div class="card-header">
-                                    <h4 class="card-title"><a href="#"> @lang('site.published_advertisements')</a></h4>
-                                    <p class="card-subtitle text-muted mb-0 pt-1">
-                                        <span class="font-small-3"> @lang('site.advertisements_hint') </span>
-                                    </p>
-                                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-                                    <div class="heading-elements">
-                                        <ul class="list-inline mb-0">
-                                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        </ul>
+                @if( auth()->user()->type != "super_admin" )
+                    <!-- Advertisements -->
+                    <section id="ads" class="timeline-center timeline-wrapper">
+                        <h3 class="page-title text-center"> @lang('site.advertisements') </h3>
+                        <ul class="timeline">
+                            <li class="timeline-line"></li>
+                            <li class="timeline-item">
+                                <div class="timeline-card card border-grey border-lighten-2">
+                                    <div class="card-header">
+                                        <h4 class="card-title"><a href="#"> @lang('site.published_advertisements')</a></h4>
+                                        <p class="card-subtitle text-muted mb-0 pt-1">
+                                            <span class="font-small-3"> @lang('site.advertisements_hint') </span>
+                                        </p>
+                                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                        <div class="heading-elements">
+                                            <ul class="list-inline mb-0">
+                                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card">
-                                        <div class="card-content collapse show">
-                                            <div class="card-body card-dashboard">
-                                                @if( isset($ads) && $ads->count() > 0 )
+                                    <div class="card-content">
+                                        <div class="card">
+                                            <div class="card-content collapse show">
+                                                <div class="card-body card-dashboard">
                                                     <table class="table table-striped table-bordered zero-configuration" id="myAdsTable">
                                                         <thead>
                                                             <tr>
@@ -254,15 +256,15 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        @forelse($ads as $index=>$row)
+                                                        @forelse(auth()->user()->advertisements as $index=>$ad)
                                                             <tr>
                                                                 <td> {{++$index}} </td>
-                                                                <td> {{ $row->title }} </td>
-                                                                <td> {{ $row->end_date }} </td>
+                                                                <td> {{ $ad->title }} </td>
+                                                                <td> {{ $ad->end_date }} </td>
                                                                 <td>
                                                                     <figure class="col-md-3 col-sm-6 col-12" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                                                                        <a href="{{ asset($row->image_path) }}" itemprop="contentUrl">
-                                                                            <img class="img-thumbnail img-fluid" src="{{ asset($row->image_path) }}" itemprop="thumbnail" alt="{{ $row->description }}" />
+                                                                        <a href="{{ asset($ad->image_path) }}" itemprop="contentUrl">
+                                                                            <img class="img-thumbnail img-fluid" src="{{ asset($ad->image_path) }}" itemprop="thumbnail" alt="{{ $ad->description }}" />
                                                                         </a>
                                                                     </figure>
                                                                 </td>
@@ -281,17 +283,15 @@
                                                             </tr>
                                                         </tfoot>
                                                     </table>
-                                                @else
-                                                    <h4>@lang('site.no_records')</h4>
-                                                @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
+                            </li>
+                        </ul>
+                    </section>
+                @endif
             </div>
             <!-- </div> -->
         </div>
@@ -323,7 +323,8 @@
     <script>
         $(document).ready( function () {
             $('#myNotisTable').DataTable();
-        } );
+            $('#myAdsTable').DataTable();
+        });
     </script>
 
     @if( Session::has('updateProfileErrorMessage') )

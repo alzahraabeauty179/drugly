@@ -39,7 +39,7 @@ class AdvertisementDataTable extends DataTable
                 return $query->translation->title;
             })
             ->addColumn('image', function ($query) {
-                return '<image src="'.$query->image_path.'" width="40" height="40" />';
+                return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;"/>';
             })
         	->addColumn('owner', function ($query) {
                 return is_null($query->owner_id)? ''

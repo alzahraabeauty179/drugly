@@ -110,6 +110,22 @@ class UserController extends BackEndController
     } //end of edit
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+       
+        $row = $this->model->findOrFail($id);
+  
+        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -155,17 +171,5 @@ class UserController extends BackEndController
 
         session()->flash('success', __('site.profile_updated_successfully'));
         return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id, Request $request)
-    {
-        //
     }
 }

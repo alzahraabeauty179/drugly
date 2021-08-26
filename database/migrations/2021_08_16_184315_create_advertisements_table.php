@@ -25,6 +25,7 @@ class CreateAdvertisementsTable extends Migration
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
+            $table->integer('views')->default(0);
             $table->tinyInteger('active')->default(1);
             $table->string('image')->nullable();
 

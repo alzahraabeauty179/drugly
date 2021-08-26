@@ -50,6 +50,7 @@
                                                 @lang('site.users')
                                             </div>
                                         	@if( isset($row) )
+                                                <input type="hidden" name="user_id" value="{{ $row->user->id }}">
                                         		<span>{{ $row->user->name }}</span>
                                         	@else
                                             <select class="select2 form-control" id="user_id" name="user_id">

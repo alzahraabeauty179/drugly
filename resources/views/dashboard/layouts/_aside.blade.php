@@ -158,15 +158,16 @@
             @endif{{-- Logs --}}
 
             @if ( auth()->user()->type == "pharmacy" )
-            <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'medical_store') }}"><i class="ft-package"></i><span
-                        class="menu-title" data-i18n="">@lang('site.warehouses')</span></a>
-            </li>
-            @endif{{-- Show stores for pharmacies --}}
-
-            @if ( auth()->user()->type == "pharmacy" )
-            <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'cosmetic_company') }}"><i class="ft-layers"></i><span
-                        class="menu-title" data-i18n="">@lang('site.cosmetic_companies')</span></a>
-            </li>
+                @if (auth()->user()->can('read-stores'))
+                <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'medical_store') }}"><i class="ft-package"></i><span
+                            class="menu-title" data-i18n="">@lang('site.warehouses')</span></a>
+                </li>
+                @endif
+                @if (auth()->user()->can('read-stores'))
+                <li class="nav-item"><a href="{{ route('dashboard.stores.index', 'cosmetic_company') }}"><i class="ft-layers"></i><span
+                            class="menu-title" data-i18n="">@lang('site.cosmetic_companies')</span></a>
+                </li>
+                @endif
             @endif{{-- Show stores for pharmacies --}}
 
         </ul>

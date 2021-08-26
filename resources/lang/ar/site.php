@@ -27,6 +27,11 @@ return [
     'product_search'=>'بحث بالمنتج',
     'discount_rate'=>'معدل الخصم',
 	'top_units'=>'أعلى الوحدات',
+    'my_advertisements'=>'إعلاناتى',
+    'subscribes_details'=>'تفاصيل الاشتراكات',
+	'recently'=>'حديثا',
+    'published_advertisements'=>'الإعلانات المُعلنة',
+    'status'=>'حالة الإشتراك',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
@@ -88,6 +93,7 @@ return [
 	'horizontal'=>'أفقي',
 	'vertical'=>'عمودي',
 	'longitudinal'=>'طولي',
+    'views' => 'المشاهدات',
 	
 	// Logs
 	'logs'=>'Logs',
@@ -198,7 +204,7 @@ return [
     'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
 
     # Roles
-    'stores' => 'إعدادات المخازن',
+    'stores' => 'المخازن',
     'users_roles'=>'صلاحيات المستخدميين',
     'user_role'=>'صلاحية المستخدم',
 

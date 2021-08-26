@@ -38,7 +38,7 @@
             <section id="configuration">
                 @php
                
-                    $users = App\User::whereNotHas('roles');
+                    $users = App\User::whereDoesntHave('roles')->get();
                     $roles = App\Role::all();
                 @endphp
                 <div class="row">

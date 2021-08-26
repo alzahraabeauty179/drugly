@@ -214,11 +214,11 @@
                     $('#top-units').prop('checked', false);
                 
                 $.post("{{ route('dashboard.stores.searchResultFilter') }}",{'keyword':$('#search-by-products').val(),'filter':this.id,'_token':$('input[name=_token]').val(),'type':type},function(data){
+                    $("#searchResultTable_wrapper").remove();
                     dispalySearchResult(data);
                 }).then( function(){
                     $('#searchResultTable').DataTable();
                 });
-                console.log( this.id ,$('#search-by-products').val());
             })
         });
     });
