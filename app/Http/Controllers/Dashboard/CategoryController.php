@@ -134,7 +134,7 @@ class CategoryController extends BackEndDatatableController
     }
 
     /**
-     * Display the specified sub/areas resource.
+     * Display the specified sub/categories resource.
      *
      */
     public function subCategory()

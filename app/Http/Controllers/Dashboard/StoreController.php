@@ -107,12 +107,27 @@ class StoreController extends BackEndController
     {
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
 
         return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
     }
 
     /**
-     * Display the store products.
+     * Display the store products resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showStoreProducts($id)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+  
+        return VIEW('dashboard.' . $module_name_plural . '.products', compact('module_name_singular', 'module_name_plural'));
+    }
+
+    /**
+     * Get the store products.
      *
      * @return \Illuminate\Http\Response
      */
@@ -123,9 +138,9 @@ class StoreController extends BackEndController
                         });
 
         return Datatables::of($query)
-            ->addColumn('check', function ($query) {
+            ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select-item" value="'.$query->id.'" />';
+                name="select-item[]" value="'.$query->id.'" onClick="javascript: SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
                 return  $query->translation->name;
@@ -139,7 +154,6 @@ class StoreController extends BackEndController
             ->addColumn('unit_price', function ($query) {
                 return '$ '.$query->unit_price;
             })
-
             ->filter(function ($query) {
                 return $query
                     ->where('owner_id', request()->store)
@@ -151,8 +165,19 @@ class StoreController extends BackEndController
                             ->orwhere('unit_price', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['check', 'name'])
+            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">'])
             ->make(true);
+    }
+
+    /**
+     * Make order.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function makeOrder(Request $request)
+    {
+        dd($request);
     }
 
     /**

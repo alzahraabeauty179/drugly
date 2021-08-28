@@ -192,14 +192,4 @@
         });
     });
 </script>
-
-<script>
-    function selectProduct(e) {
-        console.log('test', ' $(e).val() = ',$(e).val(), ' $(e).value = ',$(e).value);
-
-        var products = [];
-        
-        products.push(this.checked);
-    };
-</script>
 @endpush
