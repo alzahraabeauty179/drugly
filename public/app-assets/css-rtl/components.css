@@ -604,7 +604,7 @@ footer.footer-dark {
   padding : 0;
 }
 .main-menu ul.navigation-main {
-  overflow-x : hidden;
+  overflow-x: scroll;
 }
 .main-menu a {
   outline : none;
