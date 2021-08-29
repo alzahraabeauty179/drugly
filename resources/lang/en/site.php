@@ -37,6 +37,13 @@ return [
     'show_products'=>'Show Products',
     'open'=>'Open',
     'type'=>'Type',
+    'unit'=>'Unit',
+
+    // Orders
+    'upload_order_excel'=>'Upload Order Excel',
+    'excel_validation_errors' =>'Validation Errors',
+    'order_failed'=>'Order failed, because the excel sheet data not validated, Please be sure that you are using the right sheet then try again!',
+    'order_sent_successfuly'=>'Order Sent Successfuly',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',

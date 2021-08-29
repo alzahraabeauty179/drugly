@@ -6,6 +6,22 @@
 <div class="app-content content">
 
     <div class="container-fluid row d-flex justify-content-center">
+        @if(count($errors->getMessages()) > 0)
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>@lang('site.excel_validation_errors')</strong>
+                <ul>
+                    @foreach($errors->getMessages() as $errorMessages)
+                        @foreach($errorMessages as $errorMessage)
+                            <li>
+                                {{ $errorMessage }}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            </li>
+                        @endforeach
+                    @endforeach
+                </ul>
+            </div>                           
+        @endif
+
         @if(session('success'))
             <div class="alert alert-success col-sm-6 text-center" role="alert">
                 {!! session('success') !!}
@@ -56,21 +72,19 @@
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-md-5">
                                         <div class="row d-flex justify-content-center align-items-center">
-                                            <!-- Search by products -->
-                                            <div class="col-6" style="display: block ruby;">
-                                                <i class="ficon ft-search" id="find-product" style="cursor: pointer;"></i>
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="Product Search..." class="form-control" id="search-by-products">
-                                                </div>
-                                            </div>
-                                            <!-- ./Search by products -->
-
                                             <!-- Upload Excel -->
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <form action="">
-                                                        <label for="">Upload Excel</label>
-                                                        <input type="file" class="form-control-file" />
+                                                    <form   enctype="multipart/form-data" method="POST"
+                                                            action="{{ route('dashboard.orders.store') }}">
+                                                            @method('POST')
+                                                            @csrf
+                                                        <div class="form-group">
+                                                            <input type="hidden" name="store_id" value="{!! request()->store !!}">
+
+                                                            <label for="order_sheet">@lang('site.upload_order_excel')</label>
+                                                            <input type="file" class="form-control-file" name="order_sheet" />
+                                                        </div>
                                                         <button class="btn btn-primary btn-sm">
                                                             <i class="ft-plus"></i> @lang('site.make_order')
                                                         </button>
@@ -80,29 +94,6 @@
                                             <!-- ./Upload Excel -->
                                         </div>
                                     </div>
-
-                                    <!-- Result Filter -->
-                                    <div class="col-md-4">
-                                        <div class="row d-flex justify-content-center align-items-center">
-                                            <div class="col-md-6">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck2">
-                                                    <label class="custom-control-label" style="margin-left: 20px;"
-                                                        for="customCheck2">Discount Rate</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        name="customCheck" id="customCheck3">
-                                                    <label class="custom-control-label" style="margin-left: 20px;"
-                                                        for="customCheck3">Top Units</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- ./Result Filter -->
                                 </div>
                             </div>
                             <!-- ./Advanced Search -->
@@ -122,7 +113,8 @@
                                                     <th>@lang('site.name')</th>
                                                     <th>@lang('site.type')</th>
                                                     <th>@lang('site.available')</th>
-                                                    <th>@lang('site.unit_price')</th>
+                                                    <th>@lang('site.unit')</th>
+                                                    <th>@lang('site.unit_price') $</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -182,8 +174,9 @@
             { data: '<input type="checkbox" class="select-all checkbox" name="select-all">', name: '<input type="checkbox" class="select-all checkbox" name="select-all">', orderable: false, searchable: false},
             { data: 'name', name: 'name' , orderable: false, },
             { data: 'type', name: 'type', orderable: false, },
-            { data: 'available', name: 'available', orderable: false, },
-            { data: 'unit_price', name: 'unit_price', orderable: false, },
+            { data: 'available', name: 'available', orderable: true, },
+            { data: 'unit', name: 'unit', orderable: false, },
+            { data: 'unit_price', name: 'unit_price', orderable: true, },
         ], 
     });
 });

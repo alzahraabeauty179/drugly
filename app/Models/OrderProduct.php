@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderProduct extends Model
 {
+    public $timestamps = false;
     /**
      * @var string[]  fillable
      */

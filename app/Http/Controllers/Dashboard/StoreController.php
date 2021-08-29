@@ -149,11 +149,15 @@ class StoreController extends BackEndController
                 return  $query->translation->type;
             })
             ->addColumn('available', function ($query) {
-                return $query->amount.' '.$query->unit;
+                return $query->amount;
+            })
+            ->addColumn('unit', function ($query) {
+                return $query->unit;
             })
             ->addColumn('unit_price', function ($query) {
-                return '$ '.$query->unit_price;
+                return $query->unit_price;
             })
+            ->orderColumn('amount', 'unit_price')
             ->filter(function ($query) {
                 return $query
                     ->where('owner_id', request()->store)

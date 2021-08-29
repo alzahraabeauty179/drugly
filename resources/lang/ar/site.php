@@ -37,6 +37,13 @@ return [
     'show_products'=>'عرض المنتجات',
     'open'=>'فتح',
     'type'=>'النوع',
+    'unit'=>'الوحدة',
+
+    // Orders
+    'upload_order_excel'=>'تحميل ملف الطلب',
+    'excel_validation_errors' =>'اخطاء في ملف الأكسل',
+    'order_failed'=>'فشل الطلب بسبب عدم التحقق من صحة بيانات Excel ، يرجى التأكد من أنك تستخدم الورقة الصحيحة ثم حاول مرة أخرى!',
+    'order_sent_successfuly'=>'تم إرسال الطلب بنجاح',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

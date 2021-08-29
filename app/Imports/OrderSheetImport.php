@@ -14,14 +14,11 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class OrderSheetImport implements ToCollection
 {
+    protected $order_id;
 
-    protected $user_id;
-    protected $store_id;
-
-    public function __construct($store_id)
+    public function __construct($order_id)
     {
-        $this->store_id    = $store_id;
-        $this->user_id     = auth()->user()->id;
+        $this->order_id    = $order_id;
     }
 
     /**
@@ -31,33 +28,21 @@ class OrderSheetImport implements ToCollection
      */
     public function collection(Collection $rows)
     {
-        // create order 
-        $order = Order::create([
-                'from_id'   => $this->user_id,
-                'to_id'     => $this->store_id,
-                'status'    => 'waiting',
-            ]);
-
-        // create order products
         foreach ($rows as $index => $row) {
-            $product =  Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
-                        ->where('active', 1)->first();
-
-            if ($index <> 0 && !is_null($product)) {
-
-                OrderProduct::create([
+            if ($index <> 0 ) {
+                $product =  Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                ->where('active', 1)->first();
+                
+                if( !is_null($product) )
+                    OrderProduct::create([
                         'product_id'        => $product->id,
-                        'order_id'          => $order->id,
+                        'order_id'          => $this->order_id,
                         'amount'            => $row[2],
                         'unit'              => $row[3],
                         'note'              => $row[4],
                     ]);
             }
         }
-
-        // save log for super_admin
-        
-        // notify store
     }
 
     public function validat($rows)
