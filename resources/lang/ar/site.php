@@ -36,6 +36,7 @@ return [
     'start_order'=>'بدأ طلبية',
     'show_products'=>'عرض المنتجات',
     'open'=>'فتح',
+    'type'=>'النوع',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

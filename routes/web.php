@@ -75,8 +75,9 @@ Route::group(
             Route::get('show/store-products/{store}', 'StoreController@showStoreProducts')->name('stores.products');
             Route::get('get/store-products', 'StoreController@products')->name('products');
             Route::post('make-order', 'StoreController@makeOrder')->name('makeOrder');
-            
-            
+
+            ######################### Orders #########################
+            Route::resource('orders', 'OrderController');
             
             ######################### Areas #########################
             Route::resource('areas', 'AreaController');

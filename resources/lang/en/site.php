@@ -36,6 +36,7 @@ return [
     'start_order'=>'Start Order',
     'show_products'=>'Show Products',
     'open'=>'Open',
+    'type'=>'Type',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',

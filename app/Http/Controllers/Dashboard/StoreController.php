@@ -140,7 +140,7 @@ class StoreController extends BackEndController
         return Datatables::of($query)
             ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select-item[]" value="'.$query->id.'" onClick="javascript: SelectProduct(this, value);" />';
+                name="select-item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
                 return  $query->translation->name;

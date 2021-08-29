@@ -71,6 +71,9 @@
                                                     <form action="">
                                                         <label for="">Upload Excel</label>
                                                         <input type="file" class="form-control-file" />
+                                                        <button class="btn btn-primary btn-sm">
+                                                            <i class="ft-plus"></i> @lang('site.make_order')
+                                                        </button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -194,12 +197,11 @@
 </script>
 
 <script>
-    function selectProduct(e) {
-        console.log('test', ' $(e).val() = ',$(e).val(), ' $(e).value = ',$(e).value);
-
-        var products = [];
-        
-        products.push(this.checked);
+    var products = [];
+    function SelectProduct(e, val) {
+        products.push($(e).val());
+        // not finished yet!
+        console.log(products);        
     };
 </script>
 @endpush
