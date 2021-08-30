@@ -44,6 +44,9 @@ return [
     'excel_validation_errors' =>'اخطاء في ملف الأكسل',
     'order_failed'=>'فشل الطلب بسبب عدم التحقق من صحة بيانات Excel ، يرجى التأكد من أنك تستخدم الورقة الصحيحة ثم حاول مرة أخرى!',
     'order_sent_successfuly'=>'تم إرسال الطلب بنجاح',
+    'refused'=>'مرفوض',
+    'updated_at'=>'تاريخ التحديث',
+    'action'=>'حدث',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

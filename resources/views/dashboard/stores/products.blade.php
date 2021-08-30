@@ -171,11 +171,11 @@
         },
         type : 'POST',
         columns: [
-            { data: '<input type="checkbox" class="select-all checkbox" name="select-all">', name: '<input type="checkbox" class="select-all checkbox" name="select-all">', orderable: false, searchable: false},
-            { data: 'name', name: 'name' , orderable: false, },
-            { data: 'type', name: 'type', orderable: false, },
+            { data: '<input type="checkbox" class="select-all checkbox" name="select-all">', name: '<input type="checkbox" class="select-all checkbox" name="select-all">', orderable: true, searchable: false},
+            { data: 'name', name: 'name' , orderable: true, },
+            { data: 'type', name: 'type', orderable: true, },
             { data: 'available', name: 'available', orderable: true, },
-            { data: 'unit', name: 'unit', orderable: false, },
+            { data: 'unit', name: 'unit', orderable: true, },
             { data: 'unit_price', name: 'unit_price', orderable: true, },
         ], 
     });

@@ -78,6 +78,7 @@ Route::group(
 
             ######################### Orders #########################
             Route::resource('orders', 'OrderController');
+            Route::get('show', 'OrderController@showOrders')->name('showOrders');
             
             ######################### Areas #########################
             Route::resource('areas', 'AreaController');

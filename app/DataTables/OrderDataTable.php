@@ -9,16 +9,29 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class OrderDataTable extends DataTable
 {
+    protected $model;
     /**
-     * Build DataTable class.
+     * Constructor.
+     */
+    public function __construct(Order $model)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * Build DataTable class. this will used by super admin
      *
      * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
+        $query = $this->query();
+
         return datatables()
             ->eloquent($query)
             ->addColumn('action', 'orderdatatable.action');
@@ -30,9 +43,9 @@ class OrderDataTable extends DataTable
      * @param \App\Models\OrderDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(OrderDataTable $model)
+    public function query()
     {
-        return $model->newQuery();
+        return $this->model->newQuery();
     }
 
     /**
