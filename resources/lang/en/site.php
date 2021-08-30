@@ -47,6 +47,20 @@ return [
     'refused'=>'Refused',
     'updated_at'=>'Updated At',
     'action'=>'Action',
+    'make_an_order_decision_store_hint'=>'This message will be sent to the pharmacy.',
+    'make_an_order_decision_pharmacy_hint'=>'You can only delete the request if it is still on waiting!',
+	'the_order_request_has_been_refused'=>'The order request has been refused!',
+	'proccessingP'=>'Proccessing',
+	'order_products_info'=>'Order Products Information',
+	'order_products_info_hint'=>'Show all information for the order products.',
+	'note'=>'Note',
+    'pharmacy_email'=>'Pharmacy Email',
+	'store_email'=>'Store Email',
+    'store_areas'=>'Store Areas',
+    'from'=>'From',
+    'to'=>'To',
+    'order_info'=>'Order Information',
+	'order_info_hint'=>'Show all order information for archive or make a decision.',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -194,13 +208,23 @@ return [
     'update_profile_info'=>'Update Profile Information',
     'current_password_not_correct'=>'The current password is not accurate!',
     'profile_updated_successfully'=>'Profile Updated Successfully',
-    
     'full_name'=>'Full Name',
     'have_account'=>'already have an account ? ',
     'dont_have_account'=>'don\'t have an account ? ',
     'for_account'=>'For An Account',
     'forgot_password'=>'Forgot Password ?',
     'rememberMe'=>'Remember Me',
+
+    # Store
+	'store_info'=>'Store Information',
+	'store_info_hint'=>'All required information from stores are displayed.',
+	'info'=>'Information',
+	'logo_social_media'=>'Logo And Social Media',
+	'logo_social_media_hint'=>'Only all social media links available for sharing is displayed.',
+	'store_logo'=>'Store Logo',
+	'trade_information'=>'Trade Information',
+	'trade_information_hint'=>'Please, you must read this information carefully before starting any communication or ordering products.',
+	'important'=>'Important',
 
     # areas
     'areas'=>'Areas',

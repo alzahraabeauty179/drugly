@@ -40,7 +40,7 @@ class OrderController extends BackEndDatatableController
     }
 
     /**
-     * Show orders to the non super admin users.
+     * Show orders for the non super admin users.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class OrderController extends BackEndDatatableController
                         ->where('from_id', auth()->user()->id)->where('status', request()->status)
                         ->where(function ($w) {
                             return $w->whereHas('to', function (Builder $q) {
-                                    $q->where('name', 'like', '%'.request()->search['value'].'%');
+                                    $q->whereTranslationLike('name', "%" . request()->search['value'] . "%");
                                 })
                                 ->orwhere('status', 'like', "%" . request()->search['value'] . "%")
                                 ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
@@ -116,6 +116,43 @@ class OrderController extends BackEndDatatableController
                 ->rawColumns(['action', 'pharmacy'])
                 ->make(true)
                 ;
+    }
+
+    /**
+     * Show order products.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function orderProducts()
+    {
+        $query = OrderProduct::where('order_id', request()->order);
+
+        return Datatables::of($query)
+                ->addColumn('product', function ($query) {
+                    return $query->product->name;
+                })->addColumn('amount', function ($query) {
+                    return $query->amount;
+                })->addColumn('unit', function ($query) {
+                    return $query->unit;
+                })->addColumn('note', function ($query) {
+                    return '<span title="'.$query->note.'">'.\Illuminate\Support\Str::limit($query->note, 25, '...').'</span>';
+                })
+                ->filter(function ($query) {
+                    return $query
+                        ->where('order_id', request()->order)
+                        ->where(function ($w) {
+                            return $w->whereHas('product', function (Builder $q) {
+                                    $q->whereTranslationLike('name', "%" . request()->search['value'] . "%");
+                                })
+                                ->orwhere('amount', 'like', "%" . request()->search['value'] . "%")
+                                ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                                ->orwhere('unit', 'like', "%" . request()->search['value'] . "%")
+                                ->orwhere('note', 'like', "%" . request()->search['value'] . "%");
+                        });
+                })
+                ->rawColumns(['note'])
+                ->make(true);
     }
 
     /**
@@ -173,7 +210,11 @@ class OrderController extends BackEndDatatableController
      */
     public function show($id)
     {
-        //
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
+
+        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**

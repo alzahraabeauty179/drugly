@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('to_id')->unsigned(); // store
-            $table->foreign('to_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('to_id')->references('id')->on('stores')->onDelete('cascade');
 
             $table->enum('status', ['waiting','accepted','proccessing','done','refused'])->default('waiting');
 

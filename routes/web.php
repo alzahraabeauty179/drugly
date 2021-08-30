@@ -79,11 +79,11 @@ Route::group(
             ######################### Orders #########################
             Route::resource('orders', 'OrderController');
             Route::get('show', 'OrderController@showOrders')->name('showOrders');
+            Route::get('get/order-products', 'OrderController@orderProducts')->name('order.products');
             
             ######################### Areas #########################
             Route::resource('areas', 'AreaController');
             Route::get('sub/areas', 'AreaController@subAreas')->name('subarea');
-
 
            ######################### Products #########################
            Route::resource('products', 'ProductController');

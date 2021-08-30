@@ -47,6 +47,20 @@ return [
     'refused'=>'مرفوض',
     'updated_at'=>'تاريخ التحديث',
     'action'=>'حدث',
+    'make_an_order_decision_store_hint'=>'هذه الرسالة سيتم ارسالها الى الصيدليه.',
+    'make_an_order_decision_pharmacy_hint'=>'لا يمكنك حذف الطلب غير في حالة انه ماذال قيد الانتظار!',
+	'the_order_request_has_been_refused'=>'تم رفض الطلب!',
+	'proccessing'=>'قسد التحضير',
+	'order_products_info'=>'بيانات منتجات الطلب',
+	'order_products_info_hint'=>'عرض جميع البيانات الخاصة بالمنتجات المطلوبة',
+	'note'=>'ملاحظة',
+    'pharmacy_email'=>'البريد الإلكتروني للصيدلية',
+	'store_email'=>'البريد الإلكتروني للمورد',
+    'store_areas'=>'فروع المخزن',
+    'from'=>'من',
+    'to'=>'الي',
+    'order_info'=>'بيانات الطلب',
+	'order_info_hint'=>'إظهار كافة معلومات الطلب للأرشفة أو اتخاذ قرار. ',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
@@ -196,12 +210,21 @@ return [
     'update_profile_info'=>'تحديث الملف الشخصي',
     'current_password_not_correct'=>'كلمة المرور الحالية ليست صحيحة!',
     'profile_updated_successfully'=>'تم تحديث بيانات الملف الشخصي بنجاح',
-
     'dont_have_account'=>'اذا كنت لا تمتلك حساب ؟',
     'forgot_password'=>'هل نسيت كلمة السر ؟',
-
     'rememberMe'=>'تذكرنى',
 
+    # Store
+	'store_info'=>'بيانات المخزن',
+	'store_info_hint'=>'يتم عرض جميع البيانات المطلوبة من المخازن.',
+	'info'=>'البيانات',
+	'logo_social_media'=>'الشعار و وسائل التواصل الاجتماعي',
+	'logo_social_media_hint'=>'يتم عرض جميع بيانات التواصل الاجتماعي المتاحة فقط للمشاركة.',
+	'store_logo'=>'شعار المخزن',
+	'trade_information'=>'المعلومات التجارية',
+	'trade_information_hint'=>'من فضلك, يجب قرأت هذه المعلومات جيدا قبل بدا اي عملية تواصل او طلب منتجات.',
+	'important'=>'هام',
+    
     # areas
     'areas'=>'المناطق',
     'area'=>'منطقة',

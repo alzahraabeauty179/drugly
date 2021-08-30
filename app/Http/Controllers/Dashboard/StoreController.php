@@ -109,7 +109,7 @@ class StoreController extends BackEndController
         $module_name_singular = $this->getSingularModelName();
         $row = $this->model->findOrFail($id);
 
-        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**
@@ -157,7 +157,7 @@ class StoreController extends BackEndController
             ->addColumn('unit_price', function ($query) {
                 return $query->unit_price;
             })
-            ->orderColumn('amount', 'unit_price')
+            // ->orderColumn('available', 'unit_price')
             ->filter(function ($query) {
                 return $query
                     ->where('owner_id', request()->store)
