@@ -100,7 +100,7 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
 
-                                    <form action="{{route('dashboard.makeOrder')}}" method="POST">
+                                    <form action="{{ route('dashboard.orders.store') }}" method="POST">
                                         @method('POST')
                                         {{ csrf_field() }}
                                         <table class="table table-bordered" id="data-table">
@@ -108,7 +108,7 @@
                                                 <tr>
                                                     <th class="active">
                                                         <input type="checkbox" class="select-all checkbox"
-                                                            name="select-all" />
+                                                            name="select_all" />
                                                     </th>
                                                     <th>@lang('site.name')</th>
                                                     <th>@lang('site.type')</th>
@@ -119,9 +119,10 @@
                                             </thead>
                                         </table>
                                         <div class="col-md-12 mt-1">
-                                            <button data-repeater-create="" class="btn btn-primary">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#make_order_manually" class="btn btn-primary">
                                                 <i class="ft-plus"></i> @lang('site.make_order')
                                             </button>
+                                            @component('components.make_order') @endcomponent
                                         </div>
                                     </form>
 
@@ -171,7 +172,7 @@
         },
         type : 'POST',
         columns: [
-            { data: '<input type="checkbox" class="select-all checkbox" name="select-all">', name: '<input type="checkbox" class="select-all checkbox" name="select-all">', orderable: true, searchable: false},
+            { data: '<input type="checkbox" class="select-all checkbox" name="select-all">', name: '<input type="checkbox" class="select-all checkbox" name="select-all">', orderable: false, searchable: false},
             { data: 'name', name: 'name' , orderable: true, },
             { data: 'type', name: 'type', orderable: true, },
             { data: 'available', name: 'available', orderable: true, },
@@ -190,11 +191,11 @@
 </script>
 
 <script>
-    var products = [];
+    var select_manually = [];
     function SelectProduct(e, val) {
-        products.push($(e).val());
-        // not finished yet!
-        console.log(products);        
+        select_manually.push($(e).val());
+        $('#select-manually').attr("name", "select_manually");
+        $('#select-manually').val(select_manually);      
     };
 </script>
 @endpush

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\DataTables\OrderDataTable;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -42,8 +43,7 @@ class OrderController extends BackEndDatatableController
     /**
      * Show orders for the non super admin users.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Json
      */
     public function showOrders()
     {
@@ -121,14 +121,15 @@ class OrderController extends BackEndDatatableController
     /**
      * Show order products.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Json
      */
     public function orderProducts()
     {
+        // $order = Order::where('id', request()->order)->first();
+        // dd($order->orderProducts);
         $query = OrderProduct::where('order_id', request()->order);
 
-        return Datatables::of($query)
+        return  Datatables::of($query)
                 ->addColumn('product', function ($query) {
                     return $query->product->name;
                 })->addColumn('amount', function ($query) {
@@ -153,7 +154,7 @@ class OrderController extends BackEndDatatableController
                 })
                 ->rawColumns(['note'])
                 ->make(true);
-    }
+    }// ISSUE
 
     /**
      * Store a newly created resource in storage.
@@ -164,8 +165,14 @@ class OrderController extends BackEndDatatableController
     public function store(Request $request)
     {
         $rules = [
-            'order_sheet'   => 'required|mimes:xlsx',
-            'store_id'      => 'required|exists:stores,id'
+            'order_sheet'           => 'nullable|mimes:xlsx',
+            'select_all'            => 'nullable',
+            'select_item.*'         => 'nullable',
+            'select_manually.*'     => 'required_unless:order_sheet,null|required_unless:select_item,null',
+            'store_id'              => 'required|exists:stores,id',
+            'amount'                => 'nullable|integer|min:1',
+            'unit'                  => 'nullable|string|max:191',
+            'note'                  => 'nullable|max:400',
         ];
         $request->validate($rules);
 
@@ -177,7 +184,15 @@ class OrderController extends BackEndDatatableController
         ]);
 
         # Create order products
-        Excel::import(new OrderSheetImport($order->id), $request->order_sheet);
+        if(isset($request->order_sheet))
+            Excel::import(new OrderSheetImport($order->id), $request->order_sheet);
+        else{
+
+            if( isset($request->select_all) )
+                    $this->addOrderProducts($request, $order->id, 'select_all'); 
+            else
+                    $this->addOrderProducts($request, $order->id, 'select_manually'); 
+        }
 
         if( count($order->orderProducts) == 0 )
         {
@@ -191,7 +206,7 @@ class OrderController extends BackEndDatatableController
             $this->addLog([
                 'log_type'	=> $this->getClassNameFromModel(),
                 'log_id'  	=> $order->id,
-                'message' 	=> $this->getSingularModelName().'_has_been_updated',
+                'message' 	=> $this->getSingularModelName().'_has_been_added',
                 'action_by'	=> auth()->user()->id,
                 ]);
 
@@ -201,6 +216,33 @@ class OrderController extends BackEndDatatableController
 
         return redirect()->route('dashboard.stores.products', ['store'=>$request->store_id]);
     }
+
+    /**
+     * Store the order products.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $orderId 
+     * @param  string $flag
+     */
+    public function addOrderProducts($request, $orderId, $flag)
+    {
+        $productsIds = $flag == "select_all"? $request->select_item :  array_map('intval', explode(',', $request->select_manually));
+
+        foreach($productsIds as $productId)
+        {
+            $product =  Product::where('id', $productId)->where('active', 1)->first();
+                    
+            if( !is_null($product) )
+                OrderProduct::create([
+                    'product_id'        => $product->id,
+                    'order_id'          => $orderId,
+                    'amount'            => $request->amount,
+                    'unit'              => $request->unit,
+                    'note'              => $request->note,
+                ]);
+        }
+    }
+
 
     /**
      * Display the specified resource.

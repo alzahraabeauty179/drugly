@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderProduct extends Model
 {
     public $timestamps = false;
+    
     /**
      * @var string[]  fillable
      */
@@ -19,12 +20,12 @@ class OrderProduct extends Model
         'note'
     ];
 
-        /**
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function order() : BelongsTo
     {
-        return $this->BelongsTo(Order::class ,'order_id');
+        return $this->BelongsTo(Order::class, 'order_id');
     }
     
     /**
@@ -32,6 +33,6 @@ class OrderProduct extends Model
      */
     public function product() : BelongsTo
     {
-        return $this->BelongsTo(Product::class ,'product_id');
+        return $this->BelongsTo(Product::class, 'product_id');
     }
 }

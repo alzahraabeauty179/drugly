@@ -225,6 +225,7 @@ return [
 	'trade_information'=>'Trade Information',
 	'trade_information_hint'=>'Please, you must read this information carefully before starting any communication or ordering products.',
 	'important'=>'Important',
+    'Amount'=>'Amount',
 
     # areas
     'areas'=>'Areas',
@@ -398,6 +399,9 @@ return [
     'orders'=>'Orders',
     'ordered'=>'Ordered',
     'notes'=>'Notes',
+    'make_order_manually'=>'Make Order Manually',
+	'make_order_manually_hint'=>'In case that you choose some of the products available from 
+    the store, you must enter these data to be added in the order.',
 
     //contacts
     'contact'=>'Contact Us',

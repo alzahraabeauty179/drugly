@@ -140,7 +140,7 @@ class StoreController extends BackEndController
         return Datatables::of($query)
             ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select-item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
+                name="select_item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
                 return  $query->translation->name;
@@ -171,17 +171,6 @@ class StoreController extends BackEndController
             })
             ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">'])
             ->make(true);
-    }
-
-    /**
-     * Make order.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function makeOrder(Request $request)
-    {
-        dd($request);
     }
 
     /**

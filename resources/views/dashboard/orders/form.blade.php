@@ -199,7 +199,7 @@
                             <tr>
                                 <th>@lang('site.id')</th>
                                 <th>@lang('site.product')</th>
-                                <th>@lang('site.amount')</th>
+                                <th>@lang('site.Amount')</th>
                                 <th>@lang('site.unit')</th>
                                 <th>@lang('site.note')</th>
                             </tr>
@@ -211,3 +211,46 @@
     </div>
     <!-- ./Order Details -->
 </section>
+
+@push('style')
+    {{-- start datatables style for yajar package --}}
+    <!-- Bootstrap CSS -->
+    {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">  --}}
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+    {{-- end  datatables style for yajar package --}}
+@endpush
+
+@push('script')
+    {{-- start datatables script for yajar package --}}
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(function() {
+            $('#data-table').DataTable({       
+                dom: "Blfrtip",
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '{!! route('dashboard.order.products') !!}',
+                    data: function (d) {
+                        d.order = '{!! $row->id !!}';
+                    }
+                },
+
+                type : 'POST',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'product', name: 'product' , orderable: false, },
+                    { data: 'amount', name: 'amount', orderable: false, },
+                    { data: 'unit', name: 'unit' },
+                    { data: 'note', name: 'note' , orderable: false, searchable: false}
+                ], 
+            });
+        });
+    </script>
+@endpush

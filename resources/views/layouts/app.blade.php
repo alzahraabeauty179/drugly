@@ -123,7 +123,7 @@
 
         var user_token = messaging.getToken();
         user_token.then(function(token) {
-            console.log(token) // "Some User token"
+            //console.log(token) // "Some User token"
             $('#set-token').val(token);
         });
     </script>
