@@ -77,7 +77,7 @@
                 </li>
 
                 {{-- Notifications Start --}}
-                <li class="dropdown dropdown-notification nav-item notis-open">
+                <li class="dropdown dropdown-notification nav-item notis-open" id="show-notifies">
                     <a
                         class="nav-link nav-link-label"
                         href="#"
@@ -294,4 +294,3 @@
 </nav>
 
 <!-- End / fixed-top -->
-->

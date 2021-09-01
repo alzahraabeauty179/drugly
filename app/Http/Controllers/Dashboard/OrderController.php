@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\OrderSheetImport;
 use Illuminate\Database\Eloquent\Builder;
+use App\Notifications\OrderUpdates;
+use App\Notifications\NewOrder;
 
 use DataTables;
 
@@ -50,8 +52,8 @@ class OrderController extends BackEndDatatableController
         if( auth()->user()->type == "pharmacy" )
             $query = Order::where('from_id', auth()->user()->id)->where('status', request()->status);
         else
-            $query = Order::where('to_id', auth()->user()->id)->where('status', request()->status);
-
+            $query = Order::where('to_id', auth()->user()->store_id)->where('status', request()->status);
+      
         return 
         auth()->user()->type == "pharmacy"?
             Datatables::of($query)
@@ -62,14 +64,12 @@ class OrderController extends BackEndDatatableController
                     return $query->status;
                 })->editColumn('created_at', function ($query) {
                     return $query->created_at->diffForHumans();
-                })
-                ->addColumn('action', function ($query) {
+                })->addColumn('action', function ($query) {
                     $module_name_singular = 'order';
                     $module_name_plural   = 'orders';
                     $row = $query;
                     return view('dashboard.buttons.show', compact('module_name_singular', 'module_name_plural', 'row'));
-                })
-                ->filter(function ($query) {
+                })->filter(function ($query) {
                     return $query
                         ->where('from_id', auth()->user()->id)->where('status', request()->status)
                         ->where(function ($w) {
@@ -102,7 +102,7 @@ class OrderController extends BackEndDatatableController
                 })
                 ->filter(function ($query) {
                     return $query
-                        ->where('to_id', auth()->user()->id)->where('status', request()->status)
+                        ->where('to_id', auth()->user()->store_id)->where('status', request()->status)
                         ->where(function ($w) {
                             return $w->whereHas('from', function (Builder $q) {
                                     $q->where('name', 'like', '%'.request()->search['value'].'%');
@@ -211,7 +211,10 @@ class OrderController extends BackEndDatatableController
                 ]);
 
             # Notify store owner
-            // not yet
+            $this->setFirebase('to', $order->to->owner->fcm_token, null);
+            $title   = ['en'=>"New Order",   'ar'=>"طلب جديد"];
+            $message = ['en'=>"Dr. ".$order->from->name."'s pharmacy sent a new order request.", 'ar'=>"صيدلية الدكتور ".$order->from->name." ارسلت طلب جديد."];
+            $order->to->owner->notify(new OrderUpdates($message, $title, $order->id));
         }
 
         return redirect()->route('dashboard.stores.products', ['store'=>$request->store_id]);
@@ -226,7 +229,7 @@ class OrderController extends BackEndDatatableController
      */
     public function addOrderProducts($request, $orderId, $flag)
     {
-        $productsIds = $flag == "select_all"? $request->select_item :  array_map('intval', explode(',', $request->select_manually));
+        $productsIds = $flag == "select_all"? $request->select_item : array_map('intval', explode(',', $request->select_manually));
 
         foreach($productsIds as $productId)
         {
@@ -268,6 +271,35 @@ class OrderController extends BackEndDatatableController
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = $this->model->findOrFail($id);
+        
+        $rules = [
+            'decision' => 'required|in:accepted,refused,proccessing,done',
+        ];
+        foreach (config('translatable.locales') as $locale) {
+            $rules += [       
+                $locale . '.message'        => 'required|string|min:3|max:500',
+            ];
+        }
+        $request->validate($rules);
+
+        # Update order
+        $order->update(['status' => $request->decision]);
+
+        # Save log for super_admin
+        $this->addLog([
+            'log_type'	=> $this->getClassNameFromModel(),
+            'log_id'  	=> $order->id,
+            'message' 	=> $this->getSingularModelName().'_has_been_updated',
+            'action_by'	=> auth()->user()->id,
+        ]);
+
+        # Notify pharmacy owner
+        $this->setFirebase('to', $order->from->fcm_token, null);
+        $title   = ['en'=>"Order updated",   'ar'=>"تحديث طلب"];
+        $message = ['en'=>$request['en']['message'], 'ar'=>$request['ar']['message']];
+        $order->from->notify(new OrderUpdates($message, $title, $order->id));
+
+        return redirect()->route('dashboard.orders.show', ['order'=>$order->id]);
     }
 }

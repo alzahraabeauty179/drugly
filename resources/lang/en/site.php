@@ -50,6 +50,7 @@ return [
     'make_an_order_decision_store_hint'=>'This message will be sent to the pharmacy.',
     'make_an_order_decision_pharmacy_hint'=>'You can only delete the request if it is still on waiting!',
 	'the_order_request_has_been_refused'=>'The order request has been refused!',
+    'the_order_request_has_been_done'=>'The order request has been done.',
 	'proccessingP'=>'Proccessing',
 	'order_products_info'=>'Order Products Information',
 	'order_products_info_hint'=>'Show all information for the order products.',
@@ -61,6 +62,12 @@ return [
     'to'=>'To',
     'order_info'=>'Order Information',
 	'order_info_hint'=>'Show all order information for archive or make a decision.',
+    'the_order_is_accepted'=>'The order has been accepted',
+    'the_order_is_proccessing'=>'The order is in proccessing',
+    'the_order_is_waiting'=>'The order is in waiting',
+    'the_order_is_done'=>'The order is done',
+    'proccessing'=>'Proccessing',
+    'order_status'=>'Order Status',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -140,12 +147,15 @@ return [
 	'brand_has_been_updated'=>'Brand has been updated',
 	'category_has_been_updated'=>'Category has been updated',
 	'product_has_been_updated'=>'Product has been updated',
-	'stagnant_has_been_deleted' => 'Stagnant has been deleted' ,
+	'stagnant_has_been_deleted' => 'Stagnant has been deleted',
 	'stagnant_has_been_added' => 'Stagnant has been added' ,
-	'stagnant_has_been_updated' => 'Stagnant has been updated' ,
-	'store_has_been_deleted' => 'Store has been deleted' ,
+	'stagnant_has_been_updated' => 'Stagnant has been updated',
+	'store_has_been_deleted' => 'Store has been deleted',
 	'store_has_been_added' => 'Store information has been added' ,
-	'store_has_been_updated' => 'Store information has been updated' ,
+	'store_has_been_updated' => 'Store information has been updated',
+    'order_has_been_deleted' => 'Order has been deleted' ,
+	'order_has_been_added' => 'Order information has been added' ,
+	'order_has_been_updated' => 'Order information has been updated',
 
 
     // Brand

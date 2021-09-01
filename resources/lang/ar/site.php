@@ -50,6 +50,7 @@ return [
     'make_an_order_decision_store_hint'=>'هذه الرسالة سيتم ارسالها الى الصيدليه.',
     'make_an_order_decision_pharmacy_hint'=>'لا يمكنك حذف الطلب غير في حالة انه ماذال قيد الانتظار!',
 	'the_order_request_has_been_refused'=>'تم رفض الطلب!',
+    'the_order_request_has_been_done'=>'تم الانتهاء من الطلب.',
 	'proccessing'=>'قسد التحضير',
 	'order_products_info'=>'بيانات منتجات الطلب',
 	'order_products_info_hint'=>'عرض جميع البيانات الخاصة بالمنتجات المطلوبة',
@@ -63,6 +64,12 @@ return [
 	'order_info_hint'=>'إظهار كافة معلومات الطلب للأرشفة أو اتخاذ قرار. ',
     'make_order_manually'=>'عمل طلب يدويا',
 	'make_order_manually_hint'=>'فى حالة قمت باختار بعض المنتجات المتاحة من المخزن يجب ادخال هذة البيانات لاضافتها فى الطلب.',
+    'the_order_is_accepted'=>'تم قبول الطلب',
+    'the_order_is_proccessing'=>'الطلب قيد التحضير',
+    'the_order_is_waiting'=>'الطلب قيد الانتظار',
+    'the_order_is_done'=>'تم تجهيز الطلب',
+    'proccessing'=>'قيد التحضير',
+    'order_status'=>'حالة الطلب',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
@@ -144,9 +151,12 @@ return [
 	'stagnant_has_been_deleted' => 'تم حذف راكد' ,
 	'stagnant_has_been_added' => 'تمت إضافة راكد' ,
 	'stagnant_has_been_updated' => 'تم تحديث راكد' ,
-	'store_has_been_deleted' => 'تم حذف مخزن' ,
-	'store_has_been_added' => 'تمت إضافة بيانات مخزن' ,
-	'store_has_been_updated' => 'تم تحديث بيانات مخزن' ,
+	'store_has_been_deleted' => 'تم حذف مخزن',
+	'store_has_been_added' => 'تمت إضافة بيانات مخزن',
+	'store_has_been_updated' => 'تم تحديث بيانات مخزن',
+    'order_has_been_deleted' => 'تم حذف الطلب' ,
+	'order_has_been_added' => 'تم اضافة طلب' ,
+	'order_has_been_updated' => 'تم تعديل طلب',
 
     // Brand
     'brand'  => 'ماركة تجارية',

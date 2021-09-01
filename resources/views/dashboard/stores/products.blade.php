@@ -193,8 +193,15 @@
 <script>
     var select_manually = [];
     function SelectProduct(e, val) {
-        select_manually.push($(e).val());
-        $('#select-manually').attr("name", "select_manually");
+        
+        if ($(e).is(':checked'))
+            select_manually.push($(e).val());
+        else
+            select_manually.splice( $.inArray($(e).val(), select_manually), 1 );
+
+        if(!$('#select-manually').is(name))
+            $('#select-manually').attr("name", "select_manually");
+        
         $('#select-manually').val(select_manually);      
     };
 </script>

@@ -153,19 +153,15 @@
 
     <script>
         function makeAsReed(){
-            $('.notis-open').click( function(event){
+            if($('.noti-class').hasClass('badge-danger'))
+                $.post("{{ route('dashboard.markAsRead') }}",{'_token':$('input[name=_token]').val()});
 
-                if($('.noti-class').hasClass('badge-danger'))
-                    $.post("{{ route('dashboard.markAsRead') }}",{'_token':$('input[name=_token]').val()});
+            $('#noti-counter').text('');
+            $('#noti-new-counter').text('');
 
-                $('#noti-counter').text('');
-                $('#noti-new-counter').text('');
-
-                if($('.noti-class').hasClass('badge-danger'))
-                    $('.noti-class').removeClass('badge-danger');
-
-            });// when user open all notifications or one of them reset all nptis counters to zero
-        }
+            if($('.noti-class').hasClass('badge-danger'))
+                $('.noti-class').removeClass('badge-danger');
+        }// when user open all notifications or one of them reset all nptis counters to zero
     </script>
 
     <script>
@@ -229,7 +225,7 @@
                     <a href="`+payload.data['link']+`">
                         <div class="media">
                         <div class="media-left align-self-center">
-                            <i class="ft-check-circle icon-bg-circle bg-cyan"></i>
+                            <i class="icon-bg-circle bg-cyan ft-bell"></i>
                         </div>
                         <div class="media-body">
                             <h6 class="media-heading">`+payload.notification['body']+`</h6>
@@ -246,12 +242,14 @@
                 `);
             }
 
-            makeAsReed()// when user open all notifications or one of them reset all nptis counters to zero
+            makeAsReed();// when user open all notifications or one of them reset all nptis counters to zero
 
         }); // increament the notification with 1 and add it to the notifies dropdown list
 
-        makeAsReed()// when user open all notifications or one of them reset all nptis counters to zero
-
+        $("#show-notifies").click(function () {
+            console.log('Hello Zee');
+            makeAsReed();// when user open all notifications or one of them reset all nptis counters to zero
+        });
     </script>
 
 </body>

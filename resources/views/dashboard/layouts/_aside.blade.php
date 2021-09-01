@@ -164,7 +164,7 @@
                     <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'waiting']) }}">@lang('site.waiting')</a></li>
                     <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'accepted']) }}">@lang('site.accepted')</a></li>
                     <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'proccessing']) }}">@lang('site.proccessing')</a></li>
-                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'done']) }}">@lang('site.done')</a></li>
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'done']) }}">@lang('site.just_done')</a></li>
                     <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'refused']) }}">@lang('site.refused')</a></li>
                 </ul>
             </li>

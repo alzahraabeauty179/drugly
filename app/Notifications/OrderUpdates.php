@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 
 use Carbon\Carbon;
 
-class NewOrder extends Notification
+class OrderUpdates extends Notification
 {
     use Queueable;
 
@@ -24,9 +24,9 @@ class NewOrder extends Notification
      */
     public function __construct($message, $title, $order_id)
     {
-        $this->message      = $message;
-        $this->title        = $title;
-        $this->order_id     = $order_id;
+        $this->message     = $message;
+        $this->title       = $title;
+        $this->order_id    = $order_id;
     }
 
     /**

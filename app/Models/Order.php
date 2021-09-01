@@ -37,7 +37,7 @@ class Order extends Model
      */
     public function to() : BelongsTo
     {
-        return $this->BelongsTo(\App\Models\Store::class ,'to_id');
+        return $this->BelongsTo(Store::class ,'to_id');
     }
 
     /**
