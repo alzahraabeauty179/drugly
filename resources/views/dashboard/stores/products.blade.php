@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
-
-@section('title', isset($_REQUEST['medical_store'])? __('site.warehouses'):__('site.cosmetic_companies'))
+@php $store = \App\Models\Store::find(request()->store); @endphp
+@section('title', $store->type == 'medical_store'? __('site.warehouses'):__('site.cosmetic_companies'))
 
 @section('content')
 <div class="app-content content">
@@ -38,14 +38,14 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
-                <h3 class="content-header-title"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </h3>
+                <h3 class="content-header-title"> @if( $store->type == 'medical_store' ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
-                        <li class="breadcrumb-item active"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </li>
+                        <li class="breadcrumb-item active"> @if( $store->type == 'medical_store' ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </li>
                     </ol>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </h4>
+                                <h4 class="card-title"> {{ $store->name }} </h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">

@@ -70,6 +70,7 @@ return [
     'the_order_is_done'=>'تم تجهيز الطلب',
     'proccessing'=>'قيد التحضير',
     'order_status'=>'حالة الطلب',
+    'upload_search_excel'=>'بحث بملف Excel',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

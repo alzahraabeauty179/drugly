@@ -6,6 +6,22 @@
 <div class="app-content content">
 
     <div class="container-fluid row d-flex justify-content-center">
+        @if(count($errors->getMessages()) > 0)
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <strong>@lang('site.excel_validation_errors')</strong>
+                <ul>
+                    @foreach($errors->getMessages() as $errorMessages)
+                        @foreach($errorMessages as $errorMessage)
+                            <li>
+                                {{ $errorMessage }}
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            </li>
+                        @endforeach
+                    @endforeach
+                </ul>
+            </div>                           
+        @endif
+
         @if(session('success'))
             <div class="alert alert-success col-sm-6 text-center" role="alert">
                 {!! session('success') !!}
@@ -64,6 +80,24 @@
                                                 </div>
                                             </div>
                                             <!-- ./Search by products -->
+                                            {{--<!-- Upload Search Excel -->
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <form   enctype="multipart/form-data" method="POST"
+                                                            action="{{ route('dashboard.stores.searchSheet') }}">
+                                                            @method('POST')
+                                                            @csrf
+                                                        <div class="form-group">
+                                                            <label for="search_sheet">@lang('site.upload_search_excel')</label>
+                                                            <input type="file" class="form-control-file" name="search_sheet" />
+                                                        </div>
+                                                        <button class="btn btn-primary btn-sm">
+                                                            <i class="ft-plus"></i> @lang('site.search')
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- ./Upload Search Excel -->--}}
                                         </div>
                                     </div>
 

@@ -74,7 +74,7 @@ Route::group(
             Route::post('search-result-filter', 'StoreController@searchResultFilter')->name('stores.searchResultFilter');
             Route::get('show/store-products/{store}', 'StoreController@showStoreProducts')->name('stores.products');
             Route::get('get/store-products', 'StoreController@products')->name('products');
-            // Route::post('make-order', 'StoreController@makeOrder')->name('makeOrder');
+            Route::post('search/sheet', 'StoreController@searchSheet')->name('stores.searchSheet');
 
             ######################### Orders #########################
             Route::resource('orders', 'OrderController');

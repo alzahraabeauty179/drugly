@@ -10,6 +10,9 @@ use App\User;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Builder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SearchSheetImport;
+
 use Validator;
 use DB;
 use DataTables;
@@ -226,6 +229,22 @@ class StoreController extends BackEndController
             $products = $products->orderBy('amount', 'desc')->get();
         
         return response()->json( ['products'=>ProductResource::collection($products)] );
+    }
+
+    /**
+     * Search in products by excel sheet.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json data
+     */
+    public static function searchSheet(Request $request)
+    {
+        $rules = [
+            'search_sheet'   => 'required|mimes:xlsx',
+        ];
+        $request->validate($rules);
+
+        Excel::import(new SearchSheetImport(), $request->search_sheet);
     }
 
     /**
