@@ -71,6 +71,7 @@ return [
     'proccessing'=>'قيد التحضير',
     'order_status'=>'حالة الطلب',
     'upload_search_excel'=>'بحث بملف Excel',
+    'search_sheet_result'=>'نتائج البحث من ملف Excel',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',

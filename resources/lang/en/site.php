@@ -69,6 +69,7 @@ return [
     'proccessing'=>'Proccessing',
     'order_status'=>'Order Status',
     'upload_search_excel'=>'Search By Excel',
+    'search_sheet_result'=>'Search Sheet Result',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',

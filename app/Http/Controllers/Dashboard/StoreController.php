@@ -243,8 +243,45 @@ class StoreController extends BackEndController
             'search_sheet'   => 'required|mimes:xlsx',
         ];
         $request->validate($rules);
+        
+        $searchResult = [];
+        $searchResult = Excel::toArray(new SearchSheetImport, $request->search_sheet);
+        $products = [];
 
-        Excel::import(new SearchSheetImport(), $request->search_sheet);
+        foreach ($searchResult[0] as $index => $row) {
+            if ($index <> 0) {
+                $product =  Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                ->where('amount', '>=', $row[2])->where('active', 1)->pluck('id');
+                
+                if( is_null($product) )
+                {
+                    $product2 = Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                    ->where('amount', '<=', $row[2])->where('active', 1)->pluck('id');
+
+                    if( !is_null($product2) )
+                        array_push($products, $product);
+                }
+                else{
+                    array_push($products, $product);
+                    
+                }
+            }
+        }
+
+        // Validator::make($searchResult, [
+        //     '*.0'  => 'required|max:191',
+        //     '*.1'  => 'required|max:191',
+        //     '*.2'  => 'required|integer|min:1'
+        // ])->validate();
+        
+        $searchProducts = [];
+        foreach($products as $prodctsIds)
+        {
+            $product3 =  Product::whereIn('id', $prodctsIds)->distinct()->get();
+            array_push($searchProducts, $product3);
+        }
+        $tableCounter = count($searchProducts);
+        return view('dashboard.stores.searchSheet', compact('searchProducts', 'tableCounter'));
     }
 
     /**

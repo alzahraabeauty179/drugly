@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class SearchSheetImport implements ToCollection
 {
+    public $data;
 
     public function __construct()
     {
@@ -32,20 +33,23 @@ class SearchSheetImport implements ToCollection
         foreach ($rows as $index => $row) {
             if ($index <> 0) {
                 $product =  Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
-                ->where('amount', '>=', $row[2])->where('active', 1)->first();
+                ->where('amount', '>=', $row[2])->where('active', 1)->pluck('id');
                 
                 if( is_null($product) )
                 {
-                    $product = Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
-                    ->where('amount', '<=', $row[2])->where('active', 1)->first();
+                    $product2 = Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                    ->where('amount', '<=', $row[2])->where('active', 1)->pluck('id');
 
-                    if( !is_null($product) )
+                    if( !is_null($product2) )
                         array_push($products, $product);
                 }
                 else
                     array_push($products, $product);
             }
         }
+        
+        $this->data = $products;
+ 
     }
 
     public function validat($rows)
