@@ -125,8 +125,6 @@ class OrderController extends BackEndDatatableController
      */
     public function orderProducts()
     {
-        // $order = Order::where('id', request()->order)->first();
-        // dd($order->orderProducts);
         $query = OrderProduct::where('order_id', request()->order);
 
         return  Datatables::of($query)

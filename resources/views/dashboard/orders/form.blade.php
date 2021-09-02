@@ -227,7 +227,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="data-table">
+                    <table class="table table-striped table-bordered zero-configuration" id="data-table">
                         <thead>
                             <tr>
                                 <th>@lang('site.id')</th>
@@ -237,6 +237,28 @@
                                 <th>@lang('site.note')</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        @forelse($row->orderProducts as $index=>$orpderProduct)
+                            <tr>
+                                <td> {{++$index}} </td>
+                                <td> {{ $orpderProduct->product->name }} </td>
+                                <td> {{ $orpderProduct->amount }} </td>
+                                <td> {{ $orpderProduct->unit }} </td>
+                                <td> <span title="{{$orpderProduct->note}}">{{ \Illuminate\Support\Str::limit($orpderProduct->note, 25, '...')}}</span> </td>
+                            </tr>
+                            @empty
+                            <tr><td colspan="5" style="text-align: center;"><h4>@lang('site.no_records')</h4></td></tr>
+                        @endforelse
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>@lang('site.id')</th>
+                                <th>@lang('site.product')</th>
+                                <th>@lang('site.Amount')</th>
+                                <th>@lang('site.unit')</th>
+                                <th>@lang('site.note')</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -246,44 +268,30 @@
 </section>
 
 @push('style')
-    {{-- start datatables style for yajar package --}}
-    <!-- Bootstrap CSS -->
-    {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">  --}}
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    {{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-    {{-- end  datatables style for yajar package --}}
+
+{{-- start datatables style for yajar package --}}
+<!-- Bootstrap CSS -->
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
+{{-- end  datatables style for yajar package --}}
 @endpush
 
 @push('script')
     {{-- start datatables script for yajar package --}}
     <!-- jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous">
+    </script>
     <!-- DataTables -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
     <script>
-        $(function() {
-            $('#data-table').DataTable({       
-                dom: "Blfrtip",
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{!! route('dashboard.order.products') !!}',
-                    data: function (d) {
-                        d.order = '{!! $row->id !!}';
-                    }
-                },
-
-                type : 'POST',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'product', name: 'product' , orderable: false, },
-                    { data: 'amount', name: 'amount', orderable: false, },
-                    { data: 'unit', name: 'unit' },
-                    { data: 'note', name: 'note' , orderable: false, searchable: false}
-                ], 
-            });
+        $(document).ready( function () {
+            $('#data-table').DataTable();
         });
     </script>
+
 @endpush
