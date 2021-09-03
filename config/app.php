@@ -136,6 +136,8 @@ return [
 
     'providers' => [
 
+
+        \Chatify\ChatifyServiceProvider::class,
         /*
          * Laravel Framework Service Providers...
          */
@@ -202,6 +204,7 @@ return [
 
     'aliases' => [
 
+        'Chatify' => Chatify\Facades\ChatifyMessenger::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

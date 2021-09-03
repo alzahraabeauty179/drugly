@@ -68,11 +68,36 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/assets/css/style-rtl.css') }}" />
     <!-- END Custom CSS-->
+    <style>
+        .chat-btn {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+            background-color: blue;
+            color: #fff;
+            font-size: 22px;
+            border: none;
+
+            position: fixed;
+            right: 14px;
+            bottom: 30px;
+            cursor: pointer;
+            z-index: 99;
+        }
+
+    </style>
     @stack('style')
 </head>
 
 <body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar" data-open="click"
     data-menu="vertical-menu" data-col="2-columns">
+    <a href="{{ url('chatify') }}" target="_blank"><label class="chat-btn" for="check">
+        <i class="fa fa-commenting-o comment"></i>
+        {{-- <i class="fa fa-close close"></i> --}}
+    </label></a>
     <div class="wrapper">
         @include('dashboard.layouts._navbar')
 
@@ -134,8 +159,8 @@
         type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous">
     </script>
     <!-- END jQuery -->
@@ -221,7 +246,7 @@
                                     </time>
                                 </small>
                             </div>
-                        </div> 
+                        </div>
                     </a>
                 `);
             }else{
