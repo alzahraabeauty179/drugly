@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
                         <li class="breadcrumb-item">@lang('site.'.$module_name_plural )</li>
-                    	<li class="breadcrumb-item active">@lang('site.store_info' )</li>
+                    	<li class="breadcrumb-item active">@lang('site.subscribe_details' )</li>
                     </ol>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">@lang('site.info' )</h4>
+                                <h4 class="card-title">@lang('site.details' )</h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">

@@ -10,6 +10,9 @@ use App\User;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\ProductResource;
 use Illuminate\Database\Eloquent\Builder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SearchSheetImport;
+
 use Validator;
 use DB;
 use DataTables;
@@ -107,12 +110,27 @@ class StoreController extends BackEndController
     {
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
 
-        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**
-     * Display the store products.
+     * Display the store products resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showStoreProducts($id)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+  
+        return VIEW('dashboard.' . $module_name_plural . '.products', compact('module_name_singular', 'module_name_plural'));
+    }
+
+    /**
+     * Get the store products.
      *
      * @return \Illuminate\Http\Response
      */
@@ -123,9 +141,9 @@ class StoreController extends BackEndController
                         });
 
         return Datatables::of($query)
-            ->addColumn('check', function ($query) {
+            ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select-item" value="'.$query->id.'" />';
+                name="select_item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
                 return  $query->translation->name;
@@ -134,12 +152,23 @@ class StoreController extends BackEndController
                 return  $query->translation->type;
             })
             ->addColumn('available', function ($query) {
-                return $query->amount.' '.$query->unit;
+                return $query->amount;
+            })
+            ->addColumn('unit', function ($query) {
+                return $query->unit;
             })
             ->addColumn('unit_price', function ($query) {
-                return '$ '.$query->unit_price;
+                return $query->unit_price;
             })
+            ->order(function ($query) {
+                if (request()->order[0]['column'] == 3) {
+                    $query->orderBy('amount', request()->order[0]['dir']);
+                }
 
+                if (request()->order[0]['column'] == 5) {
+                    $query->orderBy('unit_price', request()->order[0]['dir']);
+                }
+            })
             ->filter(function ($query) {
                 return $query
                     ->where('owner_id', request()->store)
@@ -151,7 +180,7 @@ class StoreController extends BackEndController
                             ->orwhere('unit_price', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['check', 'name'])
+            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">'])
             ->make(true);
     }
 
@@ -208,6 +237,59 @@ class StoreController extends BackEndController
             $products = $products->orderBy('amount', 'desc')->get();
         
         return response()->json( ['products'=>ProductResource::collection($products)] );
+    }
+
+    /**
+     * Search in products by excel sheet.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json data
+     */
+    public static function searchSheet(Request $request)
+    {
+        $rules = [
+            'search_sheet'   => 'required|mimes:xlsx',
+        ];
+        $request->validate($rules);
+        
+        $searchResult = [];
+        $searchResult = Excel::toArray(new SearchSheetImport, $request->search_sheet);
+        $products = [];
+
+        foreach ($searchResult[0] as $index => $row) {
+            if ($index <> 0) {
+                $product =  Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                ->where('amount', '>=', $row[2])->where('active', 1)->pluck('id');
+                
+                if( is_null($product) )
+                {
+                    $product2 = Product::whereTranslationLike('name', "%" . $row[0] . "%")->whereTranslationLike('type', "%" . $row[1] . "%")
+                    ->where('amount', '<=', $row[2])->where('active', 1)->pluck('id');
+
+                    if( !is_null($product2) )
+                        array_push($products, $product);
+                }
+                else{
+                    array_push($products, $product);
+                    
+                }
+            }
+        }
+
+        // Validator::make($searchResult, [
+        //     '*.0'  => 'required|max:191',
+        //     '*.1'  => 'required|max:191',
+        //     '*.2'  => 'required|integer|min:1'
+        // ])->validate();
+        
+        $searchProducts = [];
+        foreach($products as $prodctsIds)
+        {
+            $product3 =  Product::whereIn('id', $prodctsIds)->distinct()->get();
+            array_push($searchProducts, $product3);
+        }
+        $tableCounter = count($searchProducts);
+        return view('dashboard.stores.searchSheet', compact('searchProducts', 'tableCounter'));
     }
 
     /**

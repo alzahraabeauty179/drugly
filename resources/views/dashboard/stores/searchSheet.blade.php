@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 
-@section('title', isset($_REQUEST['medical_store'])? __('site.warehouses'):__('site.cosmetic_companies'))
+@section('title', __('site.search_sheet_result'))
 
 @section('content')
 <div class="app-content content">
@@ -38,14 +38,14 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
-                <h3 class="content-header-title"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </h3>
+                <h3 class="content-header-title"> @lang('site.search_sheet_result')</h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
-                        <li class="breadcrumb-item active"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </li>
+                        <li class="breadcrumb-item active"> @lang('site.search_sheet_result')</li>
                     </ol>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> @if( isset($_REQUEST['medical_store']) ) @lang('site.warehouses') @else @lang('site.cosmetic_companies') @endif </h4>
+                                <h4 class="card-title"> @lang('site.search_sheet_result')</h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -72,14 +72,6 @@
                                 <div class="row d-flex justify-content-center align-items-center">
                                     <div class="col-md-5">
                                         <div class="row d-flex justify-content-center align-items-center">
-                                            <!-- Search by products -->
-                                            <div class="col-6" style="display: block ruby;">
-                                                <i class="ficon ft-search" id="find-product" style="cursor: pointer;"></i>
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="@lang('site.product_search')" class="form-control" id="search-by-products">
-                                                </div>
-                                            </div>
-                                            <!-- ./Search by products -->
                                             <!-- Upload Search Excel -->
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -128,7 +120,53 @@
                             <!-- ./Advanced Search -->
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard" id="products-container">
-                                    {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
+                                    @forelse( $searchProducts as $key=>$searchProduct )
+                                        <table class="table table-striped table-bordered zero-configuration" id="prodcuts-table-{{$key++}}">
+                                            <thead>
+                                                <tr>
+                                                    <th>@lang('site.product')</th>
+                                                    <th>@lang('site.type')</th>
+                                                    <th>@lang('site.available')</th>
+                                                    <th>@lang('site.store')</th>
+                                                    <th>@lang('site.start_order')</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @forelse($searchProduct as $storeProduct)
+                                                <tr>
+                                                    <td> 
+                                                        {{ $storeProduct->name }}
+                                                    </td>
+                                                    <td> 
+                                                        {{ $storeProduct->type }}
+                                                    </td>
+                                                    <td> 
+                                                        {{ $storeProduct->amount.' '.$storeProduct->unit }}
+                                                    </td>
+                                                    <td> <a href="{{ route('dashboard.stores.show', [ 'store' => $storeProduct->store->id ]) }}" >
+                                                        {{ $storeProduct->store->name }} </a> 
+                                                    </td>
+                                                    <td><a  href="{{ route('dashboard.stores.products', ['store' => $storeProduct->store->id]) }}" 
+                                                            title="{{__('site.start_order')}}" class="btn btn-info btn-sm" 
+                                                            data-original-title="{{__('site.start_order')}}"><i class="ft-eye"> {{__('site.start_order')}} </i></a></td>
+                                                </tr>
+                                                @empty
+                                                <tr><td colspan="5" style="text-align: center;"><h4>@lang('site.no_records')</h4></td></tr>
+                                            @endforelse
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>@lang('site.product')</th>
+                                                    <th>@lang('site.type')</th>
+                                                    <th>@lang('site.available')</th>
+                                                    <th>@lang('site.store')</th>
+                                                    <th>@lang('site.start_order')</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    @empty
+                                        <h1 style="text-align: center;">@lang('site.there_is_no_result')</h1>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -141,133 +179,31 @@
 </div>
 @endsection
 
-{{csrf_field()}}
-
 @push('style')
+
 {{-- start datatables style for yajar package --}}
 <!-- Bootstrap CSS -->
 <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
-
-{{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" > --}}
-
-{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
 {{-- end  datatables style for yajar package --}}
-
-{{-- Search by products  --}}
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
 @endpush
 
-
 @push('script')
-{{-- start datatables script for yajar package --}}
-<!-- jQuery -->
-<!-- <script src="//code.jquery.com/jquery.js"></script> -->
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    {{-- start datatables script for yajar package --}}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+            crossorigin="anonymous">
+    </script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-{!! $dataTable->scripts() !!}
-
-{{-- Search by products  --}}
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
-<script>
-    var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}", products_name = [];
-
-    $(document).on('keyup','#search-by-products',function(event){
-        $.post("{{ route('dashboard.stores.searchByProduct') }}",{'keyword':$('#search-by-products').val(),'type':type,'_token':$('input[name=_token]').val()},function(data){
-            
-            if( data["products"].length != 0)
-                products_name = data.products.map(function (value, index, array) { return value.name; });
-       
-            $("#search-by-products").autocomplete({ source: products_name });
-        })
-    });
-
-    function dispalySearchResult(data)
-    {
-        if( $('#search-by-products').val().length !== 0 )
-        {
-            $("#storedatatable-table_wrapper").empty();
-
-            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}";
-
-            $.each(data.products,function(key,val){
-                url         =   url.replace(':id', val.storeId);
-                container   +=  `<tr>
-                                    <td>`+val.storeId+`</td>
-                                    <td>`+val.storeName+`</td>
-                                    <td>`+val.amount+' '+val.unit+`</td>
-                                    <td>$ `+val.unitPrice+`</td>
-                                    <td><a href="`+url+`" title="{{__('site.start_order')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.start_order')}}"><i class="ft-eye"> {{__('site.start_order')}} </i></a></td>
-                                </tr>`;
-            });
-    
-            $("#products-container").append(`
-                <table class="table table-striped table-bordered cat-configuration" id="searchResultTable">
-                    <thead>
-                        <tr>
-                            <th>{{__('site.id')}}</th>
-                            <th>{{isset($_REQUEST['medical_store'])? __('site.warehouses') : __('site.cosmetic_companies')}}</th>
-                            <th>{{__('site.available')}}</th>
-                            <th>{{__('site.unit_price')}}</th>
-                            <th>{{__('site.start_order')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        `+
-                            container
-                        +`
-                    </tbody>
-                </table>
-            `);
-        }
-    }
-
-    $(document).on('click','#find-product',function(event){
-
-        $.post("{{ route('dashboard.stores.searchResult') }}",{'keyword':$('#search-by-products').val(),'_token':$('input[name=_token]').val(),'type':type},function(data){
-            dispalySearchResult(data);
-        }).then( function(){
-            if($("#searchResultTable_wrapper").length)
-                $("#searchResultTable_wrapper").remove();
-
-            $('#searchResultTable').DataTable();
-
-            if($('#search-by-products').val().length)
-                $('#search-result-filter').css('display', '');
-        }).then( function(){
-            $(document).on('click','.custom-control-input',function(event){
-                
-                if( $('#search-by-products').val().length !== 0 )
-                {
-                    if(this.id == "top-units")
-                        $('#discount-rate').prop('checked', false);
-                    else if(this.id == "discount-rate")
-                        $('#top-units').prop('checked', false);
-                    
-                    $.post("{{ route('dashboard.stores.searchResultFilter') }}",{'keyword':$('#search-by-products').val(),'filter':this.id,'_token':$('input[name=_token]').val(),'type':type},function(data){
-                        dispalySearchResult(data);
-                    }).then( function(){
-                        if($("#searchResultTable_wrapper").length)
-                            $("#searchResultTable_wrapper").remove();
-
-                        $('#searchResultTable').DataTable();
-                    });
-                }
-            })
+    <script>
+        $(document).ready( function () {
+            for(var i=1; i <= {{$tableCounter}}; i++ )
+                $('#prodcuts-table-'+i).DataTable();
         });
-    });
-</script>
-
+    </script>
 @endpush

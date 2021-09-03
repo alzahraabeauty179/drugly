@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Models\Notification;
 use App\Notifications\Announcement;
-use App\Http\Controllers\FireBaseController;
 use Illuminate\Support\Facades\Notification as Notifies;
 
 use Carbon\Carbon;
@@ -69,35 +68,6 @@ class NotificationController extends BackEndController
     }
 
     /**
-     * Send real time notification to one or more of users.
-     *
-     * @param  string  $flag
-     * @param  string  $to
-     * @param  array  $fcmList
-     * @return firebase Response
-     */
-    public function setFirebase($flag, $to, $fcmList)
-    {
-        $fire = new FireBaseController;
-        # Set FireBase
-        if( $flag == "list" ) 
-            $fire->fcmList  = $fcmList;
-        else
-            $fire->to       = $to;
-
-        $fire->flag     = $flag;
-        $fire->title    = __('site.drugly');
-        $fire->body     = __('site.have_new_notify');
-
-        $fire->type     = 'announcement';
-        $fire->link     = 'javascript:void(0)';
-        $fire->date     = Carbon::now();
-
-        $fire->sound    = true;
-        $fire->send();
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -124,7 +94,7 @@ class NotificationController extends BackEndController
         else{ 
             $users         = User::whereIn('id', $request->users_id)->get();
             $fcmList       = User::whereIn('id', $request->users_id)->pluck('fcm_token')->toArray();
-            $notifiers     = $request->users_id;
+            $notifiers     = implode(',', $request->users_id);
             $notifiersNo   = count($request->users_id);
         }
         
@@ -135,7 +105,6 @@ class NotificationController extends BackEndController
         $title   = ['en'=>$request['en']['title'],   'ar'=>$request['ar']['title']];
         $message = ['en'=>$request['en']['content'], 'ar'=>$request['ar']['content']];
 
-        // auth()->user()->notify(new Announcement($message, $title, $notifiers, $notifiersNo));
         Notifies::send($users, new Announcement($message, $title, $notifiers, $notifiersNo));
    
         return redirect()->route('dashboard.notifications.index');

@@ -77,8 +77,8 @@ class BrandController extends BackEndDatatableController
      */
     public function update(Request $request, $id)
     {
-
         $brand = $this->model->findOrFail($id);
+        
         $rules = [
             'image' => 'nullable|image|max:2000',
         ];

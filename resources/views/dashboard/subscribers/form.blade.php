@@ -125,82 +125,82 @@
             </div>
             <div class="card-content">
             	@if( $row->status != 'waiting' )
-				<div class="card-body">
-                    <div class="card-text">
-                        <p>@lang('site.the_subscribe_request_is') @lang('site.' . $row->status)</p>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>@lang('site.the_subscribe_request_is') @lang('site.' . $row->status)</p>
+                        </div>
                     </div>
-                </div>
-            	@if( $row->status != 'rejecting' )
-            	<div class="table-responsive">
-                    <table class="table table-borderless mb-0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h4>@lang('site.started_at')</h4>
-                            	</td>
-                                <td class="type-info text-right">{{$row->start_date}}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h4>@lang('site.ended_at')</h4>
-                            	</td>
-                                <td class="type-info text-right">{{$row->end_date}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            	@endif
+                    @if( $row->status != 'rejecting' )
+                    <div class="table-responsive">
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h4>@lang('site.started_at')</h4>
+                                    </td>
+                                    <td class="type-info text-right">{{$row->start_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4>@lang('site.ended_at')</h4>
+                                    </td>
+                                    <td class="type-info text-right">{{$row->end_date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    @endif
 				@else
-                <div class="card-body">
-                    <div class="card-text">
-                        <p>@lang('site.make_a_decision_hint')</p>
-                    </div>
-                
-                	<div class="row">
-                	<form 	class="form row" method="POST" enctype="multipart/form-data"
-                    		action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
-					@method('PUT')
-                	{{ csrf_field() }}
-                    @foreach (config('translatable.locales') as $index => $locale)
-					<div class="form-group col-md-6 mb-2">
-    					<div class="form-group">
-        					<label class="bmd-label-floating">@lang('site.' . $locale . '.message')</label>
-        					<textarea 	name=" {{ $locale }}[message]" cols="30" rows="10"
-            							class="form-control @error($locale . '.message') is-invalid
-            				@enderror">{{ old($locale . '.message') }}</textarea>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p>@lang('site.make_a_decision_hint')</p>
+                        </div>
+                    
+                        <div class="row">
+                            <form 	class="form row" method="POST" enctype="multipart/form-data"
+                                    action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
+                                @method('PUT')
+                                {{ csrf_field() }}
+                                @foreach (config('translatable.locales') as $index => $locale)
+                                <div class="form-group col-md-6 mb-2">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">@lang('site.' . $locale . '.message')</label>
+                                        <textarea 	name=" {{ $locale }}[message]" cols="30" rows="10"
+                                                    class="form-control @error($locale . '.message') is-invalid
+                                        @enderror">{{ old($locale . '.message') }}</textarea>
 
-        					@error($locale.'.message')
-        					<small class=" text text-danger" role="alert">
-            					<strong>{{ $message }}</strong>
-        					</small>
-        					@enderror
-    					</div>
-					</div>
-					@endforeach
-                    
-                    <div class="form-group col-md-6 mb-2">
-                    	<fieldset>
-              				<div class="custom-control custom-radio">
-                				<input type="radio" class="custom-control-input" name="decision" id="decision1" value="accepting" checked="">
-                				<label class="custom-control-label" for="decision1">@lang('site.accepted')</label>
-              				</div>
-            			</fieldset>
-            			<fieldset>
-              				<div class="custom-control custom-radio">
-                				<input type="radio" class="custom-control-input" name="decision" value="rejecting" id="decision2">
-                				<label class="custom-control-label" for="decision2">@lang('site.rejected')</label>
-              				</div>
-            			</fieldset>
+                                        @error($locale.'.message')
+                                        <small class=" text text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @endforeach
+                                
+                                <div class="form-group col-md-6 mb-2">
+                                    <fieldset>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="decision" id="decision1" value="accepting" checked="">
+                                            <label class="custom-control-label" for="decision1">@lang('site.accepted')</label>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="decision" value="rejecting" id="decision2">
+                                            <label class="custom-control-label" for="decision2">@lang('site.rejected')</label>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                        <button data-repeater-create="" class="btn btn-primary">
+                                            <i class="ft-check-circle"></i> @lang('site.just_done')
+                                        </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    
-                   <div class="form-group col-md-6">
-                    	<button data-repeater-create="" class="btn btn-primary">
-                        	<i class="ft-check-circle"></i> @lang('site.just_done')
-                        </button>
-                   </div>
-                   </form>
-                </div>
-                </div>
                 @endif
             </div>
         </div>

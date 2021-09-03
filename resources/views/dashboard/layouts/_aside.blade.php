@@ -150,10 +150,23 @@
                     <li><a class="menu-item" href="#">Soon</a></li>
                 </ul>
             </li> Offers prices --}}
-        
-        	@if (auth()->user()->can('read-logs'))
+
+            @if (auth()->user()->can('read-logs'))
             <li class="nav-item"><a href="{{route('dashboard.logs.index')}}"><i class="ft-package"></i><span
                         class="menu-title" data-i18n="">@lang('site.logs')</span></a>
+            </li>
+            @endif{{-- Logs --}}
+        
+        	@if (auth()->user()->can('read-orders'))
+            <li class="nav-item">
+                <a><i class="fa fa-money"></i><span class="menu-title" data-i18n="">@lang('site.orders')</span></a>
+                <ul class="menu-content">
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'waiting']) }}">@lang('site.waiting')</a></li>
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'accepted']) }}">@lang('site.accepted')</a></li>
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'proccessing']) }}">@lang('site.proccessing')</a></li>
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'done']) }}">@lang('site.just_done')</a></li>
+                    <li><a class="menu-item" href="{{ route('dashboard.orders.index', ['status'=>'refused']) }}">@lang('site.refused')</a></li>
+                </ul>
             </li>
             @endif{{-- Logs --}}
 

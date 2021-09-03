@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 
+use App\Http\Controllers\FireBaseController;
 use App\Models\Log;
+use Carbon\Carbon;
 
 class BackEndController extends Controller
 {
@@ -93,6 +95,35 @@ class BackEndController extends Controller
             $constraint->aspectRatio();
         })->save(public_path('uploads/' . $path . '/' . $imageName));
         return $imageName;
+    }
+
+    /**
+     * Send real time notification to one or more of users.
+     *
+     * @param  string  $flag
+     * @param  string  $to
+     * @param  array  $fcmList
+     * @return firebase Response
+     */
+    public function setFirebase($flag, $to, $fcmList)
+    {
+        $fire = new FireBaseController;
+        # Set FireBase
+        if( $flag == "list" ) 
+            $fire->fcmList  = $fcmList;
+        else
+            $fire->to       = $to;
+
+        $fire->flag     = $flag;
+        $fire->title    = __('site.drugly');
+        $fire->body     = __('site.have_new_notify');
+
+        $fire->type     = 'announcement';
+        $fire->link     = 'javascript:void(0)';
+        $fire->date     = Carbon::now();
+
+        $fire->sound    = true;
+        $fire->send();
     }
 
 	/**

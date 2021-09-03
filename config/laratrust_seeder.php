@@ -16,7 +16,8 @@ return [
             'subscriptions'       => 'c,r,u,d',
         	'subscribers'         => 'c,r,u,d',
         	'advertisements'      => 'c,r,u,d',
-        	'logs'      		  => 'c,r,u,d',
+        	'orders'      		  => 'c,r,u,d',
+            'logs'      		  => 'c,r,u,d',
         ],
     ],
     // 'permission_structure' => [

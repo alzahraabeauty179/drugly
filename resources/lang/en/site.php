@@ -36,6 +36,40 @@ return [
     'start_order'=>'Start Order',
     'show_products'=>'Show Products',
     'open'=>'Open',
+    'type'=>'Type',
+    'unit'=>'Unit',
+
+    // Orders
+    'upload_order_excel'=>'Upload Order Excel',
+    'excel_validation_errors' =>'Validation Errors',
+    'order_failed'=>'Order failed, because the excel sheet data not validated, Please be sure that you are using the right sheet then try again!',
+    'order_sent_successfuly'=>'Order Sent Successfuly',
+    'refused'=>'Refused',
+    'updated_at'=>'Updated At',
+    'action'=>'Action',
+    'make_an_order_decision_store_hint'=>'This message will be sent to the pharmacy.',
+    'make_an_order_decision_pharmacy_hint'=>'You can only delete the request if it is still on waiting!',
+	'the_order_request_has_been_refused'=>'The order request has been refused!',
+    'the_order_request_has_been_done'=>'The order request has been done.',
+	'proccessingP'=>'Proccessing',
+	'order_products_info'=>'Order Products Information',
+	'order_products_info_hint'=>'Show all information for the order products.',
+	'note'=>'Note',
+    'pharmacy_email'=>'Pharmacy Email',
+	'store_email'=>'Store Email',
+    'store_areas'=>'Store Areas',
+    'from'=>'From',
+    'to'=>'To',
+    'order_info'=>'Order Information',
+	'order_info_hint'=>'Show all order information for archive or make a decision.',
+    'the_order_is_accepted'=>'The order has been accepted',
+    'the_order_is_proccessing'=>'The order is in proccessing',
+    'the_order_is_waiting'=>'The order is in waiting',
+    'the_order_is_done'=>'The order is done',
+    'proccessing'=>'Proccessing',
+    'order_status'=>'Order Status',
+    'upload_search_excel'=>'Search By Excel',
+    'search_sheet_result'=>'Search Sheet Result',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -115,12 +149,15 @@ return [
 	'brand_has_been_updated'=>'Brand has been updated',
 	'category_has_been_updated'=>'Category has been updated',
 	'product_has_been_updated'=>'Product has been updated',
-	'stagnant_has_been_deleted' => 'Stagnant has been deleted' ,
+	'stagnant_has_been_deleted' => 'Stagnant has been deleted',
 	'stagnant_has_been_added' => 'Stagnant has been added' ,
-	'stagnant_has_been_updated' => 'Stagnant has been updated' ,
-	'store_has_been_deleted' => 'Store has been deleted' ,
+	'stagnant_has_been_updated' => 'Stagnant has been updated',
+	'store_has_been_deleted' => 'Store has been deleted',
 	'store_has_been_added' => 'Store information has been added' ,
-	'store_has_been_updated' => 'Store information has been updated' ,
+	'store_has_been_updated' => 'Store information has been updated',
+    'order_has_been_deleted' => 'Order has been deleted' ,
+	'order_has_been_added' => 'Order information has been added' ,
+	'order_has_been_updated' => 'Order information has been updated',
 
 
     // Brand
@@ -183,13 +220,24 @@ return [
     'update_profile_info'=>'Update Profile Information',
     'current_password_not_correct'=>'The current password is not accurate!',
     'profile_updated_successfully'=>'Profile Updated Successfully',
-    
     'full_name'=>'Full Name',
     'have_account'=>'already have an account ? ',
     'dont_have_account'=>'don\'t have an account ? ',
     'for_account'=>'For An Account',
     'forgot_password'=>'Forgot Password ?',
     'rememberMe'=>'Remember Me',
+
+    # Store
+	'store_info'=>'Store Information',
+	'store_info_hint'=>'All required information from stores are displayed.',
+	'info'=>'Information',
+	'logo_social_media'=>'Logo And Social Media',
+	'logo_social_media_hint'=>'Only all social media links available for sharing is displayed.',
+	'store_logo'=>'Store Logo',
+	'trade_information'=>'Trade Information',
+	'trade_information_hint'=>'Please, you must read this information carefully before starting any communication or ordering products.',
+	'important'=>'Important',
+    'Amount'=>'Amount',
 
     # areas
     'areas'=>'Areas',
@@ -363,6 +411,9 @@ return [
     'orders'=>'Orders',
     'ordered'=>'Ordered',
     'notes'=>'Notes',
+    'make_order_manually'=>'Make Order Manually',
+	'make_order_manually_hint'=>'In case that you choose some of the products available from 
+    the store, you must enter these data to be added in the order.',
 
     //contacts
     'contact'=>'Contact Us',
