@@ -38,7 +38,7 @@ class OrderController extends BackEndDatatableController
         return  auth()->user()->type == "super_admin"? 
                 $this->dataTable->render('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'))
                 :
-                view('dashboard.' . $module_name_plural . '.users_index', compact('module_name_singular', 'module_name_plural'));
+                view('dashboard.' . $module_name_plural . '.users_index', compact('module_name_singular', 'module_name_plural'))
                 ;
     }
 
@@ -152,7 +152,7 @@ class OrderController extends BackEndDatatableController
                 })
                 ->rawColumns(['note'])
                 ->make(true);
-    }// ISSUE
+    }
 
     /**
      * Store a newly created resource in storage.
