@@ -20,6 +20,23 @@ class AdvertisementController extends BackEndDatatableController
     }
 
     /**
+     * Show advertisements for super admin and other users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+        
+        return  auth()->user()->type == "super_admin"? 
+                $this->dataTable->render('dashboard.' . $module_name_plural . '.index', compact('module_name_singular', 'module_name_plural'))
+                :
+                view('dashboard.' . $module_name_plural . '.users_index', compact('module_name_singular', 'module_name_plural'))
+                ;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

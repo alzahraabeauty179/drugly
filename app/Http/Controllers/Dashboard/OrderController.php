@@ -30,6 +30,11 @@ class OrderController extends BackEndDatatableController
         $this->dataTable = $orderDataTable;
     }
 
+    /**
+     * Show orders for super admin and other users.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $module_name_plural = $this->getClassNameFromModel();
