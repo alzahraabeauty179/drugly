@@ -21,6 +21,9 @@ return [
     'warehouses'=>'Warehouses',
     'show'=>'Show',
     'cosmetic_companies'=>'Cosmetic Companies',
+    'cosmetic_company'=>'Cosmetic Company',
+	'medical'=>'Medical',
+	'warehouse'=>'Warehouse',
     'store'=>'Store',
     'unit_price'=>'Unit Price',
 	'available'=>'Available',
@@ -516,8 +519,10 @@ return [
     'blogger'=>'Bloggers',
     'bloggers'=>'Bloggers',
     'sales_links'=>'Sales Links',
-
     'or'=>'Or',
+
+    'arabic'=>'العربية',
+    'english'=>'الانجليزية',
 
     'ar' => [
         'address'=>'Address in Arabic',

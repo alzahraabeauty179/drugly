@@ -21,13 +21,19 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-Route::group(['middleware' => ['guest']], function () {
+Route::group(
+    [
+        'prefix'     => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'guest'],
+    ], 
+    
+    function () {
 
-    Route::get('/', function () {
-    	return view('home');
-	});
+        Route::get('/', function () {
+            return view('home');
+        });
 
-	Route::post('user/register', 'Dashboard\UserController@store')->name('user.store');
+        Route::post('user/register', 'Dashboard\UserController@store')->name('user.store');
 	
 });
 

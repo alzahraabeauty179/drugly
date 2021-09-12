@@ -21,6 +21,9 @@ return [
     'warehouses'=>'المستودعات',
     'show'=>'عرض',
     'cosmetic_companies'=>'شركات مستحضرات التجميل',
+    'cosmetic_company'=>'شركة مستحضرات التجميل',
+	'medical'=>'طبي',
+	'warehouse'=>'مستودع',
     'store'=>'المخزن',
     'unit_price'=>'سعر الوحدة',
 	'available'=>'متاح',
@@ -465,6 +468,9 @@ return [
     'readMore'=>'اقرأ أكثر',
 
     'view_more'=>'اعرض أكثر',
+
+    'arabic'=>'Arabic',
+    'english'=>'English',
 
     'ar'    => [
         'address'=>'العنوان باللغه العربية',

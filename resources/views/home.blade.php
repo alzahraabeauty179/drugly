@@ -66,7 +66,15 @@
                             <a class="nav-link" href="#freeReg">Consultation</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn" href="/ar">العربية <i class="fas fa-globe-africa ms-1"></i></a>
+                            @if (App::getLocale() == "en")
+                                <a class="btn" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                                    @lang('site.arabic') <i class="fas fa-globe-africa ms-1"></i>
+                                </a>
+                            @else
+                                <a class="btn" rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                                    @lang('site.english') <i class="fas fa-globe-africa ms-1"></i>
+                                </a>
+                            @endif
                         </li>
                     </ul>
                     <div class="d-flex ms-auto">
@@ -460,14 +468,21 @@
                             <button class="nav-link active" id="pills-pharmacy-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-pharmacy " type="button" role="tab"
                                 aria-controls="pills-pharmacy" aria-selected="true">
-                                Pharmacy
+                                @lang('site.pharmacy')
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pills-warehouse-tab" data-bs-toggle="pill"
                                 data-bs-target="#pills-warehouse" type="button" role="tab"
                                 aria-controls="pills-warehouse" aria-selected="false">
-                                Store
+                                @lang('site.medical') @lang('site.warehouse')
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-cosmetic_company-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-cosmetic_company" type="button" role="tab"
+                                aria-controls="pills-cosmetic_company" aria-selected="false">
+                                @lang('site.cosmetic_company')
                             </button>
                         </li>
                     </ul>
@@ -545,6 +560,43 @@
                             </div>
                         </div>
                     	<!-- ./Story Subscriptions -->
+
+                        <!-- Cosmetic Companies Subscriptions -->
+                        <div class="tab-pane fade" id="pills-cosmetic_company" role="tabpanel"
+                            aria-labelledby="pills-cosmetic_company-tab">
+                            <div class="row">
+                            	@forelse(App\Models\Subscription::where('active', 1)->where('type', 'cosmetic_companies')->get() as $row)
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>{{ $row->name }}</h3>
+                                        	</div>
+                                        	<div class="price">
+                                            	<span><sup>$</sup>{{ $row->price }}</span>
+                                        	</div>
+                                        	<div class="pricing-features">
+                                            	{!! $row->description !!}
+                                        	</div>
+                                        	<div class="pricing-footer">
+                                            	<a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#register_{{$row->id}}">
+                                                	@lang('site.subscribe_now')
+                                            	</a>
+                                        	</div>
+                                    	</div>
+                                    	@component('components.register',['subscription'=>$row ?? NULL]) @endcomponent
+                                	</div>
+                            		@empty
+                            		<div class="col-md-4">
+                                    	<div class="pricing-table">
+                                        	<div class="pricing-header">
+                                            	<h3>@lang('site.will_be_ready_soon')</h3>
+                                        </div>
+                                    	</div>
+                                	</div>
+                            	@endforelse
+                            </div>
+                        </div>
+                    	<!-- ./Cosmetic Companies Subscriptions -->
                     </div>
                 </div>
             </div>

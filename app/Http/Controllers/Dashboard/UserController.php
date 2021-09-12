@@ -60,7 +60,11 @@ class UserController extends BackEndController
 
         // store image
         if ($request->image)
+        {
             $request_data['image'] = $this->uploadImage($request->image, 'users_images');
+            $request_data['avatar'] = $this->uploadImage($request->image, 'users_images');
+        }else
+            $request_data['avatar'] = "avatar_example";
 
     	// store national_id_image
         if ($request->national_id_image) 
@@ -72,7 +76,7 @@ class UserController extends BackEndController
     	
     	$request_data += ['password' => Hash::make($request->password), 'type' => $request->subscription_type, 
                           'areas' => implode(',', $request->areas)];
-    	// dd("working on sending user's mail");
+
     	$user = User::create($request_data);
     	
     	Subscriber::create([
