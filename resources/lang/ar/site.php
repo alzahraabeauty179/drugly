@@ -127,6 +127,7 @@ return [
 	'ended_at'=>'انتهى في',
 	'subscribe_rejected_successfully'=>'تم رفض الاشتراك بنجاح!',
 	'subscribe_accepted_successfully'=>'تم قبول الاشتراك بنجاح ، امنحه صلاحيةا!',
+    'subscribe_not_accepted'=>'لم يتم الموافقة على طلب الاشتراك بعد!',
 
 	// Advertisements
 	'advertisements'=>'الإعلانات',

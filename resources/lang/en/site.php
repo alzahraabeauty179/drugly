@@ -126,6 +126,7 @@ return [
 	'ended_at'=>'Ended At',
 	'subscribe_rejected_successfully'=>'Subscribe rejected successfully!',
 	'subscribe_accepted_successfully'=>'Subscribe accepted successfully, give him a role!',
+    'subscribe_not_accepted'=>'Your subscribe request has not accepted yet!',
 
 	// Advertisements
 	'advertisements'=>'Advertisements',

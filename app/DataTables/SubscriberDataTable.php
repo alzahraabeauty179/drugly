@@ -40,7 +40,9 @@ class SubscriberDataTable extends DataTable
         	->addColumn('subscription', function ($query) {
                 return '<a href="'.route('dashboard.subscriptions.edit', ['subscription' => $query->subscription_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->subscription->translation->name .'</a>';
             })
-
+            ->addColumn('status', function ($query) {
+                return  __('site.' . $query->status);
+            })
             ->editColumn('created_at', function ($query) {
                 return $query->created_at->diffForHumans();
             })
@@ -55,10 +57,11 @@ class SubscriberDataTable extends DataTable
                         return $w->whereHas('user', function (Builder $q) {
     												$q->where('name', 'like', '%'.request()->search['value'].'%');
 												})
-                 		->orwhereHas('subscription', function (Builder $r) {
-    												$r->whereTranslationLike('name', '%'.request()->search['value'].'%');
-												})
+                            ->orwhereHas('subscription', function (Builder $r) {
+                                                        $r->whereTranslationLike('name', '%'.request()->search['value'].'%');
+                                                    })
                             ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('status', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
@@ -109,6 +112,7 @@ class SubscriberDataTable extends DataTable
             Column::make('id'),
             Column::computed('subscriber'),
         	Column::computed('subscription'),
+            Column::computed('status'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')

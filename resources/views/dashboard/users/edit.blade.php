@@ -311,12 +311,7 @@
 @endpush
 
 @push('script')
-    {{-- start datatables script for yajar package --}}
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-            crossorigin="anonymous">
-    </script>
+{{-- start datatables script for yajar package --}}
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
@@ -330,6 +325,7 @@
     @if( Session::has('updateProfileErrorMessage') )
         <script>
             $(document).ready(function(){
+                jQuery.noConflict();
                 $('#edit_profile').modal({show: true});
             });
         </script>
@@ -338,6 +334,7 @@
     @if( Session::has('updateWebsiteErrorMessage') )
         <script>
             $(document).ready(function(){
+                jQuery.noConflict();
                 $('#edit_info').modal({show: true});
             });
         </script>
