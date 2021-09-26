@@ -15,7 +15,7 @@ return [
 	'app'=>'التطبيق',
     'dashboard'=>'الرئيسية',
 
-    'users'=>'المشرفين',
+    'users'=>'المسخدمين',
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
     'warehouses'=>'المستودعات',
@@ -75,6 +75,8 @@ return [
     'order_status'=>'حالة الطلب',
     'upload_search_excel'=>'بحث بملف Excel',
     'search_sheet_result'=>'نتائج البحث من ملف Excel',
+    'order_details'=>'بيانات الطلب',
+    'orders'=>'الطلبات',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
@@ -172,6 +174,7 @@ return [
 	'created_at'=>'تاريخ الأنشاء',
 
     //users
+    'user_info'=>'بيانات المستخدم',
     'actions'=>'الأحداث',
     'add'=>'أضف',
     'delete'=>'حذف',
@@ -200,7 +203,6 @@ return [
     'notifications_and_announcements_hint'=>'اشعارات الطلبات والتنبيهات الصادرة من لوحة التحكم الرئسية.',
     'advertisements'=>'الاعلانات',
     'advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
-
     'update_profile_hint'=>'قم بتحديث بيانات الحساب الشخصي بكل سهولة.',
     'personal_information'=>'البيانات الشخصية',
     'first_name'=>'الاسم الاول',
@@ -511,6 +513,7 @@ return [
         'stagnants'     => 'الرواكد',
         'stagnant'      => 'راكد',
         'amount'        => 'الكميه',
+        'Amount'        => 'الكميه',
         'expiry_date'   => 'تاريخ الصلاحيه',
         'discount'      => 'التخفيض',
 ];

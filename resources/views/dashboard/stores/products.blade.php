@@ -100,9 +100,10 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
 
-                                    <form action="{{ route('dashboard.orders.store') }}" method="POST">
+                                    <form action="{{ route('dashboard.orders.store') }}" method="POST" id="make-order-form">
                                         @method('POST')
                                         {{ csrf_field() }}
+                                        <input type="hidden" name="store_id" value="{!! request()->store !!}">
                                         <table class="table table-bordered" id="data-table">
                                             <thead>
                                                 <tr>
@@ -113,16 +114,14 @@
                                                     <th>@lang('site.name')</th>
                                                     <th>@lang('site.type')</th>
                                                     <th>@lang('site.available')</th>
-                                                    <th>@lang('site.unit')</th>
-                                                    <th>@lang('site.unit_price') $</th>
+                                                    <th>@lang('site.unit_price')</th>
                                                 </tr>
                                             </thead>
                                         </table>
                                         <div class="col-md-12 mt-1">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#make_order_manually" class="btn btn-primary">
-                                                <i class="ft-plus"></i> @lang('site.make_order')
+                                            <button type="supmit" form="make-order-form" class="btn btn-primary">
+                                                <i class="ft-shopping-cart"></i> @lang('site.make_order')
                                             </button>
-                                            @component('components.make_order') @endcomponent
                                         </div>
                                     </form>
 
@@ -176,7 +175,6 @@
             { data: 'name', name: 'name' , orderable: true, },
             { data: 'type', name: 'type', orderable: true, },
             { data: 'available', name: 'available', orderable: true, },
-            { data: 'unit', name: 'unit', orderable: true, },
             { data: 'unit_price', name: 'unit_price', orderable: true, },
         ], 
     });
@@ -186,23 +184,54 @@
     $(function (e) {
         $(".select-all").click(function () {
             $(".select-item").prop('checked', $(this).prop('checked'));
+            
+            if($(".select-all").hasClass('show-p-d'))
+                $(".select-all").removeClass('show-p-d');
+            else
+                $(".select-all").addClass('show-p-d');
+
+            $('.sorting_1').each(function(i, obj) {
+                if($(this).find("div").length == 0)
+                {
+                    $(this).append(
+                        `<div id="p-d-`+$(this).children("input").attr("value")+`">
+                            <lable>Amount</lable>
+                            <input type="number" name="amount_`+$(this).children("input").val()+`" required>
+                            <lable>Unit</lable>
+                            <input type="text" name="unit_`+$(this).children("input").val()+`" required>
+                            <lable>Note</lable>
+                            <input type="text" name="note_`+$(this).children("input").val()+`">
+                        </div>`
+                    );
+                }else if(!$(".select-all").hasClass('show-p-d'))
+                {
+                    $("#p-d-"+$(this).children("input").val()).remove();
+                }
+            });
         });
     });
 </script>
 
 <script>
-    var select_manually = [];
     function SelectProduct(e, val) {
-        
         if ($(e).is(':checked'))
-            select_manually.push($(e).val());
+        {
+            if( $(e).parent('td').find("div").length == 0 )
+            {
+                $(e).parent('td').append(
+                    `<div id="p-d-`+$(e).val()+`">
+                        <lable>Amount</lable>
+                        <input type="number" name="amount_`+$(e).val()+`" required>
+                        <lable>Unit</lable>
+                        <input type="text" name="unit_`+$(e).val()+`" required>
+                        <lable>Note</lable>
+                        <input type="text" name="note_`+$(e).val()+`">
+                    </div>`
+                );
+            }
+        }
         else
-            select_manually.splice( $.inArray($(e).val(), select_manually), 1 );
-
-        if(!$('#select-manually').is(name))
-            $('#select-manually').attr("name", "select_manually");
-        
-        $('#select-manually').val(select_manually);      
+            $("#p-d-"+$(e).val()).remove();
     };
 </script>
 @endpush

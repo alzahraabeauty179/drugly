@@ -73,6 +73,7 @@ return [
     'order_status'=>'Order Status',
     'upload_search_excel'=>'Search By Excel',
     'search_sheet_result'=>'Search Sheet Result',
+    'order_details'=>'Order Details',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -312,6 +313,7 @@ return [
     'menu'=>'Menu',
 
     //users
+    'user_info'=>'User Information',
     'actions'=>'Actions',
     'add'=>'Add',
     'read'=>'Read',

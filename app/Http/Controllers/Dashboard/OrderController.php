@@ -169,16 +169,22 @@ class OrderController extends BackEndDatatableController
     {
         $rules = [
             'order_sheet'           => 'nullable|mimes:xlsx',
-            'select_all'            => 'nullable',
-            'select_item.*'         => 'nullable',
-            'select_manually.*'     => 'required_unless:order_sheet,null|required_unless:select_item,null',
+            'select_items.*'         => 'required_unless:order_sheet,null',
             'store_id'              => 'required|exists:stores,id',
-            'amount'                => 'nullable|integer|min:1',
-            'unit'                  => 'nullable|string|max:191',
-            'note'                  => 'nullable|max:400',
         ];
         $request->validate($rules);
 
+        if( !is_null($request->select_items) )
+            foreach( $request->select_items as $item )
+            {
+                $rules = [
+                    'amount_'   .$item  => 'required|integer|min:1',
+                    'unit_'     .$item  => 'required|max:191|',
+                    'note_'     .$item  => 'nullable|max:191',
+                ];
+                $request->validate($rules);
+            }
+      
         # Create order 
         $order = Order::create([
             'from_id'   => auth()->user()->id,
@@ -189,13 +195,8 @@ class OrderController extends BackEndDatatableController
         # Create order products
         if(isset($request->order_sheet))
             Excel::import(new OrderSheetImport($order->id), $request->order_sheet);
-        else{
-
-            if( isset($request->select_all) )
-                    $this->addOrderProducts($request, $order->id, 'select_all'); 
-            else
-                    $this->addOrderProducts($request, $order->id, 'select_manually'); 
-        }
+        else
+            $this->addOrderProducts($request, $order->id);
 
         if( count($order->orderProducts) == 0 )
         {
@@ -230,11 +231,9 @@ class OrderController extends BackEndDatatableController
      * @param  int $orderId 
      * @param  string $flag
      */
-    public function addOrderProducts($request, $orderId, $flag)
+    public function addOrderProducts($request, $orderId)
     {
-        $productsIds = $flag == "select_all"? $request->select_item : array_map('intval', explode(',', $request->select_manually));
-
-        foreach($productsIds as $productId)
+        foreach($request->select_items as $productId)
         {
             $product =  Product::where('id', $productId)->where('active', 1)->first();
                     
@@ -242,9 +241,9 @@ class OrderController extends BackEndDatatableController
                 OrderProduct::create([
                     'product_id'        => $product->id,
                     'order_id'          => $orderId,
-                    'amount'            => $request->amount,
-                    'unit'              => $request->unit,
-                    'note'              => $request->note,
+                    'amount'            => $request['amount_'.$product->id],
+                    'unit'              => $request['unit_'.$product->id],
+                    'note'              => $request['note_'.$product->id],
                 ]);
         }
     }

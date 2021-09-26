@@ -151,7 +151,7 @@ class StoreController extends BackEndController
         return Datatables::of($query)
             ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select_item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
+                name="select_items[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
                 return  $query->translation->name;
@@ -160,20 +160,17 @@ class StoreController extends BackEndController
                 return  $query->translation->type;
             })
             ->addColumn('available', function ($query) {
-                return $query->amount;
-            })
-            ->addColumn('unit', function ($query) {
-                return $query->unit;
+                return $query->amount.' '.$query->unit;
             })
             ->addColumn('unit_price', function ($query) {
-                return $query->unit_price;
+                return $query->unit_price.' $';
             })
             ->order(function ($query) {
                 if (request()->order[0]['column'] == 3) {
                     $query->orderBy('amount', request()->order[0]['dir']);
                 }
 
-                if (request()->order[0]['column'] == 5) {
+                if (request()->order[0]['column'] == 4) {
                     $query->orderBy('unit_price', request()->order[0]['dir']);
                 }
             })

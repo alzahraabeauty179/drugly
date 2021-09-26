@@ -200,12 +200,13 @@
         {
             $("#storedatatable-table_wrapper").empty();
 
-            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}";
+            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}", index = 0;
 
             $.each(data.products,function(key,val){
                 url         =   url.replace(':id', val.storeId);
+                index++;
                 container   +=  `<tr>
-                                    <td>`+val.storeId+`</td>
+                                    <td>`+ index +`</td>
                                     <td>`+val.storeName+`</td>
                                     <td>`+val.amount+' '+val.unit+`</td>
                                     <td>$ `+val.unitPrice+`</td>

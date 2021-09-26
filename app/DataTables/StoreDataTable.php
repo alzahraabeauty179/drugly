@@ -64,7 +64,7 @@ class StoreDataTable extends DataTable
      */
     public function query()
     {
-        return isset($_REQUEST['medical_store'])? $this->model->where('type', 'medical_store')->newQuery() : $this->model->where('type', 'beauty_company')->newQuery();
+        return isset($_REQUEST['medical_store'])? $this->model->where('type', 'medical_store')->whereNotNull('owner_id')->newQuery() : $this->model->where('type', 'beauty_company')->whereNotNull('owner_id')->newQuery();
     }
 
     /**

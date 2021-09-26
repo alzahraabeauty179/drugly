@@ -8,7 +8,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
-                <h3 class="content-header-title">@lang('site.subscribe_details' )</h3>
+                <h3 class="content-header-title">@lang('site.user_info' )</h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
@@ -16,7 +16,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
                         <li class="breadcrumb-item">@lang('site.'.$module_name_plural )</li>
-                    	<li class="breadcrumb-item active">@lang('site.subscribe_details' )</li>
+                    	<li class="breadcrumb-item active">@lang('site.user_info' )</li>
                     </ol>
                 </div>
             </div>

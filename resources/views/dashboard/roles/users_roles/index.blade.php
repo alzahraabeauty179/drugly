@@ -77,7 +77,7 @@
                                         @forelse($rows as $index=>$row)
                                             <tr>
                                                 <td> {{++$index}} </td>
-                                                <td>{{$row->user->name}}</td>
+                                                <td><a title="@lang('site.' . $row->user->type)" href="{{ route('dashboard.users.show', [ 'user' => $row->user->id ]) }}">{{$row->user->name}}</a></td>
                                                 <td> 
                                                     {{$row->role->display_name}}
                                                 </td>

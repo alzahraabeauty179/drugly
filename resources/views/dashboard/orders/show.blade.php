@@ -8,15 +8,15 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
-                <h3 class="content-header-title">@lang('site.subscribe_details' )</h3>
+                <h3 class="content-header-title">@lang('site.order_details' )</h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home')</a>
                         </li>
-                        <li class="breadcrumb-item">@lang('site.'.$module_name_plural )</li>
-                    	<li class="breadcrumb-item active">@lang('site.subscribe_details' )</li>
+                        <li class="breadcrumb-item">@lang('site.'.$module_name_plural)</li>
+                    	<li class="breadcrumb-item active">@lang('site.order_details')</li>
                     </ol>
                 </div>
             </div>
@@ -40,7 +40,6 @@
                                         <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                         <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                         <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
                                     </ul>
                                 </div>
                             </div>
