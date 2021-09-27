@@ -45,6 +45,30 @@ class StoreController extends BackEndController
     }
 
     /**
+     * Download order sheet example.
+     *
+     * @return File
+     */
+    public function downloadOrderSheet()
+    {
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/orderSheet.xlsx');
+
+        return $file;
+    }
+
+    /**
+     * Download search products sheet example.
+     *
+     * @return File
+     */
+    public function downloadSearchProductsSheet()
+    {
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/searchProductsSheet.xlsx');
+
+        return $file;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,9 +94,9 @@ class StoreController extends BackEndController
             foreach (config('translatable.locales') as $locale) {
                 $rules += [
                     $locale . '.name'        => 'required|string|min:3|max:200',
-                    $locale . '.description' => 'nullable|string|min:3|max:500',
-                    $locale . '.about_us' => 'nullable|string|min:3|max:500',
-                    $locale . '.privacy_policy' => 'nullable|string|min:3|max:500',
+                    $locale . '.description' => 'required|string|min:3|max:500',
+                    $locale . '.about_us' => 'required|string|min:3|max:500',
+                    $locale . '.privacy_policy' => 'required|string|min:3|max:500',
                 ];
             }
 
@@ -154,7 +178,8 @@ class StoreController extends BackEndController
                 name="select_items[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
-                return  $query->translation->name;
+                return  '<span title="'.$query->translation->name.' - '.$query->translation->type.' - '.$query->getExpiryDate($query->id).
+                        '">'.$query->translation->name.'</span>';
             })
             ->addColumn('type', function ($query) {
                 return  $query->translation->type;
@@ -185,7 +210,7 @@ class StoreController extends BackEndController
                             ->orwhere('unit_price', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">'])
+            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">', 'name'])
             ->make(true);
     }
 
@@ -320,9 +345,9 @@ class StoreController extends BackEndController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'nullable|string|min:3|max:500',
-                $locale . '.about_us' => 'nullable|string|min:3|max:500',
-                $locale . '.privacy_policy' => 'nullable|string|min:3|max:500',
+                $locale . '.description' => 'required|string|min:3|max:500',
+                $locale . '.about_us' => 'required|string|min:3|max:500',
+                $locale . '.privacy_policy' => 'required|string|min:3|max:500',
             ];
         }
 

@@ -244,6 +244,8 @@ return [
 	'trade_information'=>'المعلومات التجارية',
 	'trade_information_hint'=>'من فضلك, يجب قرأت هذه المعلومات جيدا قبل بدا اي عملية تواصل او طلب منتجات.',
 	'important'=>'هام',
+    'download_order_sheet'=>'تحميل ملف طلب المنتجات',
+    'download_search_sheet'=>'تحميل ملف البحث في المنتجات',
     
     # areas
     'areas'=>'المناطق',

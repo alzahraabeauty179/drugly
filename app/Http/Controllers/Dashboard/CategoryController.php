@@ -7,9 +7,9 @@ use App\Models\Category;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use DataTables;
-
-// use Yajra\Datatables\Datatables;
+use DB;
 
 class CategoryController extends BackEndDatatableController
 {
@@ -41,9 +41,10 @@ class CategoryController extends BackEndDatatableController
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->where(function ($query) {
-                    $query->join('categories', function($j){ return $j->where('categories.store_id', '=', auth()->user()->store_id); });
-                }),],
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')
+                ->where(function ($query) {
+                    $query->where('locale', 'ar')->join('categories', function($j){ return $j->whereRaw('categories.store_id = '. auth()->user()->store_id); });
+                }) ],
                 $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
         }

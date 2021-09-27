@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +18,7 @@ class Product extends Model implements TranslatableContract
     protected $append = ['image_path'];
 
     public function getImagePathAttribute(){
-        return $this->image != null ? asset('uploads/products_images/'.$this->image) :  asset('uploads/products_images/default.png') ;
+        return $this->image != null ? asset('uploads/products_images/'.$this->image) :  asset('uploads/products_images/default.png');
     }
 
     /**
@@ -36,6 +35,15 @@ class Product extends Model implements TranslatableContract
     function store() : BelongsTo
     {
         return $this->belongsTo(Store::class, 'owner_id');
+    }
+
+    public function getExpiryDate($id)
+    {
+        $last_log = ProductLog::where('product_id', $id)->orderBy('id', 'DESC')->first();
+        if(is_null($last_log) || is_null($last_log->expiry_date))
+            $last_log = Product::where('id', $id)->first();
+
+        return $last_log->expiry_date;
     }
 
 }

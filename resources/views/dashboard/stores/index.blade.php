@@ -92,7 +92,7 @@
                                                             <input type="file" class="form-control-file" name="search_sheet" />
                                                         </div>
                                                         <button class="btn btn-primary btn-sm">
-                                                            <i class="ft-plus"></i> @lang('site.search')
+                                                            <i class="ficon ft-search"></i> @lang('site.search')
                                                         </button>
                                                     </form>
                                                 </div>
@@ -129,6 +129,17 @@
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard" id="products-container">
                                     {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
+                                </div>
+
+                                {{-- Download order sheet --}}
+                                <div class="card-body card-dashboard">
+                                    <a href="{{ route('dashboard.download.orderSheetExcel') }}" class="btn btn-info">
+                                        @lang('site.download_order_sheet')
+                                    </a>
+                                    
+                                    <a href="{{ route('dashboard.download.searchSheetExcel') }}" class="btn btn-info">
+                                        @lang('site.download_search_sheet')
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -207,9 +218,9 @@
                 index++;
                 container   +=  `<tr>
                                     <td>`+ index +`</td>
-                                    <td>`+val.storeName+`</td>
+                                    <td><a href="show/store-products/`+val.storeId+`">`+val.storeName+`<a></td>
                                     <td>`+val.amount+' '+val.unit+`</td>
-                                    <td>$ `+val.unitPrice+`</td>
+                                    <td>`+val.unitPrice+` $</td>
                                     <td><a href="`+url+`" title="{{__('site.start_order')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.start_order')}}"><i class="ft-eye"> {{__('site.start_order')}} </i></a></td>
                                 </tr>`;
             });

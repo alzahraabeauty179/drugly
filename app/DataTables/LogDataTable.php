@@ -70,7 +70,7 @@ class LogDataTable extends DataTable
      */
     public function query()
     {
-        return $this->model->newQuery();
+        return $this->model->orderBy('id', 'DESC')->newQuery();
     }
 
     /**

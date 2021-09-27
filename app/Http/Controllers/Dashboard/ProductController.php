@@ -60,7 +60,7 @@ class ProductController extends BackEndDatatableController
 
         $request_data = $request->except(['_token', 'image']);
         $log_data = $request->except(['_token', 'image', 'type', 'active', 'owner_id', 'category_id', 'brand_id']);
-        // $request_data['owner_id'] = auth()->user()->id;
+        $request_data['owner_id'] = auth()->user()->store_id;
         // return $log_data;
 
         if ($request->image) {

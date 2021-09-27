@@ -243,6 +243,8 @@ return [
 	'trade_information_hint'=>'Please, you must read this information carefully before starting any communication or ordering products.',
 	'important'=>'Important',
     'Amount'=>'Amount',
+    'download_order_sheet'=>'Download Order Sheet',
+    'download_search_sheet'=>'Download Search Sheet',
 
     # areas
     'areas'=>'Areas',
