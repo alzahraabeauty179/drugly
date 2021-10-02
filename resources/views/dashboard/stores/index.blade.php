@@ -166,13 +166,8 @@
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
 
 {{-- end  datatables style for yajar package --}}
-
-{{-- Search by products  --}}
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
 @endpush
 
 
@@ -185,13 +180,10 @@
 
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 {!! $dataTable->scripts() !!}
 
-{{-- Search by products  --}}
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
+{{-- Search By Products --}}
 <script>
     var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}", products_name = [];
 

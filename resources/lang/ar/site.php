@@ -16,7 +16,7 @@ return [
     'dashboard'=>'الرئيسية',
     'app_info'=>'بيانات التطبيق الاليكتروني',
 
-
+    'general_search'=>'قم باستخدام كلمات دلالية مثل اضافة,تعديل,حذف,المشتركين...',
     'users'=>'المسخدمين',
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
@@ -147,15 +147,15 @@ return [
 	'logs'=>'Logs',
 	'log'=>'Log',
 	'advertisement_has_been_deleted' => 'تم حذف إعلان' ,
-	'brand_has_been_deleted' => "تم حذف علامة تجارية" ,
+	'brand_has_been_deleted' => "تم حذف الشركة المنتجة" ,
 	'category_has_been_deleted' => "تم حذف قسم" ,
 	'product_has_been_deleted' => 'تم حذف منتج' ,
 	'advertisement_has_been_added' => 'تمت إضافة إعلان' ,
-	"brand_has_been_added" => "تمت إضافة علامة تجارية" ,
+	"brand_has_been_added" => "تمت إضافة شركة منتجة" ,
 	'category_has_been_added' => "تمت إضافة قسم" ,
 	'product_has_been_added' => "تمت إضافة منتج" ,
 	'advertisement_has_been_updated' => 'تم تحديث إعلان' ,
-	'brand_has_been_updated' => "تم تحديث علامة تجارية" ,
+	'brand_has_been_updated' => "تم تحديث الشركة المنتجة" ,
 	'category_has_been_updated' => "تم تحديث قسم" ,
 	'product_has_been_updated' => 'تم تحديث منتج' ,
 	'stagnant_has_been_deleted' => 'تم حذف راكد' ,
@@ -169,8 +169,8 @@ return [
 	'order_has_been_updated' => 'تم تعديل طلب',
 
     // Brand
-    'brand'  => 'ماركة تجارية',
-    'brands' => 'مركات تجارية',
+    'brand'  => 'الشركة المنتجة',
+    'brands' => 'الشركات المنتجة',
     'update' => 'تحديث',
     'repeated_data'=>'تكرار البيانات ، إذا كان اسم موجودًا من قبل!',
 	'created_at'=>'تاريخ الأنشاء',

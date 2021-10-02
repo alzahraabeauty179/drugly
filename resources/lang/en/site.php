@@ -14,6 +14,7 @@ return [
 
 	'app'=>'App',
     'app_info'=>'Application Information',
+    'general_search'=>'Use tags such as add, edit, delete, subscribers...',
     'dashboard'=>'Dashboard',
     'users'=>'Users',
     'desc'=>'Here you can add- delete- update ',

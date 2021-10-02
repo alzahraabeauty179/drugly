@@ -104,7 +104,6 @@
                 </ul>
             </li>
             @endif{{-- categories --}}
-
           
             @if (auth()->user()->can('read-products'))
             <li class="nav-item">

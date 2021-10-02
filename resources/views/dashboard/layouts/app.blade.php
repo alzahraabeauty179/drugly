@@ -62,11 +62,12 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('dashboard_files/app-assets/css-rtl/pages/users.min.css') }}" />
     <!-- END Page Level CSS-->
-
-
-
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/assets/css/style-rtl.css') }}" />
+    {{-- Search By Jquery UI --}}
+    <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <!-- END Custom CSS-->
     <style>
         .chat-btn {
@@ -164,6 +165,9 @@
             crossorigin="anonymous">
     </script>
     <!-- END jQuery -->
+    {{-- Search By Jquery UI --}}
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    
     @stack('script')
 
     <!--################## FIREBASE SCRIPT ##################-->

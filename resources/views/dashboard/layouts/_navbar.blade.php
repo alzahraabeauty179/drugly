@@ -40,14 +40,15 @@
                     ></a>
                     </li>
                     <li class="nav-item nav-search">
-                    <a class="nav-link nav-link-search" href="#"
-                        ><i class="ficon ft-search"></i
+                    <a  class="nav-link nav-link-search" title="@lang('site.general_search')" href="#"
+                        id="general-search-find"><i class="ficon ft-search"></i
                     ></a>
                     <div class="search-input">
                         <input
                         class="input"
                         type="text"
-                        placeholder="Explore Search..."
+                        id="general-search"
+                        placeholder="@lang('site.general_search')"
                         />
                     </div>
                     </li>
@@ -292,5 +293,123 @@
         </div>
     </div>
 </nav>
-
 <!-- End / fixed-top -->
+@push('script')
+{{-- Search By Jquery UI --}}
+<script src="{{ asset('js/jquery-ui.js') }}"></script>
+<script>
+    var keywords = [
+        'اضافة ادارة','تعديل ادارة','حذف ادارة','اضافة مستخدم لادارة','تعديل مستخدم لادارة',
+        'add role','edit role','delete role','add user role','edit user role','اضافة منطقة','تعديل منطقة','حذف منطقة',
+        'add area','edit area','delete area','اضافة اشتراك','تعديل اشتراك','حذف اشتراك',
+        'add subscription','edit subscription','delete subscription','subscribers','المشتركين',
+        'اضافة اعلان','تعديل اعلان','حذف اعلان','add advertisement','edit advertisement','delete advertisment',
+        'اضافة اخطار','تعديل اخطار','حذف اخطار','add announcement','edit announcement','delete announcement',
+        'اضافة شركة منتجة','تعديل شركة منتجة','حذف شركة منتجة','add brand','edit brand','delete brand',
+        'اضافة قسم','تعديل قسم','حذف قسم','add category','edit category','delete category','اضافة منتج','تعديل منتج','حذف منتج',
+        'add product','edit product','delete product','اضافة تبادل رواكد','تعديل تبادل رواكد','حذف تبادل رواكد',
+        'add stagnats','edit stagnates','delete stagnates','logs','السجلات',
+        'طلبات نواقص فى الانتظار','طلبات نواقص مقبولة','طلبات نواقص قيد التنفيذ','طلبات نواقص تم الانتهاء منها','طلبات نواقص تم رفضها',
+        'orders in pending','acceptable orders requests','orders in progress','orders have been completed',
+        'orders were rejected','warehouses','المستودعات','cosmetic companies','شركات التجميل','شركات الادوية'];
+
+    $(document).on('keyup','#general-search',function(event){
+        $("#general-search").autocomplete({ source: keywords });
+    });
+
+    $(document).on('click','#general-search-find',function(event){
+        // find the page by keyword // navigate to the page
+        if( $('#general-search').val().length !== 0 )
+        {
+            var str = $('#general-search').val();
+            //Orders
+            if( (str.indexOf('order') != -1) || (str.indexOf('طلب') != -1) || (str.indexOf('نواقص') != -1) )
+            {
+                if( (str.indexOf('pending') != -1) || (str.indexOf('الانتظار') != -1) )
+                {
+                    window.location.replace("{{ route('dashboard.orders.index', ['status'=>'waiting']) }}");
+                }
+                else if( (str.indexOf('acceptable') != -1) || (str.indexOf('مقبولة') != -1) )
+                {
+                    window.location.replace("{{ route('dashboard.orders.index', ['status'=>'accepted']) }}");
+                }
+                else if( (str.indexOf('progress') != -1) || (str.indexOf('قيد التنفيذ') != -1) )
+                {
+                    window.location.replace("{{ route('dashboard.orders.index', ['status'=>'proccessing']) }}");
+                }
+                else if( (str.indexOf('completed') != -1) || (str.indexOf('تم الانتهاء') != -1) )
+                {
+                    window.location.replace("{{ route('dashboard.orders.index', ['status'=>'done']) }}");
+                }
+                else if( (str.indexOf('rejected') != -1) || (str.indexOf('تم رفضها') != -1) )
+                {
+                    window.location.replace("{{ route('dashboard.orders.index', ['status'=>'refused']) }}");
+                }
+            }//Pharmacies stores
+            else if( (str.indexOf('warehouses') != -1) || (str.indexOf('المستودعات') != -1) || (str.indexOf('شركات الادوية') != -1) )
+            {
+                window.location.replace("{{ route('dashboard.stores.index', 'medical_store') }}");
+            }
+            else if( (str.indexOf('cosmetic companies') != -1) || (str.indexOf('شركات التجميل') != -1) )
+            {
+                window.location.replace("{{ route('dashboard.stores.index', 'cosmetic_company') }}");
+            }//Adds
+            else if( (str.indexOf('add') != -1) || (str.indexOf('اضافة') != -1) )
+            {
+                if((str.indexOf('user role') != -1) || (str.indexOf('مستخدم لادارة') != -1))
+                {  window.location.replace("{{ route('dashboard.user.role.index') }}"); }
+                else if((str.indexOf('role') != -1) || (str.indexOf('ادارة') != -1))
+                { window.location.replace("{{ route('dashboard.roles.create') }}"); }
+                else if((str.indexOf('area') != -1) || (str.indexOf('منطقة') != -1))
+                { window.location.replace("{{ route('dashboard.areas.create') }}"); }
+                else if((str.indexOf('subscription') != -1) || (str.indexOf('اشتراك') != -1))
+                { window.location.replace("{{ route('dashboard.subscriptions.create') }}"); }
+                else if((str.indexOf('advertisement') != -1) || (str.indexOf('اعلان') != -1))
+                { window.location.replace("{{ route('dashboard.advertisements.create') }}"); }
+                else if((str.indexOf('announcement') != -1) || (str.indexOf('اخطار') != -1))
+                { window.location.replace("{{ route('dashboard.notifications.create') }}"); }
+                else if((str.indexOf('brand') != -1) || (str.indexOf('شركة منتجة') != -1))
+                { window.location.replace("{{ route('dashboard.brands.create') }}"); }
+                else if((str.indexOf('category') != -1) || (str.indexOf('قسم') != -1))
+                { window.location.replace("{{ route('dashboard.categories.create') }}"); }
+                else if((str.indexOf('product') != -1) || (str.indexOf('منتج') != -1))
+                { window.location.replace("{{ route('dashboard.products.create') }}"); }
+                else if((str.indexOf('stagnates') != -1) || (str.indexOf('تبادل رواكد') != -1))
+                { window.location.replace("{{ route('dashboard.stagnants.create') }}"); }
+
+            }//Edits && Deletes
+            else if( (str.indexOf('edit') != -1) || (str.indexOf('تعديل') != -1) || (str.indexOf('delete') != -1) || (str.indexOf('حذف') != -1) )
+            {
+                if((str.indexOf('user role') != -1) || (str.indexOf('مستخدم لادارة') != -1))
+                {  window.location.replace("{{ route('dashboard.user.role.index') }}"); }
+                else if((str.indexOf('role') != -1) || (str.indexOf('ادارة') != -1))
+                { window.location.replace("{{ route('dashboard.roles.index') }}"); }
+                else if((str.indexOf('area') != -1) || (str.indexOf('منطقة') != -1))
+                { window.location.replace("{{ route('dashboard.areas.index') }}"); }
+                else if((str.indexOf('subscription') != -1) || (str.indexOf('اشتراك') != -1))
+                { window.location.replace("{{ route('dashboard.subscriptions.index') }}"); }
+                else if((str.indexOf('advertisement') != -1) || (str.indexOf('اعلان') != -1))
+                { window.location.replace("{{ route('dashboard.advertisements.index') }}"); }
+                else if((str.indexOf('announcement') != -1) || (str.indexOf('اخطار') != -1))
+                { window.location.replace("{{ route('dashboard.notifications.index') }}"); }
+                else if((str.indexOf('brand') != -1) || (str.indexOf('شركة منتجة') != -1))
+                { window.location.replace("{{ route('dashboard.brands.index') }}"); }
+                else if((str.indexOf('category') != -1) || (str.indexOf('قسم') != -1))
+                { window.location.replace("{{ route('dashboard.categories.index') }}"); }
+                else if((str.indexOf('product') != -1) || (str.indexOf('منتج') != -1))
+                { window.location.replace("{{ route('dashboard.products.index') }}"); }
+                else if((str.indexOf('stagnates') != -1) || (str.indexOf('تبادل رواكد') != -1))
+                { window.location.replace("{{ route('dashboard.stagnants.index') }}"); }
+            }//Subscribers
+            else if( (str.indexOf('subscribers') != -1) || (str.indexOf('المشتركين') != -1) )
+            {
+                window.location.replace("{{ route('dashboard.subscribers.index') }}");
+            }//Logs
+            else if( (str.indexOf('logs') != -1) || (str.indexOf('السجلات') != -1) )
+            {
+                window.location.replace("{{ route('dashboard.logs.index') }}");
+            }
+        }
+    });
+</script>
+@endpush
