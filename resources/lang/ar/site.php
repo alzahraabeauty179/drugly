@@ -14,6 +14,8 @@ return [
 	
 	'app'=>'التطبيق',
     'dashboard'=>'الرئيسية',
+    'app_info'=>'بيانات التطبيق الاليكتروني',
+
 
     'users'=>'المسخدمين',
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
@@ -216,11 +218,15 @@ return [
     'new_password_confirmation'=>'تاكيد كلمة السر الجديدة',
     'cancel'=>'اغلاق',
     'save'=>'حفظ',
-    'set_store_settings'=>'من فضلك ، قم بتعيين إعدادات الموقع الاليكتروني لمتجرك أولاً! </br>
+    'set_store_settings'=>'من فضلك ، قم بتعيين إعدادات المخزن الاليكتروني لمتجرك أولاً! </br>
     ستجده في صفحة ملفك الشخصي.',
     'only_for_stores' => 'يستخدم فقط من قبل حسابات المخازن!',
-    'update_site_information'=>'تحديث بيانات الموقع الاليكتروني',
-    'update_site_information_hint'=>'قم بتحديث بيانات موقعك الاليكتروني بكل سهولة.',
+
+    'update_store_information'=>'تحديث بيانات المخزن الاليكتروني',
+    'update_store_information_hint'=>'قم بتحديث بيانات مخزنك الاليكتروني بكل سهولة.',
+    'update_app_information'=>'تحديث بيانات الطبيق الاليكتروني',
+    'update_app_information_hint'=>'قم بتحديث بيانات الطبيق الاليكتروني بكل سهولة.',
+
     'contact_information'=>'بيانات التواصل',
     'facebook_link'=>'رابط الفيس بوك',
     'twitter_link'=>'رابط توتر',
@@ -260,8 +266,10 @@ return [
     'user_have_this_role'=>'هذا المستخدم لدية هذه الصالحة بالفعل!',
 
     # app settings
-    'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
-    'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
+    'store_updated_successfully'=>'تم حديث بيانات المخزن الاليكتروني بنجاح',
+    'store_info_added_successfully'=>'تم تحديث بيانات المخزن اللاليكتروني بنجاح',
+    'app_updated_successfully'=>'تم حديث بيانات التطبيق الاليكتروني بنجاح',
+    'app_info_added_successfully'=>'تم تحديث بيانات التطبيق اللاليكتروني بنجاح',
 
     # Roles
     'stores' => 'المخازن',

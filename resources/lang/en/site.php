@@ -13,6 +13,7 @@ return [
     ],
 
 	'app'=>'App',
+    'app_info'=>'Application Information',
     'dashboard'=>'Dashboard',
     'users'=>'Users',
     'desc'=>'Here you can add- delete- update ',
@@ -211,11 +212,15 @@ return [
     'new_password_confirmation'=>'New Password Confirmation',
     'cancel'=>'Cancel',
     'save'=>'Save',
-    'set_store_settings'=>'Please, set your store website settings first!</br>
+    'set_store_settings'=>'Please, set your store store settings first!</br>
     You will find it in your profile page.',
     'only_for_stores' => 'Only used by stores accounts!',
-    'update_site_information'=>'Update Website Information',
-    'update_site_information_hint'=>'Be free to update your website information.',
+    
+    'update_store_information'=>'Update Store Information',
+    'update_store_information_hint'=>'Be free to update your store information.',
+    'update_app_information'=>'Update App Information',
+    'update_app_information_hint'=>'Be free to update your application information.',
+
     'contact_information'=>'Contact Information',
     'facebook_link'=>'Facebook Link',
     'twitter_link'=>'Twitter Link',
@@ -257,8 +262,10 @@ return [
     'appsettings'=>'App Settings',
 
     # app settings
-    'website_updated_successfully'=>'Website informaion updated successfully',
-    'website_info_added_successfully'=>'Website information added successfully',
+    'store_updated_successfully'=>'Store informaion updated successfully',
+    'store_info_added_successfully'=>'Store information added successfully',
+    'app_updated_successfully'=>'Application informaion updated successfully',
+    'app_info_added_successfully'=>'Application information added successfully',
 
     # Roles
     'stores' => 'Stores',

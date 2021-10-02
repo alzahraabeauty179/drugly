@@ -28,7 +28,7 @@ class CategoryController extends BackEndDatatableController
     {
         if( is_null(auth()->user()->store_id) )
         {
-            auth()->user()->type == "super_admin"?  session()->flash('error', __('site.only_for_stores')) : session()->flash('error', __('site.set_store_settings'));
+            session()->flash('error', __('site.set_store_settings'));
 
             return redirect()->back();
         }

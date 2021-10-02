@@ -80,7 +80,7 @@ class StoreController extends BackEndController
         $accepted = User::where('id', auth()->user()->id)->whereHas('subscribes', function (Builder $r) {
     												$r->where('status', 'accepting');
 												})->get();
-        if(count($accepted)){         
+        if(count($accepted) || auth()->user()->type == "super_admin"){         
             $rules = [
                 'email' => 'required|string|email|max:191|unique:app_settings,email',
                 'phone' => 'required|regex:/^\+?\d[0-9-]{9,11}$/|unique:app_settings,phone',
@@ -102,12 +102,11 @@ class StoreController extends BackEndController
 
             $validator = Validator::make($request->all(), $rules);
             if($validator->fails())
-                return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+                return redirect()->back()->with(["updateStoreErrorMessage" => $validator->errors()->first()]);
     
             $request_data = $request->except(['_token', 'logo']);
             $request_data['owner_id'] = auth()->user()->id;
 
-            // return $request_data;
             if ($request->logo) {
                 $request_data['image'] = $this->uploadImage($request->logo, 'store_settings_images');
             }
@@ -125,7 +124,7 @@ class StoreController extends BackEndController
             ];
             $this->addLog($data);
 
-            session()->flash('success', __('site.website_info_added_successfully'));
+            session()->flash('success', __('site.store_info_added_successfully'));
         }else
             session()->flash('error', __('site.subscribe_not_accepted'));
 
@@ -353,7 +352,7 @@ class StoreController extends BackEndController
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+			return redirect()->back()->with(["updateStoreErrorMessage" => $validator->errors()->first()]);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
@@ -375,7 +374,7 @@ class StoreController extends BackEndController
     	];
     	$this->addLog($data);
     
-        session()->flash('success', __('site.website_updated_successfully'));
+        session()->flash('success', __('site.store_updated_successfully'));
         return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
     }
 }

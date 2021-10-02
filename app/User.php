@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -61,6 +62,22 @@ class User extends Authenticatable
     public function subscribes() : HasMany
     {
         return $this->hasMany(\App\Models\Subscriber::class ,'subscriber_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function store() : BelongsTo
+    {
+        return $this->BelongsTo(\App\Models\Store::class ,'store_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function appSettings() : BelongsTo
+    {
+        return $this->BelongsTo(\App\Models\AppSetting::class ,'app_setting_id');
     }
 
     /**

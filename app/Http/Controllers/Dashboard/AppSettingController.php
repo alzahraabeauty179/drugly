@@ -51,12 +51,11 @@ class AppSettingController extends BackEndController
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+			return redirect()->back()->with(["updateAppInfoErrorMessage" => $validator->errors()->first()]);
    
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
 
-        // return $request_data;
         if ($request->logo) {
             $request_data['image'] = $this->uploadImage($request->logo, 'app_settings_images');
         }
@@ -64,7 +63,7 @@ class AppSettingController extends BackEndController
         $setting = $this->model->create($request_data);
         User::where('id', auth()->user()->id)->update(['app_setting_id'=>$setting->id]);
 
-        session()->flash('success', __('site.website_info_added_successfully'));
+        session()->flash('success', __('site.app_info_added_successfully'));
 
         return redirect()->back();
     }
@@ -100,7 +99,7 @@ class AppSettingController extends BackEndController
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+			return redirect()->back()->with(["updateAppInfoErrorMessage" => $validator->errors()->first()]);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
@@ -113,7 +112,7 @@ class AppSettingController extends BackEndController
         } //end of if
 
         $appSetting->update($request_data);
-        session()->flash('success', __('site.website_updated_successfully'));
+        session()->flash('success', __('site.app_updated_successfully'));
   
         return redirect()->back();
     }
