@@ -32,7 +32,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">@lang('site.'.$module_name_plural )</h4>
+                                <h4 class="card-title">@lang('site.subcategories' )</h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -66,6 +66,54 @@
                 </div>
             </section>
             <!--/ Zero configuration table -->
+            <section id="form-control-repeater">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title text-capitlaize" id="file-repeater"><i class="ft-eye"></i> @lang('site.show') @lang('site.'.$module_name_singular)</h4>
+                                <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
+                                <div class="heading-elements">
+                                    <ul class="list-inline mb-0">
+                                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                        <!-- <li><a data-action="close"><i class="ft-x"></i></a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-content collapse show">
+                                <div class="card-body">
+                                    <form class="form row">
+                                        <fieldset class="form-group col-md-12">
+                                            <label for="basicInputFile">@lang('site.photo')</label>
+                                            <img src="{{asset($row->image_path)}}" alt="@lang('site.brand')">
+                                        </fieldset>
+
+                                        @foreach (config('translatable.locales') as $index => $locale)
+                                            <div class="form-group col-md-6 mb-2">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">@lang('site.' . $locale . '.name')</label>
+                                                <p>{{ isset($row) ? $row->translate($locale)->name : old($locale . '.name') }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        @foreach (config('translatable.locales') as $index => $locale)
+                                            <div class="form-group col-md-6 mb-2">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">@lang('site.' . $locale . '.description')</label>
+                                                    <p>{{ isset($row) ? $row->translate($locale)->description : old($locale . '.description') }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </div>

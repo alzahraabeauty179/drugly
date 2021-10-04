@@ -31,7 +31,7 @@ class SubscriptionController extends BackEndDatatableController
     {
         $rules = [
         	'type'		=> 'required|string|in:medical_store,beauty_company,pharmacy',
-        	'price'		=> 'required|numeric|min:0',
+        	'price'		=> 'required|numeric|min:0|max:1264',
         	'duriation'	=> 'required|integer|min:1',
         ];
         foreach (config('translatable.locales') as $locale) {
@@ -66,7 +66,7 @@ class SubscriptionController extends BackEndDatatableController
         $subscription = $this->model->findOrFail($id);
         $rules = [
         	'type'		=> 'required|string|in:medical_store,beauty_company,pharmacy',
-        	'price'		=> 'required|numeric|min:0',
+        	'price'		=> 'required|numeric|min:0|max:1264',
         	'duriation'	=> 'required|integer|min:1',
         ];
         foreach (config('translatable.locales') as $locale) {

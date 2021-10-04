@@ -281,6 +281,20 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            @if( App::getLocale() == 'ar')
+                if(document.querySelector('[title="Id"]')){document.querySelector('[title="Id"]').innerHTML = 'رقم التعريف';}
+                if(document.querySelector('[title="Updated At"]')){document.querySelector('[title="Updated At"]').innerHTML = 'تاريخ التحديث';}
+                if(document.querySelector('[title="Display Name"]')){document.querySelector('[title="Display Name"]').innerHTML = 'الاسم فى العرض';}
+                if(document.querySelector('[title="Name"]')){document.querySelector('[title="Name"]').innerHTML = 'الاسم';}
+                if(document.querySelector('[title="Action"]')){document.querySelector('[title="Action"]').innerHTML = 'الحدث';}
+                if($('.dataTables_empty td')){$('.dataTables_empty td').innerHTML = 'لا يوجد بيانات لعرضها فى الجدول';}
+                
+            @endif
+        });
+    </script>
+
 </body>
 
 </html>

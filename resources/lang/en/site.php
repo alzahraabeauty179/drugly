@@ -13,6 +13,7 @@ return [
     ],
 
 	'app'=>'App',
+    'photo'=>'Photo',
     'app_info'=>'Application Information',
     'general_search'=>'Use tags such as add, edit, delete, subscribers...',
     'dashboard'=>'Dashboard',
@@ -43,6 +44,9 @@ return [
     'open'=>'Open',
     'type'=>'Type',
     'unit'=>'Unit',
+    'general'=>'General',
+    'descrption'=>'Descrption',
+    'read'=>'Read',
 
     // Orders
     'upload_order_excel'=>'Upload Order Excel',
@@ -165,7 +169,10 @@ return [
     'order_has_been_deleted' => 'Order has been deleted' ,
 	'order_has_been_added' => 'Order information has been added' ,
 	'order_has_been_updated' => 'Order information has been updated',
-
+    'module'=>'Module',
+    'hint'=>'Hint',
+    'action_by'=>'Action By',
+    'owner'=>'Owner',
 
     // Brand
     'brand'  => 'Brand',
@@ -355,8 +362,8 @@ return [
     //categories
     'categories'=>'Categories',
     'category'=>'Category',
-    'subcategory'=>'Sub Category',
-    'subcategories'=>'Sub Categories',
+    'subcategory'=>'Sub-Category',
+    'subcategories'=>'Sub-Categories',
     'select' =>'Select',
     'logo'=>'Logo',
 

@@ -43,6 +43,9 @@ return [
     'open'=>'فتح',
     'type'=>'النوع',
     'unit'=>'الوحدة',
+    'general'=>'عام',
+    'descrption'=>'الوصف',
+    'read'=>'اطلاع',
 
     // Orders
     'upload_order_excel'=>'تحميل ملف الطلب',
@@ -144,8 +147,8 @@ return [
     'views' => 'المشاهدات',
 	
 	// Logs
-	'logs'=>'Logs',
-	'log'=>'Log',
+	'logs'=>'السجلات',
+	'log'=>'سجل',
 	'advertisement_has_been_deleted' => 'تم حذف إعلان' ,
 	'brand_has_been_deleted' => "تم حذف الشركة المنتجة" ,
 	'category_has_been_deleted' => "تم حذف قسم" ,
@@ -167,6 +170,10 @@ return [
     'order_has_been_deleted' => 'تم حذف الطلب' ,
 	'order_has_been_added' => 'تم اضافة طلب' ,
 	'order_has_been_updated' => 'تم تعديل طلب',
+    'module'=>'القسم',
+    'hint'=>'ملاحظة',
+    'action_by'=>'تم بواسطة',
+    'owner'=>'المعلن',
 
     // Brand
     'brand'  => 'الشركة المنتجة',
@@ -270,6 +277,7 @@ return [
     'store_info_added_successfully'=>'تم تحديث بيانات المخزن اللاليكتروني بنجاح',
     'app_updated_successfully'=>'تم حديث بيانات التطبيق الاليكتروني بنجاح',
     'app_info_added_successfully'=>'تم تحديث بيانات التطبيق اللاليكتروني بنجاح',
+    'photo'=>'صورة',
 
     # Roles
     'stores' => 'المخازن',

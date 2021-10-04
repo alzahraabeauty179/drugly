@@ -32,13 +32,13 @@ class StoreDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
+            ->addColumn(__('site.name'), function ($query) {
                 return '<a href="'.route('dashboard.stores.show', [ 'store' => $query->id ]).'" ><i class="glyphicon glyphicon-edit"></i> '.$query->translation->name.'</a>';
             })
-            ->addColumn('email', function ($query) {
+            ->addColumn(__('site.email'), function ($query) {
                 return $query->email;
             })
-            ->addColumn('action', function (Store $row) {
+            ->addColumn(__('site.action'), function (Store $row) {
                 $module_name_singular = 'store';
                 $module_name_plural   = 'stores';
                 return view('dashboard.buttons.start_order', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -53,7 +53,7 @@ class StoreDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['name', 'action']);
+            ->rawColumns([__('site.name'), __('site.action')]);
     }
 
     /**
@@ -97,9 +97,9 @@ class StoreDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('name'),
-            Column::computed('email'),
-            Column::computed('action')
+            Column::computed(__('site.name')),
+            Column::computed(__('site.email')),
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

@@ -35,20 +35,20 @@ class AdvertisementDataTable extends DataTable
     
         return datatables()
             ->eloquent($query)
-            ->addColumn('title', function ($query) {
+            ->addColumn(__('site.title'), function ($query) {
                 return $query->translation->title;
             })
-            ->addColumn('image', function ($query) {
+            ->addColumn(__('site.image'), function ($query) {
                 return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;"/>';
             })
-        	->addColumn('owner', function ($query) {
+        	->addColumn(__('site.owner'), function ($query) {
                 return is_null($query->owner_id)? ''
                 		:'<a href="'.route('dashboard.users.show', ['user' => $query->owner_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->owner->name .'</a>';
             })
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Advertisement $row) {
+            ->addColumn(__('site.action'), function (Advertisement $row) {
                 $module_name_singular = 'advertisement';
                 $module_name_plural   = 'advertisements';
                 return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -65,7 +65,7 @@ class AdvertisementDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['action', 'title', 'image', 'owner']);
+            ->rawColumns([__('site.action'), __('site.title'), __('site.image'), __('site.owner')]);
     }
 
     /**
@@ -110,12 +110,12 @@ class AdvertisementDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('title'),
-            Column::make('image'),
-        	Column::make('owner'),
-            Column::make('created_at'),
+            Column::computed(__('site.title')),
+            Column::make(__('site.image')),
+        	Column::make(__('site.owner')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

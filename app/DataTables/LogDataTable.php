@@ -34,17 +34,17 @@ class LogDataTable extends DataTable
     
         return datatables()
             ->eloquent($query)
-            ->addColumn('moduel', function ($query) {
+            ->addColumn(__('site.module'), function ($query) {
                 return is_null( $query->log_id )? __('site.' . $query->log_type)
-                		: '<a href="'.route('dashboard.'. $query->log_type .'.edit', [ strtok($query->message , "_") => $query->log_id ]).'" ><i class="glyphicon glyphicon-edit"></i> '. __('site.' . $query->log_type) .'</a>';
+                		: '<a href="'.route('dashboard.'. $query->log_type .'.show', [ strtok($query->message , "_") => $query->log_id ]).'" ><i class="glyphicon glyphicon-edit"></i> '. __('site.' . $query->log_type) .'</a>';
             })
-            ->addColumn('hint', function ($query) {
+            ->addColumn(__('site.hint'), function ($query) {
                 return __('site.' . $query->message);
             })
-            ->addColumn('action_by', function ($query) {
-                return '<a href="'.route('dashboard.users.edit', ['user' => $query->action_by]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->actionBy->name .'</a>';
+            ->addColumn(__('site.action_by'), function ($query) {
+                return '<a href="'.route('dashboard.users.show', ['user' => $query->action_by]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->actionBy->name .'</a>';
             })
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
             ->filter(function ($query) {
@@ -60,7 +60,7 @@ class LogDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['moduel', 'action_by']);
+            ->rawColumns([ __('site.module'), __('site.action_by') ]);
     }
 
     /**
@@ -103,10 +103,10 @@ class LogDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('moduel'),
-            Column::computed('hint'),
-            Column::make('action_by'),
-            Column::make('created_at'),
+            Column::computed(__('site.module')),
+            Column::computed(__('site.hint')),
+            Column::make(__('site.action_by')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at')
         ];
     }

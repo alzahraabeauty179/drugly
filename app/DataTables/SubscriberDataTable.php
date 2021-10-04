@@ -34,19 +34,19 @@ class SubscriberDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('subscriber', function ($query) {
+            ->addColumn(__('site.subscriber'), function ($query) {
                 return '<a href="'.route('dashboard.users.edit', ['user' => $query->subscriber_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->user->name .'</a>';
             })
-        	->addColumn('subscription', function ($query) {
+        	->addColumn(__('site.subscription'), function ($query) {
                 return '<a href="'.route('dashboard.subscriptions.edit', ['subscription' => $query->subscription_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->subscription->translation->name .'</a>';
             })
-            ->addColumn('status', function ($query) {
+            ->addColumn(__('site.status'), function ($query) {
                 return  __('site.' . $query->status);
             })
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Subscriber $row) {
+            ->addColumn(__('site.action'), function (Subscriber $row) {
                 $module_name_singular = 'subscriber';
                 $module_name_plural   = 'subscribers';
                 return view('dashboard.buttons.show', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -67,7 +67,7 @@ class SubscriberDataTable extends DataTable
                     });
             })
                  
-            ->rawColumns(['action', 'subscriber', 'subscription']);
+            ->rawColumns([__('site.action'), __('site.subscriber'), __('site.subscription')]);
     }
 
     /**
@@ -110,12 +110,12 @@ class SubscriberDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('subscriber'),
-        	Column::computed('subscription'),
-            Column::computed('status'),
-            Column::make('created_at'),
+            Column::computed(__('site.subscriber')),
+        	Column::computed(__('site.subscription')),
+            Column::computed(__('site.status')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

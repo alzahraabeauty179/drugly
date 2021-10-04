@@ -58,7 +58,7 @@
     <div class="col-md-1"></div>
 
 <fieldset class="form-group col-md-6">
-    <label for="basicInputFile">@lang('site.upload_photo')</label>
+    <label for="basicInputFile">@lang('site.photo')</label>
     <div class="custom-file">
         <input type="file" name="image" class="custom-file-input @error('image') is-invalid @enderror "
             id="inputGroupFile01">

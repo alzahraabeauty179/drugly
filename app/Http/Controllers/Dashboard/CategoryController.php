@@ -84,8 +84,9 @@ class CategoryController extends BackEndDatatableController
     {
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
 
-        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**

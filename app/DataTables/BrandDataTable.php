@@ -32,19 +32,19 @@ class BrandDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
+            ->addColumn(__('site.name'), function ($query) {
                 return '<a href="'.route('dashboard.brands.show', ['brand' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
             })
             // ->addColumn('description', function (Brand $d) {
             //     return $d->translation->description;
             // })
-            ->addColumn('logo', function ($query) {
+            ->addColumn(__('site.logo'), function ($query) {
                 return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;" />';
-            })->rawColumns(['name', 'logo', 'action'])
-            ->editColumn('created_at', function ($query) {
+            })->rawColumns([__('site.name'), __('site.logo'), __('site.action')])
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Brand $row) {
+            ->addColumn(__('site.action'), function (Brand $row) {
                 $module_name_singular = 'brand';
                 $module_name_plural   = 'brands';
                 // if( auth()->user()->isAbleTo('edit_brand') )
@@ -106,12 +106,12 @@ class BrandDataTable extends DataTable
         return [
 
             Column::make('id'),
-            Column::make('name'),
+            Column::make(__('site.name')),
             // Column::make('description'),
-            Column::make('logo'),
-            Column::make('created_at'),
+            Column::make(__('site.logo')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)
