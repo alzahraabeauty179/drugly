@@ -79,7 +79,7 @@ return [
 	'/month'   =>' x / Month',
 	'will_be_ready_soon'=>'Will be ready soon!',
 	'drugly_registration'=>'Drugly Registration',
-	'drugly_registration_hint'=>'After pressing the submit button, your data will be recorded and will be reviewed in detail, 
+	'drugly_registration_hint'=>'After pressing the submit button, your data will be recorded and will be reviewed in detail,
     	and then a notification will be sent to confirm or refuse to subscribe',
 	'personal_photo'=>'Personal Photo',
 	'required_documents'=>'Required Documents',
@@ -117,7 +117,7 @@ return [
 	'waiting'=>'Waiting',
 	'accepting'=>'Accepted',
 	'rejecting'=>'Rejected',
-	'finished'=>'Finished', 
+	'finished'=>'Finished',
 	'choose_3_only'=>'Choose three only',
 	'started_at'=>'Started At',
 	'ended_at'=>'Ended At',
@@ -279,7 +279,7 @@ return [
     'custom_users'=>'Custom Users',
     'all_users'   =>'All Users',
     'send_to_all_users'=>'Send to all users',
-    
+
     //team
     'team'=>'Company Team',
     'teams'=>'Company Team',
@@ -412,7 +412,7 @@ return [
     'ordered'=>'Ordered',
     'notes'=>'Notes',
     'make_order_manually'=>'Make Order Manually',
-	'make_order_manually_hint'=>'In case that you choose some of the products available from 
+	'make_order_manually_hint'=>'In case that you choose some of the products available from
     the store, you must enter these data to be added in the order.',
 
     //contacts
@@ -534,6 +534,7 @@ return [
         'title'=>' Title in Arabic',
         'content'=>'Content in Arabic',
     	'message'=>'Message in Arabic',
+        'type'=>'Effective Material in Arabic'
     ],
 
     'en' => [
@@ -551,8 +552,10 @@ return [
         'title'=>' Title in English',
         'content'=>'Content in English',
     	'message'=>'Message in English',
+        'type'=>'Effective Material in English'
+
     ],
-    
+
     // stagnants
     'stagnants'     => 'stagnants',
     'stagnant'      => 'stagnant',
