@@ -28,8 +28,6 @@ class CreateProductsTable extends Migration
             $table->double('amount');
             $table->double('unit_price');
 
-            $table->double('discount')->nullable();
-
             $table->date('expiry_date')->nullable();
 
             $table->string('brand')->nullable(); // this is for insert from excel becous user cannot add brand_id for product in excel

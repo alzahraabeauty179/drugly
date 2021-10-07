@@ -34,17 +34,19 @@ class SubscriberDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('subscriber', function ($query) {
+            ->addColumn(__('site.subscriber'), function ($query) {
                 return '<a href="'.route('dashboard.users.edit', ['user' => $query->subscriber_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->user->name .'</a>';
             })
-        	->addColumn('subscription', function ($query) {
+        	->addColumn(__('site.subscription'), function ($query) {
                 return '<a href="'.route('dashboard.subscriptions.edit', ['subscription' => $query->subscription_id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->subscription->translation->name .'</a>';
             })
-
-            ->editColumn('created_at', function ($query) {
+            ->addColumn(__('site.status'), function ($query) {
+                return  __('site.' . $query->status);
+            })
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Subscriber $row) {
+            ->addColumn(__('site.action'), function (Subscriber $row) {
                 $module_name_singular = 'subscriber';
                 $module_name_plural   = 'subscribers';
                 return view('dashboard.buttons.show', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -55,16 +57,17 @@ class SubscriberDataTable extends DataTable
                         return $w->whereHas('user', function (Builder $q) {
     												$q->where('name', 'like', '%'.request()->search['value'].'%');
 												})
-                 		->orwhereHas('subscription', function (Builder $r) {
-    												$r->whereTranslationLike('name', '%'.request()->search['value'].'%');
-												})
+                            ->orwhereHas('subscription', function (Builder $r) {
+                                                        $r->whereTranslationLike('name', '%'.request()->search['value'].'%');
+                                                    })
                             ->orwhere('id', 'like', "%" . request()->search['value'] . "%")
+                            ->orwhere('status', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
                  
-            ->rawColumns(['action', 'subscriber', 'subscription']);
+            ->rawColumns([__('site.action'), __('site.subscriber'), __('site.subscription')]);
     }
 
     /**
@@ -107,11 +110,12 @@ class SubscriberDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('subscriber'),
-        	Column::computed('subscription'),
-            Column::make('created_at'),
+            Column::computed(__('site.subscriber')),
+        	Column::computed(__('site.subscription')),
+            Column::computed(__('site.status')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

@@ -80,9 +80,9 @@
                         <li class="timeline-item">
                             <div class="timeline-card card border-grey border-lighten-2">
                                 <div class="card-header">
-                                    <h4 class="card-title"><a href="#"> @lang('site.' . auth()->user()->type ) @lang('site.information')</a></h4>
+                                    <h4 class="card-title"><a href="#"> @lang('site.store') @lang('site.information')</a></h4>
                                     <p class="card-subtitle text-muted mb-0 pt-1">
-                                        <span class="font-small-3"> @lang('site.' . auth()->user()->type ) @lang('site.information_hint')</span>
+                                        <span class="font-small-3"> @lang('site.store' ) @lang('site.information_hint')</span>
                                     </p>
                                     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
@@ -96,8 +96,10 @@
                                 <div class="card-content">
                                     <div class="card">
                                         <div class="card-header">
-                                            <!-- <h4 class="card-title" id="heading-social-buttons">Social Accounts</h4> -->
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_info"><i class="fa fa-cog"></i> @lang('site.website') </button>
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#store_info"><i class="fa fa-cog"></i> @lang('site.store_info') </button>
+                                            @if( auth()->user()->type == "super_admin" )
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#app_info"><i class="fa fa-cog"></i> @lang('site.app_info') </button>
+                                            @endif
                                             <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                             <div class="heading-elements">
                                                 <div class="social-buttons">
@@ -131,17 +133,17 @@
                                             	</p>
      											@endif
                                             
-                                            	<h4 class="card-title"> @if(auth()->user()->type != "super_admin") @lang('site.' . auth()->user()->type) @else @lang('site.app') @endif @lang('site.name') </h4>
-                                                <p class="card-text"> @if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {{ $app_settings->name }} @endif</p>
+                                            	<h4 class="card-title"> @lang('site.store') @lang('site.name') </h4>
+                                                <p class="card-text"> @if( is_null(auth()->user()->store) ) @lang('site.not_set_yet')  @else {{ auth()->user()->store->name }} @endif</p>
                                                 
-                                                <h4 class="card-title"> @if(auth()->user()->type != "super_admin") @lang('site.' . auth()->user()->type) @else @lang('site.app') @endif  @lang('site.description') </h4>
-                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->description !!} @endif</p>
+                                                <h4 class="card-title"> @lang('site.store') @lang('site.description') </h4>
+                                                <p class="card-text">@if( is_null(auth()->user()->store) ) @lang('site.not_set_yet')  @else {!! auth()->user()->store->description !!} @endif</p>
 
-                                                <h4 class="card-title">  @lang('site.about_us') </h4>
-                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->about_us !!} @endif</p>
+                                                <h4 class="card-title"> @lang('site.about_us') </h4>
+                                                <p class="card-text">@if( is_null(auth()->user()->store) ) @lang('site.not_set_yet')  @else {!! auth()->user()->store->about_us !!} @endif</p>
 
-                                                <h4 class="card-title">  @lang('site.privacy_policy') </h4>
-                                                <p class="card-text">@if( is_null($app_settings) ) @lang('site.not_set_yet')  @else {!! $app_settings->privacy_policy !!} @endif</p>
+                                                <h4 class="card-title"> @lang('site.privacy_policy') </h4>
+                                                <p class="card-text">@if( is_null(auth()->user()->store) ) @lang('site.not_set_yet')  @else {!! auth()->user()->store->privacy_policy !!} @endif</p>
                                             
                                         	</div>
                                         </div>
@@ -311,12 +313,7 @@
 @endpush
 
 @push('script')
-    {{-- start datatables script for yajar package --}}
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-            crossorigin="anonymous">
-    </script>
+{{-- start datatables script for yajar package --}}
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
@@ -330,15 +327,26 @@
     @if( Session::has('updateProfileErrorMessage') )
         <script>
             $(document).ready(function(){
+                jQuery.noConflict();
                 $('#edit_profile').modal({show: true});
             });
         </script>
     @endif
 
-    @if( Session::has('updateWebsiteErrorMessage') )
+    @if( Session::has('updateStoreErrorMessage') )
         <script>
             $(document).ready(function(){
-                $('#edit_info').modal({show: true});
+                jQuery.noConflict();
+                $('#store_info').modal({show: true});
+            });
+        </script>
+    @endif
+
+    @if( Session::has('updateAppInfoErrorMessage') )
+        <script>
+            $(document).ready(function(){
+                jQuery.noConflict();
+                $('#app_info').modal({show: true});
             });
         </script>
     @endif

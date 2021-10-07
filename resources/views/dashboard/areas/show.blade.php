@@ -51,11 +51,11 @@
                                     <table class="table table-bordered" id="data-table">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Created At</th>
-                                                <th>Updated At</th>
-                                                <th>action</th>
+                                                <th>@lang('site.id')</th>
+                                                <th>@lang('site.name')</th>
+                                                <th>@lang('site.created_at')</th>
+                                                <th>@lang('site.updated_at')</th>
+                                                <th>@lang('site.action')</th>
                                             </tr>
                                         </thead>
                                     </table>

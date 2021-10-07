@@ -45,6 +45,30 @@ class StoreController extends BackEndController
     }
 
     /**
+     * Download order sheet example.
+     *
+     * @return File
+     */
+    public function downloadOrderSheet()
+    {
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/orderSheet.xlsx');
+
+        return $file;
+    }
+
+    /**
+     * Download search products sheet example.
+     *
+     * @return File
+     */
+    public function downloadSearchProductsSheet()
+    {
+        $file = Storage::disk('public_uploads')->download('\sheetExcel/searchProductsSheet.xlsx');
+
+        return $file;
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -52,51 +76,58 @@ class StoreController extends BackEndController
      */
     public function store(Request $request)
     {
-        $rules = [
-            'email' => 'required|string|email|max:191|unique:app_settings,email',
-            'phone' => 'required|regex:/^\+?\d[0-9-]{9,11}$/|unique:app_settings,phone',
-            'logo' => 'nullable|image|max:2000',         
-            'facebook_link'=>'nullable|string|max:191',
-            'twitter_link'=>'nullable|string|max:191',
-            'instagram_link'=>'nullable|string|max:191',
-            'youtube_link'=>'nullable|string|max:191',
-        ];
-
-        foreach (config('translatable.locales') as $locale) {
-            $rules += [
-                $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'nullable|string|min:3|max:500',
-                $locale . '.about_us' => 'nullable|string|min:3|max:500',
-                $locale . '.privacy_policy' => 'nullable|string|min:3|max:500',
+        # check if user have accepted subscribe
+        $accepted = User::where('id', auth()->user()->id)->whereHas('subscribes', function (Builder $r) {
+    												$r->where('status', 'accepting');
+												})->get();
+        if(count($accepted) || auth()->user()->type == "super_admin"){         
+            $rules = [
+                'email' => 'required|string|email|max:191|unique:app_settings,email',
+                'phone' => 'required|regex:/^\+?\d[0-9-]{9,11}$/|unique:app_settings,phone',
+                'logo' => 'nullable|image|max:2000',         
+                'facebook_link'=>'nullable|string|max:191',
+                'twitter_link'=>'nullable|string|max:191',
+                'instagram_link'=>'nullable|string|max:191',
+                'youtube_link'=>'nullable|string|max:191',
             ];
-        }
 
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
-   
-        $request_data = $request->except(['_token', 'logo']);
-        $request_data['owner_id'] = auth()->user()->id;
+            foreach (config('translatable.locales') as $locale) {
+                $rules += [
+                    $locale . '.name'        => 'required|string|min:3|max:200',
+                    $locale . '.description' => 'required|string|min:3|max:500',
+                    $locale . '.about_us' => 'required|string|min:3|max:500',
+                    $locale . '.privacy_policy' => 'required|string|min:3|max:500',
+                ];
+            }
 
-        // return $request_data;
-        if ($request->logo) {
-            $request_data['image'] = $this->uploadImage($request->logo, 'store_settings_images');
-        }
-
-        $request_data['type'] = auth()->user()->type;
-
-        $setting = $this->model->create($request_data);
-        User::where('id', auth()->user()->id)->update(['store_id'=>$setting->id]);
+            $validator = Validator::make($request->all(), $rules);
+            if($validator->fails())
+                return redirect()->back()->with(["updateStoreErrorMessage" => $validator->errors()->first()]);
     
-    	$data = [
-        	'log_type'	=> $this->getClassNameFromModel(),
-        	'log_id'  	=> $setting->id,
-    		'message' 	=> $this->getSingularModelName().'_has_been_added',
-        	'action_by'	=> auth()->user()->id,
-    	];
-    	$this->addLog($data);
+            $request_data = $request->except(['_token', 'logo']);
+            $request_data['owner_id'] = auth()->user()->id;
 
-        session()->flash('success', __('site.website_info_added_successfully'));
+            if ($request->logo) {
+                $request_data['image'] = $this->uploadImage($request->logo, 'store_settings_images');
+            }
+
+            $request_data['type'] = auth()->user()->type;
+
+            $setting = $this->model->create($request_data);
+            User::where('id', auth()->user()->id)->update(['store_id'=>$setting->id]);
+        
+            $data = [
+                'log_type'	=> $this->getClassNameFromModel(),
+                'log_id'  	=> $setting->id,
+                'message' 	=> $this->getSingularModelName().'_has_been_added',
+                'action_by'	=> auth()->user()->id,
+            ];
+            $this->addLog($data);
+
+            session()->flash('success', __('site.store_info_added_successfully'));
+        }else
+            session()->flash('error', __('site.subscribe_not_accepted'));
+
         return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
     }
 
@@ -143,29 +174,27 @@ class StoreController extends BackEndController
         return Datatables::of($query)
             ->addColumn('<input type="checkbox" class="select-all checkbox" name="select-all">', function ($query) {
                 return  '<input type="checkbox" class="select-item checkbox"
-                name="select_item[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
+                name="select_items[]" value="'.$query->id.'" onClick="javascript:SelectProduct(this, value);" />';
             })
             ->addColumn('name', function ($query) {
-                return  $query->translation->name;
+                return  '<span title="'.$query->translation->name.' - '.$query->translation->type.' - '.$query->getExpiryDate($query->id).
+                        '">'.$query->translation->name.'</span>';
             })
             ->addColumn('type', function ($query) {
                 return  $query->translation->type;
             })
             ->addColumn('available', function ($query) {
-                return $query->amount;
-            })
-            ->addColumn('unit', function ($query) {
-                return $query->unit;
+                return $query->amount.' '.$query->unit;
             })
             ->addColumn('unit_price', function ($query) {
-                return $query->unit_price;
+                return $query->unit_price.' $';
             })
             ->order(function ($query) {
                 if (request()->order[0]['column'] == 3) {
                     $query->orderBy('amount', request()->order[0]['dir']);
                 }
 
-                if (request()->order[0]['column'] == 5) {
+                if (request()->order[0]['column'] == 4) {
                     $query->orderBy('unit_price', request()->order[0]['dir']);
                 }
             })
@@ -180,7 +209,7 @@ class StoreController extends BackEndController
                             ->orwhere('unit_price', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">'])
+            ->rawColumns(['<input type="checkbox" class="select-all checkbox" name="select-all">', 'name'])
             ->make(true);
     }
 
@@ -315,15 +344,15 @@ class StoreController extends BackEndController
         foreach (config('translatable.locales') as $locale) {
             $rules += [
                 $locale . '.name'        => 'required|string|min:3|max:200',
-                $locale . '.description' => 'nullable|string|min:3|max:500',
-                $locale . '.about_us' => 'nullable|string|min:3|max:500',
-                $locale . '.privacy_policy' => 'nullable|string|min:3|max:500',
+                $locale . '.description' => 'required|string|min:3|max:500',
+                $locale . '.about_us' => 'required|string|min:3|max:500',
+                $locale . '.privacy_policy' => 'required|string|min:3|max:500',
             ];
         }
 
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
-			return redirect()->back()->with(["updateWebsiteErrorMessage" => $validator->errors()->first()]);
+			return redirect()->back()->with(["updateStoreErrorMessage" => $validator->errors()->first()]);
 
         $request_data = $request->except(['_token', 'logo']);
         $request_data['owner_id'] = auth()->user()->id;
@@ -345,7 +374,7 @@ class StoreController extends BackEndController
     	];
     	$this->addLog($data);
     
-        session()->flash('success', __('site.website_updated_successfully'));
+        session()->flash('success', __('site.store_updated_successfully'));
         return redirect()->route('dashboard.users.edit', ['user' => auth()->user()->id]);
     }
 }

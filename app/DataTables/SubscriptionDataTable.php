@@ -32,18 +32,18 @@ class SubscriptionDataTable extends DataTable
     
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
+            ->addColumn(__('site.name'), function ($query) {
                 return $query->translation->name;
             })
         
-        	->addColumn('type', function ($query) {
+        	->addColumn(__('site.type'), function ($query) {
                 return __('site.' . $query->type);
             })
 
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Subscription $row) {
+            ->addColumn(__('site.action'), function (Subscription $row) {
                 $module_name_singular = 'subscription';
                 $module_name_plural   = 'subscriptions';
                 return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -59,7 +59,7 @@ class SubscriptionDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['action']);
+            ->rawColumns([__('site.action')]);
     }
 
     /**
@@ -104,11 +104,11 @@ class SubscriptionDataTable extends DataTable
     {
         return [
        		Column::make('id'),
-            Column::computed('name'),
-        	Column::computed('type'),
-            Column::make('created_at'),
+            Column::computed(__('site.name')),
+        	Column::computed(__('site.type')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

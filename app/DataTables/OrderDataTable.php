@@ -34,16 +34,16 @@ class OrderDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('store', function ($query) {
+            ->addColumn(__('site.store'), function ($query) {
                 return '<a href="'.route('dashboard.stores.show', [ 'store' => $query->to_id ]).'" ><i class="glyphicon glyphicon-edit"></i> '.$query->to->name.'</a>';
-            })->addColumn('pharmacy', function ($query) {
+            })->addColumn(__('site.pharmacy'), function ($query) {
                 return '<a href="'.route('dashboard.stores.show', [ 'store' => $query->from_id ]).'" ><i class="glyphicon glyphicon-edit"></i> '.$query->to->name.'</a>';
 
-            })->addColumn('status', function ($query) {
+            })->addColumn(__('site.status'), function ($query) {
                 return $query->status;
-            })->editColumn('created_at', function ($query) {
+            })->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
-            })->addColumn('action', function ($query) {
+            })->addColumn(__('site.action'), function ($query) {
                 $module_name_singular = 'order';
                 $module_name_plural   = 'orders';
                 $row = $query;
@@ -63,7 +63,7 @@ class OrderDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['action', 'store', 'pharmacy']);
+            ->rawColumns([__('site.action'), __('site.store'), __('site.pharmacy')]);
     }
 
     /**
@@ -108,11 +108,11 @@ class OrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('store'),
-            Column::computed('pharmacy'),
-            Column::make('status'),
-            Column::make('created_at'),
-            Column::computed('action')
+            Column::computed(__('site.store')),
+            Column::computed(__('site.pharmacy')),
+            Column::make(__('site.status')),
+            Column::make(__('site.created_at')),
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 ->addClass('text-center'),

@@ -36,10 +36,12 @@
         <div class="content-body">
             <section id="configuration">
                 <div class="row">
-                    <div class="col-md-12 mb-1">
-                        <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
-                            class="ft-plus"></i> @lang('site.add') @lang('site.announcement' )</a>
-                    </div>
+                    @if (auth()->user()->can('create-'.$module_name_plural))
+                        <div class="col-md-12 mb-1">
+                            <a class="btn btn-info" href="{{route('dashboard.'.$module_name_plural.'.create')}}"><i
+                                class="ft-plus"></i> @lang('site.add') @lang('site.announcement' )</a>
+                        </div>
+                    @endif
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">

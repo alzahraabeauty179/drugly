@@ -92,7 +92,7 @@
                                                             <input type="file" class="form-control-file" name="search_sheet" />
                                                         </div>
                                                         <button class="btn btn-primary btn-sm">
-                                                            <i class="ft-plus"></i> @lang('site.search')
+                                                            <i class="ficon ft-search"></i> @lang('site.search')
                                                         </button>
                                                     </form>
                                                 </div>
@@ -130,6 +130,17 @@
                                 <div class="card-body card-dashboard" id="products-container">
                                     {!! $dataTable->table(['class' => 'table table-bordered', ]) !!}
                                 </div>
+
+                                {{-- Download order sheet --}}
+                                <div class="card-body card-dashboard">
+                                    <a href="{{ route('dashboard.download.orderSheetExcel') }}" class="btn btn-info">
+                                        @lang('site.download_order_sheet')
+                                    </a>
+                                    
+                                    <a href="{{ route('dashboard.download.searchSheetExcel') }}" class="btn btn-info">
+                                        @lang('site.download_search_sheet')
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,13 +166,8 @@
 {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> --}}
 
 {{-- end  datatables style for yajar package --}}
-
-{{-- Search by products  --}}
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
-<link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
 @endpush
 
 
@@ -174,13 +180,10 @@
 
 <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
 <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 {!! $dataTable->scripts() !!}
 
-{{-- Search by products  --}}
-<!-- DataTables -->
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
+{{-- Search By Products --}}
 <script>
     var type = "{{ isset($_REQUEST['medical_store'])? 'medical_store' : 'beauty_company' }}", products_name = [];
 
@@ -200,15 +203,16 @@
         {
             $("#storedatatable-table_wrapper").empty();
 
-            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}";
+            var container = "", url = "{{ route('dashboard.stores.products', [ 'store' => ':id']) }}", index = 0;
 
             $.each(data.products,function(key,val){
                 url         =   url.replace(':id', val.storeId);
+                index++;
                 container   +=  `<tr>
-                                    <td>`+val.storeId+`</td>
-                                    <td>`+val.storeName+`</td>
+                                    <td>`+ index +`</td>
+                                    <td><a href="show/store-products/`+val.storeId+`">`+val.storeName+`<a></td>
                                     <td>`+val.amount+' '+val.unit+`</td>
-                                    <td>$ `+val.unitPrice+`</td>
+                                    <td>`+val.unitPrice+` $</td>
                                     <td><a href="`+url+`" title="{{__('site.start_order')}}" class="btn btn-info btn-sm" data-original-title="{{__('site.start_order')}}"><i class="ft-eye"> {{__('site.start_order')}} </i></a></td>
                                 </tr>`;
             });

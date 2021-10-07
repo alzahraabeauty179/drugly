@@ -21,13 +21,13 @@ class NotificationDataTable extends DataTable
     {
         return datatables()
         ->eloquent($query)
-        ->addColumn('type', function (Notification $n) {
+        ->addColumn(__('site.type'), function (Notification $n) {
             return \Illuminate\Support\Str::snake( class_basename($n->type, ' ') );
         })
-        ->editColumn('created_at', function (Notification $d) {
+        ->editColumn(__('site.created_at'), function (Notification $d) {
             return $d->created_at->diffForHumans();
         })
-        ->addColumn('action', function (Notification $row) {
+        ->addColumn(__('site.action'), function (Notification $row) {
             $module_name_singular = 'notification';
             $module_name_plural   = 'notifications';
 
@@ -87,12 +87,10 @@ class NotificationDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('type'),
-            // Column::make('description'),
-            // Column::make('logo'),
-            Column::make('created_at'),
+            Column::make(__('site.type')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

@@ -11,16 +11,21 @@ return [
         'name'        => 'الأسم باللغه الإنجليزيه ',
         'description' => ' الوصف  باللغه الإنجليزيه ',
     ],
-
+	
 	'app'=>'التطبيق',
     'dashboard'=>'الرئيسية',
+    'app_info'=>'بيانات التطبيق الاليكتروني',
 
-    'users'=>'المشرفين',
+    'general_search'=>'قم باستخدام كلمات دلالية مثل اضافة,تعديل,حذف,المشتركين...',
+    'users'=>'المسخدمين',
     'desc'=>'فى هذا الجدول يمكنك إضافة - حذف - تعديل  ',
     'language'=>'اللغه',
     'warehouses'=>'المستودعات',
     'show'=>'عرض',
     'cosmetic_companies'=>'شركات مستحضرات التجميل',
+    'cosmetic_company'=>'شركة مستحضرات التجميل',
+	'medical'=>'طبي',
+	'warehouse'=>'مستودع',
     'store'=>'المخزن',
     'unit_price'=>'سعر الوحدة',
 	'available'=>'متاح',
@@ -36,8 +41,11 @@ return [
     'start_order'=>'بدأ طلبية',
     'show_products'=>'عرض المنتجات',
     'open'=>'فتح',
-    'type'=>'المادة الفعالة',
+    'type'=>'النوع',
     'unit'=>'الوحدة',
+    'general'=>'عام',
+    'descrption'=>'الوصف',
+    'read'=>'اطلاع',
 
     // Orders
     'upload_order_excel'=>'تحميل ملف الطلب',
@@ -72,6 +80,8 @@ return [
     'order_status'=>'حالة الطلب',
     'upload_search_excel'=>'بحث بملف Excel',
     'search_sheet_result'=>'نتائج البحث من ملف Excel',
+    'order_details'=>'بيانات الطلب',
+    'orders'=>'الطلبات',
 
 	// Subscriptions
 	'subscriptions'=>'الأشتراكات',
@@ -95,7 +105,7 @@ return [
 	'set_password'=>'أنشاء كلمة سر',
 	'password'=>'كلمة السر',
 	'password_confirmation'=>'تأكيد كلمة السر',
-
+	
 	// Subscribers
 	'subscribers'=>'المشتركين',
 	'subscriber'=>'المشترك',
@@ -118,12 +128,13 @@ return [
 	'waiting'=>'قيد الانتظار',
 	'accepting'=>'تم الموافقة عليه',
 	'rejecting'=>'تم رفضه',
-	'finished'=>'تم الانتهاء منه',
+	'finished'=>'تم الانتهاء منه', 
 	'choose_3_only'=>'أختر ثلاثة فقط',
 	'started_at'=>'بدأت في',
 	'ended_at'=>'انتهى في',
 	'subscribe_rejected_successfully'=>'تم رفض الاشتراك بنجاح!',
 	'subscribe_accepted_successfully'=>'تم قبول الاشتراك بنجاح ، امنحه صلاحيةا!',
+    'subscribe_not_accepted'=>'لم يتم الموافقة على طلب الاشتراك بعد!',
 
 	// Advertisements
 	'advertisements'=>'الإعلانات',
@@ -134,20 +145,20 @@ return [
 	'vertical'=>'عمودي',
 	'longitudinal'=>'طولي',
     'views' => 'المشاهدات',
-
+	
 	// Logs
-	'logs'=>'Logs',
-	'log'=>'Log',
+	'logs'=>'السجلات',
+	'log'=>'سجل',
 	'advertisement_has_been_deleted' => 'تم حذف إعلان' ,
-	'brand_has_been_deleted' => "تم حذف علامة تجارية" ,
+	'brand_has_been_deleted' => "تم حذف الشركة المنتجة" ,
 	'category_has_been_deleted' => "تم حذف قسم" ,
 	'product_has_been_deleted' => 'تم حذف منتج' ,
 	'advertisement_has_been_added' => 'تمت إضافة إعلان' ,
-	"brand_has_been_added" => "تمت إضافة علامة تجارية" ,
+	"brand_has_been_added" => "تمت إضافة شركة منتجة" ,
 	'category_has_been_added' => "تمت إضافة قسم" ,
 	'product_has_been_added' => "تمت إضافة منتج" ,
 	'advertisement_has_been_updated' => 'تم تحديث إعلان' ,
-	'brand_has_been_updated' => "تم تحديث علامة تجارية" ,
+	'brand_has_been_updated' => "تم تحديث الشركة المنتجة" ,
 	'category_has_been_updated' => "تم تحديث قسم" ,
 	'product_has_been_updated' => 'تم تحديث منتج' ,
 	'stagnant_has_been_deleted' => 'تم حذف راكد' ,
@@ -159,6 +170,10 @@ return [
     'order_has_been_deleted' => 'تم حذف الطلب' ,
 	'order_has_been_added' => 'تم اضافة طلب' ,
 	'order_has_been_updated' => 'تم تعديل طلب',
+    'module'=>'القسم',
+    'hint'=>'ملاحظة',
+    'action_by'=>'تم بواسطة',
+    'owner'=>'المعلن',
 
     // Brand
     'brand'  => 'الشركة المنتجة',
@@ -168,6 +183,7 @@ return [
 	'created_at'=>'تاريخ الأنشاء',
 
     //users
+    'user_info'=>'بيانات المستخدم',
     'actions'=>'الأحداث',
     'add'=>'أضف',
     'delete'=>'حذف',
@@ -196,7 +212,6 @@ return [
     'notifications_and_announcements_hint'=>'اشعارات الطلبات والتنبيهات الصادرة من لوحة التحكم الرئسية.',
     'advertisements'=>'الاعلانات',
     'advertisements_hint'=>'سيتم عرض هذه الإعلانات في الموقع.',
-
     'update_profile_hint'=>'قم بتحديث بيانات الحساب الشخصي بكل سهولة.',
     'personal_information'=>'البيانات الشخصية',
     'first_name'=>'الاسم الاول',
@@ -210,11 +225,15 @@ return [
     'new_password_confirmation'=>'تاكيد كلمة السر الجديدة',
     'cancel'=>'اغلاق',
     'save'=>'حفظ',
-    'set_store_settings'=>'من فضلك ، قم بتعيين إعدادات الموقع الاليكتروني لمتجرك أولاً! </br>
+    'set_store_settings'=>'من فضلك ، قم بتعيين إعدادات المخزن الاليكتروني لمتجرك أولاً! </br>
     ستجده في صفحة ملفك الشخصي.',
     'only_for_stores' => 'يستخدم فقط من قبل حسابات المخازن!',
-    'update_site_information'=>'تحديث بيانات الموقع الاليكتروني',
-    'update_site_information_hint'=>'قم بتحديث بيانات موقعك الاليكتروني بكل سهولة.',
+
+    'update_store_information'=>'تحديث بيانات المخزن الاليكتروني',
+    'update_store_information_hint'=>'قم بتحديث بيانات مخزنك الاليكتروني بكل سهولة.',
+    'update_app_information'=>'تحديث بيانات الطبيق الاليكتروني',
+    'update_app_information_hint'=>'قم بتحديث بيانات الطبيق الاليكتروني بكل سهولة.',
+
     'contact_information'=>'بيانات التواصل',
     'facebook_link'=>'رابط الفيس بوك',
     'twitter_link'=>'رابط توتر',
@@ -238,7 +257,9 @@ return [
 	'trade_information'=>'المعلومات التجارية',
 	'trade_information_hint'=>'من فضلك, يجب قرأت هذه المعلومات جيدا قبل بدا اي عملية تواصل او طلب منتجات.',
 	'important'=>'هام',
-
+    'download_order_sheet'=>'تحميل ملف طلب المنتجات',
+    'download_search_sheet'=>'تحميل ملف البحث في المنتجات',
+    
     # areas
     'areas'=>'المناطق',
     'area'=>'منطقة',
@@ -252,8 +273,11 @@ return [
     'user_have_this_role'=>'هذا المستخدم لدية هذه الصالحة بالفعل!',
 
     # app settings
-    'website_updated_successfully'=>'تم حديث بيانات الموقع الاليكتروني بنجاح',
-    'website_info_added_successfully'=>'تم تحديث بيانات الموقع اللاليكتروني بنجاح',
+    'store_updated_successfully'=>'تم حديث بيانات المخزن الاليكتروني بنجاح',
+    'store_info_added_successfully'=>'تم تحديث بيانات المخزن اللاليكتروني بنجاح',
+    'app_updated_successfully'=>'تم حديث بيانات التطبيق الاليكتروني بنجاح',
+    'app_info_added_successfully'=>'تم تحديث بيانات التطبيق اللاليكتروني بنجاح',
+    'photo'=>'صورة',
 
     # Roles
     'stores' => 'المخازن',
@@ -466,6 +490,9 @@ return [
 
     'view_more'=>'اعرض أكثر',
 
+    'arabic'=>'Arabic',
+    'english'=>'English',
+
     'ar'    => [
         'address'=>'العنوان باللغه العربية',
         'about' => 'عن الشركه باللغه العربية',
@@ -481,7 +508,6 @@ return [
         'title'=>' العنوان باللغة العربية',
         'content'=>'المحتوي باللغة العربية',
     	'message'=>'الرسالة باللغة العربية',
-        'type'=>'المادة الفعالة باللغة العربية'
     ],
 
     'en'    => [
@@ -499,14 +525,13 @@ return [
         'title'=>' العنوان باللغة الانجليزية',
         'content'=>'المحتوي باللغة الانجليزية',
     	'message'=>'الرسالة باللغة الانجليزية',
-        'type'=>'المادة الفعالة باللغة الانجليزية'
-
     ],
 
         // stagnants
         'stagnants'     => 'الرواكد',
         'stagnant'      => 'راكد',
         'amount'        => 'الكميه',
+        'Amount'        => 'الكميه',
         'expiry_date'   => 'تاريخ الصلاحيه',
         'discount'      => 'التخفيض',
 ];

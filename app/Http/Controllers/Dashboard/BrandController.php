@@ -28,10 +28,10 @@ class BrandController extends BackEndDatatableController
     {
         if( is_null(auth()->user()->store_id) )
         {
-            auth()->user()->type == "super_admin"?  session()->flash('error', __('site.only_for_stores')) : session()->flash('error', __('site.set_store_settings'));
+            session()->flash('error', __('site.set_store_settings'));
             return redirect()->back();
         }
-        // return $request;
+  
         $rules = [
             'image' => 'nullable|image|max:2048',
         ];
@@ -66,6 +66,21 @@ class BrandController extends BackEndDatatableController
     
         session()->flash('success', __('site.add_successfuly'));
         return redirect()->route('dashboard.' . $this->getClassNameFromModel() . '.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $module_name_plural = $this->getClassNameFromModel();
+        $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
+
+        return view('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**

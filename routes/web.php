@@ -21,13 +21,19 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Auth::routes();
 
-Route::group(['middleware' => ['guest']], function () {
+Route::group(
+    [
+        'prefix'     => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'guest'],
+    ], 
+    
+    function () {
 
-    Route::get('/', function () {
-    	return view('home');
-	});
+        Route::get('/', function () {
+            return view('home');
+        });
 
-	Route::post('user/register', 'Dashboard\UserController@store')->name('user.store');
+        Route::post('user/register', 'Dashboard\UserController@store')->name('user.store');
 	
 });
 
@@ -67,7 +73,7 @@ Route::group(
             ######################### App Settings #########################
             Route::resource('appsettings', 'AppSettingController');
 
-            ######################### Stores Settings #########################
+            ######################### Stores #########################
             Route::resource('stores', 'StoreController');
             Route::post('search-by-product', 'StoreController@searchByProduct')->name('stores.searchByProduct');
             Route::post('search-result', 'StoreController@searchResult')->name('stores.searchResult');
@@ -75,6 +81,8 @@ Route::group(
             Route::get('show/store-products/{store}', 'StoreController@showStoreProducts')->name('stores.products');
             Route::get('get/store-products', 'StoreController@products')->name('products');
             Route::post('search/sheet', 'StoreController@searchSheet')->name('stores.searchSheet');
+            Route::get('download/order/sheet-products', 'StoreController@downloadOrderSheet')->name('download.orderSheetExcel');
+            Route::get('download/search/sheet-products', 'StoreController@downloadSearchProductsSheet')->name('download.searchSheetExcel');
 
             ######################### Orders #########################
             Route::resource('orders', 'OrderController');

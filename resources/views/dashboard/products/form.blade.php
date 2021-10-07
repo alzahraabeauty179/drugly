@@ -99,7 +99,7 @@
     </div>
 @endforeach
 
-{{-- @foreach (config('translatable.locales') as $index => $locale)
+@foreach (config('translatable.locales') as $index => $locale)
     <div class="form-group col-md-6 mb-2">
         <div class="form-group">
             <label class="bmd-label-floating">@lang('site.' . $locale . '.unit')</label>
@@ -114,7 +114,7 @@
             @enderror
         </div>
     </div>
-@endforeach --}}
+@endforeach
 
 <input type="hidden" name="owner_id" value="{{auth()->user()->id}}">
 <div class="form-group col-md-6 mb-2">
@@ -131,11 +131,10 @@
     </div>
 </div>
 
-
 <div class="form-group col-md-6 mb-2">
     <div class="form-group">
         <label class="bmd-label-floating">@lang('site.unit_price')</label>
-        <input type="number" step="0.01" class="form-control @error('unit_price') is-invalid
+        <input type="number" class="form-control @error('unit_price') is-invalid
             @enderror " name="unit_price" value="{{ isset($row) ? $row->unit_price : old('unit_price') }}">
 
         @error('unit_price')
@@ -145,21 +144,6 @@
         @enderror
     </div>
 </div>
-
-<div class="form-group col-md-6 mb-2">
-    <div class="form-group">
-        <label class="bmd-label-floating">@lang('site.discount')</label>
-        <input type="number" step="0.01" class="form-control @error('discount') is-invalid
-            @enderror " name="discount" value="{{ isset($row) ? $row->discount : old('discount') }}">
-
-        @error('discount')
-        <small class=" text text-danger" role="alert">
-            <strong>{{ $message }}</strong>
-        </small>
-        @enderror
-    </div>
-</div>
-
 
 <fieldset class="form-group col-md-6">
     <label for="basicInputFile">Upload Photo</label>

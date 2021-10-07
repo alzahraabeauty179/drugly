@@ -26,7 +26,7 @@ class ProductsCollectionImport implements ToCollection
     public function __construct($category)
     {
         $this->category_id = $category;
-        $this->user_id     = auth()->user()->id;
+        $this->user_id     = auth()->user()->store_id;
     }
 
 

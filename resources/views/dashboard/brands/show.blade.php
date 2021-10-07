@@ -1,21 +1,21 @@
 @extends('dashboard.layouts.app')
 
-@section('title', __('site.update') .' '. __('site.' . $module_name_singular) )
+@section('title', __('site.add') .' '. __('site.' . $module_name_singular) )
 
 @section('content')
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="container-fluid row d-flex justify-content-center">
             @if(session('success'))
-            <div class="alert alert-success col-sm-6 text-center" role="alert">
-                {!! session('success') !!}
-            </div>
+                <div class="alert alert-success col-sm-6 text-center" role="alert">
+                    {!! session('success') !!}
+                </div>
             @endif
 
             @if(session('error'))
-            <div class="alert alert-danger col-sm-6 text-center" role="alert">
-                {!! session('error') !!}
-            </div>
+                <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                    {!! session('error') !!}
+                </div>
             @endif
         </div>
 
@@ -31,8 +31,7 @@
                         <li class="breadcrumb-item"><a
                                 href="{{ route('dashboard.'.$module_name_plural.'.index') }}">@lang('site.'.$module_name_plural)</a>
                         </li>
-                        <li class="breadcrumb-item active">@lang('site.update') @lang('site.'.$module_name_singular)
-                        </li>
+                        <li class="breadcrumb-item active">@lang('site.show') @lang('site.'.$module_name_singular)</li>
                     </ol>
                 </div>
             </div>
@@ -44,9 +43,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title text-capitlaize" id="file-repeater"><i
-                                        class="fa fa-edit"></i>@lang('site.update') @lang('site.'.$module_name_singular)
-                                </h4>
+                                <h4 class="card-title text-capitlaize" id="file-repeater"><i class="ft-eye"></i> @lang('site.show') @lang('site.'.$module_name_singular)</h4>
                                 <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -59,19 +56,29 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form row" method="POST" enctype="multipart/form-data"
-                                        action="{{ route('dashboard.'.$module_name_plural.'.update', $row->id) }}">
-                                        @method('PUT')
+                                    <form class="form row">
+                                        <fieldset class="form-group col-md-12">
+                                            <label for="basicInputFile">@lang('site.photo')</label>
+                                            <img src="{{asset($row->image_path)}}" alt="@lang('site.brand')">
+                                        </fieldset>
 
-                                        @include('dashboard.'.$module_name_plural.'.form')
+                                        @foreach (config('translatable.locales') as $index => $locale)
+                                            <div class="form-group col-md-6 mb-2">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">@lang('site.' . $locale . '.name')</label>
+                                                <p>{{ isset($row) ? $row->translate($locale)->name : old($locale . '.name') }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
 
-
-                                        <div class="form-group col-md-6">
-                                            <button data-repeater-create="" class="btn btn-primary">
-                                                <i class="fa fa-cog"></i> @lang('site.update')
-                                            </button>
-                                        </div>
-
+                                        @foreach (config('translatable.locales') as $index => $locale)
+                                            <div class="form-group col-md-6 mb-2">
+                                                <div class="form-group">
+                                                    <label class="bmd-label-floating">@lang('site.' . $locale . '.description')</label>
+                                                    <p>{{ isset($row) ? $row->translate($locale)->description : old($locale . '.description') }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </form>
                                 </div>
                             </div>

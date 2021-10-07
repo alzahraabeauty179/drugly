@@ -62,11 +62,12 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('dashboard_files/app-assets/css-rtl/pages/users.min.css') }}" />
     <!-- END Page Level CSS-->
-
-
-
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard_files/assets/css/style-rtl.css') }}" />
+    {{-- Search By Jquery UI --}}
+    <script src="{{ asset('js/jquery-1.10.2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.css') }}">
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
     <!-- END Custom CSS-->
     <style>
         .chat-btn {
@@ -164,6 +165,9 @@
             crossorigin="anonymous">
     </script>
     <!-- END jQuery -->
+    {{-- Search By Jquery UI --}}
+    <script src="{{ asset('js/jquery-ui.js') }}"></script>
+    
     @stack('script')
 
     <!--################## FIREBASE SCRIPT ##################-->
@@ -274,6 +278,20 @@
         $("#show-notifies").click(function () {
             console.log('Hello Zee');
             makeAsReed();// when user open all notifications or one of them reset all nptis counters to zero
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            @if( App::getLocale() == 'ar')
+                if(document.querySelector('[title="Id"]')){document.querySelector('[title="Id"]').innerHTML = 'رقم التعريف';}
+                if(document.querySelector('[title="Updated At"]')){document.querySelector('[title="Updated At"]').innerHTML = 'تاريخ التحديث';}
+                if(document.querySelector('[title="Display Name"]')){document.querySelector('[title="Display Name"]').innerHTML = 'الاسم فى العرض';}
+                if(document.querySelector('[title="Name"]')){document.querySelector('[title="Name"]').innerHTML = 'الاسم';}
+                if(document.querySelector('[title="Action"]')){document.querySelector('[title="Action"]').innerHTML = 'الحدث';}
+                if($('.dataTables_empty td')){$('.dataTables_empty td').innerHTML = 'لا يوجد بيانات لعرضها فى الجدول';}
+                
+            @endif
         });
     </script>
 

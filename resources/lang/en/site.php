@@ -13,6 +13,9 @@ return [
     ],
 
 	'app'=>'App',
+    'photo'=>'Photo',
+    'app_info'=>'Application Information',
+    'general_search'=>'Use tags such as add, edit, delete, subscribers...',
     'dashboard'=>'Dashboard',
     'users'=>'Users',
     'desc'=>'Here you can add- delete- update ',
@@ -21,6 +24,9 @@ return [
     'warehouses'=>'Warehouses',
     'show'=>'Show',
     'cosmetic_companies'=>'Cosmetic Companies',
+    'cosmetic_company'=>'Cosmetic Company',
+	'medical'=>'Medical',
+	'warehouse'=>'Warehouse',
     'store'=>'Store',
     'unit_price'=>'Unit Price',
 	'available'=>'Available',
@@ -38,6 +44,9 @@ return [
     'open'=>'Open',
     'type'=>'Type',
     'unit'=>'Unit',
+    'general'=>'General',
+    'descrption'=>'Descrption',
+    'read'=>'Read',
 
     // Orders
     'upload_order_excel'=>'Upload Order Excel',
@@ -70,6 +79,7 @@ return [
     'order_status'=>'Order Status',
     'upload_search_excel'=>'Search By Excel',
     'search_sheet_result'=>'Search Sheet Result',
+    'order_details'=>'Order Details',
 
 	// Subscriptions
 	'subscriptions'=>'Subscriptions',
@@ -79,7 +89,7 @@ return [
 	'/month'   =>' x / Month',
 	'will_be_ready_soon'=>'Will be ready soon!',
 	'drugly_registration'=>'Drugly Registration',
-	'drugly_registration_hint'=>'After pressing the submit button, your data will be recorded and will be reviewed in detail,
+	'drugly_registration_hint'=>'After pressing the submit button, your data will be recorded and will be reviewed in detail, 
     	and then a notification will be sent to confirm or refuse to subscribe',
 	'personal_photo'=>'Personal Photo',
 	'required_documents'=>'Required Documents',
@@ -117,12 +127,13 @@ return [
 	'waiting'=>'Waiting',
 	'accepting'=>'Accepted',
 	'rejecting'=>'Rejected',
-	'finished'=>'Finished',
+	'finished'=>'Finished', 
 	'choose_3_only'=>'Choose three only',
 	'started_at'=>'Started At',
 	'ended_at'=>'Ended At',
 	'subscribe_rejected_successfully'=>'Subscribe rejected successfully!',
 	'subscribe_accepted_successfully'=>'Subscribe accepted successfully, give him a role!',
+    'subscribe_not_accepted'=>'Your subscribe request has not accepted yet!',
 
 	// Advertisements
 	'advertisements'=>'Advertisements',
@@ -158,7 +169,10 @@ return [
     'order_has_been_deleted' => 'Order has been deleted' ,
 	'order_has_been_added' => 'Order information has been added' ,
 	'order_has_been_updated' => 'Order information has been updated',
-
+    'module'=>'Module',
+    'hint'=>'Hint',
+    'action_by'=>'Action By',
+    'owner'=>'Owner',
 
     // Brand
     'brand'  => 'Brand',
@@ -206,11 +220,15 @@ return [
     'new_password_confirmation'=>'New Password Confirmation',
     'cancel'=>'Cancel',
     'save'=>'Save',
-    'set_store_settings'=>'Please, set your store website settings first!</br>
+    'set_store_settings'=>'Please, set your store store settings first!</br>
     You will find it in your profile page.',
     'only_for_stores' => 'Only used by stores accounts!',
-    'update_site_information'=>'Update Website Information',
-    'update_site_information_hint'=>'Be free to update your website information.',
+    
+    'update_store_information'=>'Update Store Information',
+    'update_store_information_hint'=>'Be free to update your store information.',
+    'update_app_information'=>'Update App Information',
+    'update_app_information_hint'=>'Be free to update your application information.',
+
     'contact_information'=>'Contact Information',
     'facebook_link'=>'Facebook Link',
     'twitter_link'=>'Twitter Link',
@@ -238,6 +256,8 @@ return [
 	'trade_information_hint'=>'Please, you must read this information carefully before starting any communication or ordering products.',
 	'important'=>'Important',
     'Amount'=>'Amount',
+    'download_order_sheet'=>'Download Order Sheet',
+    'download_search_sheet'=>'Download Search Sheet',
 
     # areas
     'areas'=>'Areas',
@@ -250,8 +270,10 @@ return [
     'appsettings'=>'App Settings',
 
     # app settings
-    'website_updated_successfully'=>'Website informaion updated successfully',
-    'website_info_added_successfully'=>'Website information added successfully',
+    'store_updated_successfully'=>'Store informaion updated successfully',
+    'store_info_added_successfully'=>'Store information added successfully',
+    'app_updated_successfully'=>'Application informaion updated successfully',
+    'app_info_added_successfully'=>'Application information added successfully',
 
     # Roles
     'stores' => 'Stores',
@@ -279,7 +301,7 @@ return [
     'custom_users'=>'Custom Users',
     'all_users'   =>'All Users',
     'send_to_all_users'=>'Send to all users',
-
+    
     //team
     'team'=>'Company Team',
     'teams'=>'Company Team',
@@ -308,6 +330,7 @@ return [
     'menu'=>'Menu',
 
     //users
+    'user_info'=>'User Information',
     'actions'=>'Actions',
     'add'=>'Add',
     'read'=>'Read',
@@ -339,8 +362,8 @@ return [
     //categories
     'categories'=>'Categories',
     'category'=>'Category',
-    'subcategory'=>'Sub Category',
-    'subcategories'=>'Sub Categories',
+    'subcategory'=>'Sub-Category',
+    'subcategories'=>'Sub-Categories',
     'select' =>'Select',
     'logo'=>'Logo',
 
@@ -412,7 +435,7 @@ return [
     'ordered'=>'Ordered',
     'notes'=>'Notes',
     'make_order_manually'=>'Make Order Manually',
-	'make_order_manually_hint'=>'In case that you choose some of the products available from
+	'make_order_manually_hint'=>'In case that you choose some of the products available from 
     the store, you must enter these data to be added in the order.',
 
     //contacts
@@ -516,8 +539,10 @@ return [
     'blogger'=>'Bloggers',
     'bloggers'=>'Bloggers',
     'sales_links'=>'Sales Links',
-
     'or'=>'Or',
+
+    'arabic'=>'العربية',
+    'english'=>'الانجليزية',
 
     'ar' => [
         'address'=>'Address in Arabic',
@@ -534,7 +559,6 @@ return [
         'title'=>' Title in Arabic',
         'content'=>'Content in Arabic',
     	'message'=>'Message in Arabic',
-        'type'=>'Effective Material in Arabic'
     ],
 
     'en' => [
@@ -552,10 +576,8 @@ return [
         'title'=>' Title in English',
         'content'=>'Content in English',
     	'message'=>'Message in English',
-        'type'=>'Effective Material in English'
-
     ],
-
+    
     // stagnants
     'stagnants'     => 'stagnants',
     'stagnant'      => 'stagnant',

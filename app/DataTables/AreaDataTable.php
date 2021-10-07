@@ -32,14 +32,14 @@ class AreaDataTable extends DataTable
 
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
+            ->addColumn(__('site.name'), function ($query) {
                 return '<a href="'.route('dashboard.areas.show', ['area' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
             })
 
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Area $row) {
+            ->addColumn(__('site.action'), function (Area $row) {
                 $module_name_singular = 'area';
                 $module_name_plural   = 'areas';
                 return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -55,7 +55,7 @@ class AreaDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['action', 'name', 'area']); // this is for show view and url 
+            ->rawColumns([__('site.action'), __('site.name'), 'area']); // this is for show view and url 
     }
 
     /**
@@ -100,10 +100,10 @@ class AreaDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('name'),
-            Column::make('created_at'),
+            Column::computed(__('site.name')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

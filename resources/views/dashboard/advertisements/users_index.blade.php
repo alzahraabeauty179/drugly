@@ -5,18 +5,31 @@
 @section('content')
 <div class="app-content content">
 
+    <div class="container-fluid row d-flex justify-content-center">
+        @if(session('success'))
+            <div class="alert alert-success col-sm-6 text-center" role="alert">
+                {!! session('success') !!}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                {!! session('error') !!}
+            </div>
+        @endif
+    </div>
+
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
-                <h3 class="content-header-title">@lang('site.user_info' )</h3>
+                <h3 class="content-header-title">@lang('site.'.$module_name_plural )</h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
                         </li>
-                        <li class="breadcrumb-item">@lang('site.'.$module_name_plural )</li>
-                    	<li class="breadcrumb-item active">@lang('site.user_info' )</li>
+                        <li class="breadcrumb-item active">@lang('site.'.$module_name_plural )</li>
                     </ol>
                 </div>
             </div>
@@ -33,7 +46,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">@lang('site.details' )</h4>
+                                <h4 class="card-title">@lang('site.'.$module_name_plural )</h4>
                                 <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
@@ -46,9 +59,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body card-dashboard">
-
-									@include('dashboard.'.$module_name_plural.'.form')
-
+                                    <h2>Under Construction</h2>
                                 </div>
                             </div>
                         </div>

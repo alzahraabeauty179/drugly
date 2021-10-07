@@ -27,20 +27,20 @@ class CategoryDataTable extends DataTable
         $query = $this->query();
         return datatables()
             ->eloquent($query)
-            ->addColumn('name', function ($query) {
+            ->addColumn(__('site.name'), function ($query) {
                 return '<a href="'.route('dashboard.categories.show', ['category' => $query->id]).'" ><i class="glyphicon glyphicon-edit"></i> '. $query->translation->name .'</a>';
             })
             // ->addColumn('description', function ($query) {
             //     return $query->translation->description;
             // })
-            ->addColumn('logo', function ($query) {
+            ->addColumn(__('site.logo'), function ($query) {
                 return '<image src="'.$query->image_path.'" width="40" height="40" style="cursor: url(`'.$query->image_path.'`), auto;" />';
             })
 
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
             })
-            ->addColumn('action', function (Category $row) {
+            ->addColumn(__('site.action'), function (Category $row) {
                 $module_name_singular = 'category';
                 $module_name_plural   = 'categories';
                 return view('dashboard.buttons.edit', compact('module_name_singular', 'module_name_plural', 'row')) .  view('dashboard.buttons.delete', compact('module_name_singular', 'module_name_plural', 'row'));
@@ -59,7 +59,7 @@ class CategoryDataTable extends DataTable
                             ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
                     });
             })
-            ->rawColumns(['action', 'name', 'logo']); // this is for show view and url 
+            ->rawColumns([__('site.action'), __('site.name'), __('site.logo')]); // this is for show view and url 
 
     }
 
@@ -105,12 +105,12 @@ class CategoryDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::computed('name'),
+            Column::computed(__('site.name')),
             // Column::computed('description'),
-            Column::make('logo'),
-            Column::make('created_at'),
+            Column::make(__('site.logo')),
+            Column::make(__('site.created_at')),
             Column::make('updated_at'),
-            Column::computed('action')
+            Column::computed(__('site.action'))
                 ->exportable(false)
                 ->printable(false)
                 // ->width(60)

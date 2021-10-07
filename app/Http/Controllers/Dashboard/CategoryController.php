@@ -7,9 +7,9 @@ use App\Models\Category;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use DataTables;
-
-// use Yajra\Datatables\Datatables;
+use DB;
 
 class CategoryController extends BackEndDatatableController
 {
@@ -28,7 +28,7 @@ class CategoryController extends BackEndDatatableController
     {
         if( is_null(auth()->user()->store_id) )
         {
-            auth()->user()->type == "super_admin"?  session()->flash('error', __('site.only_for_stores')) : session()->flash('error', __('site.set_store_settings'));
+            session()->flash('error', __('site.set_store_settings'));
 
             return redirect()->back();
         }
@@ -41,9 +41,10 @@ class CategoryController extends BackEndDatatableController
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules += [
-                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')->where(function ($query) {
-                    $query->join('categories', function($j){ return $j->where('categories.store_id', '=', auth()->user()->store_id); });
-                }),],
+                $locale . '.name'        => ['required', 'string', 'min:3', 'max:191', Rule::unique('category_translations', 'name')
+                ->where(function ($query) {
+                    $query->where('locale', 'ar')->join('categories', function($j){ return $j->whereRaw('categories.store_id = '. auth()->user()->store_id); });
+                }) ],
                 $locale . '.description' => 'nullable|string|min:3|max:500',
             ];
         }
@@ -83,8 +84,9 @@ class CategoryController extends BackEndDatatableController
     {
         $module_name_plural = $this->getClassNameFromModel();
         $module_name_singular = $this->getSingularModelName();
+        $row = $this->model->findOrFail($id);
 
-        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural'));
+        return VIEW('dashboard.' . $module_name_plural . '.show', compact('module_name_singular', 'module_name_plural', 'row'));
     }
 
     /**

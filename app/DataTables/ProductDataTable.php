@@ -28,7 +28,8 @@ class ProductDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('name', function ($query) {
-                return $query->translation->name;
+                return '<span title="'.$query->translation->name.' - '.$query->translation->type.' - '.$query->getExpiryDate($query->id).
+                '">'.$query->translation->name.'</span>';
             })->addColumn('description', function ($query) {
                 return $query->translation->description;
             })->editColumn('created_at', function ($query) {
@@ -51,7 +52,7 @@ class ProductDataTable extends DataTable
                     ->orwhere('created_at', 'like', "%" . request()->search['value'] . "%")
                     ->orwhere('updated_at', 'like', "%" . request()->search['value'] . "%");
             })
-            ->rawColumns(['action',]); // this is for show view and url 
+            ->rawColumns(['action','name']); // this is for show view and url 
 
     }
 

@@ -27,9 +27,9 @@ class RoleDataTable extends DataTable
         $query = $this->query();
         return datatables()
             ->eloquent($query)
-            ->editColumn('created_at', function ($query) {
+            ->editColumn(__('site.created_at'), function ($query) {
                 return $query->created_at->diffForHumans();
-            }) ->editColumn('updated_at', function ($query) {
+            }) ->editColumn(__('site.updated_at'), function ($query) {
                 return date('d-M-Y', strtotime($query->updated_at));
             })
             ->addColumn('action', function ($query) {
@@ -85,8 +85,8 @@ class RoleDataTable extends DataTable
             Column::make('name'),
             Column::make('display_name'),
             // Column::make('description'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make(__('site.created_at')),
+            Column::make(__('site.updated_at')),
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
