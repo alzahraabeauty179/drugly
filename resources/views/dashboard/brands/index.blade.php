@@ -4,6 +4,8 @@
 
 @section('content')
 <div class="app-content content">
+    @component('components.advertisements') @endcomponent
+
     <div class="container-fluid row d-flex justify-content-center">
         @if(session('success'))
             <div class="alert alert-success col-sm-6 text-center" role="alert">

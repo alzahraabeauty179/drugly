@@ -4439,3 +4439,29 @@ tr.shown td.details-control {
 .DTFC_LeftBodyLiner, .DTFC_RightBodyLiner {
   background : white;
 }
+
+.e3lan-container{
+  position: fixed;
+  z-index: 3;
+  width: 83%;
+  margin-left: 11px;
+  text-align: center;
+}
+.e3lan-container .horizontal{
+  width: 100%;
+  height: 150px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+.e3lan-container .vertical-right{
+  position: absolute;
+  right: 0;
+  width: 200px;
+  height: 100vh;
+}
+.e3lan-container .vertical-left{
+  position: absolute;
+  left: 0;
+  width: 200px;
+  height: 100vh;
+}

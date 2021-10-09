@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="app-content content">
-
+    @component('components.advertisements') @endcomponent
+    
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">

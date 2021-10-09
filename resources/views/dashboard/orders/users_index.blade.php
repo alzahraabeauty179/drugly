@@ -4,6 +4,8 @@
 
 @section('content')
 <div class="app-content content">
+    @component('components.advertisements') @endcomponent
+
     <div class="container-fluid row d-flex justify-content-center">
         @if(session('success'))
             <div class="alert alert-success col-sm-6 text-center" role="alert">
@@ -26,7 +28,7 @@
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home' )</a>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard.home') }}">@lang('site.home')</a>
                         </li>
                         <li class="breadcrumb-item active">@lang('site.'.$module_name_plural )</li>
                     </ol>
