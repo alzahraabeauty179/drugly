@@ -100,7 +100,7 @@
         serverSide: true,
         ajax: {
             url: '{!! route('dashboard.subarea') !!}',
-            data: function (d) {
+            data: function (d) { 
                 d.subArea = '{!! request()->area !!}';
             }
         },

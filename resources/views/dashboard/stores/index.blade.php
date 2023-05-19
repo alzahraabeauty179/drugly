@@ -189,13 +189,25 @@
 
     $(document).on('keyup','#search-by-products',function(event){
         $.post("{{ route('dashboard.stores.searchByProduct') }}",{'keyword':$('#search-by-products').val(),'type':type,'_token':$('input[name=_token]').val()},function(data){
-            
+            console.log(data.products);
             if( data["products"].length != 0)
                 products_name = data.products.map(function (value, index, array) { return value.name; });
        
-            $("#search-by-products").autocomplete({ source: products_name });
+            $("#search-by-products").autocomplete({ 
+                source: products_name,
+                select: function( event, ui ) {
+                    console.log(ui.item.value);
+                    console.log(ui.item.);
+                }
+            });
+
         })
-    });
+    })
+
+    // $(document).on('click','.ui-menu-item-wrapper',
+    // function(event){
+    //     console.log('hi');
+    // });
 
     function dispalySearchResult(data)
     {

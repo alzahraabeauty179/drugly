@@ -149,7 +149,7 @@ class AreaController extends BackEndDatatableController
     }
 
     /**
-     * Display the specified sub/areas resource.
+     * Display the specified sub/areas resource. 
      *
      */
     public function subAreas()
